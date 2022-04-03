@@ -5,12 +5,13 @@
  */
 package calometre;
 
-import entities.Event;
-import services.ServiceEvent;
+import entity.Reclamation;
+import service.ServiceReclamation;
+import util.Connexion;
 
 /**
  *
- * @author wassim
+ * @author RYM BACCOURI
  */
 public class Calometre {
 
@@ -18,11 +19,27 @@ public class Calometre {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ServiceEvent se = new ServiceEvent();
-        Event e = new Event("New Event","02/22/2022","02/23/2022","Nullam iaculis lacus non lectus venenatis tincidunt. Pellentesque est lectus, semper vitae aliquam in, pretium at libero. Nulla sed mauris neque. Nam eget pulvinar turpis, nec iaculis diam. Proin nec cursus libero",10,"moknin","QSVDJEAC41J2G5X4NJ.jpg");
-      //se.getallEvent();
-      //se.getEventById(17);
-      se.createEvent(e);
+        // TODO code application lnogic here
+        ServiceReclamation fn = new ServiceReclamation();
+        Reclamation rec = new Reclamation();
+
+        //ajout
+       /* rec.setEmail("test");
+        rec.setMessage("message");
+        rec.setType("ttttttt");
+
+        fn.createReclamation(rec);*/
+
+        //edit
+       /* rec.setId(39);
+        rec.setEmail("test");
+        rec.setMessage("message");
+        rec.setType("ttttttt");
+
+        fn.editReclamation(rec);*/
+
+        //affichage
+        /*fn.readReclamation();*/
     }
-    
+
 }
