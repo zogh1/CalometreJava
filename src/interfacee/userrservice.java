@@ -1,19 +1,24 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package interfacee;
 
-import entities.Event;
 import java.util.List;
+import entity.user;
 
 /**
  *
- * @author wassim
+ * @author admin
  */
-public interface IServiceEvent {
-    //crud 
-    public void createEvent(Event e);
-    public List<Event> readEvents();
+public interface  userrservice  {
+    
+    //CRUD
+    public void createuser(user u);
+    public List<user> readusers();
+   
+  
+    
 }

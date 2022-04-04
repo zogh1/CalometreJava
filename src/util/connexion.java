@@ -11,22 +11,22 @@ import java.sql.SQLException;
 
 /**
  *
- * @author wassim
+ * @author admin
  */
-public class DataSource {
-     //DB CREDENTIALS
-    final static String URL = "jdbc:mysql://127.0.0.1:3306/calometre";
+public class connexion {
+
+    //DB CREDENTIALS
+    final static String URL = "jdbc:mysql://127.0.0.1:3306/Calometre";
     final static String USERNAME = "root";
     final static String PWD = "";
-    
-    
+
     //Connection init
-    static DataSource instance = null;
+    static connexion instance = null;
     private Connection cnx;
-    
+
     //constructor
-    private DataSource() {
-        
+    public connexion() {
+
         try {
             cnx = DriverManager.getConnection(URL, USERNAME, PWD);
             System.out.println("Connexion avec succes");
@@ -34,18 +34,20 @@ public class DataSource {
             ex.printStackTrace();
         }
     }
-    
+
     //getters
-    public static DataSource getInstance() {
+    public static connexion getInstance() {
         if (instance == null) {
-            instance = new DataSource();
+            instance = new connexion();
         }
-        
+
         return instance;
     }
 
     public Connection getCnx() {
         return cnx;
     }
-    
+
+ 
+
 }
