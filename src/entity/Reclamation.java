@@ -80,4 +80,8 @@ public class Reclamation {
         this.date = date;
     }
 
+    public void setReponse(String rymm) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

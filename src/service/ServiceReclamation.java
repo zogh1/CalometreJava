@@ -63,6 +63,22 @@ public class ServiceReclamation implements IServiceReclamation {
         }
 
     }
+    @Override
+    public boolean deleteReclamation(int id) {
+        boolean isDeleted = false;
+        try {
+            String req = "delete from reclamation where id = ?";
+            PreparedStatement prepare = cnx.prepareStatement(req);
+            prepare.setInt(1, id);
+            prepare.executeUpdate();
+            isDeleted = true;
+            System.out.println("reclamation deleted");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+        }
+        return isDeleted;
+    }
 
     @Override
     public List<Reclamation> readReclamation() {
@@ -89,5 +105,9 @@ public class ServiceReclamation implements IServiceReclamation {
 
         return reclamation;
 
+    }
+
+    public void createReponse(Reclamation rec) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

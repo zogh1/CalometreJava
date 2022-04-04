@@ -6,7 +6,9 @@
 package calometre;
 
 import entity.Reclamation;
+import entity.Reponse;
 import service.ServiceReclamation;
+import service.ServiceReponse;
 import util.Connexion;
 
 /**
@@ -20,26 +22,40 @@ public class Calometre {
      */
     public static void main(String[] args) {
         // TODO code application lnogic here
-        ServiceReclamation fn = new ServiceReclamation();
+        //ServiceReclamation fn = new ServiceReclamation();
+//        Reclamation rec = new Reclamation();
+        ServiceReponse f = new ServiceReponse();
+        Reponse rep = new Reponse();
         Reclamation rec = new Reclamation();
 
         //ajout
-       /* rec.setEmail("test");
-        rec.setMessage("message");
-        rec.setType("ttttttt");
+        /* rec.setEmail("rymm");
+        rec.setMessage("mehjgucugcssage");
+        rec.setType("coach");
 
         fn.createReclamation(rec);*/
-
         //edit
-       /* rec.setId(39);
+        /* rec.setId(39);
         rec.setEmail("test");
         rec.setMessage("message");
         rec.setType("ttttttt");
 
         fn.editReclamation(rec);*/
-
         //affichage
-        /*fn.readReclamation();*/
+        //fn.readReclamation();
+        // rec.setId(36);
+        /* rec.setId(36);
+       fn.deleteReclamation(35);
+         */
+        //delete 
+        //ajout
+        
+        rep.setReponse("rymm");
+
+        rep.setId(52);
+        
+        f.editReponse(rep);
+
     }
 
 }

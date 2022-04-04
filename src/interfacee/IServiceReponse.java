@@ -6,19 +6,21 @@
 package interfacee;
 
 import entity.Reclamation;
+import entity.Reponse;
 import java.util.List;
 
 /**
  *
  * @author RYM BACCOURI
  */
-public interface IServiceReclamation {
+public interface IServiceReponse {
+    
+    public void createReponse(Reponse Rp,Reclamation rec) ;
+    
+    public void editReponse(Reponse Rp);
 
-    public void createReclamation(Reclamation R);
+    public boolean deleteReponse(int id);
 
-    public void editReclamation(Reclamation R);
-
-    public boolean deleteReclamation(int id);
-
-    public List<Reclamation> readReclamation();
+    public List<Reponse> readReponse();
+    
 }
