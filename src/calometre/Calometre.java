@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package calometre;
+
+import entity.user;
 import java.sql.Connection;
+import service.userservice;
 import util.connexion;
 
 /**
@@ -18,7 +21,31 @@ public class Calometre {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Connection cnx = connexion.getInstance().getCnx();
+        userservice fn = new userservice();
+//        user test = new user();
+
+//        test.setCountry_code("216");
+//        test.setEmail("test");
+//        test.setFirstname("hghghgh");
+//        test.setLastname("rtrtt");
+//        test.setPassword("ttttt");
+//        test.setPhonenumber(1213);
+//        test.setProfile_picture("fghfhgf");
+//        test.setRoles("tttt");
+
+//       fn.deleteuser(32);
+        user edit =new user();
+
+        edit.setCountry_code("216");
+        edit.setEmail("test");
+        edit.setFirstname("hghghgh");
+        edit.setLastname("rtrddtt");
+        edit.setPassword("ttttt");
+        edit.setPhonenumber(1213);
+        edit.setProfile_picture("fghfhgf");
+        edit.setRoles("tttt");
+        edit.setId(28);
+        fn.updateuser(edit);
     }
-    
+
 }

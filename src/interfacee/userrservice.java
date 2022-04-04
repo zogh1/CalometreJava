@@ -18,5 +18,7 @@ public interface  userrservice  {
     //CRUD
     public void createuser(user u);
     public List<user> readusers();
+   
+  
     
 }

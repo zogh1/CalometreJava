@@ -10,19 +10,36 @@ package entity;
  * @author Souhail
  */
 public class user {
+
     private int id;
     private String password;
     private String firstname;
     private String lastname;
     private String email;
     private String roles;
-    private boolean isVerfied=false;
+    private boolean isVerfied;
     private int phonenumber;
-    private int country_code;
-    private boolean isbanned=false;
+    private String country_code;
+    private boolean isbanned;
     private String profile_picture;
 
-    public user(int id, String password, String firstname, String lastname, String email, String roles, int phonenumber, int country_code, String profile_picture) {
+    public user() {
+    }
+
+    public user(String password, String firstname, String lastname, String email, String roles, boolean isVerfied, int phonenumber, String country_code, boolean isbanned, String profile_picture) {
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.roles = roles;
+        this.isVerfied = isVerfied;
+        this.phonenumber = phonenumber;
+        this.country_code = country_code;
+        this.isbanned = isbanned;
+        this.profile_picture = profile_picture;
+    }
+
+    public user(int id, String password, String firstname, String lastname, String email, String roles, int phonenumber, String country_code, String profile_picture) {
         this.id = id;
         this.password = password;
         this.firstname = firstname;
@@ -98,11 +115,11 @@ public class user {
         this.phonenumber = phonenumber;
     }
 
-    public int getCountry_code() {
+    public String getCountry_code() {
         return country_code;
     }
 
-    public void setCountry_code(int country_code) {
+    public void setCountry_code(String country_code) {
         this.country_code = country_code;
     }
 
@@ -121,11 +138,10 @@ public class user {
     public void setProfile_picture(String profile_picture) {
         this.profile_picture = profile_picture;
     }
-     @Override
+
+    @Override
     public String toString() {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
+
 }
