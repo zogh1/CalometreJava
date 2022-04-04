@@ -14,7 +14,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import entity.user;
+import util.BCrypt;
 import util.connexion;
+import util.session;
 
 /**
  *
@@ -32,7 +34,7 @@ public class userservice {
         try {
             String req = "INSERT INTO `user`(`password`, `email`, `roles`, `is_verified`, `firstname`, `lastname`, `phonenumber`, `profile_picture`, `isbanned`, `country_code`) VALUES (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement st = cnx.prepareStatement(req);
-            st.setString(1, u.getPassword());
+            st.setString(1, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt()));
             st.setString(2, u.getEmail());
             st.setString(3, u.getRoles());
             st.setBoolean(4, false);
@@ -113,5 +115,59 @@ public class userservice {
             ex.printStackTrace();
             System.out.println("error");
         }
+    }
+
+    public user findById(Integer id) {
+        user u = null;
+        try {
+            String req = "select * from user where id=? ";
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                u = new user(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getBoolean(7),
+                        rs.getInt(8),
+                        rs.getString(9),
+                        rs.getBoolean(10),
+                        rs.getString(11));
+            }
+        } catch (Exception a) {
+            a.printStackTrace();
+        }
+        return u;
+    }
+
+    public boolean login(user user) {
+        boolean status = false;
+        try {
+            String req = "SELECT * FROM `user` WHERE email=?";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, user.getEmail());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if (BCrypt.checkpw(user.getPassword(), rs.getString("password"))) {
+                    status = true;
+                    user = this.findById(rs.getInt("id"));
+                    session.setUser(user);
+                    System.out.println("connected");
+                    System.out.println(session.getUser().getPhonenumber());
+                } else {
+                    status = false;
+                    System.out.println("invalid credentials");
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return status;
     }
 }

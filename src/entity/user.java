@@ -26,7 +26,8 @@ public class user {
     public user() {
     }
 
-    public user(String password, String firstname, String lastname, String email, String roles, boolean isVerfied, int phonenumber, String country_code, boolean isbanned, String profile_picture) {
+    public user(int id, String password, String firstname, String lastname, String email, String roles, boolean isVerfied, int phonenumber, String country_code, boolean isbanned, String profile_picture) {
+        this.id = id;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -39,15 +40,16 @@ public class user {
         this.profile_picture = profile_picture;
     }
 
-    public user(int id, String password, String firstname, String lastname, String email, String roles, int phonenumber, String country_code, String profile_picture) {
-        this.id = id;
+    public user(String password, String firstname, String lastname, String email, String roles, boolean isVerfied, int phonenumber, String country_code, boolean isbanned, String profile_picture) {
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.roles = roles;
+        this.isVerfied = isVerfied;
         this.phonenumber = phonenumber;
         this.country_code = country_code;
+        this.isbanned = isbanned;
         this.profile_picture = profile_picture;
     }
 

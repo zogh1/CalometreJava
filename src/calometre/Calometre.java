@@ -22,7 +22,12 @@ public class Calometre {
     public static void main(String[] args) {
         // TODO code application logic here
         userservice fn = new userservice();
-//        user test = new user();
+        user test = new user();
+
+        test.setEmail("testmail");
+        test.setPassword("password");
+
+        fn.login(test);
 
 //        test.setCountry_code("216");
 //        test.setEmail("test");
@@ -32,9 +37,8 @@ public class Calometre {
 //        test.setPhonenumber(1213);
 //        test.setProfile_picture("fghfhgf");
 //        test.setRoles("tttt");
-
 //       fn.deleteuser(32);
-        user edit =new user();
+        /*user edit =new user();
 
         edit.setCountry_code("216");
         edit.setEmail("test");
@@ -45,7 +49,7 @@ public class Calometre {
         edit.setProfile_picture("fghfhgf");
         edit.setRoles("tttt");
         edit.setId(28);
-        fn.updateuser(edit);
+        fn.updateuser(edit);*/
     }
 
 }
