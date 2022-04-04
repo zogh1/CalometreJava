@@ -5,12 +5,18 @@
  */
 package calometre;
 
-import entities.Event;
-import services.ServiceEvent;
+import entity.category;
+import entity.product;
+import entity.user;
+import java.sql.Connection;
+import service.userservice;
+import service.categoryservice;
+import service.productservice;
+import util.connexion;
 
 /**
  *
- * @author wassim
+ * @author Souhail
  */
 public class Calometre {
 
@@ -18,11 +24,56 @@ public class Calometre {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ServiceEvent se = new ServiceEvent();
-        Event e = new Event("New Event","02/22/2022","02/23/2022","Nullam iaculis lacus non lectus venenatis tincidunt. Pellentesque est lectus, semper vitae aliquam in, pretium at libero. Nulla sed mauris neque. Nam eget pulvinar turpis, nec iaculis diam. Proin nec cursus libero",10,"moknin","QSVDJEAC41J2G5X4NJ.jpg");
-      //se.getallEvent();
-      //se.getEventById(17);
-      se.createEvent(e);
+        // TODO code application logic here
+//        userservice fn = new userservice();
+//        user test = new user();
+
+//        test.setEmail("testmail");
+//        test.setPassword("password");
+//
+//        fn.login(test);
+
+//        test.setCountry_code("216");
+//        test.setEmail("test");
+//        test.setFirstname("hghghgh");
+//        test.setLastname("rtrtt");
+//        test.setPassword("ttttt");
+//        test.setPhonenumber(1213);
+//        test.setProfile_picture("fghfhgf");
+//        test.setRoles("tttt");
+//       fn.deleteuser(32);
+        /*user edit =new user();
+
+        edit.setCountry_code("216");
+        edit.setEmail("test");
+        edit.setFirstname("hghghgh");
+        edit.setLastname("rtrddtt");
+        edit.setPassword("ttttt");
+        edit.setPhonenumber(1213);
+        edit.setProfile_picture("fghfhgf");
+        edit.setRoles("tttt");
+        edit.setId(28);
+        fn.updateuser(edit);*/
+//        seif ajout
+        categoryservice fn = new categoryservice();
+        category test = new category();
+//     ajout    test.setName("kiwi");
+//        fn.createcategory(test);
+//affichae fn.getallcategory();
+//delete fn.deletecategory(8);
+// update
+//test.setName("banasfrgrerne");
+//test.setId(6);
+//fn.updatecategory(test);
+
+productservice ps = new productservice();
+product prod = new product();
+
+
+ps.getallproduct();
+        
+
+        
     }
-    
+
 }
