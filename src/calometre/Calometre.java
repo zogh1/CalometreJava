@@ -5,11 +5,15 @@
  */
 package calometre;
 
-import entity.user;
 import java.sql.Connection;
 import service.userservice;
 import util.connexion;
 import service.exerciceService;
+import entity.category;
+import entity.product;
+import entity.user;
+import service.categoryservice;
+import service.productservice;
 
 /**
  *
@@ -33,6 +37,13 @@ public class Calometre {
         exerciceService es = new exerciceService();
 
         es.deleteExercice(8);
+//        userservice fn = new userservice();
+//        user test = new user();
+
+//        test.setEmail("testmail");
+//        test.setPassword("password");
+//
+//        fn.login(test);
 
 //        test.setCountry_code("216");
 //        test.setEmail("test");
@@ -55,6 +66,26 @@ public class Calometre {
         edit.setRoles("tttt");
         edit.setId(28);
         fn.updateuser(edit);*/
+//        seif ajout
+        categoryservice fn = new categoryservice();
+        category test = new category();
+//     ajout    test.setName("kiwi");
+//        fn.createcategory(test);
+//affichae fn.getallcategory();
+//delete fn.deletecategory(8);
+// update
+//test.setName("banasfrgrerne");
+//test.setId(6);
+//fn.updatecategory(test);
+
+productservice ps = new productservice();
+product prod = new product();
+
+
+ps.getallproduct();
+        
+
+        
     }
 
 }
