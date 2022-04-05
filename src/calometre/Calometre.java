@@ -9,6 +9,7 @@ import entity.user;
 import java.sql.Connection;
 import service.userservice;
 import util.connexion;
+import service.exerciceService;
 
 /**
  *
@@ -28,6 +29,10 @@ public class Calometre {
         test.setPassword("password");
 
         fn.login(test);
+
+        exerciceService es = new exerciceService();
+
+        es.deleteExercice(8);
 
 //        test.setCountry_code("216");
 //        test.setEmail("test");
