@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package entity;
 
 import java.util.Date;
 
@@ -13,23 +13,25 @@ import java.util.Date;
  */
 public class Post {
     private int id ; 
-      private int event_id ; 
+  
       private String name ; 
-      private Date creation_date ; 
+      private String  creation_date ; 
        private String description ; 
 
     public Post() {
     }
 
-    public Post(int id, int event_id, String name, Date creation_date, String description) {
-        this.id = id;
-        this.event_id = event_id;
+    public Post(String name, String creation_date, String description, Event ev) {
         this.name = name;
         this.creation_date = creation_date;
         this.description = description;
+        this.ev = ev;
     }
 
-    public Post(int id, String name, Date creation_date, String description) {
+    
+   
+
+    public Post(int id, String name, String creation_date, String description) {
         this.id = id;
         this.name = name;
         this.creation_date = creation_date;
@@ -44,12 +46,14 @@ public class Post {
         this.id = id;
     }
 
-    public int getEvent_id() {
-        return event_id;
+   Event ev ; 
+
+    public Event getEv() {
+        return ev;
     }
 
-    public void setEvent_id(int event_id) {
-        this.event_id = event_id;
+    public void setEv(Event ev) {
+        this.ev = ev;
     }
 
     public String getName() {
@@ -60,11 +64,11 @@ public class Post {
         this.name = name;
     }
 
-    public Date getCreation_date() {
+    public String getCreation_date() {
         return creation_date;
     }
 
-    public void setCreation_date(Date creation_date) {
+    public void setCreation_date(String creation_date) {
         this.creation_date = creation_date;
     }
 
@@ -78,7 +82,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" + "id=" + id + ", event_id=" + event_id + ", name=" + name + ", creation_date=" + creation_date + ", description=" + description + '}';
+        return "Post{" + "id=" + id +  ", name=" + name + ", creation_date=" + creation_date + ", description=" + description + '}';
 
 //To change body of generated methods, choose Tools | Templates.
     }

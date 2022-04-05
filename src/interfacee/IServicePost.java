@@ -5,15 +5,15 @@
  */
 package interfacee;
 
-import entity.Event;
+import entity.Post;
 import java.util.List;
 
 /**
  *
  * @author wassim
  */
-public interface IServiceEvent {
-    //crud 
-    public void createEvent(Event e);
-    public List<Event> readEvents();
+public interface IServicePost {
+     public void createPost(Post p);
+    public List<Post> readPost();
+    
 }

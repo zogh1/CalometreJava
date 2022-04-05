@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package entity;
 
 import java.util.Date;
 
@@ -43,6 +43,10 @@ public class Event {
         this.nombre_participants = nombre_participants;
         this.lieu = lieu;
         this.image = image;
+    }
+
+    public Event(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId() {
