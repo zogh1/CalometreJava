@@ -14,21 +14,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import util.DataSource;
+import util.connexion;
 
 /**
  *
  * @author wassim
  */
 public class ServicePost {
-     DataSource instance = DataSource.getInstance();
+     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
 
     public List<Post> getallPost() {
         List<Post> le = new ArrayList<Post>();
         String req = "select * from post";
         try {
-            Statement s = DataSource.getInstance().getCnx().createStatement();
+            Statement s = connexion.getInstance().getCnx().createStatement();
             ResultSet rs = s.executeQuery(req);
             while (rs.next()) {
                 Post p = new Post();
@@ -68,7 +68,7 @@ public class ServicePost {
         Post p = new Post();
         String req = "select * from post where id=?";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -96,7 +96,7 @@ public class ServicePost {
         //req BD
         String req = "INSERT INTO `post`(`name`,`event_id`, `creation_date`, `description`) VALUES (?,?,?,?)";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
              // PreparedStatement définit les méthodes pour un objet qui va encapsuler une requête précompilée
             ps.setString(1, p.getName());
             ps.setString(3, p.getCreation_date());
@@ -117,7 +117,7 @@ public class ServicePost {
        public void deletePost(int id) {
         String req = "delete from post where id=?";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException er) {
@@ -130,7 +130,7 @@ public class ServicePost {
         String req = "update post set name=?,creation_date	=?,description=? where id=?";
         try {
             System.out.println("jib" + id);
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             ps.setString(1, p.getName());
             ps.setString(2, p.getCreation_date());
       

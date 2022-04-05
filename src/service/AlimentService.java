@@ -5,7 +5,7 @@
  */
 package service;
 
-import interfaces.AlimentInterface;
+import interfacee.AlimentInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.Aliment;
-import util.MaConnexion;
+import entity.Aliment;
+import util.connexion;
 
 /**
  *
@@ -23,7 +23,7 @@ import util.MaConnexion;
 public class AlimentService implements AlimentInterface {
     
     //var
-    MaConnexion instance = MaConnexion.getInstance();
+    connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
 
     @Override

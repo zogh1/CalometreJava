@@ -6,16 +6,20 @@
 package interfacee;
 
 import java.util.List;
-import model.Recette;
+import entity.Recette;
 
 /**
  *
  * @author Ahmed Mahjoub
  */
 public interface RecetteInterface {
-     public void addRecette(Recette a);
+
+    public void addRecette(Recette a);
+
     public List<Recette> fetchAllRecette();
+
     public void DeleatRecette(int id);
-     public void UpdateRecette(Recette a ,int id);
-    
+
+    public void UpdateRecette(Recette a, int id);
+
 }

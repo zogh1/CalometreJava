@@ -75,8 +75,8 @@ public class Calometre {
         edit.setId(28);
         fn.updateuser(edit);*/
 //        seif ajout
-        categoryservice fn = new categoryservice();
-        category test = new category();
+        categoryservice cf = new categoryservice();
+        category cat = new category();
 //     ajout    test.setName("kiwi");
 //        fn.createcategory(test);
 //affichae fn.getallcategory();

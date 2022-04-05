@@ -5,7 +5,7 @@
  */
 package service;
 
-import interfaces.RecetteInterface;
+import interfacee.RecetteInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.Recette;
-import util.MaConnexion;
+import entity.Recette;
+import util.connexion;
 
 /**
  *
@@ -22,7 +22,7 @@ import util.MaConnexion;
  */
 public class RecetteService implements RecetteInterface {
       //var
-    MaConnexion instance = MaConnexion.getInstance();
+    connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
 
     @Override

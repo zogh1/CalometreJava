@@ -6,23 +6,15 @@
  */
 package interfacee;
 
-<<<<<<< HEAD:src/interfacee/userrservice.java
-=======
 import entity.Event;
->>>>>>> origin/Zebex-GestionEvenement:src/interfacee/IServiceEvent.java
 import java.util.List;
-import entity.user;
 
 /**
  *
- * @author admin
+ * @author wassim
  */
-public interface  userrservice  {
-    
-    //CRUD
-    public void createuser(user u);
-    public List<user> readusers();
-   
-  
-    
+public interface IServiceEvent {
+    //crud 
+    public void createEvent(Event e);
+    public List<Event> readEvents();
 }

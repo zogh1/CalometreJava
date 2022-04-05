@@ -8,7 +8,6 @@ package service;
 import java.sql.PreparedStatement;
 
 import entity.Event;
-import interfacee.IServiceEvent;
 import java.sql.Connection;
 
 import java.sql.ResultSet;
@@ -16,7 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import util.DataSource;
+import util.connexion;
 
 /**
  *
@@ -24,14 +23,14 @@ import util.DataSource;
  */
 public class ServiceEvent {
 
-    DataSource instance = DataSource.getInstance();
+    connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
 
     public List<Event> getallEvent() {
         List<Event> le = new ArrayList<Event>();
         String req = "select * from event";
         try {
-            Statement s = DataSource.getInstance().getCnx().createStatement();
+            Statement s = connexion.getInstance().getCnx().createStatement();
             ResultSet rs = s.executeQuery(req);
             while (rs.next()) {
                 Event e = new Event();
@@ -59,7 +58,7 @@ public class ServiceEvent {
         Event e = new Event();
         String req = "select * from event where id=?";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -87,7 +86,7 @@ public class ServiceEvent {
         //req BD
         String req = "INSERT INTO `event`(`nom`, `date_debut`, `date_fin`, `description`, `nombre_participants`, `lieu`, `image`) VALUES (?,?,?,?,?,?,?)";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
 
             ps.setString(1, e.getNom());
             ps.setString(2, e.getDate_debut());
@@ -111,7 +110,7 @@ public class ServiceEvent {
     public void deleteEvent(int id) {
         String req = "delete from event where id=?";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException er) {
@@ -125,7 +124,7 @@ public class ServiceEvent {
         String req = "update event set nom=?,date_debut=?,date_fin=?,description=?,nombre_participants=?,lieu=?,image=? where id=?";
         try {
             System.out.println("jib" + id);
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             ps.setString(1, e.getNom());
             ps.setString(2, e.getDate_debut());
             ps.setString(3, e.getDate_fin());

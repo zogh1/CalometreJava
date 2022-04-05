@@ -6,7 +6,7 @@
 package interfacee;
 
 import java.util.List;
-import model.Aliment;
+import entity.Aliment;
 
 /**
  *
