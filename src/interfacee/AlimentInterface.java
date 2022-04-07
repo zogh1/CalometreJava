@@ -23,6 +23,9 @@ public interface AlimentInterface {
      public List<Aliment> OrderbyCategorie();
      public Aliment GetById(int id);
      public Aliment GetByName(String name);
+     public List<Aliment> ListByCategorie(String categorie);
+     public List<Aliment> ListByCaloriesRange(int bornemin,int bornemax );
+     
          
       
      

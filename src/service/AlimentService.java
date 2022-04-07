@@ -253,6 +253,59 @@ public class AlimentService implements AlimentInterface {
        
         
     }
+
+    @Override
+    public List<Aliment> ListByCategorie(String categorie) {
+       
+        ArrayList<Aliment> aliments = new ArrayList();
+          String req = "SELECT * FROM `aliment` where categorie=?;";
+        
+        try {
+             PreparedStatement ps = cnx.prepareStatement(req);
+          
+             ps.setString(1, categorie);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                
+                aliments.add(new Aliment(rs.getInt("id"), rs.getString("name"), rs.getFloat("calories"), rs.getString("categorie"), rs.getString("image")));
+                
+            }
+            
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        
+        return aliments;
+        
+    }
+
+    @Override
+    public List<Aliment> ListByCaloriesRange(int bornemin, int bornemax) {
+         ArrayList<Aliment> aliments = new ArrayList();
+          String req = "SELECT * FROM `aliment` WHERE calories BETWEEN ? AND ?;";
+        
+        try {
+             PreparedStatement ps = cnx.prepareStatement(req);
+          
+             ps.setInt(1, bornemin);
+              ps.setInt(2, bornemax);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                
+                aliments.add(new Aliment(rs.getInt("id"), rs.getString("name"), rs.getFloat("calories"), rs.getString("categorie"), rs.getString("image")));
+                
+            }
+            
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        
+        return aliments;
+    }
     
     
     

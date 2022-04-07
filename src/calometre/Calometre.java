@@ -46,8 +46,8 @@ public class Calometre {
         // TODO code application logic here
  float b=233;
        AlimentInterface AI = new AlimentService();
-       Aliment a= AI.GetByName("TEST");
-       System.out.println(a);
+       List<Aliment> liste= AI.ListByCaloriesRange(10000,13000);
+       System.out.println(liste);
     
     
 
