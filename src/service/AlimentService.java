@@ -90,7 +90,7 @@ public class AlimentService implements AlimentInterface {
 
         String req = "update aliment set name=?,calories=?,categorie=?,image=? where id=?";
         try {
-            System.out.println("jib " + id);
+          
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, a.getNom());
             ps.setFloat(2, a.getCalories());
@@ -105,6 +105,28 @@ public class AlimentService implements AlimentInterface {
         }
     
     }
+
+    @Override
+    public List<Aliment> OrderAlimentsByCaloriesASC() {
+           ArrayList<Aliment> aliments = new ArrayList();
+        
+        try {
+            Statement st = cnx.createStatement();
+            String req = "SELECT * FROM `aliment` ORDER BY calories ASC;";
+            ResultSet rs = st.executeQuery(req);
+            
+            while (rs.next()) {                
+                
+                aliments.add(new Aliment(rs.getInt("id"), rs.getString("name"), rs.getFloat("calories"), rs.getString("categorie"), rs.getString("image")));
+                
+            }
+            
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        
+        return aliments;
+      
     
     
     
@@ -115,3 +137,133 @@ public class AlimentService implements AlimentInterface {
     
     
 }
+
+    @Override
+    public List<Aliment> OrderAlimentsByCaloriesDESC() {
+         ArrayList<Aliment> aliments = new ArrayList();
+        
+        try {
+            Statement st = cnx.createStatement();
+            String req = "SELECT * FROM `aliment` ORDER BY calories DESC;";
+            ResultSet rs = st.executeQuery(req);
+            
+            while (rs.next()) {                
+                
+                aliments.add(new Aliment(rs.getInt("id"), rs.getString("name"), rs.getFloat("calories"), rs.getString("categorie"), rs.getString("image")));
+                
+            }
+            
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        
+        return aliments;
+   
+    }
+
+    @Override
+    public List<Aliment> OrderByName() {
+        ArrayList<Aliment> aliments = new ArrayList();
+        
+        try {
+            Statement st = cnx.createStatement();
+            String req = "SELECT * FROM `aliment` ORDER BY name DESC;";
+            ResultSet rs = st.executeQuery(req);
+            
+            while (rs.next()) {                
+                
+                aliments.add(new Aliment(rs.getInt("id"), rs.getString("name"), rs.getFloat("calories"), rs.getString("categorie"), rs.getString("image")));
+                
+            }
+            
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        
+        return aliments;
+    }
+
+    @Override
+    public List<Aliment> OrderbyCategorie() {
+        ArrayList<Aliment> aliments = new ArrayList();
+        
+        try {
+            Statement st = cnx.createStatement();
+            String req = "SELECT * FROM `aliment` ORDER BY categorie DESC;";
+            ResultSet rs = st.executeQuery(req);
+            
+            while (rs.next()) {                
+                
+                aliments.add(new Aliment(rs.getInt("id"), rs.getString("name"), rs.getFloat("calories"), rs.getString("categorie"), rs.getString("image")));
+                
+            }
+            
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        
+        return aliments;
+    }
+
+
+   
+
+    @Override
+    public Aliment GetById(int id ) {
+              ArrayList<Aliment> aliments = new ArrayList();
+              Aliment a=new Aliment();
+          String req = "SELECT * FROM `aliment` WHERE id=?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+              while (rs.next()) {      
+            
+             a = new Aliment(rs.getInt("id"), rs.getString("name"), rs.getFloat("calories"), rs.getString("categorie"), rs.getString("image"));
+              }
+            }
+            
+         catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        return a ;
+       
+    } 
+
+    @Override
+    public Aliment GetByName(String name) {
+        
+              ArrayList<Aliment> aliments = new ArrayList();
+              Aliment a=new Aliment();
+          String req = "SELECT * FROM `aliment` WHERE name=?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+              while (rs.next()) {      
+            
+             a = new Aliment(rs.getInt("id"), rs.getString("name"), rs.getFloat("calories"), rs.getString("categorie"), rs.getString("image"));
+              }
+            }
+            
+         catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        return a ;
+       
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+

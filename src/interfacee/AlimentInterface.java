@@ -17,5 +17,14 @@ public interface AlimentInterface {
     public List<Aliment> fetchAllAliment();
     public void DeleatAliment(int id);
      public void UpdateAliment(Aliment a ,int id);
+     public List<Aliment> OrderAlimentsByCaloriesASC();
+     public List<Aliment> OrderAlimentsByCaloriesDESC();
+     public List<Aliment> OrderByName();
+     public List<Aliment> OrderbyCategorie();
+     public Aliment GetById(int id);
+     public Aliment GetByName(String name);
+         
+      
+     
     
 }

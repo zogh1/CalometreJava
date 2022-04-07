@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.util.List;
+
 /**
  *
  * @author Ahmed Mahjoub
@@ -15,6 +17,7 @@ public class Aliment {
     private Float calories;
     private String categorie;
     private String image;
+    private  List<Aliment> listAliment;
 
     public Aliment(int id, String nom, Float calories, String categorie, String image) {
         this.id = id;
