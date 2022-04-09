@@ -7,6 +7,8 @@ package interfacee;
 
 import java.util.List;
 import entity.Recette;
+import entity.RecetteLike;
+import entity.user;
 
 /**
  *
@@ -21,5 +23,18 @@ public interface RecetteInterface {
     public void DeleatRecette(int id);
 
     public void UpdateRecette(Recette a, int id);
+     public List<Recette> OrderByNameASC();
+     public List<Recette> OrderbyCategorie();
+     public Recette GetById(int id);
+     public Recette GetByName(String name);
+     public List<Recette> ListByCategorie(String categorie);
 
+/*    public RecetteLike Like(user user, Recette recette) {
+       int userId=user.getId();
+       int recetteId= recette.getId();
+       RecetteLike like= new RecetteLike(user,recette);
+       
+        
+    }
+}*/
 }

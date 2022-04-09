@@ -16,15 +16,15 @@ public interface AlimentInterface {
     public void addAliment(Aliment a);
     public List<Aliment> fetchAllAliment();
     public void DeleatAliment(int id);
-     public void UpdateAliment(Aliment a ,int id);
-     public List<Aliment> OrderAlimentsByCaloriesASC();
-     public List<Aliment> OrderAlimentsByCaloriesDESC();
-     public List<Aliment> OrderByName();
-     public List<Aliment> OrderbyCategorie();
-     public Aliment GetById(int id);
-     public Aliment GetByName(String name);
-     public List<Aliment> ListByCategorie(String categorie);
-     public List<Aliment> ListByCaloriesRange(int bornemin,int bornemax );
+    public void UpdateAliment(Aliment a ,int id);
+    public List<Aliment> OrderAlimentsByCaloriesASC();
+    public List<Aliment> OrderAlimentsByCaloriesDESC();
+    public List<Aliment> OrderByNameASC();
+    public List<Aliment> OrderbyCategorie();
+    public Aliment GetById(int id);
+    public Aliment GetByName(String name);
+    public List<Aliment> ListByCategorie(String categorie);
+    public List<Aliment> ListByCaloriesRange(int bornemin,int bornemax );
      
          
       

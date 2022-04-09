@@ -5,14 +5,20 @@
  */
 package entity;
 
+import java.util.List;
+
 /**
  *
  * @author Ahmed Mahjoub
  */
 public class Recette {
-     private int id;
+    private int id;
     private String nom;
     private String regime;
+    private Float totcalories;
+    private String categorie;
+    private String image;
+     private  List<Aliment> listAliment;
 
     public void setId(int id) {
         this.id = id;
@@ -101,8 +107,5 @@ public class Recette {
     public String toString() {
         return "Recette{" + "id=" + id + ", nom=" + nom + ", regime=" + regime + ", totcalories=" + totcalories + ", categorie=" + categorie + ", image=" + image + '}';
     }
-    private Float totcalories;
-    private String categorie;
-    private String image;
-    
+  
 }

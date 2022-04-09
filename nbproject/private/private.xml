@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/util/connexion.java</file>
-            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/calometre/Calometre.java</file>
-            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/service/typeExerciceService.java</file>
-            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/service/RecetteService.java</file>
+            <file>file:/C:/Users/Ahmed%20Mahjoub/Dropbox/PC/Desktop/PI%20JAVA/CalometreJava/src/util/connexion.java</file>
+            <file>file:/C:/Users/Ahmed%20Mahjoub/Dropbox/PC/Desktop/PI%20JAVA/CalometreJava/src/interfacee/AlimentInterface.java</file>
+            <file>file:/C:/Users/Ahmed%20Mahjoub/Dropbox/PC/Desktop/PI%20JAVA/CalometreJava/src/entity/Aliment.java</file>
+            <file>file:/C:/Users/Ahmed%20Mahjoub/Dropbox/PC/Desktop/PI%20JAVA/CalometreJava/src/calometre/Calometre.java</file>
+            <file>file:/C:/Users/Ahmed%20Mahjoub/Dropbox/PC/Desktop/PI%20JAVA/CalometreJava/src/service/AlimentService.java</file>
         </group>
     </open-files>
 </project-private>

@@ -162,12 +162,12 @@ public class AlimentService implements AlimentInterface {
     }
 
     @Override
-    public List<Aliment> OrderByName() {
+    public List<Aliment> OrderByNameASC() {
         ArrayList<Aliment> aliments = new ArrayList();
         
         try {
             Statement st = cnx.createStatement();
-            String req = "SELECT * FROM `aliment` ORDER BY name DESC;";
+            String req = "SELECT * FROM `aliment` ORDER BY name ASC;";
             ResultSet rs = st.executeQuery(req);
             
             while (rs.next()) {                
@@ -189,7 +189,7 @@ public class AlimentService implements AlimentInterface {
         
         try {
             Statement st = cnx.createStatement();
-            String req = "SELECT * FROM `aliment` ORDER BY categorie DESC;";
+            String req = "SELECT * FROM `aliment` ORDER BY categorie ASC;";
             ResultSet rs = st.executeQuery(req);
             
             while (rs.next()) {                
