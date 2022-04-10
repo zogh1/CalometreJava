@@ -6,8 +6,8 @@
  */
 package interfacee;
 
-import entity.user;
 import java.util.List;
+import entity.user;
 
 /**
  *
@@ -24,30 +24,8 @@ public interface userInterface {
 
     public user findById(int id);
 
-    public user findByEmail(String email);
-
     public void updateuser(user u);
 
     public void deleteuser(int id);
-
-    public boolean verifyEmailExistance(String email);
-
-    public void banUser(int id);
-
-    public void unbanUser(int id);
-
-    public void logout();
-
-    public boolean isConnected();
-
-    public void updatePassword(String oldPassword, String password);
-
-    public boolean passisMatched(String password);
-
-    public List<user> searchUser(String search);
-
-    public List<user> orderUser();
-
-    public int countuserbyRole(String countitem);
 
 }
