@@ -7,7 +7,9 @@ package calometre;
 
 import entity.user;
 import interfacee.userInterface;
+import javax.mail.MessagingException;
 import service.userservice;
+import util.EmailSender;
 
 /**
  *
@@ -18,7 +20,7 @@ public class Calometre {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MessagingException {
         // TODO code application logic here
 
         userInterface fn = new userservice();
@@ -41,8 +43,8 @@ public class Calometre {
 //        user.setProfile_picture("fghfhgf");
 //        user.setRoles("tttt");
 //        fn.createuser(user);
-        fn.countuserbyRole("tttt");
-
+        //  fn.countuserbyRole("tttt");
+        EmailSender.sendEmailWithAttachments("crinnxx@gmail.com", "test", "message");
     }
 
 }
