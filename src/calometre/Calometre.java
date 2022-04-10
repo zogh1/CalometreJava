@@ -6,9 +6,8 @@
 package calometre;
 
 import entity.user;
-import java.sql.Connection;
+import interfacee.userInterface;
 import service.userservice;
-import util.connexion;
 
 /**
  *
@@ -21,35 +20,29 @@ public class Calometre {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        userservice fn = new userservice();
-        user test = new user();
 
-        test.setEmail("testmail");
-        test.setPassword("password");
+        userInterface fn = new userservice();
+        user user = new user();
 
-        fn.login(test);
+        user.setEmail("souhail");
+        user.setPassword("password");
+        fn.login(user);
+//        System.out.println(fn.verifyEmailExistance("souhail"));
+        // fn.unbanUser(36);
+        //fn.updatePassword("hello", "password");
+        // fn.searchUser("souhail");
+        // fn.orderUser();
+//        user.setCountry_code("216");
+//        user.setEmail("test111");
+//        user.setFirstname("hghghgh");
+//        user.setLastname("rtrtt");
+//        user.setPassword("ttttt");
+//        user.setPhonenumber(1213);
+//        user.setProfile_picture("fghfhgf");
+//        user.setRoles("tttt");
+//        fn.createuser(user);
+        fn.countuserbyRole("tttt");
 
-//        test.setCountry_code("216");
-//        test.setEmail("test");
-//        test.setFirstname("hghghgh");
-//        test.setLastname("rtrtt");
-//        test.setPassword("ttttt");
-//        test.setPhonenumber(1213);
-//        test.setProfile_picture("fghfhgf");
-//        test.setRoles("tttt");
-//       fn.deleteuser(32);
-        /*user edit =new user();
-
-        edit.setCountry_code("216");
-        edit.setEmail("test");
-        edit.setFirstname("hghghgh");
-        edit.setLastname("rtrddtt");
-        edit.setPassword("ttttt");
-        edit.setPhonenumber(1213);
-        edit.setProfile_picture("fghfhgf");
-        edit.setRoles("tttt");
-        edit.setId(28);
-        fn.updateuser(edit);*/
     }
 
 }
