@@ -19,6 +19,7 @@ public class Recette {
     private String categorie;
     private String image;
      private  List<Aliment> listAliment;
+      private  List<RecetteLike> Likes;
 
     public void setId(int id) {
         this.id = id;
@@ -101,6 +102,19 @@ public class Recette {
         this.totcalories = totcalories;
         this.categorie = categorie;
         this.image = image;
+    }
+    
+    public boolean IsLikedByUser(user user)
+    {
+        
+        for (RecetteLike like : this.Likes) {
+        if (like.getUser()==user)
+        return true;
+    
+      
+    }
+            
+        return false;
     }
 
     @Override

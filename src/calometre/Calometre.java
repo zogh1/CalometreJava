@@ -12,6 +12,7 @@ import util.connexion;
 import service.exerciceService;
 import entity.category;
 import entity.product;
+import entity.RecetteLike;
 import entity.user;
 import service.categoryservice;
 import service.productservice;
@@ -33,6 +34,7 @@ import service.RecetteService;
 import service.ServiceReclamation;
 import service.ServiceReponse;
 
+
 /**
  *
  * @author Souhail
@@ -45,13 +47,29 @@ public class Calometre {
     public static void main(String[] args) {
         // TODO code application logic here
  float b=233;
+  userservice fn = new userservice();
+     user test = fn.findById(1);
+
+    
+      
        RecetteInterface RI=new RecetteService();
-       List<Recette> liste= RI.OrderbyCategorie();
-       System.out.println(liste);
+       Recette recette=RI.GetById(20);
+      
+     
+     RecetteLike ri= new RecetteLike();
+     ri=ri.getRecetteLikeById(2);
+    
+     
+     
+      RI.Removelike(ri);
+     
+   
+   
+     
     
     
 
 
 
-}
+
 }

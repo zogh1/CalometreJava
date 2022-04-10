@@ -226,4 +226,54 @@ public class RecetteService implements RecetteInterface {
         
     }
 
+    @Override
+    public RecetteLike Like(user user, Recette recette) {
+      
+        
+        RecetteLike like= new RecetteLike(user,recette);
+               
+        
+       return like;
+    }
+
+    @Override
+    public void Addlike(RecetteLike like) {
+        String req = "INSERT INTO `recette_like`(`recette_id`,`user_id`) VALUES (?,?)";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setInt(1, like.getUserId());
+            st.setInt(2, like.getRecetteId());
+           
+        
+            st.executeUpdate();
+            System.out.println("Recette Liked avec succes.");
+            
+        } catch (SQLException ex) {
+            
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void Removelike(RecetteLike like) {
+        int id = like.getId();
+        
+        
+         String req = "delete from recette_like where id=?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException er) {
+            System.out.println("Erreur lors de la suppression");
+            er.printStackTrace();
+        }
+        
+    }
+
+
+
+
+  
     
+}

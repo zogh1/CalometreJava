@@ -5,6 +5,17 @@
  */
 package entity;
 
+import interfacee.RecetteInterface;
+import interfacee.userInterface;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import service.RecetteService;
+import service.userservice;
+import util.connexion;
+
 /**
  *
  * @author Ahmed Mahjoub
@@ -13,6 +24,10 @@ public class RecetteLike {
     int id ;
     user user;
     Recette recette;
+      connexion instance = connexion.getInstance();
+    Connection cnx = instance.getCnx();
+    RecetteInterface RI=new RecetteService();
+    userInterface UI =new userservice();
 
     public int getId() {
         return id;
@@ -52,12 +67,36 @@ public class RecetteLike {
         this.recette = recette;
     }
     
+    public int getUserId (){return this.getUser().getId();}
     
     
-    public void AddLike(RecetteLike Rl)
-    {
+public int getRecetteId (){return this.getRecette().getId();}
+public RecetteLike getRecetteLikeById ( int id){
+     ArrayList<Recette> likes = new ArrayList();
+              RecetteLike a =new RecetteLike();
+              
+          String req = "SELECT * FROM `recette_like` WHERE id=?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+              while (rs.next()) {      
+            
+             a = new RecetteLike(rs.getInt("id"),UI.findById(rs.getInt("user_id")),RI.GetById(rs.getInt("recette_id")));
+         
+              }
+            }
+            
+         catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        return a ;
+
+}
     
+    
+ 
     }
     
     
-}
+

@@ -17,24 +17,22 @@ import entity.user;
 public interface RecetteInterface {
 
     public void addRecette(Recette a);
-
     public List<Recette> fetchAllRecette();
-
     public void DeleatRecette(int id);
-
     public void UpdateRecette(Recette a, int id);
-     public List<Recette> OrderByNameASC();
-     public List<Recette> OrderbyCategorie();
-     public Recette GetById(int id);
-     public Recette GetByName(String name);
-     public List<Recette> ListByCategorie(String categorie);
+    public List<Recette> OrderByNameASC();
+    public List<Recette> OrderbyCategorie();
+    public Recette GetById(int id);
+    public Recette GetByName(String name);
+    public List<Recette> ListByCategorie(String categorie);
+    public void Addlike(RecetteLike like);
+    public void Removelike(RecetteLike like);
+    public RecetteLike Like(user user,Recette recette);
+   
+    
+    
+    
+    
 
-/*    public RecetteLike Like(user user, Recette recette) {
-       int userId=user.getId();
-       int recetteId= recette.getId();
-       RecetteLike like= new RecetteLike(user,recette);
-       
-        
-    }
-}*/
+
 }
