@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.Connexion;
+import util.connexion;
 
 /**
  *
@@ -26,8 +26,32 @@ import util.Connexion;
  */
 public class ServiceReclamation implements IServiceReclamation {
 
-    Connexion instance = Connexion.getInstance();
+    connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
+     public Reclamation getById(int id) {
+        Reclamation r = new Reclamation();
+        String req = "select * from Reclamation where id=?";
+        try {
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                r.setId(rs.getInt("id"));
+                r.setEmail(rs.getString("email"));
+                r.setDate(rs.getString("Date"));
+                r.setType(rs.getString("TYPE"));
+                r.setMessage(rs.getString("message"));
+             
+            }
+
+        } catch (SQLException erreur) {
+            System.out.println("erreurr");
+            erreur.printStackTrace();
+        }
+        System.out.println(r);
+        return r;
+    }
 
     @Override
     public void createReclamation(Reclamation R) {

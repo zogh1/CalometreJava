@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author admin
  */
-public class Connexion {
+public class connexion {
 
     //DB CREDENTIALS
     final static String URL = "jdbc:mysql://127.0.0.1:3306/Calometre";
@@ -21,11 +21,11 @@ public class Connexion {
     final static String PWD = "";
 
     //Connection init
-    static Connexion instance = null;
+    static connexion instance = null;
     private Connection cnx;
 
     //constructor
-    public Connexion() {
+    public connexion() {
 
         try {
             cnx = DriverManager.getConnection(URL, USERNAME, PWD);
@@ -36,9 +36,9 @@ public class Connexion {
     }
 
     //getters
-    public static Connexion getInstance() {
+    public static connexion getInstance() {
         if (instance == null) {
-            instance = new Connexion();
+            instance = new connexion();
         }
 
         return instance;
@@ -47,5 +47,7 @@ public class Connexion {
     public Connection getCnx() {
         return cnx;
     }
+
+ 
 
 }

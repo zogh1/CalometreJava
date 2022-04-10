@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.Connexion;
+import util.connexion;
 
 /**
  *
@@ -27,7 +27,7 @@ import util.Connexion;
  */
 public class ServiceReponse implements IServiceReponse {
 
-    Connexion instance = Connexion.getInstance();
+    connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
 
     /**
