@@ -5,7 +5,7 @@
  */
 package service;
 
-import interfacee.userrservice;
+import interfacee.userInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,12 +22,13 @@ import util.session;
  *
  * @author Souhail
  */
-public class userservice {
+public class userservice implements userInterface {
 
     //var
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
 
+    @Override
     public void createuser(user u) {
 
         //request
@@ -54,6 +55,7 @@ public class userservice {
 
     }
 
+    @Override
     public List<user> getalluser() {
         List<user> li = new ArrayList<user>();
 
@@ -90,6 +92,7 @@ public class userservice {
         return li;
     }
 
+    @Override
     public void deleteuser(int id) {
 
         try {
@@ -104,6 +107,7 @@ public class userservice {
         }
     }
 
+    @Override
     public void updateuser(user u) {
 
         String req = "UPDATE `user` SET `password`='" + u.getPassword() + "',`email`='" + u.getEmail() + "',`roles`='" + u.getRoles() + "',`is_verified`=0,`firstname`='" + u.getFirstname() + "',`lastname`='" + u.getLastname() + "',`phonenumber`='" + u.getPhonenumber() + "',`profile_picture`='" + u.getProfile_picture() + "',`isbanned`=0,`country_code`='" + u.getCountry_code() + "' WHERE id='" + u.getId() + "'";
@@ -117,7 +121,8 @@ public class userservice {
         }
     }
 
-    public user findById(Integer id) {
+    @Override
+    public user findById(int id) {
         user u = null;
         try {
             String req = "select * from user where id=? ";
@@ -139,12 +144,14 @@ public class userservice {
                         rs.getBoolean(10),
                         rs.getString(11));
             }
+       System.out.println(u.getFirstname());
         } catch (Exception a) {
             a.printStackTrace();
         }
         return u;
     }
 
+    @Override
     public boolean login(user user) {
         boolean status = false;
         try {
