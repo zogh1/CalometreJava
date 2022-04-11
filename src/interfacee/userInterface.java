@@ -20,8 +20,6 @@ public interface userInterface {
 
     public List<user> getalluser();
 
-    public List<user> pagination();
-
     public boolean login(user user);
 
     public user findById(int id);
