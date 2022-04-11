@@ -90,6 +90,43 @@ public class userservice implements userInterface {
     }
 
     @Override
+    public List<user> pagination() {
+        List<user> li = new ArrayList<user>();
+
+        try {
+            String req = "select * from user LIMIT 3 OFFSET 1 ";
+            Statement s = cnx.createStatement();
+
+            ResultSet rs = s.executeQuery(req);
+            while (rs.next()) {
+                user l = new user();
+                l.setId(rs.getInt("id"));
+                l.setEmail(rs.getString("email"));
+                l.setRoles(rs.getString("roles"));
+                l.setIsVerfied(rs.getBoolean("is_verified"));
+                l.setFirstname(rs.getString("firstname"));
+                l.setLastname(rs.getString("lastname"));
+                l.setPhonenumber(rs.getInt("phonenumber"));
+                l.setProfile_picture(rs.getString("profile_picture"));
+                l.setIsbanned(rs.getBoolean("isbanned"));
+                l.setCountry_code(rs.getString("country_code"));
+
+                li.add(l);
+            }
+            for (int i = 0; i < li.size(); i++) {
+                System.out.println("*********");
+                System.out.println(li.get(i).getEmail());
+                System.out.println(li.get(i).getFirstname());
+            }
+
+        } catch (SQLException ex) {
+        }
+
+        return li;
+
+    }
+
+    @Override
     public void deleteuser(int id) {
 
         try {
@@ -196,8 +233,7 @@ public class userservice implements userInterface {
                 }
             }
 
-        } catch (Exception e) {
-
+        } catch (SQLException e) {
         }
         return status;
     }
