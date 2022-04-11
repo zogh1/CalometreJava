@@ -34,6 +34,8 @@ import service.RecetteService;
 import service.ServiceReclamation;
 import service.ServiceReponse;
 import util.EmailSender;
+import util.sendSMS;
+import static util.sendSMS.sendSMS;
 
 /**
  *
@@ -258,6 +260,9 @@ public class Calometre {
        f.createReponse(rep,rec);*/
           //exemple mail 
           EmailSender.sendEmailWithAttachments("rym.baccouri@esprit.tn", "test", "message");
+          
+          Reclamation r = new Reclamation(1, "rym.baccouri@esprit.tn", "Test", "msg", "2022-04-11");
+          sendSMS(r);
     }
 
 }
