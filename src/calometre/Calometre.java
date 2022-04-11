@@ -6,10 +6,16 @@
 package calometre;
 
 import entity.user;
+<<<<<<< HEAD
 import interfacee.userInterface;
 import javax.mail.MessagingException;
 import service.userservice;
 import util.EmailSender;
+=======
+import java.sql.Connection;
+import service.userservice;
+import util.connexion;
+>>>>>>> parent of 70de6e8 (Many functions done)
 
 /**
  *
@@ -22,7 +28,10 @@ public class Calometre {
      */
     public static void main(String[] args) throws MessagingException {
         // TODO code application logic here
+        userservice fn = new userservice();
+        user test = new user();
 
+<<<<<<< HEAD
         userInterface fn = new userservice();
         user user = new user();
 
@@ -45,6 +54,34 @@ public class Calometre {
 //        fn.createuser(user);
         //  fn.countuserbyRole("tttt");
         EmailSender.sendEmailWithAttachments("crinnxx@gmail.com", "test", "message");
+=======
+        test.setEmail("testmail");
+        test.setPassword("password");
+
+        fn.login(test);
+
+//        test.setCountry_code("216");
+//        test.setEmail("test");
+//        test.setFirstname("hghghgh");
+//        test.setLastname("rtrtt");
+//        test.setPassword("ttttt");
+//        test.setPhonenumber(1213);
+//        test.setProfile_picture("fghfhgf");
+//        test.setRoles("tttt");
+//       fn.deleteuser(32);
+        /*user edit =new user();
+
+        edit.setCountry_code("216");
+        edit.setEmail("test");
+        edit.setFirstname("hghghgh");
+        edit.setLastname("rtrddtt");
+        edit.setPassword("ttttt");
+        edit.setPhonenumber(1213);
+        edit.setProfile_picture("fghfhgf");
+        edit.setRoles("tttt");
+        edit.setId(28);
+        fn.updateuser(edit);*/
+>>>>>>> parent of 70de6e8 (Many functions done)
     }
 
 }

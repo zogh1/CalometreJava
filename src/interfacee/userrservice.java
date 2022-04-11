@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,15 +6,19 @@
  */
 package interfacee;
 
-import entity.Post;
 import java.util.List;
+import entity.user;
 
 /**
  *
- * @author wassim
+ * @author admin
  */
-public interface IServicePost {
-     public void createPost(Post p);
-    public List<Post> readPost();
+public interface  userrservice  {
+    
+    //CRUD
+    public void createuser(user u);
+    public List<user> readusers();
+   
+  
     
 }
