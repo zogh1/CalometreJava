@@ -144,7 +144,7 @@ public class userservice implements userInterface {
                         rs.getBoolean(10),
                         rs.getString(11));
             }
-       System.out.println(u.getFirstname());
+      
         } catch (Exception a) {
             a.printStackTrace();
         }

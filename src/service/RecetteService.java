@@ -16,6 +16,7 @@ import java.util.List;
 import entity.Recette;
 import entity.RecetteLike;
 import entity.user;
+import interfacee.userInterface;
 import util.connexion;
 
 /**
@@ -26,6 +27,7 @@ public class RecetteService implements RecetteInterface {
       //var
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
+    userInterface UI= new userservice();
 
     @Override
     public void addRecette(Recette p) {
@@ -229,7 +231,9 @@ public class RecetteService implements RecetteInterface {
     @Override
     public RecetteLike Like(user user, Recette recette) {
       
-        
+        if(recette.IsLikedByUser(user))
+        {   System.out.print("ALLREADY LIKED");
+            return null;}
         RecetteLike like= new RecetteLike(user,recette);
                
         
@@ -241,8 +245,8 @@ public class RecetteService implements RecetteInterface {
         String req = "INSERT INTO `recette_like`(`recette_id`,`user_id`) VALUES (?,?)";
         try {
             PreparedStatement st = cnx.prepareStatement(req);
-            st.setInt(1, like.getUserId());
-            st.setInt(2, like.getRecetteId());
+            st.setInt(2, like.getUserId());
+            st.setInt(1, like.getRecetteId());
            
         
             st.executeUpdate();
@@ -269,6 +273,37 @@ public class RecetteService implements RecetteInterface {
             er.printStackTrace();
         }
         
+    }
+
+    @Override
+    public List<RecetteLike> getRecetteLikesByRecetteId(int id) {
+         ArrayList<RecetteLike> likes = new ArrayList();
+              RecetteLike a =new RecetteLike();
+              
+          String req = "SELECT * FROM `recette_like` WHERE recette_id=?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+              while (rs.next()) {      
+            
+             a = new RecetteLike(rs.getInt("id"),UI.findById(rs.getInt("user_id")),this.GetById(rs.getInt("recette_id")));
+             likes.add(a);
+         
+              }
+            }
+            
+         catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        return likes ;
+    }
+
+    @Override
+    public int getNumberOfLikesByRecetteId(int id) {
+        List<RecetteLike> likes = this.getRecetteLikesByRecetteId(id);
+       int  a= likes.size();
+       return a;
     }
 
 

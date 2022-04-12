@@ -28,6 +28,11 @@ public interface RecetteInterface {
     public void Addlike(RecetteLike like);
     public void Removelike(RecetteLike like);
     public RecetteLike Like(user user,Recette recette);
+    public  List<RecetteLike> getRecetteLikesByRecetteId ( int id);
+    public int getNumberOfLikesByRecetteId(int id);
+    
+
+
    
     
     

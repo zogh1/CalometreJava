@@ -121,5 +121,22 @@ public class Recette {
     public String toString() {
         return "Recette{" + "id=" + id + ", nom=" + nom + ", regime=" + regime + ", totcalories=" + totcalories + ", categorie=" + categorie + ", image=" + image + '}';
     }
+
+    public void setListAliment(List<Aliment> listAliment) {
+        this.listAliment = listAliment;
+    }
+
+    public void setLikes(List<RecetteLike> Likes) {
+        this.Likes = Likes;
+    }
+
+    public List<Aliment> getListAliment() {
+        return listAliment;
+    }
+
+    public List<RecetteLike> getLikes() {
+        return Likes;
+    }
+    
   
 }

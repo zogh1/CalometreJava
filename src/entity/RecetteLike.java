@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import service.RecetteService;
 import service.userservice;
 import util.connexion;
@@ -93,7 +94,13 @@ public RecetteLike getRecetteLikeById ( int id){
         return a ;
 
 }
+
+    @Override
+    public String toString() {
+        return "RecetteLike{" + "user=" + user + ", recette=" + recette + '}';
+    }
     
+
     
  
     }

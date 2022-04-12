@@ -49,19 +49,30 @@ public class Calometre {
  float b=233;
   userservice fn = new userservice();
      user test = fn.findById(1);
+    
 
     
       
        RecetteInterface RI=new RecetteService();
        Recette recette=RI.GetById(20);
+       
       
      
-     RecetteLike ri= new RecetteLike();
-     ri=ri.getRecetteLikeById(2);
+    System.out.print(RI.getRecetteLikesByRecetteId(recette.getId()));
+    
+      System.out.print(RI.getNumberOfLikesByRecetteId(recette.getId()));
+ 
+     
+   
+    
+    
+   
+    
+   
     
      
      
-      RI.Removelike(ri);
+ 
      
    
    
