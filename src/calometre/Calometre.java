@@ -34,17 +34,17 @@ public class Calometre {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        userservice fn = new userservice();
-        user test = new user();
-
-        test.setEmail("testmail");
-        test.setPassword("password");
-
-        fn.login(test);
-
-        exerciceService es = new exerciceService();
-
-        es.deleteExercice(8);
+//        userservice fn = new userservice();
+//        user test = new user();
+//
+//        test.setEmail("testmail");
+//        test.setPassword("password");
+//
+//        fn.login(test);
+//
+//        exerciceService es = new exerciceService();
+//
+//        es.deleteExercice(8);
 //        userservice fn = new userservice();
 //        user test = new user();
 
@@ -75,8 +75,8 @@ public class Calometre {
         edit.setId(28);
         fn.updateuser(edit);*/
 //        seif ajout
-        categoryservice cf = new categoryservice();
-        category cat = new category();
+//        categoryservice cf = new categoryservice();
+//        category cat = new category();
 //     ajout    test.setName("kiwi");
 //        fn.createcategory(test);
 //affichae fn.getallcategory();
@@ -86,32 +86,35 @@ public class Calometre {
 //test.setId(6);
 //fn.updatecategory(test);
 
-productservice ps = new productservice();
-product prod = new product();
-
-
-ps.getallproduct();
+//productservice ps = new productservice();
+//product prod = new product();
+//
+//
+//ps.getallproduct();
         
 
         
         ServiceEvent se = new ServiceEvent();
+        se.applyToEvent(6, 17);
       
-        Event e = se.getEventById(17) ;
-        System.out.println(e);
-        //   Event e = new Event("New Event","02/22/2022","02/23/2022","Nullam iaculis lacus non lectus venenatis tincidunt. Pellentesque est lectus, semper vitae aliquam in, pretium at libero. Nulla sed mauris neque. Nam eget pulvinar turpis, nec iaculis diam. Proin nec cursus libero",10,"moknin","QSVDJEAC41J2G5X4NJ.jpg");
-        Post p = new Post ("New post","2022-03-22 ","aaaa wassim kifeh",e) ; 
-//se.getallEvent();
-     ServicePost sp = new ServicePost(); 
-     // sp.getallPost(); 
+     //   Event e = se.getEventById(17) ;
+     //     System.out.println(e);
+        //  Event e = new Event("khalled","02/22/2022","02/23/2022","Nullam iaculis lacus non lectus venenatis tincidunt. Pellentesque est lectus, semper vitae aliquam in, pretium at libero. Nulla sed mauris neque. Nam eget pulvinar turpis, nec iaculis diam. Proin nec cursus libero",10,"moknin","QSVDJEAC41J2G5X4NJ.jpg");
+        // Post p = new Post ("New post","2022-03-22 ","aaaa wassim kifeh",e) ; 
+        //  se.getallEvent();
+    // ServicePost sp = new ServicePost(); 
+   //sp.getallPost(); 
       //se.getEventById(17);
-      // se.createEvent(e);
-      sp.createPost(p) ;  
+      //  se.createEvent(e);
+     // se.updateEvent(e, 63); 
+    // se.deleteEvent(63);
+      //    sp.createPost(p) ;  
         // TODO code application lnogic here
         //ServiceReclamation fn = new ServiceReclamation();
 //        Reclamation rec = new Reclamation();
-        ServiceReponse f = new ServiceReponse();
-        Reponse rep = new Reponse();
-        Reclamation rec = new Reclamation();
+//        ServiceReponse f = new ServiceReponse();
+//        Reponse rep = new Reponse();
+//        Reclamation rec = new Reclamation();
 
         //ajout
         /* rec.setEmail("rymm");
@@ -135,11 +138,11 @@ ps.getallproduct();
         //delete 
         //ajout
         
-        rep.setReponse("rymm");
-
-        rep.setId(52);
-        
-        f.editReponse(rep);
+//        rep.setReponse("rymm");
+//
+//        rep.setId(52);
+//        
+//        f.editReponse(rep);
 
     }
 
