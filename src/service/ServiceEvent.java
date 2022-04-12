@@ -141,4 +141,51 @@ public class ServiceEvent {
         }
     }
 
+    
+    
+    public void applyToEvent(int idUser,int idEvent) {
+            ServiceEvent se = new ServiceEvent();
+            Event e = se.getEventById(idEvent);
+            
+            if(e!= null){
+                if(e.getNombre_participants()>0){
+                     String req2 = "INSERT INTO `event_user`(`event_id`, `user_id`) VALUES (?,?)";
+        try {
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req2);
+
+            ps.setInt(1, idEvent);
+            ps.setInt(2, idUser);
+            
+            ps.executeUpdate();
+            System.out.println("Applied to event .");
+            
+    
+
+        } catch (SQLException ex) {
+            //The printStackTrace() method in Java is a tool used to handle exceptions and errors 
+            ex.printStackTrace();
+            System.out.println("erreur dans la methode insert");
+        }
+                    int nbPArticipants = e.getNombre_participants() -1 ;
+                     String req = "update event set nombre_participants=? where id=?";
+        try {
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
+            ps.setInt(1, nbPArticipants);
+            ps.setInt(2, idEvent);
+            ps.executeUpdate();
+        } catch (SQLException err) {
+            err.printStackTrace();
+            System.out.println("erreur dans la methode update nombre participants");
+        }
+                    
+                    
+                }
+                else {
+                    System.out.println("il n'y a plus de places");
+                }
+               
+        }else {
+                System.out.println("Veuillez verifier l'id evenement ou l'idUser ");
+            }
+    }
 }

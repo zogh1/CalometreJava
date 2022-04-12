@@ -6,6 +6,7 @@
 package entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,10 @@ public class Event {
 
     public Event() {
     }
+
+ 
+
+
 
     public Event(String nom, String date_debut, String date_fin, String description, int nombre_participants, String lieu, String image) {
         this.nom = nom;
