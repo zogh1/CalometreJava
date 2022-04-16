@@ -5,18 +5,25 @@
  */
 package GUI;
 
+import calometre.Calometre;
 import entity.user;
 import interfacee.userInterface;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import service.userservice;
 
 /**
@@ -25,6 +32,15 @@ import service.userservice;
  */
 public class SignupController implements Initializable {
 
+    private Stage stage;
+    private Scene scene;
+
+    public void linkToLoginPage() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
     @FXML
     private TextField emailField;
     @FXML
@@ -41,6 +57,8 @@ public class SignupController implements Initializable {
     private ComboBox roleCombo;
     @FXML
     private Button profilepic;
+    @FXML
+    private Hyperlink linktoLogin;
 
     userInterface fn = new userservice();
     user test = new user();
@@ -55,6 +73,7 @@ public class SignupController implements Initializable {
         String country_code = ccField.getText();
         String phone_number = pnField.getText();
         String role = roleCombo.getValue().toString();
+
         int number = Integer.parseInt(phone_number);
 
         if (mail.isEmpty() || pass.isEmpty() || fname.isEmpty() || lname.isEmpty() || country_code.isEmpty()) {
@@ -73,6 +92,7 @@ public class SignupController implements Initializable {
             test.setProfile_picture("121");
             fn.createuser(test);
         }
+
     }
 
     @Override

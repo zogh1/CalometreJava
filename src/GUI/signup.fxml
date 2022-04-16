@@ -21,8 +21,7 @@
             </ImageView>
         </children>
     </AnchorPane>
-    <AnchorPane layoutX="350.0" prefHeight="200.0" prefWidth="350.0" BorderPane.alignment="CENTER" />
-    <Hyperlink layoutX="1205.0" layoutY="986.0" prefHeight="34.0" prefWidth="213.0" text="Already have and account? login" />
+    <Hyperlink fx:id="linktoLogin" layoutX="1205.0" layoutY="986.0" onAction="#linkToLoginPage" prefHeight="34.0" prefWidth="213.0" text="Already have an account? login" />
     <TextField fx:id="emailField" layoutX="1020.0" layoutY="117.0" prefHeight="83.0" prefWidth="571.0" promptText="Email" style="-fx-border-color: #000000; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
     <TextField fx:id="fnameField" layoutX="1020.0" layoutY="267.0" prefHeight="61.0" prefWidth="592.0" promptText="First name" style="-fx-border-color: #000000; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
     <TextField fx:id="lnameField" layoutX="1016.0" layoutY="382.0" prefHeight="69.0" prefWidth="573.0" promptText="Last name" style="-fx-border-color: #000000; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
@@ -35,5 +34,4 @@
         </font>
     </Button>
     <TextField fx:id="ccField" layoutX="1013.0" layoutY="599.0" prefHeight="62.0" prefWidth="579.0" promptText="Country Code" style="-fx-border-color: #000000; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
-    <Button fx:id="profilepic" layoutX="1355.0" layoutY="819.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="200.0" text="Upload a profile picture" />
 </AnchorPane>

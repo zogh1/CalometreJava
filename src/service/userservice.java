@@ -27,6 +27,7 @@ import util.session;
 public class userservice implements userInterface {
 
     public static int code;
+    public static String email;
 
     //var
     connexion instance = connexion.getInstance();

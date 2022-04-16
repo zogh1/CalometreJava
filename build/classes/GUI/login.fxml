@@ -35,10 +35,15 @@
                     <Font size="32.0" />
                 </font>
             </Button>
-            <Hyperlink layoutX="334.0" layoutY="724.0" text="Forgot your password?">
+            <Hyperlink fx:id="ForgotPassword" layoutX="93.0" layoutY="724.0" onAction="#LinkToResetPassword" text="Forgot  password?">
             <font>
                <Font size="29.0" />
             </font></Hyperlink>
+         <Hyperlink fx:id="CreateAnAccount" layoutX="561.0" layoutY="724.0" onAction="#LinkToCreateAnAccount" text="New member? create an account">
+            <font>
+               <Font size="29.0" />
+            </font>
+         </Hyperlink>
         </children>
     </AnchorPane>
 </AnchorPane>

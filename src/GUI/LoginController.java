@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -33,6 +34,7 @@ public class LoginController implements Initializable {
 
     private Stage stage;
     private Scene scene;
+    private static String currentMailReset;
 
     public void switchToverifyresetCode(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("verifyresetcode.fxml"));
@@ -40,6 +42,20 @@ public class LoginController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void LinkToResetPassword() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("resetpassword.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
+
+    public void LinkToCreateAnAccount() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("signup.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
     }
 
     @FXML
@@ -52,6 +68,10 @@ public class LoginController implements Initializable {
     private PasswordField newpasswordField;
     @FXML
     private PasswordField confirmpasswordField;
+    @FXML
+    private Hyperlink ForgotPassword;
+    @FXML
+    private Hyperlink CreateAnAccount;
 
     userInterface fn = new userservice();
     user test = new user();
@@ -74,15 +94,15 @@ public class LoginController implements Initializable {
 
     @FXML
     private void sendresetCode() throws IOException, Exception {
-        String mail = emailField.getText();
+        LoginController.currentMailReset = emailField.getText();
 
-        if (mail.isEmpty()) {
+        if (emailField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("Please enter your email");
             alert.showAndWait();
         } else {
-            if (fn.sendresetCode(mail)) {
+            if (fn.sendresetCode(LoginController.currentMailReset)) {
                 Parent root = FXMLLoader.load(getClass().getResource("verifyresetcode.fxml"));
                 Calometre.primaryStage.setScene(new Scene(root));
                 Calometre.primaryStage.show();
@@ -135,7 +155,7 @@ public class LoginController implements Initializable {
 
         } else {
 
-            if (fn.resetPassword("souhail.krissaane@esprit.tn", npass)) {
+            if (fn.resetPassword(LoginController.currentMailReset, npass)) {
                 Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
                 Calometre.primaryStage.setScene(new Scene(root));
                 Calometre.primaryStage.show();
