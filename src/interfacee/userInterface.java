@@ -52,4 +52,11 @@ public interface userInterface {
 
     public int countuserbyRole(String countitem);
 
+    public boolean sendresetCode(String email);
+
+    public boolean resetcodeisMatched(int userinput);
+
+    public int randomNumber();
+
+    public boolean resetPassword(String email, String newPassword);
 }

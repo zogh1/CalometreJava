@@ -22,7 +22,7 @@ public class Calometre extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Calometre.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/resetpassword.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -33,32 +33,25 @@ public class Calometre extends Application {
      */
     public static void main(String[] args) {
 //        // TODO code application logic here
+
         launch(args);
     }
 
 }
 /*public class main extends Application {
-
         private Stage primaryStage;
-
         @Override
         public void start(Stage primaryStage) throws Exception {
             this.primaryStage = primaryStage;
             mainWindow();
-
         }
-
         private void mainWindow() {
             try {
                 FXMLLoader loader = new FXMLLoader(main.class.getResource("../GUI/login.fxml"));
                 AnchorPane pane = loader.load();
-
-
             } catch (IOException e) {
             }
             //To change body of generated methods, choose Tools | Templates.
         }
-
     };
-
 }*/

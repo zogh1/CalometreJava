@@ -6,8 +6,8 @@
 package service;
 
 import entity.category;
-import java.sql.Connection;
-import util.connexion;
+import entity.product;
+import interfacee.productInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,8 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import entity.product;
-import interfacee.productInterface;
+import util.connexion;
 
 /**
  *
@@ -84,6 +83,110 @@ public class productservice implements productInterface {
         }
 
         return li;
+    }
+
+    @Override
+    public List<product> paginationProd() {
+        List<product> li = new ArrayList<product>();
+
+        try {
+            String req = "select * from product LIMIT 2 OFFSET 0 ";
+            Statement s = cnx.createStatement();
+
+            ResultSet rs = s.executeQuery(req);
+            while (rs.next()) {
+                product p = new product();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setPrice(rs.getDouble("price"));
+                p.setDescription(rs.getString("description"));
+                p.setQuantity(rs.getInt("quantity"));
+                p.setImage(rs.getString("image"));
+
+                li.add(p);
+            }
+            for (int i = 0; i < li.size(); i++) {
+                System.out.println("*********");
+                System.out.println(li.get(i).getPrice());
+                System.out.println(li.get(i).getDescription());
+                System.out.println(li.get(i).getQuantity());
+                System.out.println(li.get(i).getImage());
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return li;
+    }
+
+    public List<product> searchByCategory(int catId) {
+        List<product> li = new ArrayList();
+
+        try {
+            String req = "SELECT * FROM product p WHERE p.category_id ='" + catId + "'";
+            Statement s = cnx.createStatement();
+
+            ResultSet rs = s.executeQuery(req);
+            while (rs.next()) {
+                product p = new product();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setPrice(rs.getDouble("price"));
+                p.setDescription(rs.getString("description"));
+                p.setQuantity(rs.getInt("quantity"));
+                p.setImage(rs.getString("image"));
+
+                li.add(p);
+            }
+            for (int i = 0; i < li.size(); i++) {
+                System.out.println("*********");
+                System.out.println(li.get(i).getPrice());
+                System.out.println(li.get(i).getDescription());
+                System.out.println(li.get(i).getQuantity());
+                System.out.println(li.get(i).getImage());
+            }
+
+        } catch (SQLException ex) {
+        }
+
+        return li;
+    }
+
+    @Override
+    public List<product> searchProduct(String search) {
+        List<product> li = new ArrayList();
+
+        try {
+            String req = "SELECT * FROM product WHERE name LIKE '%" + search + "%' OR price LIKE '%" + search + "%' OR description LIKE '%" + search + "%'";
+            Statement s = cnx.createStatement();
+
+            ResultSet rs = s.executeQuery(req);
+            while (rs.next()) {
+                product p = new product();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setPrice(rs.getDouble("price"));
+                p.setDescription(rs.getString("description"));
+                p.setQuantity(rs.getInt("quantity"));
+                p.setImage(rs.getString("image"));
+
+                li.add(p);
+            }
+            for (int i = 0; i < li.size(); i++) {
+                System.out.println("*********");
+                System.out.println(li.get(i).getPrice());
+                System.out.println(li.get(i).getDescription());
+                System.out.println(li.get(i).getQuantity());
+                System.out.println(li.get(i).getImage());
+            }
+
+        } catch (SQLException ex) {
+        }
+
+        return li;
+
     }
 
     @Override

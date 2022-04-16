@@ -1,11 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
+<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #ebebeb;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="-2.0" prefHeight="1080.0" prefWidth="668.0" style="-fx-background-color: #4c3c70;">
+         <children>
+            <ImageView fitHeight="358.0" fitWidth="551.0" layoutX="43.0" layoutY="-52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/App%20logo.png" />
+               </image>
+            </ImageView>
+            <Hyperlink layoutX="186.0" layoutY="428.0" prefHeight="69.0" prefWidth="426.0" text="Profile" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="35.0" />
+               </font>
+            </Hyperlink>
+            <ImageView fitHeight="58.0" fitWidth="77.0" layoutX="123.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../University/3rd/2nd%20Semester/PIDEV/Java%20interface/icons8-user-100.png" />
+               </image>
+            </ImageView>
+            <Hyperlink layoutX="184.0" layoutY="572.0" prefHeight="69.0" prefWidth="426.0" text="Mot de passe" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="35.0" />
+               </font>
+            </Hyperlink>
+            <ImageView fitHeight="58.0" fitWidth="77.0" layoutX="121.0" layoutY="572.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../University/3rd/2nd%20Semester/PIDEV/Java%20interface/icons8-key-100.png" />
+               </image>
+            </ImageView>
+            <Hyperlink layoutX="180.0" layoutY="707.0" prefHeight="69.0" prefWidth="426.0" text="Paramètres" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="35.0" />
+               </font>
+            </Hyperlink>
+            <ImageView fitHeight="58.0" fitWidth="77.0" layoutX="117.0" layoutY="707.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../University/3rd/2nd%20Semester/PIDEV/Java%20interface/icons8-settings-100.png" />
+               </image>
+            </ImageView>
+            <Hyperlink layoutX="176.0" layoutY="839.0" prefHeight="69.0" prefWidth="426.0" text="Conditions" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="35.0" />
+               </font>
+            </Hyperlink>
+            <ImageView fitHeight="58.0" fitWidth="77.0" layoutX="113.0" layoutY="839.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../University/3rd/2nd%20Semester/PIDEV/Java%20interface/icons8-lock-100.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Text layoutX="691.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information générale" wrappingWidth="470.00000000000006">
+         <font>
+            <Font name="Dubai Regular" size="44.0" />
+         </font>
+      </Text>
+      <Text layoutX="697.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="name" wrappingWidth="334.00000000000006">
+         <font>
+            <Font name="Consolas" size="44.0" />
+         </font>
+      </Text>
+      <Text layoutX="684.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Détails du profil" wrappingWidth="470.00000000000006">
+         <font>
+            <Font name="Dubai Regular" size="44.0" />
+         </font>
+      </Text>
+      <TextField layoutX="1128.0" layoutY="326.0" prefHeight="71.0" prefWidth="517.0" style="-fx-background-color: TRAPARENT; -fx-border-width: 0 0 1 0; -fx-border-color: #000000;" />
+      <Text layoutX="696.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="role" wrappingWidth="334.00000000000006">
+         <font>
+            <Font name="Consolas" size="44.0" />
+         </font>
+      </Text>
+      <TextField layoutX="1127.0" layoutY="429.0" prefHeight="71.0" prefWidth="517.0" style="-fx-background-color: TRAPARENT; -fx-border-width: 0 0 1 0; -fx-border-color: #000000;" />
+      <Text layoutX="682.0" layoutY="640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information du contact" wrappingWidth="470.00000000000006">
+         <font>
+            <Font name="Dubai Regular" size="44.0" />
+         </font>
+      </Text>
+      <Text layoutX="684.0" layoutY="781.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email" wrappingWidth="334.00000000000006">
+         <font>
+            <Font name="Consolas" size="44.0" />
+         </font>
+      </Text>
+      <TextField layoutX="1115.0" layoutY="706.0" prefHeight="71.0" prefWidth="517.0" style="-fx-background-color: TRAPARENT; -fx-border-width: 0 0 1 0; -fx-border-color: #000000;" />
+      <Text layoutX="682.0" layoutY="890.0" strokeType="OUTSIDE" strokeWidth="0.0" text="num tel" wrappingWidth="334.00000000000006">
+         <font>
+            <Font name="Consolas" size="44.0" />
+         </font>
+      </Text>
+      <TextField layoutX="1113.0" layoutY="815.0" prefHeight="71.0" prefWidth="517.0" style="-fx-background-color: TRAPARENT; -fx-border-width: 0 0 1 0; -fx-border-color: #000000;" />
+   </children>
 </AnchorPane>
