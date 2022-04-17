@@ -5,12 +5,17 @@
  */
 package GUI;
 
+import calometre.Calometre;
 import entity.user;
 import interfacee.userInterface;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
@@ -21,6 +26,13 @@ import service.userservice;
  * @author Souhail
  */
 public class ChangePasswordController implements Initializable {
+
+    public void LinkToProfile() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
 
     @FXML
     private PasswordField oldpasswordField;
@@ -43,16 +55,23 @@ public class ChangePasswordController implements Initializable {
             alert.setHeaderText("null");
             alert.setContentText("Please fill all required fields");
             alert.showAndWait();
-        } else if (npass != cpass) {
+        } else if (!npass.equals(cpass)) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("password don't match");
+            alert.showAndWait();
+
+        } else if (newpasswordField.getText().length() < 8) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("null");
+            alert.setContentText("le mdp doit conteir plus que 8 characters");
             alert.showAndWait();
 
         } else {
 
             fn.updatePassword(opass, npass);
         }
+
     }
 
     @Override

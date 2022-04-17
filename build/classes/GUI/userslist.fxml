@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UsersListController">
     <children>
-        <ListView fx:id="usersList" layoutX="734.0" layoutY="244.0" prefHeight="242.0" prefWidth="606.0" />
-        <Label fx:id="emailList" alignment="CENTER" layoutX="1051.0" layoutY="86.0" prefHeight="87.0" prefWidth="342.0" text="Email">
-            <font>
-                <Font size="35.0" />
-            </font>
-        </Label>
+        <TableView fx:id="usersList" layoutX="164.0" layoutY="120.0" prefHeight="710.0" prefWidth="1746.0" stylesheets="@userslist.css">
+            <columns>
+                <TableColumn fx:id="userId" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="userFirstName" prefWidth="219.0" text="First name" />
+                <TableColumn fx:id="userLastName" prefWidth="209.0" text="Last name" />
+                <TableColumn fx:id="userEmail" prefWidth="248.0" text="Email" />
+                <TableColumn fx:id="userRole" minWidth="0.0" text="Role" />
+                <TableColumn fx:id="userCountryCode" prefWidth="281.0" text="Country Code" />
+                <TableColumn fx:id="userPhoneNumber" prefWidth="292.0" text="Phone Number" />
+                <TableColumn fx:id="userBanStatus" prefWidth="281.0" text="Ban Status" />
+            </columns>
+        </TableView>
     </children>
 </AnchorPane>

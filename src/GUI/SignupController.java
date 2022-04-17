@@ -72,16 +72,27 @@ public class SignupController implements Initializable {
         String lname = lnameField.getText();
         String country_code = ccField.getText();
         String phone_number = pnField.getText();
-        String role = roleCombo.getValue().toString();
 
-        int number = Integer.parseInt(phone_number);
-
-        if (mail.isEmpty() || pass.isEmpty() || fname.isEmpty() || lname.isEmpty() || country_code.isEmpty()) {
+        if (mail.isEmpty() || pass.isEmpty() || fname.isEmpty() || lname.isEmpty() || roleCombo.getValue() == null || phone_number.isEmpty() || country_code.isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("Please fill all required fields");
             alert.showAndWait();
+        } else if (passwordField.getText().length() < 8) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("null");
+            alert.setContentText("votre mdp doit contenir au moins 8 characteres");
+            alert.showAndWait();
+        } else if (!(emailField.getText().matches("^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
+                + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$"))) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("null");
+            alert.setContentText("verifier votre email");
+            alert.showAndWait();
+
         } else {
+            String role = roleCombo.getValue().toString();
+            int number = Integer.parseInt(phone_number);
             test.setEmail(mail);
             test.setFirstname(fname);
             test.setLastname(lname);

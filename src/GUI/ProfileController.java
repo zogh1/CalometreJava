@@ -5,10 +5,31 @@
  */
 package GUI;
 
+import calometre.Calometre;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+
 /**
  *
  * @author Souhail
  */
-public class ProfileController {
+public class ProfileController implements Initializable {
+
+    public void LinkToChagePassword() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("changepassword.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 
 }
