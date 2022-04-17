@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="GUI.ListerecController">
+   <children>
+      <ListView fx:id="listRec" layoutX="53.0" layoutY="38.0" prefHeight="312.0" prefWidth="450.0" />
+      <Button layoutX="516.0" layoutY="47.0" mnemonicParsing="false" onAction="#ajoutRec" text="Ajouter" />
+      <Button layoutX="518.0" layoutY="105.0" mnemonicParsing="false" onAction="#supprimerRec" text="Supprimer" />
+      <Button layoutX="518.0" layoutY="300.0" mnemonicParsing="false" onAction="#stats" text="Stats" />
+   </children>
+</AnchorPane>

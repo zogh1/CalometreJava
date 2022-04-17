@@ -20,6 +20,7 @@ public interface IServiceReclamation {
 
     public boolean deleteReclamation(int id);
      public Reclamation getById(int id);
+      public List<Reclamation> RechercherparEmail(String email) ;
 
     public List<Reclamation> readReclamation();
 }
