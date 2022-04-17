@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface categoryInterface {
 
-    public void createcategory(category c);
+     public boolean createcategory(category c);
 
     public List<category> getallcategory();
 

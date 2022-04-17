@@ -25,9 +25,11 @@ public class categoryservice implements categoryInterface {
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
 
+  
     @Override
-    public void createcategory(category c) {
-
+    public boolean createcategory(category c) {
+        boolean isadded=false;
+   
         //request
         try {
             String req = "INSERT INTO `category`(`name`) VALUES (?)";
@@ -35,11 +37,10 @@ public class categoryservice implements categoryInterface {
             st.setString(1, c.getName());
             st.executeUpdate();
             System.out.println("Categorie ajoutée avec succes.");
+            isadded=true;
 
         } catch (SQLException ex) {
-
-            ex.printStackTrace();
-        }
+        } return isadded;
 
     }
 
