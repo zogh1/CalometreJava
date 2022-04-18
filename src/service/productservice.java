@@ -90,7 +90,7 @@ public class productservice implements productInterface {
         List<product> li = new ArrayList<product>();
 
         try {
-            String req = "select * from product LIMIT 1 OFFSET 0 ";
+            String req = "select * from product LIMIT 2 OFFSET 0 ";
             Statement s = cnx.createStatement();
 
             ResultSet rs = s.executeQuery(req);

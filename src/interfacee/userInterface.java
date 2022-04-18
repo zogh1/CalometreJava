@@ -7,6 +7,7 @@
 package interfacee;
 
 import entity.user;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -51,5 +52,19 @@ public interface userInterface {
     public List<user> orderUser();
 
     public int countuserbyRole(String countitem);
+
+    public boolean sendresetCode(String email);
+
+    public boolean resetcodeisMatched(int userinput);
+
+    public int randomNumber();
+
+    public boolean resetPassword(String email, String newPassword);
+
+    public HashMap<String, Integer> getStatTypeOfUsers();
+
+    public int countBannedAccounts();
+
+    public String getRole();
 
 }

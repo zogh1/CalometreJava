@@ -13,8 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import util.BCrypt;
+import static util.EmailSender.sendEmailWithAttachments;
 import util.connexion;
 import util.session;
 
@@ -23,6 +26,9 @@ import util.session;
  * @author Souhail
  */
 public class userservice implements userInterface {
+
+    public static int code;
+    public static String email;
 
     //var
     connexion instance = connexion.getInstance();
@@ -49,6 +55,7 @@ public class userservice implements userInterface {
             System.out.println("Personne ajoutée avec succes.");
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -215,6 +222,65 @@ public class userservice implements userInterface {
     }
 
     @Override
+    public String getRole() {
+        String role = null;
+        System.out.println(session.getUser().getRoles());
+        if (session.getUser().getRoles().contains("ADMIN")) {
+            role = "admin";
+            System.out.println("admin");
+            return role;
+        }
+
+        if (session.getUser().getRoles().contains("CLIENT")) {
+            role = "coach";
+            System.out.println("client");
+            return role;
+        }
+
+        if (session.getUser().getRoles().contains("COACH")) {
+            role = "coach";
+            System.out.println("coach");
+            return role;
+        }
+
+        return role;
+    }
+
+    @Override
+    public int countBannedAccounts() {
+        int i = 0;
+        try {
+            String req = "SELECT COUNT(*) FROM `user` WHERE isbanned=1 ";
+            Statement ps = cnx.createStatement();
+            ResultSet result = ps.executeQuery(req);
+            result.next();
+            i = result.getInt(1);
+        } catch (SQLException e) {
+        }
+        return i;
+    }
+
+    @Override
+    public HashMap<String, Integer> getStatTypeOfUsers() {
+        List<user> list = this.getalluser();
+        HashMap<String, Integer> stat = new HashMap<>();
+        stat.put("Admins", 0);
+        stat.put("Clients", 0);
+        stat.put("Coaches", 0);
+
+        list.forEach((user) -> {
+            if (user.getRoles().contains("ADMIN")) {
+                stat.put("Admins", stat.get("Admins") + 1);
+            } else if (user.getRoles().contains("Coach")) {
+                stat.put("Coaches", stat.get("Coaches") + 1);
+            } else if (user.getRoles().contains("CLIENT")) {
+                stat.put("Clients", stat.get("Clients") + 1);
+            }
+        });
+        return stat;
+    }
+
+    @Override
     public boolean login(user user) {
         boolean status = false;
         try {
@@ -227,6 +293,7 @@ public class userservice implements userInterface {
                     status = true;
                     user = this.findById(rs.getInt("id"));
                     session.setUser(user);
+                    System.out.println("connected");
                 } else {
                     status = false;
                     System.out.println("invalid credentials");
@@ -234,6 +301,7 @@ public class userservice implements userInterface {
             }
 
         } catch (SQLException e) {
+            System.err.println("wrong");
         }
         return status;
     }
@@ -292,6 +360,7 @@ public class userservice implements userInterface {
     public void logout() {
 
         session.setUser(null);
+        System.out.println("logout successful");
 
     }
 
@@ -324,17 +393,6 @@ public class userservice implements userInterface {
         } else {
             System.err.println("passdontmatch");
         }
-    }
-
-    @Override
-    public boolean passisMatched(String password) {
-        boolean passMatched = false;
-        if (BCrypt.checkpw(password, session.getUser().getPassword())) {
-            passMatched = true;
-
-        }
-        return passMatched;
-
     }
 
     @Override
@@ -430,4 +488,81 @@ public class userservice implements userInterface {
         return nb;
 
     }
+
+    @Override
+    public boolean passisMatched(String password) {
+        boolean passMatched = false;
+        if (BCrypt.checkpw(password, session.getUser().getPassword())) {
+            passMatched = true;
+
+        }
+        return passMatched;
+
+    }
+
+    @Override
+    public boolean sendresetCode(String email) {
+        boolean isSent = false;
+
+        String subject = "test";
+        String message = "your reset code is " + this.randomNumber();
+        try {
+            sendEmailWithAttachments(email,
+                    subject, message);
+            System.out.println("Email sent.");
+            isSent = true;
+            System.out.println(isSent);
+        } catch (Exception ex) {
+            System.out.println("Could not send email.");
+            ex.printStackTrace();
+        }
+        return isSent;
+
+    }
+
+    @Override
+    public boolean resetcodeisMatched(int userinput) {
+        boolean resetcodeMatched = false;
+
+        if (userservice.code == userinput) {
+            System.out.println("true");
+            resetcodeMatched = true;
+        } else {
+            System.err.println("wrong");
+        }
+
+        return resetcodeMatched;
+    }
+
+    @Override
+    public boolean resetPassword(String email, String newPassword) {
+        boolean reset = false;
+        try {
+            reset = true;
+            String passwordEnc = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+            String req = "update user set password='" + passwordEnc + "' where email='" + email + "'";
+
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.executeUpdate();
+            System.out.println("password updated");
+
+        } catch (SQLException e) {
+        }
+        return reset;
+    }
+
+    @Override
+    public int randomNumber() {
+
+        Random rand = new Random();
+
+        userservice.code = rand.nextInt(999999);
+
+        userservice.code += 1;
+
+        System.out.println("random is " + userservice.code);
+        return userservice.code;
+
+    }
+
 }
