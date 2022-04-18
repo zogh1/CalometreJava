@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1133.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.EventsViewController">
+   <children>
+      <Label maxHeight="-Infinity" text="TOP 3 EVENTS">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font name="Century Schoolbook" size="19.0" />
+         </font>
+      </Label>
+      <HBox fx:id="topThreeEventsLayout" maxHeight="-Infinity" prefHeight="220.0" prefWidth="1140.0" />
+      <Label maxHeight="-Infinity" text="ALL EVENTS">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font name="Century Schoolbook" size="19.0" />
+         </font>
+      </Label>
+      <HBox fx:id="allEventsLayout" prefHeight="302.0" prefWidth="1140.0" />
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</VBox>

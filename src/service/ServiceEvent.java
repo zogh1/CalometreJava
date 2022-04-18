@@ -96,7 +96,7 @@ public class ServiceEvent {
             ps.setInt(5, e.getNombre_participants());
             ps.setString(6, e.getLieu());
             ps.setString(7, e.getImage());
-            
+
             ps.executeUpdate();
             System.out.println("Event added .");
 
@@ -141,51 +141,122 @@ public class ServiceEvent {
             System.out.println("erreur dans la methode update");
         }
     }
-    
-    public void applyToEvent(int idUser,int idEvent) {
-            ServiceEvent se = new ServiceEvent();
-            Event e = se.getEventById(idEvent);
-            
-            if(e!= null){
-                if(e.getNombre_participants()>0){
-                     String req2 = "INSERT INTO `event_user`(`event_id`, `user_id`) VALUES (?,?)";
-        try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req2);
 
-            ps.setInt(1, idEvent);
-            ps.setInt(2, idUser);
-            
-            ps.executeUpdate();
-            System.out.println("Applied to event .");
-            
-    
+    public int getNombre_participants_byevent(int event_id) {
+        String req = "select count(*) from event_user where event_id=?;";
+        int numberROW = 0;
+        try {
+            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+
+            ps.setInt(1, event_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                numberROW = rs.getInt("count(*)");
+            }
 
         } catch (SQLException ex) {
             //The printStackTrace() method in Java is a tool used to handle exceptions and errors 
             ex.printStackTrace();
             System.out.println("erreur dans la methode insert");
         }
-                    int nbPArticipants = e.getNombre_participants() -1 ;
-                     String req = "update event set nombre_participants=? where id=?";
-        try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
-            ps.setInt(1, nbPArticipants);
-            ps.setInt(2, idEvent);
-            ps.executeUpdate();
-        } catch (SQLException err) {
-            err.printStackTrace();
-            System.out.println("erreur dans la methode update nombre participants");
-        }
-                    
-                    
-                }
-                else {
-                    System.out.println("il n'y a plus de places");
-                }
-               
-        }else {
-                System.out.println("Veuillez verifier l'id evenement ou l'idUser ");
-            }
+
+        return numberROW;
     }
 
+    public boolean user_is_applyed_toevent(int idUser, int idEvent) {
+        String req = "select count(*) from event_user where event_id=? and user_id = ?;";
+        int numberROW = 0;
+        try {
+            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+
+            ps.setInt(1, idEvent);
+            ps.setInt(2, idUser);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                numberROW = rs.getInt("count(*)");
+            }
+
+        } catch (SQLException ex) {
+            //The printStackTrace() method in Java is a tool used to handle exceptions and errors 
+            ex.printStackTrace();
+            System.out.println("erreur dans la methode insert");
+        }
+
+        return numberROW > 0;
+    }
+
+    public void applyToEvent(int idUser, int idEvent) {
+        Event e = this.getEventById(idEvent);
+
+        if (e != null) {
+            if ((e.getNombre_participants() > 0)
+                    && (e.getNombre_participants() - this.getNombre_participants_byevent(idEvent) > 0)
+                    && (user_is_applyed_toevent(idUser, idEvent) == false)) {
+                String req2 = "INSERT INTO `event_user`(`event_id`, `user_id`) VALUES (?,?)";
+                try {
+                    PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req2);
+
+                    ps.setInt(1, idEvent);
+                    ps.setInt(2, idUser);
+
+                    ps.executeUpdate();
+                    System.out.println("Applied to event .");
+
+                } catch (SQLException ex) {
+                    //The printStackTrace() method in Java is a tool used to handle exceptions and errors 
+                    ex.printStackTrace();
+                    System.out.println(ex.getMessage());
+                }
+            } else {
+                if ((e.getNombre_participants() == 0)
+                        || (e.getNombre_participants() - this.getNombre_participants_byevent(idEvent) == 0)) {
+                    System.out.println("Il n'y a plus de places !");
+                }
+                if (user_is_applyed_toevent(idUser, idEvent) == true) {
+                    System.out.println("L'utilisateur est déjà participé à cet évenement !");
+                }
+            }
+
+        } else {
+            System.out.println("Veuillez verifier l'id evenement ou l'idUser ");
+        }
+    }
+
+    public List<Event> getTopThreeEvents() {
+        List<Event> le = new ArrayList<Event>();
+        String req = "Select * \n"
+                    + "from event \n"
+                    + "WHERE id IN (\n"
+                    + "    		SELECT TopEventsBasedOnCountApply.event_id \n"
+                    + "    		from (select event_id, count(event_id) \n"
+                    + "		  		  from event_user \n"
+                    + "		  		  GROUP by event_id\n"
+                    + "          		  order by count(event_id) desc\n"
+                    + "    			  ) AS TopEventsBasedOnCountApply\n"
+                    + "			)\n"
+                    + "LIMIT 3;";
+        try {
+            Statement s = DataSource.getInstance().getCnx().createStatement();
+            ResultSet rs = s.executeQuery(req);
+            while (rs.next()) {
+                Event e = new Event();
+                e.setId(rs.getInt("id"));
+                e.setNom(rs.getString("nom"));
+                e.setDate_debut(rs.getString("date_debut"));
+                e.setDate_fin(rs.getString("date_fin"));
+                e.setDescription(rs.getString("description"));
+                e.setNombre_participants(rs.getInt("nombre_participants"));
+                e.setLieu(rs.getString("lieu"));
+                e.setImage(rs.getString("image"));
+                System.out.println(e);
+
+                le.add(e);
+            }
+
+        } catch (SQLException err) {
+            System.out.println("erreur getall envenement");
+        }
+
+        return le;
+    }
 }
