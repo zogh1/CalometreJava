@@ -27,6 +27,7 @@ public class UsersListController implements Initializable {
 
     userInterface fn = new userservice();
     user test = new user();
+    user selecteduser = null;
 
     @FXML
     TableView<user> usersList;
@@ -51,6 +52,18 @@ public class UsersListController implements Initializable {
     private TableColumn<user, Boolean> userBanStatus;
 
     ObservableList<user> oblist = FXCollections.observableArrayList();
+
+    @FXML
+    private void banselectedUser() {
+        selecteduser = usersList.getSelectionModel().getSelectedItem();
+        fn.banUser(selecteduser.getId());
+    }
+
+    @FXML
+    private void unbanselectedUser() {
+        selecteduser = usersList.getSelectionModel().getSelectedItem();
+        fn.unbanUser(selecteduser.getId());
+    }
 
     private void userList() {
 

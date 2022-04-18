@@ -25,6 +25,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.userservice;
+import util.session;
 
 /**
  *
@@ -58,6 +59,13 @@ public class LoginController implements Initializable {
 
     }
 
+    public void linkToLoginPage() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
+
     @FXML
     private TextField emailField;
     @FXML
@@ -77,7 +85,7 @@ public class LoginController implements Initializable {
     user test = new user();
 
     @FXML
-    private void loginuser() {
+    private void loginuser() throws IOException {
         String mail = emailField.getText();
         String pass = passwordField.getText();
         if (mail.isEmpty() || pass.isEmpty()) {
@@ -89,7 +97,19 @@ public class LoginController implements Initializable {
             test.setEmail(mail);
             test.setPassword(pass);
             fn.login(test);
+
+            if (session.getUser().getRoles().contains("Admin")) {
+                Parent root = FXMLLoader.load(getClass().getResource("userslist.fxml"));
+                Calometre.primaryStage.setScene(new Scene(root));
+                Calometre.primaryStage.show();
+            } else if (!session.getUser().getRoles().contains("Admin")) {
+
+                Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
+                Calometre.primaryStage.setScene(new Scene(root));
+                Calometre.primaryStage.show();
+            }
         }
+
     }
 
     @FXML
@@ -156,15 +176,15 @@ public class LoginController implements Initializable {
         } else {
 
             if (fn.resetPassword(LoginController.currentMailReset, npass)) {
-                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-                Calometre.primaryStage.setScene(new Scene(root));
-                Calometre.primaryStage.show();
+
             }
         }
 
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources
+    ) {
     }
+
 }

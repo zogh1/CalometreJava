@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import util.BCrypt;
@@ -54,6 +55,7 @@ public class userservice implements userInterface {
             System.out.println("Personne ajoutée avec succes.");
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -217,6 +219,65 @@ public class userservice implements userInterface {
             a.printStackTrace();
         }
         return u;
+    }
+
+    @Override
+    public String getRole() {
+        String role = null;
+        System.out.println(session.getUser().getRoles());
+        if (session.getUser().getRoles().contains("ADMIN")) {
+            role = "admin";
+            System.out.println("admin");
+            return role;
+        }
+
+        if (session.getUser().getRoles().contains("CLIENT")) {
+            role = "coach";
+            System.out.println("client");
+            return role;
+        }
+
+        if (session.getUser().getRoles().contains("COACH")) {
+            role = "coach";
+            System.out.println("coach");
+            return role;
+        }
+
+        return role;
+    }
+
+    @Override
+    public int countBannedAccounts() {
+        int i = 0;
+        try {
+            String req = "SELECT COUNT(*) FROM `user` WHERE isbanned=1 ";
+            Statement ps = cnx.createStatement();
+            ResultSet result = ps.executeQuery(req);
+            result.next();
+            i = result.getInt(1);
+        } catch (SQLException e) {
+        }
+        return i;
+    }
+
+    @Override
+    public HashMap<String, Integer> getStatTypeOfUsers() {
+        List<user> list = this.getalluser();
+        HashMap<String, Integer> stat = new HashMap<>();
+        stat.put("Admins", 0);
+        stat.put("Clients", 0);
+        stat.put("Coaches", 0);
+
+        list.forEach((user) -> {
+            if (user.getRoles().contains("ADMIN")) {
+                stat.put("Admins", stat.get("Admins") + 1);
+            } else if (user.getRoles().contains("Coach")) {
+                stat.put("Coaches", stat.get("Coaches") + 1);
+            } else if (user.getRoles().contains("CLIENT")) {
+                stat.put("Clients", stat.get("Clients") + 1);
+            }
+        });
+        return stat;
     }
 
     @Override

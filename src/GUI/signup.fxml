@@ -34,4 +34,5 @@
         </font>
     </Button>
     <TextField fx:id="ccField" layoutX="1013.0" layoutY="599.0" prefHeight="62.0" prefWidth="579.0" promptText="Country Code" style="-fx-border-color: #000000; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
+    <Button layoutX="1367.0" layoutY="816.0" mnemonicParsing="false" onAction="#uploadpic" prefHeight="35.0" prefWidth="213.0" text="Upload Profile Picture" />
 </AnchorPane>

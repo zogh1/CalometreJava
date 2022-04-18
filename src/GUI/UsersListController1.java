@@ -8,12 +8,13 @@ package GUI;
 import entity.user;
 import interfacee.userInterface;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import service.userservice;
 
@@ -24,33 +25,27 @@ import service.userservice;
 public class UsersListController1 implements Initializable {
 
     @FXML
-    private ListView<String> usersList;
-    @FXML
-    private Label emailList;
-    String[] users = {"email", "name", "phone_number"};
-    String currentUser;
-    String currentItem;
-    userInterface fn = new userservice();
-    user test = new user();
+    private ListView<user> usersList;
 
-    @FXML
+    public void loadUsers() {
+        userInterface fn = new userservice();
+        List<user> li = new ArrayList<user>();
+
+        ArrayList<user> userlist = (ArrayList<user>) fn.getalluser();
+        ObservableList<user> userslist = FXCollections.observableArrayList(fn.getalluser());
+        System.out.println(userslist.toString());
+
+        usersList.setItems(userslist);
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        usersList.getItems().addAll(users);
-        usersList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
-                currentUser = usersList.getSelectionModel().getSelectedItem();
-                emailList.setText(currentUser);
-                if (usersList.getSelectionModel().getSelectedItem().equals("email")) {
-
-                    fn.getalluser();
-
-                }
-
-            }
-        });
+//        userInterface fn = new userservice();
+//        List<user> li = fn.getalluser();
+//        ObservableList<user> data = FXCollections.observableArrayList(li);
+//        usersList.setItems(data);
+        this.loadUsers();
 
     }
 

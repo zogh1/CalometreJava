@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/login.fxml</file>
+            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/ExerciceController.java</file>
+            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/resetpassword.fxml</file>
             <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/LoginController.java</file>
+            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/SignupController.java</file>
+            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/exercice.fxml</file>
             <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/calometre/Calometre.java</file>
-            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/ChangePasswordController.java</file>
+            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/userslist.fxml</file>
+            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/service/typeExerciceService.java</file>
         </group>
     </open-files>
 </project-private>

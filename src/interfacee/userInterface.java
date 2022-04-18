@@ -7,6 +7,7 @@
 package interfacee;
 
 import entity.user;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -59,4 +60,11 @@ public interface userInterface {
     public int randomNumber();
 
     public boolean resetPassword(String email, String newPassword);
+
+    public HashMap<String, Integer> getStatTypeOfUsers();
+
+    public int countBannedAccounts();
+
+    public String getRole();
+
 }
