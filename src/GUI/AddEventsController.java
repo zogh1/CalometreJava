@@ -121,7 +121,8 @@ public class AddEventsController {
 
     @FXML
     private void addEvent(ActionEvent event) throws FileNotFoundException, IOException {
-               
+                Stage current = (Stage)((Node)event.getSource()).getScene().getWindow();
+
                 if (event.getSource() == btnajouter) {
            
           
@@ -136,6 +137,7 @@ public class AddEventsController {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
+                current.close();
                 stage.show();
            
         }

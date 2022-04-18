@@ -46,6 +46,8 @@ public class MainMenuController implements Initializable {
     private HBox selectedMenuItem = null;
     @FXML
     private AnchorPane menuPane;
+    
+    
 
     /**
      * Initializes the controller class.

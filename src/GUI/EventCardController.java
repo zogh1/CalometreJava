@@ -10,14 +10,22 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import service.ServiceEvent;
 
 /**
@@ -59,6 +67,10 @@ public class EventCardController implements Initializable {
     private VBox box;
     @FXML
     private Button applyButton;
+    
+    private int parsedId;
+    @FXML
+    private AnchorPane eventCardContainer;
 
     /**
      * Initializes the controller class.
@@ -70,7 +82,7 @@ public class EventCardController implements Initializable {
 
     @FXML
     private void apply(MouseEvent event) {
-        int parsedId;
+        
         try {
             parsedId = Integer.parseInt(id.getText());
             serviceEvent.applyToEvent(1, parsedId);
@@ -83,16 +95,47 @@ public class EventCardController implements Initializable {
         }
         //apply user to event
         //update front ++nb applyed
-        //qrcode
-        //send mail
+        // il me reste le qrcode
+        //send mail :D 
     }
 
     @FXML
     private void delete(MouseEvent event) {
+        parsedId = Integer.parseInt(id.getText());
+        
+        try {
+            serviceEvent.deleteEvent(parsedId);
+            eventCardContainer.setVisible(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+       
     }
 
     @FXML
     private void update(MouseEvent event) {
+        parsedId = Integer.parseInt(id.getText());
+        Event ev = serviceEvent.getEventById(parsedId);
+        
+        try {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("updateEvent.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage current = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        Stage secondaryStage = new Stage();
+        secondaryStage.setScene(new Scene(root1));  
+        secondaryStage.setTitle("Update Event") ; 
+        UpdateEventController controller = fxmlLoader.getController();
+        controller.initData(ev);
+        current.close();
+        secondaryStage.show();
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
+        
+
     }
 
     public void setData(Event event) throws FileNotFoundException {
@@ -114,7 +157,7 @@ public class EventCardController implements Initializable {
 
         Image i = new Image(new FileInputStream("C:\\Users\\wassim\\Desktop\\Pidev3A\\Calometre\\public\\uploads\\Event_images\\"+ event.getImage()));
         
-        System.out.println("i"+i);
+        
         image.setImage(i);
         box.setStyle("-fx-background-color: " + colors[(int) Math.random() * 7]);
         
@@ -135,4 +178,7 @@ public class EventCardController implements Initializable {
             e.printStackTrace();
         }
     }
+    
+
+   
 }
