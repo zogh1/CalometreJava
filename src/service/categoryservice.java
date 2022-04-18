@@ -5,6 +5,7 @@
  */
 package service;
 
+import entity.category;
 import interfacee.categoryInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,16 +14,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import entity.category;
-
-
 import util.connexion;
 
 /**
  *
  * @author seifd
  */
-public class categoryservice implements categoryInterface{
+public class categoryservice implements categoryInterface {
 
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
