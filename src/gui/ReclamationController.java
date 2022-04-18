@@ -33,8 +33,6 @@ public class ReclamationController implements Initializable {
     @FXML
     private Label label;
     @FXML
-    private TextField tfid;
-    @FXML
     private TextField tfemail;
     @FXML
     private TextField tfdate;
@@ -45,10 +43,6 @@ public class ReclamationController implements Initializable {
 
     @FXML
     private Button btnajouter;
-    @FXML
-    private Button btnmodifier;
-    @FXML
-    private Button btnsupprimer;
     
     
     ServiceReclamation fn = new ServiceReclamation();

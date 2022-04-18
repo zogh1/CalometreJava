@@ -27,7 +27,7 @@ import javafx.scene.chart.XYChart;
 /**
  * FXML Controller class
  *
- * @author khali
+ 
  */
 public class FXBarChartController implements Initializable {
 

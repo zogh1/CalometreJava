@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ReclamationController">
+<AnchorPane prefHeight="419.0" prefWidth="605.0" style="-fx-background-color: ivory;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ReclamationController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <VBox layoutX="24.0" layoutY="30.0" prefHeight="235.0" prefWidth="54.0" spacing="15.0">
+      <VBox layoutX="24.0" layoutY="69.0" prefHeight="235.0" prefWidth="112.0" spacing="15.0">
          <children>
             <Label>
                <VBox.margin>
@@ -24,14 +24,14 @@
             <Label text="message" />
          </children>
       </VBox>
-      <VBox layoutX="126.0" layoutY="51.0" prefHeight="207.0" prefWidth="197.0" spacing="9.0">
+      <VBox layoutX="192.0" layoutY="96.0" prefHeight="170.0" prefWidth="321.0" spacing="9.0">
          <children>
-            <TextField fx:id="tfemail" prefHeight="26.0" prefWidth="255.0" />
-            <TextField fx:id="tfdate" />
-            <ComboBox fx:id="tftype" prefHeight="26.0" prefWidth="210.0" />
-            <TextField fx:id="tfmessage" />
+            <TextField fx:id="tfemail" prefHeight="26.0" prefWidth="301.0" style="-fx-background-color: beige;" />
+            <TextField fx:id="tfdate" style="-fx-background-color: beige;" />
+            <ComboBox fx:id="tftype" prefHeight="26.0" prefWidth="325.0" style="-fx-background-color: beige;" />
+            <TextField fx:id="tfmessage" style="-fx-background-color: beige;" />
          </children>
       </VBox>
-      <Button fx:id="btnajouter" layoutX="183.0" layoutY="252.0" mnemonicParsing="false" onAction="#ajouterreclamation" text="ajouter" />
+      <Button fx:id="btnajouter" layoutX="275.0" layoutY="291.0" mnemonicParsing="false" onAction="#ajouterreclamation" prefHeight="42.0" prefWidth="112.0" style="-fx-background-color: khaki;" text="ajouter" />
     </children>
 </AnchorPane>

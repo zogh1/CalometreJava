@@ -26,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -42,6 +43,8 @@ public class ListerecController implements Initializable {
 
     @FXML
     private ListView<Reclamation> listRec;
+    @FXML
+    private TextField tf_recherche;
 
     /**
      * Initializes the controller class.
@@ -97,9 +100,9 @@ public class ListerecController implements Initializable {
     
     public void loadReclamations() {
         ServiceReclamation SR = new ServiceReclamation();
-        ArrayList<Reclamation> listeArticle = (ArrayList<Reclamation>) SR.readReclamation();
+        ArrayList<Reclamation> listeRec = (ArrayList<Reclamation>) SR.readReclamation();
 
-        ObservableList observableList = FXCollections.observableArrayList(listeArticle);
+        ObservableList observableList = FXCollections.observableArrayList(listeRec);
         listRec.setItems(observableList);
 
     }
@@ -133,5 +136,19 @@ public class ListerecController implements Initializable {
         e.printStackTrace();
     }
     }
+
+    @FXML
+    private void modifierRec(ActionEvent event) {
+       
+        try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("ModifierReclamation.fxml"));
+            Parent root=loader.load();
+            ModifierReclamationController aac=loader.getController();
+            listRec.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(ListerecController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
 }
