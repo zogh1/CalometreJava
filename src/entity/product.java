@@ -10,14 +10,17 @@ package entity;
  * @author seifd
  */
 public class product {
+
     private int id;
     private String name;
     private double price;
     private String description;
     private int quantity;
-    private int category_id;
+    private category category_id;
+    private String image;
+    private int count;
 
-    public product(int id, String name, double price, String description, int quantity, int category_id, String image) {
+    public product(int id, String name, double price, String description, int quantity, category category_id, String image) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -27,13 +30,28 @@ public class product {
         this.image = image;
     }
 
-    public product(String name, double price, String description, int quantity, int category_id, String image) {
+    public product(int id, String name, category category_id, int count) {
+        this.id = id;
+        this.name = name;
+        this.category_id = category_id;
+        this.count = count;
+    }
+
+    public product(String name, double price, String description, int quantity, category category_id, String image) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.quantity = quantity;
         this.category_id = category_id;
         this.image = image;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getId() {
@@ -76,11 +94,11 @@ public class product {
         this.quantity = quantity;
     }
 
-    public int getCategory_id() {
+    public category getCategory_id() {
         return category_id;
     }
 
-    public void setCategory_id(int category_id) {
+    public void setCategory_id(category category_id) {
         this.category_id = category_id;
     }
 
@@ -94,6 +112,9 @@ public class product {
 
     public product() {
     }
-    private String image;
-    
+
+    public void setPrice(String price) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

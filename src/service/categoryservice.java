@@ -25,7 +25,26 @@ public class categoryservice implements categoryInterface {
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
 
-  
+  @Override
+    public category findById(int id) {
+        category u = null;
+        try {
+            String req = "select * from category where id=? ";
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                u = new category(
+                        rs.getInt(1),
+                        rs.getString(2));
+            }
+        } catch (Exception e) {
+        }
+        return u;
+    }
+    
+    
     @Override
     public boolean createcategory(category c) {
         boolean isadded=false;
@@ -55,7 +74,7 @@ public class categoryservice implements categoryInterface {
             ResultSet rs = s.executeQuery(req);
             while (rs.next()) {
                 category c = new category();
-
+                c.setId(rs.getInt("id"));
                 c.setName(rs.getString("name"));
 
                 li.add(c);
@@ -100,6 +119,10 @@ public class categoryservice implements categoryInterface {
             ex.printStackTrace();
             System.out.println("error");
         }
+    }
+
+    public List<category> readType() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

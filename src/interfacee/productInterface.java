@@ -7,6 +7,8 @@ package interfacee;
 
 import entity.category;
 import entity.product;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,6 +16,7 @@ import java.util.List;
  * @author seifd
  */
 public interface productInterface {
+    public ArrayList<product> getNumberofproodsByCat() ;
 
     public void createproduct(product p, category cat);
 
@@ -26,4 +29,6 @@ public interface productInterface {
     public List<product> paginationProd();
 
     public List<product> searchProduct(String search);
+    
+    public HashMap<String, Integer> getProductStats();
 }

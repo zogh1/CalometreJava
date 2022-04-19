@@ -21,5 +21,7 @@ public interface categoryInterface {
     public void deletecategory(int id);
 
     public void updatecategory(category c);
+    
+    public category findById(int id);
 
 }

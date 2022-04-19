@@ -14,7 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import util.connexion;
 
 /**
@@ -25,6 +27,8 @@ public class productservice implements productInterface {
 
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
+
+    categoryservice cs = new categoryservice();
 
     @Override
     public void createproduct(product p, category cat) {
@@ -65,6 +69,7 @@ public class productservice implements productInterface {
                 p.setPrice(rs.getDouble("price"));
                 p.setDescription(rs.getString("description"));
                 p.setQuantity(rs.getInt("quantity"));
+                p.setCategory_id(cs.findById(rs.getInt("category_id")));
                 p.setImage(rs.getString("image"));
 
                 li.add(p);
@@ -115,7 +120,6 @@ public class productservice implements productInterface {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
         }
 
         return li;
@@ -136,6 +140,7 @@ public class productservice implements productInterface {
                 p.setPrice(rs.getDouble("price"));
                 p.setDescription(rs.getString("description"));
                 p.setQuantity(rs.getInt("quantity"));
+                p.setCategory_id(cs.findById(rs.getInt("category_id")));
                 p.setImage(rs.getString("image"));
 
                 li.add(p);
@@ -218,4 +223,52 @@ public class productservice implements productInterface {
         }
     }
 
+    @Override
+    public ArrayList<product> getNumberofproodsByCat() {
+        ArrayList<product> prods = new ArrayList();
+        try {
+            String req = "SELECT id,name,category_id, COUNT(*) FROM product GROUP BY category_id;";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                prods.add(new product(
+                        result.getInt(1),
+                        result.getString(2),
+                        cs.findById(result.getInt(3)),
+                        result.getInt(4)
+                ));
+               /* for (int i = 0; i < prods.size(); i++) {
+                    System.out.println(prods.get(i).getName());
+                    System.out.println(prods.get(i).getCount());
+                    System.err.println("*********");
+                }*/
+
+            }
+
+        } catch (SQLException ex) {
+        }
+        return prods;
+    }
+
+    @Override
+    public HashMap<String, Integer> getProductStats() {
+        List<product> list = this.getNumberofproodsByCat();
+        HashMap<String, Integer> stat = new HashMap<>();
+
+        for (product ps : list) {
+            stat.put(ps.getCategory_id().getName(), 0);
+        }
+
+        list.stream().map((product) -> product.getCount()).forEachOrdered((count) -> {
+            list.stream().filter((ps) -> (count != 0)).forEachOrdered((ps) -> {
+                stat.put(ps.getCategory_id().getName(), stat.get(ps.getCategory_id().getName()) + 1);
+            });
+        });
+
+        return stat;
+    }
+
+    public void createproduct(category cat, product test) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
