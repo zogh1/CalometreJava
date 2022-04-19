@@ -6,14 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ivory;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="GUI.AjoutReponseController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ivory;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AjoutReponseController">
    <children>
-      <Label layoutX="77.0" layoutY="97.0" text="Date" />
-      <Label layoutX="76.0" layoutY="142.0" text="Repondre ID" />
+      <Label layoutX="77.0" layoutY="142.0" text="Date" />
+      <Label layoutX="65.0" layoutY="105.0" text="Repondre ID" />
       <Label layoutX="76.0" layoutY="183.0" text="Reponse" />
-      <TextField fx:id="tf_date" layoutX="192.0" layoutY="93.0" prefHeight="26.0" prefWidth="273.0" style="-fx-background-color: beige;" />
-      <ComboBox fx:id="combo_id" layoutX="192.0" layoutY="138.0" prefHeight="26.0" prefWidth="274.0" style="-fx-background-color: beige;" />
+      <TextField fx:id="tf_date" layoutX="193.0" layoutY="137.0" prefHeight="26.0" prefWidth="273.0" style="-fx-background-color: beige;" />
+      <ComboBox fx:id="combo_id" layoutX="192.0" layoutY="100.0" prefHeight="26.0" prefWidth="274.0" style="-fx-background-color: beige;" />
       <TextField fx:id="tf_reponse" layoutX="193.0" layoutY="187.0" prefHeight="26.0" prefWidth="274.0" style="-fx-background-color: beige;" />
       <Button layoutX="272.0" layoutY="273.0" mnemonicParsing="false" onAction="#ajouterReponse" prefHeight="26.0" prefWidth="84.0" style="-fx-background-color: khaki;" text="Ajouter" />
    </children>

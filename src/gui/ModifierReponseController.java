@@ -42,7 +42,6 @@ public class ModifierReponseController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
     @FXML
     private TextField tf_date;
     @FXML
@@ -51,22 +50,22 @@ public class ModifierReponseController implements Initializable {
     private TextField tf_repondre;
     @FXML
     private ComboBox<Integer> combo_id;
-    ServiceReponse sr= new ServiceReponse();
-    Reponse rep= new Reponse();
-    
+    ServiceReponse sr = new ServiceReponse();
+    Reponse rep = new Reponse();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            String req="select id from reponse";
-            PreparedStatement pst = connexion.getInstance().getCnx()   
-                   .prepareStatement(req);
-            ResultSet rs=pst.executeQuery();
+            String req = "select id from reponse";
+            PreparedStatement pst = connexion.getInstance().getCnx()
+                    .prepareStatement(req);
+            ResultSet rs = pst.executeQuery();
             ObservableList<Integer> id = null;
             List<Integer> list = new ArrayList<>();
-            while(rs.next()){
-                
+            while (rs.next()) {
+
                 list.add(rs.getInt("id"));
-                
+
             }
             id = FXCollections
                     .observableArrayList(list);
@@ -74,51 +73,47 @@ public class ModifierReponseController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(ModifierReponseController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
-
-
+    }
 
     @FXML
     private void modifierReponse(ActionEvent event) {
         try {
-            
-        sr.editReponse(new Reponse(combo_id.getSelectionModel().getSelectedItem(), tf_date.getText(),Integer.parseInt(tf_repondre.getText()),tf_reponse.getText()));       
-        JOptionPane.showMessageDialog(null, "Reponse modifié");
-        
+
+            sr.editReponse(new Reponse(combo_id.getSelectionModel().getSelectedItem(), tf_date.getText(), Integer.parseInt(tf_repondre.getText()), tf_reponse.getText()));
+            JOptionPane.showMessageDialog(null, "Reponse modifié");
+
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("reponse.fxml"));
-            Parent root = loader.load(); 
+            Parent root = loader.load();
             tf_date.getScene().setRoot(root);
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(ModifierReponseController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
     private void getId(MouseEvent event) {
-        combo_id.setOnAction(e ->{
-            String req="select date,repondre_id,reponse from reponse where id=?";
+        combo_id.setOnAction(e -> {
+            String req = "select date,repondre_id,reponse from reponse where id=?";
             try {
-                    PreparedStatement pst = connexion.getInstance().getCnx()
-                    .prepareStatement(req);             
-                    pst.setInt(1,(Integer)combo_id.getSelectionModel().getSelectedItem());
-                ResultSet rs=pst.executeQuery();
-                while(rs.next()){
+                PreparedStatement pst = connexion.getInstance().getCnx()
+                        .prepareStatement(req);
+                pst.setInt(1, (Integer) combo_id.getSelectionModel().getSelectedItem());
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
                     tf_date.setText(rs.getString("date"));
                     tf_repondre.setText(rs.getString("repondre_id"));
                     tf_reponse.setText(rs.getString("reponse"));
-                 
+
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ModifierReponseController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
-    
-    
 
     @FXML
     private void ajouterReponse(ActionEvent event) {
     }
-    
+
 }

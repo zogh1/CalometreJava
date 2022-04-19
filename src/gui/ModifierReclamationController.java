@@ -57,6 +57,7 @@ public class ModifierReclamationController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
     Reclamation r = new Reclamation();
     ServiceReclamation sr = new ServiceReclamation();
     @Override
@@ -114,9 +115,13 @@ public class ModifierReclamationController implements Initializable {
                     pst.setInt(1,(Integer)combo_id.getSelectionModel().getSelectedItem());
                 ResultSet rs=pst.executeQuery();
                 while(rs.next()){
+                    System.out.println(rs.getString("email"));
+                    System.out.println(rs.getString("date"));
                     tfemail.setText(rs.getString("email"));
                     tfdate.setText(rs.getString("date"));
+                    tftype.setValue(rs.getString("type"));
                     tftype.setPromptText(rs.getString("type"));
+                    tftype.setDisable(true);
                     tfmessage.setText(rs.getString("message"));
                  
                 }

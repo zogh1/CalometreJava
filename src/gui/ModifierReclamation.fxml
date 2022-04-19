@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ivory;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="GUI.ModifierReclamationController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ivory;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ModifierReclamationController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="400.0">
          <children>
@@ -36,7 +35,7 @@
                </children>
             </VBox>
             <Button fx:id="btnajouter" layoutX="218.0" layoutY="305.0" mnemonicParsing="false" onAction="#ajouterreclamation" prefHeight="26.0" prefWidth="54.0" text="ajouter" />
-            <ComboBox fx:id="combo_id" layoutX="126.0" layoutY="83.0" prefHeight="26.0" prefWidth="354.0" style="-fx-background-color: beige;" />
+            <ComboBox fx:id="combo_id" layoutX="126.0" layoutY="83.0" onMouseClicked="#getId" prefHeight="26.0" prefWidth="354.0" style="-fx-background-color: beige;" />
             <Label layoutX="21.0" layoutY="87.0" text="id reclamation" />
             <Button fx:id="btnajouter" layoutX="218.0" layoutY="305.0" mnemonicParsing="false" onAction="#modifierRec" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: khaki;" text="Modifier" />
          </children>

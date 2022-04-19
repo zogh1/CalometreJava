@@ -286,9 +286,9 @@ ServiceReclamation fn = new ServiceReclamation();
           
          // Reclamation r = new Reclamation(2, "rym.baccouri@esprit.tn", "Test", "bonjour ", "2022-04-11");
         //sendSMS(r);
-       List<Reclamation> reclamations = new ArrayList();
-reclamations=fn.RechercherparEmail("rym.baccouri@esprit.tn");
-               System.out.println(reclamations.toString());
+      // List<Reclamation> reclamations = new ArrayList();
+//reclamations=fn.RechercherparEmail("rym.baccouri@esprit.tn");
+              // System.out.println(reclamations.toString());
     }
 
 }

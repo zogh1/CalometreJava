@@ -7,6 +7,7 @@ package GUI;
 
 import entity.Reclamation;
 import entity.Reponse;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,10 +21,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
 import service.ServiceReponse;
 import util.connexion;
 
@@ -86,9 +90,17 @@ public class AjoutReponseController implements Initializable {
        rep.setReponse(reponse);
        Reclamation rec= new Reclamation();
        rec.setId(idRep);
-      sr.createReponse(rep,rec);
+     try { sr.createReponse(rep,rec);
+     JOptionPane.showMessageDialog(null, "Reponse ajouter");
+    FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("reponse.fxml"));
+        Parent root = loader.load(); 
+         tf_date.getScene().setRoot(root);
     
-    }
+    }catch (IOException ex) {
+            Logger.getLogger(ModifierReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+    
+    }}
     
     
     }

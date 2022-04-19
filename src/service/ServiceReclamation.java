@@ -20,6 +20,7 @@ import java.util.List;
 
 import util.connexion;
 import static util.sendSMS.sendSMS;
+import util.session;
 
 /**
  *
@@ -29,7 +30,8 @@ public class ServiceReclamation implements IServiceReclamation {
 
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
-     public Reclamation getById(int id) {
+
+    public Reclamation getById(int id) {
         Reclamation r = new Reclamation();
         String req = "select * from Reclamation where id=?";
         try {
@@ -43,7 +45,7 @@ public class ServiceReclamation implements IServiceReclamation {
                 r.setDate(rs.getString("Date"));
                 r.setType(rs.getString("TYPE"));
                 r.setMessage(rs.getString("message"));
-             
+
             }
 
         } catch (SQLException erreur) {
@@ -53,7 +55,8 @@ public class ServiceReclamation implements IServiceReclamation {
         System.out.println(r);
         return r;
     }
-       public Reclamation getBytype(String type) {
+
+    public Reclamation getBytype(String type) {
         Reclamation r = new Reclamation();
         String req = "select * from Reclamation where type=?";
         try {
@@ -67,7 +70,7 @@ public class ServiceReclamation implements IServiceReclamation {
                 r.setDate(rs.getString("Date"));
                 r.setType(rs.getString("TYPE"));
                 r.setMessage(rs.getString("message"));
-             
+
             }
 
         } catch (SQLException erreur) {
@@ -98,7 +101,6 @@ public class ServiceReclamation implements IServiceReclamation {
         }
 
     }
-    
 
     @Override
     public void editReclamation(Reclamation R) {
@@ -114,6 +116,7 @@ public class ServiceReclamation implements IServiceReclamation {
         }
 
     }
+
     @Override
     public boolean deleteReclamation(int id) {
         boolean isDeleted = false;
@@ -129,6 +132,26 @@ public class ServiceReclamation implements IServiceReclamation {
             System.out.println("error");
         }
         return isDeleted;
+    }
+
+    public List<Reclamation> getByUser() {
+        ArrayList<Reclamation> reclamationUser = new ArrayList();
+        String req1 = "SELECT * FROM reclamation where id_id="+ session.getUser().getId();
+        try {
+            PreparedStatement preparedStatement = cnx.prepareStatement(req1);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+
+                reclamationUser.add(new Reclamation(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return reclamationUser;
     }
 
     @Override
@@ -155,27 +178,27 @@ public class ServiceReclamation implements IServiceReclamation {
         }
 
         return reclamation;
-        
 
     }
+
     @Override
-     public List<Reclamation> RechercherparEmail(String email)  {
+    public List<Reclamation> RechercherparEmail(String email) {
         ArrayList<Reclamation> reclamation = new ArrayList();
 
         String req1 = "SELECT * FROM reclamation where email=?";
-        try{
-        PreparedStatement preparedStatement = cnx.prepareStatement(req1);
-        preparedStatement.setString(1, email);
+        try {
+            PreparedStatement preparedStatement = cnx.prepareStatement(req1);
+            preparedStatement.setString(1, email);
 
-        ResultSet rs = preparedStatement.executeQuery();
-         
-            while (rs.next()) {                
-                
-                reclamation.add(new Reclamation (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
-                
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+
+                reclamation.add(new Reclamation(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+
             }
 
-          } catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return reclamation;
