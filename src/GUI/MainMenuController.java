@@ -5,17 +5,17 @@
  */
 package GUI;
 
-import interfacee.userInterface;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -28,8 +28,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import service.userservice;
-import util.session;
 
 /**
  * FXML Controller class
@@ -40,20 +38,10 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private VBox vBoxMenu;
-    private static String CurrentProfilePicture;
 
     private final Background focusBackground = new Background(new BackgroundFill(Color.web("#E4E4E4"), CornerRadii.EMPTY, Insets.EMPTY));
     private final Background unfocusBackground = new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY));
     private final Border border = new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, null, null));
-    private ImageView UserProfilePicutre;
-
-    public String displayProfilePic() {
-        MainMenuController.CurrentProfilePicture = UserProfilePicutre.toString();
-        CurrentProfilePicture = session.getUser().getProfile_picture();
-
-        return CurrentProfilePicture;
-
-    }
 
     private HBox selectedMenuItem = null;
     @FXML
@@ -62,6 +50,10 @@ public class MainMenuController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    }
+
     @FXML
     private void selectMenueItem(MouseEvent event) {
         HBox hb = (HBox) event.getSource();
@@ -94,12 +86,6 @@ public class MainMenuController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        userInterface fn = new userservice();
-
     }
 
 }

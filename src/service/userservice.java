@@ -5,7 +5,10 @@
  */
 package service;
 
+<<<<<<< HEAD
 import entity.user;
+=======
+>>>>>>> reclamationjava
 import interfacee.userInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,11 +16,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import util.BCrypt;
 import static util.EmailSender.sendEmailWithAttachments;
+=======
+import java.util.List;
+import entity.user;
+import util.BCrypt;
+>>>>>>> reclamationjava
 import util.connexion;
 import util.session;
 
@@ -27,9 +36,12 @@ import util.session;
  */
 public class userservice implements userInterface {
 
+<<<<<<< HEAD
     public static int code;
     public static String email;
 
+=======
+>>>>>>> reclamationjava
     //var
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
@@ -43,7 +55,11 @@ public class userservice implements userInterface {
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt()));
             st.setString(2, u.getEmail());
+<<<<<<< HEAD
             st.setString(3, "[\"" + u.getRoles() + "\"]");
+=======
+            st.setString(3, u.getRoles());
+>>>>>>> reclamationjava
             st.setBoolean(4, false);
             st.setString(5, u.getFirstname());
             st.setString(6, u.getLastname());
@@ -55,6 +71,10 @@ public class userservice implements userInterface {
             System.out.println("Personne ajoutée avec succes.");
 
         } catch (SQLException ex) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> reclamationjava
             ex.printStackTrace();
         }
 
@@ -91,12 +111,17 @@ public class userservice implements userInterface {
             }
 
         } catch (SQLException ex) {
+<<<<<<< HEAD
+=======
+            ex.printStackTrace();
+>>>>>>> reclamationjava
         }
 
         return li;
     }
 
     @Override
+<<<<<<< HEAD
     public List<user> pagination() {
         List<user> li = new ArrayList<user>();
 
@@ -134,6 +159,8 @@ public class userservice implements userInterface {
     }
 
     @Override
+=======
+>>>>>>> reclamationjava
     public void deleteuser(int id) {
 
         try {
@@ -177,6 +204,7 @@ public class userservice implements userInterface {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
+<<<<<<< HEAD
                         rs.getBoolean(5),
                         rs.getString(6),
                         rs.getString(7),
@@ -209,12 +237,21 @@ public class userservice implements userInterface {
                         rs.getBoolean(5),
                         rs.getString(6),
                         rs.getString(7),
+=======
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getBoolean(7),
+>>>>>>> reclamationjava
                         rs.getInt(8),
                         rs.getString(9),
                         rs.getBoolean(10),
                         rs.getString(11));
             }
+<<<<<<< HEAD
             System.out.println(u.getFirstname());
+=======
+       System.out.println(u.getFirstname());
+>>>>>>> reclamationjava
         } catch (Exception a) {
             a.printStackTrace();
         }
@@ -222,6 +259,7 @@ public class userservice implements userInterface {
     }
 
     @Override
+<<<<<<< HEAD
     public String getRole() {
         String role = null;
         System.out.println(session.getUser().getRoles());
@@ -281,6 +319,8 @@ public class userservice implements userInterface {
     }
 
     @Override
+=======
+>>>>>>> reclamationjava
     public boolean login(user user) {
         boolean status = false;
         try {
@@ -294,12 +334,17 @@ public class userservice implements userInterface {
                     user = this.findById(rs.getInt("id"));
                     session.setUser(user);
                     System.out.println("connected");
+<<<<<<< HEAD
+=======
+                    System.out.println(session.getUser().getPhonenumber());
+>>>>>>> reclamationjava
                 } else {
                     status = false;
                     System.out.println("invalid credentials");
                 }
             }
 
+<<<<<<< HEAD
         } catch (SQLException e) {
             System.err.println("wrong");
         }
@@ -565,4 +610,11 @@ public class userservice implements userInterface {
 
     }
 
+=======
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+>>>>>>> reclamationjava
 }

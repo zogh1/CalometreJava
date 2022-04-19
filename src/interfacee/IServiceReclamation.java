@@ -19,6 +19,8 @@ public interface IServiceReclamation {
     public void editReclamation(Reclamation R);
 
     public boolean deleteReclamation(int id);
+     public Reclamation getById(int id);
+      public List<Reclamation> RechercherparEmail(String email) ;
 
     public List<Reclamation> readReclamation();
 }

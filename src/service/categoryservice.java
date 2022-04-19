@@ -5,7 +5,10 @@
  */
 package service;
 
+<<<<<<< HEAD
 import entity.category;
+=======
+>>>>>>> reclamationjava
 import interfacee.categoryInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,13 +17,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
+=======
+import entity.category;
+
+
+>>>>>>> reclamationjava
 import util.connexion;
 
 /**
  *
  * @author seifd
  */
+<<<<<<< HEAD
 public class categoryservice implements categoryInterface {
+=======
+public class categoryservice implements categoryInterface{
+>>>>>>> reclamationjava
 
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();

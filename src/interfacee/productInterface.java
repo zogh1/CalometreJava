@@ -22,8 +22,11 @@ public interface productInterface {
     public void deleteproduct(int id);
 
     public void updateproduct(product p);
+<<<<<<< HEAD
 
     public List<product> paginationProd();
 
     public List<product> searchProduct(String search);
+=======
+>>>>>>> reclamationjava
 }

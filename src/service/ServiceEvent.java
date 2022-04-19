@@ -141,6 +141,7 @@ public class ServiceEvent {
         }
     }
 
+<<<<<<< HEAD
     
     
     public void applyToEvent(int idUser,int idEvent) {
@@ -188,4 +189,6 @@ public class ServiceEvent {
                 System.out.println("Veuillez verifier l'id evenement ou l'idUser ");
             }
     }
+=======
+>>>>>>> reclamationjava
 }

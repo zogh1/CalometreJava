@@ -22,7 +22,11 @@ import javax.mail.internet.MimeMultipart;
 
 /**
  *
+<<<<<<< HEAD
  * @author Souhail
+=======
+ * @author louay
+>>>>>>> reclamationjava
  */
 public class EmailSender {
 
@@ -70,6 +74,7 @@ public class EmailSender {
 
     }
 
+<<<<<<< HEAD
 //    public static void main(String[] args) {
 //        // SMTP info
 //        // message info
@@ -85,4 +90,7 @@ public class EmailSender {
 //            ex.printStackTrace();
 //        }
 //    }
+=======
+ 
+>>>>>>> reclamationjava
 }

@@ -6,8 +6,13 @@
 package service;
 
 import entity.category;
+<<<<<<< HEAD
 import entity.product;
 import interfacee.productInterface;
+=======
+import java.sql.Connection;
+import util.connexion;
+>>>>>>> reclamationjava
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +20,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import util.connexion;
+=======
+import entity.product;
+import interfacee.productInterface;
+>>>>>>> reclamationjava
 
 /**
  *
@@ -86,6 +96,7 @@ public class productservice implements productInterface {
     }
 
     @Override
+<<<<<<< HEAD
     public List<product> paginationProd() {
         List<product> li = new ArrayList<product>();
 
@@ -190,6 +201,8 @@ public class productservice implements productInterface {
     }
 
     @Override
+=======
+>>>>>>> reclamationjava
     public void deleteproduct(int id) {
 
         try {

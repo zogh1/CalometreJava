@@ -6,9 +6,14 @@
  */
 package interfacee;
 
+<<<<<<< HEAD
 import entity.user;
 import java.util.HashMap;
 import java.util.List;
+=======
+import java.util.List;
+import entity.user;
+>>>>>>> reclamationjava
 
 /**
  *
@@ -21,18 +26,25 @@ public interface userInterface {
 
     public List<user> getalluser();
 
+<<<<<<< HEAD
     public List<user> pagination();
 
+=======
+>>>>>>> reclamationjava
     public boolean login(user user);
 
     public user findById(int id);
 
+<<<<<<< HEAD
     public user findByEmail(String email);
 
+=======
+>>>>>>> reclamationjava
     public void updateuser(user u);
 
     public void deleteuser(int id);
 
+<<<<<<< HEAD
     public boolean verifyEmailExistance(String email);
 
     public void banUser(int id);
@@ -67,4 +79,6 @@ public interface userInterface {
 
     public String getRole();
 
+=======
+>>>>>>> reclamationjava
 }
