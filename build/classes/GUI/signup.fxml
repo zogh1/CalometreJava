@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -35,4 +36,11 @@
     </Button>
     <TextField fx:id="ccField" layoutX="1013.0" layoutY="599.0" prefHeight="62.0" prefWidth="579.0" promptText="Country Code" style="-fx-border-color: #000000; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
     <Button layoutX="1367.0" layoutY="816.0" mnemonicParsing="false" onAction="#uploadpic" prefHeight="35.0" prefWidth="213.0" text="Upload Profile Picture" />
+   <Label fx:id="CaptchaCode" layoutX="1658.0" layoutY="905.0" prefHeight="35.0" prefWidth="210.0" style="-fx-background-color: #000000;" text="CaptchaCode">
+      <font>
+         <Font size="32.0" />
+      </font>
+   </Label>
+   <TextField fx:id="captchaField" layoutX="1612.0" layoutY="712.0" prefHeight="55.0" prefWidth="252.0" promptText="Phone Number" style="-fx-border-color: #000000; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
+   <Button fx:id="ChangeCode" layoutX="1729.0" layoutY="510.0" mnemonicParsing="false" onAction="#ChangeCode" prefHeight="47.0" prefWidth="110.0" text="Button" />
 </AnchorPane>

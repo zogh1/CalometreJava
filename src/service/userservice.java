@@ -88,6 +88,7 @@ public class userservice implements userInterface {
                 System.out.println("*********");
                 System.out.println(li.get(i).getEmail());
                 System.out.println(li.get(i).getFirstname());
+
             }
 
         } catch (SQLException ex) {
@@ -97,15 +98,19 @@ public class userservice implements userInterface {
     }
 
     @Override
-    public List<user> pagination() {
+    public List<user> pagination(int size, int row) {
         List<user> li = new ArrayList<user>();
 
         try {
-            String req = "select * from user LIMIT 3 OFFSET 1 ";
-            Statement s = cnx.createStatement();
+            String req = "select * from `user` LIMIT ? OFFSET ? ";
 
-            ResultSet rs = s.executeQuery(req);
+            PreparedStatement s = cnx.prepareStatement(req);
+            s.setInt(1, size);
+            s.setInt(2, row);
+
+            ResultSet rs = s.executeQuery();
             while (rs.next()) {
+
                 user l = new user();
                 l.setId(rs.getInt("id"));
                 l.setEmail(rs.getString("email"));
@@ -120,17 +125,34 @@ public class userservice implements userInterface {
 
                 li.add(l);
             }
-            for (int i = 0; i < li.size(); i++) {
-                System.out.println("*********");
-                System.out.println(li.get(i).getEmail());
-                System.out.println(li.get(i).getFirstname());
-            }
+//            for (int i = 0; i < li.size(); i++) {
+//                System.out.println("*********");
+//                System.out.println(li.get(i).getEmail());
+//                System.out.println(li.get(i).getFirstname());
+//
+//            }
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
         return li;
 
+    }
+
+    @Override
+    public int getRowCount() {
+        int count = 0;
+        try {
+            String req = "SELECT COUNT(*) FROM `user`";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return count;
     }
 
     @Override
@@ -562,6 +584,27 @@ public class userservice implements userInterface {
 
         System.out.println("random is " + userservice.code);
         return userservice.code;
+
+    }
+
+    @Override
+    public String CreateCaptchaValue() {
+        Random random = new Random();
+        int length = 7 + (Math.abs(random.nextInt()) % 3);
+        StringBuffer captchaStrBuffer = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int baseCharacterNumber = Math.abs(random.nextInt()) % 62;
+            int characterNumber = 0;
+            if (baseCharacterNumber < 26) {
+                characterNumber = 65 + baseCharacterNumber;
+            } else if (baseCharacterNumber < 52) {
+                characterNumber = 97 + (baseCharacterNumber - 26);
+            } else {
+                characterNumber = 48 + (baseCharacterNumber - 52);
+            }
+            captchaStrBuffer.append((char) characterNumber);
+        }
+        return captchaStrBuffer.toString();
 
     }
 

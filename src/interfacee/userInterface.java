@@ -21,7 +21,9 @@ public interface userInterface {
 
     public List<user> getalluser();
 
-    public List<user> pagination();
+    public List<user> pagination(int page, int row);
+
+    public int getRowCount();
 
     public boolean login(user user);
 
@@ -66,5 +68,7 @@ public interface userInterface {
     public int countBannedAccounts();
 
     public String getRole();
+
+    public String CreateCaptchaValue();
 
 }

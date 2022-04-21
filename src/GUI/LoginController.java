@@ -46,7 +46,7 @@ public class LoginController implements Initializable {
     }
 
     public void LinkToResetPassword() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("resetpassword.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("sendresetcode.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
 
@@ -176,6 +176,9 @@ public class LoginController implements Initializable {
         } else {
 
             if (fn.resetPassword(LoginController.currentMailReset, npass)) {
+                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                Calometre.primaryStage.setScene(new Scene(root));
+                Calometre.primaryStage.show();
 
             }
         }

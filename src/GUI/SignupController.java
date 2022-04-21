@@ -24,8 +24,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.MotionBlur;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import service.userservice;
@@ -39,6 +41,7 @@ public class SignupController implements Initializable {
     private Stage stage;
     private Scene scene;
     private static String CurrentProfilePicture;
+    private static String GeneratedCode;
 
     public void linkToLoginPage() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
@@ -46,6 +49,8 @@ public class SignupController implements Initializable {
         Calometre.primaryStage.show();
 
     }
+    @FXML
+    private Label CaptchaCode;
     @FXML
     private TextField emailField;
     @FXML
@@ -58,6 +63,8 @@ public class SignupController implements Initializable {
     private TextField ccField;
     @FXML
     private TextField pnField;
+    @FXML
+    private TextField captchaField;
     @FXML
     private ComboBox roleCombo;
 
@@ -97,6 +104,14 @@ public class SignupController implements Initializable {
 
     @FXML
 
+    private void ChangeCode() {
+        SignupController.GeneratedCode = fn.CreateCaptchaValue();
+        CaptchaCode.setText(SignupController.GeneratedCode);
+
+    }
+
+    @FXML
+
     private void signupuser() throws IOException {
         String mail = emailField.getText();
         String pass = passwordField.getText();
@@ -104,8 +119,9 @@ public class SignupController implements Initializable {
         String lname = lnameField.getText();
         String country_code = ccField.getText();
         String phone_number = pnField.getText();
+        String captcha_code = captchaField.getText();
 
-        if (mail.isEmpty() || pass.isEmpty() || fname.isEmpty() || lname.isEmpty() || roleCombo.getValue() == null || phone_number.isEmpty() || country_code.isEmpty()) {
+        if (mail.isEmpty() || pass.isEmpty() || fname.isEmpty() || lname.isEmpty() || roleCombo.getValue() == null || phone_number.isEmpty() || country_code.isEmpty() || captcha_code.isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("Please fill all required fields");
@@ -120,6 +136,12 @@ public class SignupController implements Initializable {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("verifier votre email");
+            alert.showAndWait();
+
+        } else if (!captchaField.getText().equals(SignupController.GeneratedCode)) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("null");
+            alert.setContentText("WrongCaptchaCode");
             alert.showAndWait();
 
         } else {
@@ -145,6 +167,14 @@ public class SignupController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         roleCombo.getItems().removeAll(roleCombo.getItems());
         roleCombo.getItems().addAll("Client", "Coach");
+
+        SignupController.GeneratedCode = fn.CreateCaptchaValue();
+        CaptchaCode.setText(SignupController.GeneratedCode);
+        MotionBlur mb = new MotionBlur();
+        mb.setRadius(8.0f);
+        mb.setAngle(30.0f);
+
+        CaptchaCode.setEffect(mb);
 
     }
 }
