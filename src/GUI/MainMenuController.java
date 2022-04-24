@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import calometre.Calometre;
+import entity.Event;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,14 +48,17 @@ public class MainMenuController implements Initializable {
     private HBox selectedMenuItem = null;
     @FXML
     private AnchorPane menuPane;
-    
-    
+
+    public AnchorPane getMenuPane() {
+        return menuPane;
+    }
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Calometre.mainController = this;
     }
 
     @FXML
@@ -81,6 +86,26 @@ public class MainMenuController implements Initializable {
         menuPane.getChildren().add(newLoadedPane);
     }
 
+    public void loadEventDetails(String page, int idEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
+        Pane newLoadedPane = loader.load();  
+        
+        DetailsController detailsController = loader.getController();
+        detailsController.setData(idEvent);
+
+        menuPane.getChildren().add(newLoadedPane);
+    }
+
+    public void loadUpdateEventView(String page, Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
+        AnchorPane newLoadedPane = loader.load();  
+        
+        UpdateEventController detailsController = loader.getController();
+        detailsController.initData(event);
+
+        menuPane.getChildren().add(newLoadedPane);
+    }
+    
     @FXML
     private void viewProfile(MouseEvent event) {
         try {

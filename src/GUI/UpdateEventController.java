@@ -61,13 +61,12 @@ public class UpdateEventController implements Initializable {
     private ImageView img;
     @FXML
     private JFXTextField txtnbrplace;
-    
+
     File file;
-    
+
     private Stage stage;
 
-    
-    ServiceEvent serviceEvent ;
+    ServiceEvent serviceEvent;
     @FXML
     private Label idNotVisible;
 
@@ -77,65 +76,54 @@ public class UpdateEventController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    
-    public LocalDate convertDateStringToLocalDate(String date){
+    }
+
+    public LocalDate convertDateStringToLocalDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-  
 
         //convert String to LocalDate
         LocalDate localDate = LocalDate.parse(date, formatter);
         return localDate;
     }
-    
-    void initData(Event e){
+
+    void initData(Event e) {
         txtname.setText(e.getNom());
-        txtdatedebut.setValue(convertDateStringToLocalDate(e.getDate_debut()));
-        textdatefin.setValue(convertDateStringToLocalDate(e.getDate_fin()));
+        //txtdatedebut.setValue(convertDateStringToLocalDate(e.getDate_debut()));
+        //textdatefin.setValue(convertDateStringToLocalDate(e.getDate_fin()));
         txtlocation.setText(e.getLieu());
         txtnbrplace.setText(String.valueOf(e.getNombre_participants()));
         txtdescrip.setText(e.getDescription());
         idNotVisible.setText(String.valueOf(e.getId()));
-    
+
     }
-    
-    
-
-
-  
-
-    
 
     @FXML
     private void updateEvent(ActionEvent event) throws FileNotFoundException, IOException {
         serviceEvent = new ServiceEvent();
-        Stage current = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage current = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         if (event.getSource() == btnajouter) {
-           
-          
-                FileInputStream fl = new FileInputStream(file);
-                byte[] data = new byte[(int) file.length()];
-                String fileName = file.getName();
-                fl.read(data);
-                fl.close();
-                Event event1 = new Event(txtname.getText(),txtdatedebut.getValue().toString(),textdatefin.getValue().toString(),txtdescrip.getText(),Integer.parseInt(txtnbrplace.getText()),txtlocation.getText(), fileName);
-                serviceEvent.updateEvent(event1,Integer.parseInt(idNotVisible.getText()));
-                Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                current.close();
-                stage.show();
-           
+
+            FileInputStream fl = new FileInputStream(file);
+            byte[] data = new byte[(int) file.length()];
+            String fileName = file.getName();
+            fl.read(data);
+            fl.close();
+            Event event1 = new Event(txtname.getText(), txtdatedebut.getValue().toString(), textdatefin.getValue().toString(), txtdescrip.getText(), Integer.parseInt(txtnbrplace.getText()), txtlocation.getText(), fileName);
+            serviceEvent.updateEvent(event1, Integer.parseInt(idNotVisible.getText()));
+
+            goToEventsView();
         }
-        
+
     }
 
+    private void goToEventsView() throws IOException {
+        calometre.Calometre.mainController.getMenuPane().getChildren().clear();
+        calometre.Calometre.mainController.loadFxml("EventsView.fxml");
+    }
     @FXML
     private void selectImage(ActionEvent event) {
-        
+
         Path to11 = null;
         String m = null;
         String path = "C:\\Users\\wassim\\Desktop\\Pidev3A\\Calometre\\public\\uploads\\Event_images";
@@ -172,5 +160,5 @@ public class UpdateEventController implements Initializable {
 
         }
     }
-    
+
 }

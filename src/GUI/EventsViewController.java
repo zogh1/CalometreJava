@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -38,15 +39,12 @@ public class EventsViewController implements Initializable {
     private HBox allEventsLayout;
     @FXML
     private Label EventNumberLabel;
-    
+
     private List<Event> allEvents;
 
-    private ServiceEvent serviceEvent= new ServiceEvent();
-    
-    private int numberOfEvents;
-    
-    
+    private ServiceEvent serviceEvent = new ServiceEvent();
 
+    private int numberOfEvents;
 
     /**
      * Initializes the controller class.
@@ -54,7 +52,7 @@ public class EventsViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("TopThreeEventsList.fxml"));
 
@@ -66,41 +64,28 @@ public class EventsViewController implements Initializable {
             System.out.println("Error While Adding Top Three Events cards in Events View : " + ioe.getMessage());
         }
         try {
-            
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("AllEventsList.fxml"));
 
             AnchorPane allEventsBox = loader.load();
 
             allEventsLayout.getChildren().add(allEventsBox);
-            
+
             // number Of Events displayed
-        allEvents = new ArrayList<Event>(serviceEvent.getallEvent());
-        numberOfEvents =  allEvents.size();
-        EventNumberLabel.setText("");
-        EventNumberLabel.setText("("+numberOfEvents+")");
-        
-        
+            allEvents = new ArrayList<Event>(serviceEvent.getallEvent());
+            numberOfEvents = allEvents.size();
+            EventNumberLabel.setText("");
+            EventNumberLabel.setText("(" + numberOfEvents + ")");
+
         } catch (IOException ioe) {
             System.out.println("Error While Adding all cards in Events View : " + ioe.getMessage());
         }
     }
 
     @FXML
-    private void goToAddEventForm(ActionEvent event) throws IOException  {
-        try {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addEvent.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage secondaryStage = new Stage();
-        secondaryStage.setScene(new Scene(root1));  
-        secondaryStage.setTitle("Add Event") ; 
-           
-        secondaryStage.show();
-    } catch(Exception e) {
-        e.printStackTrace();
+    private void goToAddEventForm(ActionEvent event) throws IOException {
+        calometre.Calometre.mainController.getMenuPane().getChildren().clear();
+        calometre.Calometre.mainController.loadFxml("addEvent.fxml");
     }
-        
-        
-    }
-
 }

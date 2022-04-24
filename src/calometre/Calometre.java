@@ -5,6 +5,7 @@
  */
 package calometre;
 
+import GUI.MainMenuController;
 import entity.Event;
 import entity.Post;
 import java.io.IOException;
@@ -27,6 +28,7 @@ import sun.applet.Main;
  */
 public class Calometre extends Application {
 
+    public static MainMenuController mainController;
      /**
      * @param args the command line arguments
      */

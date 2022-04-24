@@ -224,17 +224,14 @@ public class ServiceEvent {
 
     public List<Event> getTopThreeEvents() {
         List<Event> le = new ArrayList<Event>();
-        String req = "Select * \n"
-                    + "from event \n"
-                    + "WHERE id IN (\n"
-                    + "    		SELECT TopEventsBasedOnCountApply.event_id \n"
-                    + "    		from (select event_id, count(event_id) \n"
-                    + "		  		  from event_user \n"
-                    + "		  		  GROUP by event_id\n"
-                    + "          		  order by count(event_id) desc\n"
-                    + "    			  ) AS TopEventsBasedOnCountApply\n"
-                    + "			)\n"
-                    + "LIMIT 3;";
+        String req = "select * \n"
+                + "from event \n"
+                + "where id in (select topThreeEventsIds.event_id \n"
+                + "             from (select eu.event_id,e.nombre_participants, count(eu.event_id) \n"
+                + "                   from event_user eu join event e on eu.event_id=e.id\n"
+                + "                   GROUP by eu.event_id,e.nombre_participants\n"
+                + "                   order by count(eu.event_id) / e.nombre_participants desc\n"
+                + "                   LIMIT 3) as topThreeEventsIds);";
         try {
             Statement s = DataSource.getInstance().getCnx().createStatement();
             ResultSet rs = s.executeQuery(req);

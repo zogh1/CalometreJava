@@ -60,12 +60,12 @@ public class AddEventsController {
     @FXML
     private JFXTextArea txtdescrip;
     private JFXTextField txtnom;
-    
+
     @FXML
     private ImageView img;
     private JFXTextField txtnombre_participants;
     private JFXTextField txtloaction;
-    
+
     File file;
     @FXML
     private JFXTextField txtname;
@@ -74,12 +74,9 @@ public class AddEventsController {
     @FXML
     private JFXTextField txtnbrplace;
 
- 
-
-
     @FXML
     private void addimage(ActionEvent event) {
-         Path to11 = null;
+        Path to11 = null;
         String m = null;
         String path = "C:\\Users\\wassim\\Desktop\\Pidev3A\\Calometre\\public\\uploads\\Event_images";
         JFileChooser chooser1 = new JFileChooser();
@@ -116,35 +113,28 @@ public class AddEventsController {
         }
     }
 
-
-  
-
     @FXML
     private void addEvent(ActionEvent event) throws FileNotFoundException, IOException {
-                Stage current = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-                if (event.getSource() == btnajouter) {
-           
-          
-                FileInputStream fl = new FileInputStream(file);
-                byte[] data = new byte[(int) file.length()];
-                String fileName = file.getName();
-                fl.read(data);
-                fl.close();
-                Event event1 = new Event(txtname.getText(),txtdatedebut.getValue().toString(),textdatefin.getValue().toString(),txtdescrip.getText(),Integer.parseInt(txtnbrplace.getText()),txtlocation.getText(), fileName);
-                service.createEvent(event1);
-                Parent root = FXMLLoader.load(getClass().getResource("addEvent.fxml"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                current.close();
-                stage.show();
-           
+        Stage current = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        if (event.getSource() == btnajouter) {
+
+            FileInputStream fl = new FileInputStream(file);
+            byte[] data = new byte[(int) file.length()];
+            String fileName = file.getName();
+            fl.read(data);
+            fl.close();
+            Event event1 = new Event(txtname.getText(), txtdatedebut.getValue().toString(), textdatefin.getValue().toString(), txtdescrip.getText(), Integer.parseInt(txtnbrplace.getText()), txtlocation.getText(), fileName);
+            service.createEvent(event1);
+
+            goToEventsView();
         }
     }
 
+    private void goToEventsView() throws IOException {
+        calometre.Calometre.mainController.getMenuPane().getChildren().clear();
+        calometre.Calometre.mainController.loadFxml("EventsView.fxml");
+    }
 
-
-
-    
 }

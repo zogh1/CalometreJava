@@ -14,7 +14,7 @@ import java.util.Date;
 public class Comment {
     private int id ; 
     private int event_id ; 
-    private Date commentdate; 
+    private String commentdate; 
     private int likecount;
     private String commentcontent ; 
     private int user_id ; 
@@ -22,7 +22,7 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(int id, int event_id, Date commentdate, int likecount, String commentcontent, int user_id) {
+    public Comment(int id, int event_id, String commentdate, int likecount, String commentcontent, int user_id) {
         this.id = id;
         this.event_id = event_id;
         this.commentdate = commentdate;
@@ -31,7 +31,7 @@ public class Comment {
         this.user_id = user_id;
     }
 
-    public Comment(int id, int event_id, Date commentdate, String commentcontent, int user_id) {
+    public Comment(int id, int event_id, String commentdate, String commentcontent, int user_id) {
         this.id = id;
         this.event_id = event_id;
         this.commentdate = commentdate;
@@ -55,11 +55,11 @@ public class Comment {
         this.event_id = event_id;
     }
 
-    public Date getCommentdate() {
+    public String getCommentdate() {
         return commentdate;
     }
 
-    public void setCommentdate(Date commentdate) {
+    public void setCommentdate(String commentdate) {
         this.commentdate = commentdate;
     }
 

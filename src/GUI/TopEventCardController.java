@@ -6,6 +6,8 @@
 package GUI;
 
 import entity.Event;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -65,27 +67,38 @@ public class TopEventCardController implements Initializable {
 
     @FXML
     private void showDetails(MouseEvent event) {
+        int parsedId;
+        try {
+            calometre.Calometre.mainController.getMenuPane().getChildren().clear();
+
+            parsedId = Integer.parseInt(id.getText());
+            calometre.Calometre.mainController.loadEventDetails("Details.fxml", parsedId);
+        } catch (Exception e) {
+            System.out.println(e.getMessage()+"====="+id.getText());
+        }
     }
 
-    public void setData(Event event) {
-        
+    public void setData(Event event) throws FileNotFoundException {
+
         this.id.setText("" + event.getId());
-        
+
         this.nom.setText(event.getNom());
-        
+
         this.description.setText(event.getNom());
-        
+
         this.date_fin.setText(event.getDate_debut());
-        
+
         this.date_debut.setText(event.getDate_fin());
-        
+
         String nbApplyed = "" + serviceEvent.getNombre_participants_byevent(event.getId());
         this.nb_applyed.setText(nbApplyed);
-        
+
         this.nombre_participants.setText("" + event.getNombre_participants());
 
-        // Image i = new Image(getClass().getResourceAsStream("" + event.getImage()));
-        // image.setImage(i);
+        Image i = new Image(new FileInputStream("C:\\Users\\wassim\\Desktop\\Pidev3A\\Calometre\\public\\uploads\\Event_images\\"+ event.getImage()));
+        
+        
+        image.setImage(i);
         box.setStyle("-fx-background-color: " + colors[(int) Math.random() * 7]);
     }
 

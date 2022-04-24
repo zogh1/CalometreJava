@@ -6,10 +6,10 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.lang.String?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -33,74 +33,72 @@
       <Separator layoutX="73.0" layoutY="86.0" opacity="0.48" prefHeight="3.0" prefWidth="700.0" />
       <ScrollPane prefHeight="600.0" prefWidth="844.0">
          <content>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="826.0">
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="826.0" styleClass="mainFxmlClass">
                <children>
-                  <ImageView fitHeight="597.0" fitWidth="829.0" layoutX="-1.0" layoutY="-199.0" pickOnBounds="true" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
-                     <image>
-                        <Image url="file:/C:/Users/wassim/Documents/NetBeansProjects/Calometre/src/img/1093585.jpg" />
-                     </image>
-                  </ImageView>
                   <Label layoutX="340.0" layoutY="23.0" prefHeight="51.0" prefWidth="274.0" text="Ajouter Offres" textFill="#ddd9d9" AnchorPane.bottomAnchor="617.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="257.0" AnchorPane.topAnchor="23.0">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="83.0" layoutY="396.0" text="Places" textFill="#930200">
+                  <Label layoutX="83.0" layoutY="396.0" styleClass="fontsFxmlClass" text="Places" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="btnajouter" layoutX="393.0" layoutY="499.0" onAction="#addEvent" prefHeight="44.0" prefWidth="150.0" style="-fx-border-radius: 20;" styleClass="button1" stylesheets="@Styles/cardoffres.css" text="Ajouter" />
-                  <JFXDatePicker fx:id="txtdatedebut" defaultColor="#930200" layoutX="152.0" layoutY="195.0" opacity="0.63" prefHeight="31.0" prefWidth="281.0" style="-fx-border-color: #ff8a2b; -fx-background-color: #cccccc; -fx-border-radius: 20; -fx-background-radius: 20;" stylesheets="@Styles/cardoffres.css">
+                  <JFXButton fx:id="btnajouter" layoutX="393.0" layoutY="499.0" onAction="#addEvent" prefHeight="44.0" prefWidth="150.0" styleClass="myButton" text="Ajouter" />
+                  <JFXDatePicker fx:id="txtdatedebut" defaultColor="#0146ae" layoutX="152.0" layoutY="195.0" opacity="0.63" prefHeight="31.0" prefWidth="281.0" style="-fx-border-color: white; -fx-border-radius: 20;" stylesheets="@Styles/cardoffres.css">
                      <styleClass>
                         <String fx:value="input2" />
                         <String fx:value="label1" />
                      </styleClass>
                   </JFXDatePicker>
-                  <JFXDatePicker fx:id="textdatefin" defaultColor="#930200" layoutX="152.0" layoutY="250.0" opacity="0.63" prefHeight="33.0" prefWidth="281.0" style="-fx-background-color: D1D0D0; -fx-border-color: #ff8a2b; -fx-border-radius: 20; -fx-background-radius: 20;" stylesheets="@Styles/cardoffres.css">
+                  <JFXDatePicker fx:id="textdatefin" accessibleText="HELP" defaultColor="#0146ae" layoutX="152.0" layoutY="250.0" opacity="0.63" prefHeight="33.0" prefWidth="281.0" style="-fx-border-color: white; -fx-border-radius: 20;" stylesheets="@Styles/cardoffres.css">
                      <styleClass>
                         <String fx:value="label1" />
                         <String fx:value="input2" />
                      </styleClass>
                   </JFXDatePicker>
                   <Separator layoutX="445.0" layoutY="125.0" opacity="0.46" orientation="VERTICAL" prefHeight="370.0" prefWidth="49.0" />
-                  <JFXTextArea fx:id="txtdescrip" focusColor="#930200" layoutX="512.0" layoutY="176.0" prefHeight="229.0" prefWidth="298.0" style="-fx-border-color: #ff8a2b; -fx-border-radius: 20;" styleClass="label1" stylesheets="@Styles/cardoffres.css" unFocusColor="#930200" />
-                  <Label layoutX="516.0" layoutY="145.0" stylesheets="@Styles/style-AjoutOffre.css" text="Description" textFill="#ddd9d9">
+                  <JFXTextArea fx:id="txtdescrip" focusColor="#8f000000" layoutX="512.0" layoutY="176.0" prefHeight="229.0" prefWidth="298.0" style="-fx-border-color: white; -fx-border-radius: 20;" styleClass="label1" stylesheets="@Styles/cardoffres.css" unFocusColor="#8f000000" />
+                  <Label layoutX="516.0" layoutY="145.0" styleClass="fontsFxmlClass" stylesheets="@Styles/style-AjoutOffre.css" text="Description" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="517.0" layoutY="430.0" onAction="#addimage" prefHeight="44.0" prefWidth="298.0" style="-fx-background-radius: 30;" styleClass="button1" stylesheets="@Styles/cardoffres.css" text="Ajouter photo" />
-                  <JFXTextField fx:id="txtname" focusColor="#930200" layoutX="152.0" layoutY="140.0" prefHeight="31.0" prefWidth="281.0" stylesheets="@Styles/cardoffres.css" unFocusColor="#930200">
+                  <JFXButton layoutX="517.0" layoutY="430.0" onAction="#addimage" prefHeight="44.0" prefWidth="298.0" styleClass="myButton" text="Ajouter photo" />
+                  <JFXTextField fx:id="txtname" focusColor="#5e5b5b" layoutX="152.0" layoutY="140.0" prefHeight="31.0" prefWidth="281.0" stylesheets="@Styles/cardoffres.css" unFocusColor="WHITE">
                      <styleClass>
                         <String fx:value="input2" />
                         <String fx:value="label1" />
                      </styleClass>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtlocation" focusColor="#930200" layoutX="152.0" layoutY="310.0" prefHeight="31.0" prefWidth="281.0" styleClass="input2" stylesheets="@Styles/cardoffres.css" unFocusColor="#930200" />
+                  <JFXTextField fx:id="txtlocation" focusColor="#9e9e9e" layoutX="152.0" layoutY="310.0" prefHeight="31.0" prefWidth="281.0" styleClass="input2" stylesheets="@Styles/cardoffres.css" unFocusColor="WHITE" />
                   <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" layoutX="621.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label layoutX="48.0" layoutY="155.0" stylesheets="@Styles/style-AjoutOffre.css" text="Event name" textFill="#930200">
+                  <Label layoutX="48.0" layoutY="163.0" styleClass="fontsFxmlClass" text="Event name" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="txtnbrplace" focusColor="#930200" layoutX="152.0" layoutY="373.0" prefHeight="31.0" prefWidth="281.0" styleClass="input2" stylesheets="@Styles/cardoffres.css" unFocusColor="#930200" />
-                  <Label layoutX="62.0" layoutY="259.0" stylesheets="@Styles/style-AjoutOffre.css" text="End date" textFill="#930200">
+                  <JFXTextField fx:id="txtnbrplace" focusColor="#838282" layoutX="152.0" layoutY="373.0" prefHeight="31.0" prefWidth="281.0" styleClass="input2" stylesheets="@Styles/cardoffres.css" unFocusColor="WHITE" />
+                  <Label layoutX="62.0" layoutY="259.0" styleClass="fontsFxmlClass" text="End date" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="64.0" layoutY="215.0" stylesheets="@Styles/style-AjoutOffre.css" text="Start date" textFill="#930200">
+                  <Label layoutX="64.0" layoutY="215.0" styleClass="fontsFxmlClass" text="Start date" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="63.0" layoutY="318.0" stylesheets="@Styles/style-AjoutOffre.css" text="Location" textFill="#930200">
+                  <Label layoutX="63.0" layoutY="318.0" styleClass="fontsFxmlClass" text="Location" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </AnchorPane>
          </content>
       </ScrollPane>

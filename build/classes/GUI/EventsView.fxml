@@ -8,9 +8,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="750.0" prefWidth="1140.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.EventsViewController">
+<VBox alignment="TOP_CENTER" prefHeight="750.0" prefWidth="1140.0" spacing="10.0" styleClass="mainFxmlClass" stylesheets="@ajouteroffre.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.EventsViewController">
    <children>
-      <Label alignment="TOP_CENTER" maxHeight="-Infinity" text="TOP 3 EVENTS">
+      <Label alignment="TOP_CENTER" maxHeight="-Infinity" styleClass="fontsFxmlClass" stylesheets="@ajouteroffre.css" text="TOP 3 EVENTS">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font name="Arial Black" size="21.0" />
+         </font>
+      </Label>
+      <HBox fx:id="topThreeEventsLayout" maxHeight="-Infinity" prefHeight="220.0" prefWidth="1140.0" styleClass="mainFxmlClass" />
+      <Label maxHeight="-Infinity" prefHeight="24.0" prefWidth="128.0" styleClass="fontsFxmlClass" stylesheets="@ajouteroffre.css" text="ALL EVENTS">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -18,17 +27,8 @@
             <Font name="Century Schoolbook" size="19.0" />
          </font>
       </Label>
-      <HBox fx:id="topThreeEventsLayout" maxHeight="-Infinity" prefHeight="220.0" prefWidth="1140.0" />
-      <Label maxHeight="-Infinity" prefHeight="24.0" prefWidth="128.0" text="ALL EVENTS">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <font>
-            <Font name="Century Schoolbook" size="19.0" />
-         </font>
-      </Label>
-      <Button alignment="TOP_CENTER" depthTest="DISABLE" mnemonicParsing="false" onAction="#goToAddEventForm" text="Add new Event" />
-      <Label fx:id="EventNumberLabel" maxHeight="-Infinity">
+      <Button alignment="TOP_CENTER" depthTest="DISABLE" mnemonicParsing="false" onAction="#goToAddEventForm" styleClass="myButton" stylesheets="@ajouteroffre.css" text="ADD NEW EVENT" textAlignment="CENTER" />
+      <Label fx:id="EventNumberLabel" maxHeight="-Infinity" styleClass="fontsFxmlClass">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -38,7 +38,7 @@
       </Label>
       <ScrollPane prefHeight="393.0" prefWidth="1140.0">
          <content>
-            <HBox fx:id="allEventsLayout" maxHeight="-Infinity" prefHeight="421.0" prefWidth="1140.0" />
+            <HBox fx:id="allEventsLayout" maxHeight="-Infinity" prefHeight="421.0" prefWidth="1140.0" styleClass="mainFxmlClass" />
          </content>
       </ScrollPane>
    </children>

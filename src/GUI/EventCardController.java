@@ -8,6 +8,7 @@ package GUI;
 import entity.Event;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -67,7 +68,7 @@ public class EventCardController implements Initializable {
     private VBox box;
     @FXML
     private Button applyButton;
-    
+
     private int parsedId;
     @FXML
     private AnchorPane eventCardContainer;
@@ -82,10 +83,10 @@ public class EventCardController implements Initializable {
 
     @FXML
     private void apply(MouseEvent event) {
-        
+
         try {
             parsedId = Integer.parseInt(id.getText());
-            serviceEvent.applyToEvent(1, parsedId);
+            serviceEvent.applyToEvent(5, parsedId);
 
             String nbApplyed = "" + serviceEvent.getNombre_participants_byevent(parsedId);
             this.nb_applyed.setText(nbApplyed);
@@ -102,40 +103,23 @@ public class EventCardController implements Initializable {
     @FXML
     private void delete(MouseEvent event) {
         parsedId = Integer.parseInt(id.getText());
-        
+
         try {
             serviceEvent.deleteEvent(parsedId);
             eventCardContainer.setVisible(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        
-       
+
     }
 
     @FXML
-    private void update(MouseEvent event) {
+    private void update(MouseEvent event) throws IOException {
         parsedId = Integer.parseInt(id.getText());
         Event ev = serviceEvent.getEventById(parsedId);
-        
-        try {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("updateEvent.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage current = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        Stage secondaryStage = new Stage();
-        secondaryStage.setScene(new Scene(root1));  
-        secondaryStage.setTitle("Update Event") ; 
-        UpdateEventController controller = fxmlLoader.getController();
-        controller.initData(ev);
-        current.close();
-        secondaryStage.show();
-    } catch(Exception e) {
-        e.printStackTrace();
-    }
-        
 
+        calometre.Calometre.mainController.getMenuPane().getChildren().clear();
+        calometre.Calometre.mainController.loadUpdateEventView("updateEvent.fxml", ev);
     }
 
     public void setData(Event event) throws FileNotFoundException {
@@ -155,21 +139,20 @@ public class EventCardController implements Initializable {
 
         this.nombre_participant.setText("" + event.getNombre_participants());
 
-        Image i = new Image(new FileInputStream("C:\\Users\\wassim\\Desktop\\Pidev3A\\Calometre\\public\\uploads\\Event_images\\"+ event.getImage()));
-        
-        
+        Image i = new Image(new FileInputStream("C:\\Users\\wassim\\Desktop\\Pidev3A\\Calometre\\public\\uploads\\Event_images\\" + event.getImage()));
+
         image.setImage(i);
         box.setStyle("-fx-background-color: " + colors[(int) Math.random() * 7]);
-        
+
         setVisibility();
     }
-    
-    private void setVisibility(){
+
+    private void setVisibility() {
         int parsedId;
         try {
             parsedId = Integer.parseInt(id.getText());
 
-            if (serviceEvent.user_is_applyed_toevent(1, parsedId)) {
+            if (serviceEvent.user_is_applyed_toevent(5, parsedId)) {
                 applyButton.setVisible(false);
             } else {
                 applyButton.setVisible(true);
@@ -178,7 +161,5 @@ public class EventCardController implements Initializable {
             e.printStackTrace();
         }
     }
-    
 
-   
 }
