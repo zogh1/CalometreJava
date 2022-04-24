@@ -24,7 +24,7 @@ public interface productInterface {
 
     public void deleteproduct(int id);
 
-    public void updateproduct(product p);
+    public void updateproduct(product p, category cat);
 
     public List<product> paginationProd();
 

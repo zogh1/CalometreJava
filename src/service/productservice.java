@@ -31,7 +31,7 @@ public class productservice implements productInterface {
     categoryservice cs = new categoryservice();
 
     @Override
-    public void createproduct(product p, category cat) {
+     public void createproduct(product p, category cat) {
 
         //request
         try {
@@ -74,14 +74,7 @@ public class productservice implements productInterface {
 
                 li.add(p);
             }
-            for (int i = 0; i < li.size(); i++) {
-                System.out.println("*********");
-                System.out.println(li.get(i).getPrice());
-                System.out.println(li.get(i).getDescription());
-                System.out.println(li.get(i).getQuantity());
-                System.out.println(li.get(i).getImage());
-
-            }
+    
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -110,14 +103,7 @@ public class productservice implements productInterface {
 
                 li.add(p);
             }
-            for (int i = 0; i < li.size(); i++) {
-                System.out.println("*********");
-                System.out.println(li.get(i).getPrice());
-                System.out.println(li.get(i).getDescription());
-                System.out.println(li.get(i).getQuantity());
-                System.out.println(li.get(i).getImage());
-
-            }
+        
 
         } catch (SQLException ex) {
         }
@@ -145,13 +131,7 @@ public class productservice implements productInterface {
 
                 li.add(p);
             }
-            for (int i = 0; i < li.size(); i++) {
-                System.out.println("*********");
-                System.out.println(li.get(i).getPrice());
-                System.out.println(li.get(i).getDescription());
-                System.out.println(li.get(i).getQuantity());
-                System.out.println(li.get(i).getImage());
-            }
+         
 
         } catch (SQLException ex) {
         }
@@ -179,14 +159,6 @@ public class productservice implements productInterface {
 
                 li.add(p);
             }
-            for (int i = 0; i < li.size(); i++) {
-                System.out.println("*********");
-                System.out.println(li.get(i).getPrice());
-                System.out.println(li.get(i).getDescription());
-                System.out.println(li.get(i).getQuantity());
-                System.out.println(li.get(i).getImage());
-            }
-
         } catch (SQLException ex) {
         }
 
@@ -210,9 +182,9 @@ public class productservice implements productInterface {
     }
 
     @Override
-    public void updateproduct(product p) {
+    public void updateproduct(product p, category cat) {
 
-        String req = "UPDATE `product` SET `name`='" + p.getName() + "',`price`='" + p.getPrice() + "',`description`='" + p.getDescription() + "',`quantity`='" + p.getQuantity() + "',`image`='" + p.getImage() + "' WHERE id='" + p.getId() + "'";
+        String req = "UPDATE `product` SET `name`='" + p.getName() + "',`price`='" + p.getPrice() + "',`description`='" + p.getDescription() + "',`quantity`='" + p.getQuantity() + "',`image`='" + p.getImage() + "' ,`category_id`='" + cat.getId() + "' WHERE id='" + p.getId() + "'";
         try {
             PreparedStatement st = cnx.prepareStatement(req);
 
@@ -268,7 +240,5 @@ public class productservice implements productInterface {
         return stat;
     }
 
-    public void createproduct(category cat, product test) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 }

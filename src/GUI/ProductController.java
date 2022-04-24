@@ -6,15 +6,18 @@
 package GUI;
 
 import calometre.Calometre;
+
 import entity.category;
 import entity.product;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,11 +28,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+
 import service.categoryservice;
 import service.productservice;
+
 
 /**
  *
@@ -54,7 +61,7 @@ public class ProductController implements Initializable {
     @FXML
     private TextField qtyProd;
     @FXML
-    TableView<product> catview;
+    TableView<product> prodview;
     @FXML
     private TableColumn<category, String> prodID;
     @FXML
@@ -67,24 +74,85 @@ public class ProductController implements Initializable {
     private TableColumn<category, String> prodQty;
     @FXML
     private TableColumn<category, String> prodImg;
+    @FXML
+    private TableColumn<category, String> Category;
     ObservableList<product> oblist = FXCollections.observableArrayList();
     product p = null;
+    
+    private void prodview() {
 
-    public void editProd() throws java.io.IOException {
-        String name = nameProd.getText();
-        String price = PriceProd.getText();
-        String desc = descProd.getText();
-        String qty = qtyProd.getText();
-        p = catview.getSelectionModel().getSelectedItem();
-        p.setId(p.getId());
-        p.setName(name);
+        // TODO
+        List<product> li = fn.getallproduct();
+        li.forEach(e -> {
+            oblist.add(e);
+            prodID.setCellValueFactory(new PropertyValueFactory<>("id"));
+            prodName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            prodPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+            prodDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
+            prodQty.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+            Category.setCellValueFactory(new PropertyValueFactory<>("category_id"));
+          
+       
+            //prodImg.setCellValueFactory(new PropertyValueFactory<>("image"));
+            
+        });
+        
+ /*Category.setCellValueFactory(new PropertyValueFactory<>("category_id"),ObservableValue<String>(){
 
-        fn.updateproduct(p);
-        Parent root = FXMLLoader.load(getClass().getResource("Product.fxml"));
+                @Override
+                public ObservableValue<String> call(CellDataFeatures<Enseignant, String> param) {
+                    return new SimpleStringProperty(param.getValue().getMatiere().getIntitule());
+                }
+            });*/
+        prodview.setItems(oblist);
+
+    }
+    
+    
+    private void refreshtables() throws java.io.IOException{
+    Parent root = FXMLLoader.load(getClass().getResource("Products.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+}
+    public void GoToCat() throws java.io.IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("addcategory.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
     }
+    public void GoToStats() throws java.io.IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("statProduits.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+    }
+    public void editProd() throws java.io.IOException {
+        String selected = categ.getValue().toString();
+        category catname = fn1.findByName(selected);
+        String name = nameProd.getText();
+        String price = PriceProd.getText();
+        String description = descProd.getText();
+        String qty = qtyProd.getText();
+        int x = Integer.parseInt(catname.getName());
+        int prix= Integer.parseInt(price);
+        int quantity= Integer.parseInt(qty);
+        p = prodview.getSelectionModel().getSelectedItem();
+        p.setId(p.getId());
+        p.setName(name);
+        p.setPrice(prix);
+        p.setDescription(description);
+        p.setQuantity(quantity);
+        cat.setId(x);
+        fn.updateproduct(p, cat);
+        this.refreshtables();
+    }
+public void deleteprod() throws java.io.IOException {
+        
+        p = prodview.getSelectionModel().getSelectedItem();
+        p.setId(p.getId());
+        
 
+        fn.deleteproduct(p.getId());
+        this.refreshtables();
+    }
     @FXML
     public String uploadImage() throws java.io.IOException {
         FileChooser fileChooser = new FileChooser();
@@ -109,30 +177,41 @@ public class ProductController implements Initializable {
         return ProductController.Picture;
     }
 
-    public void addProduct() {
-        String categorie = categ.getValue().toString();
+    public void addProduct() throws IOException {
+       
+        String selected = categ.getValue().toString();
+        category catname = fn1.findByName(selected);
         String name = nameProd.getText();
         String price = PriceProd.getText();
         String description = descProd.getText();
         String qty = qtyProd.getText();
-        String selected = categ.getValue().toString();
+       
+        int x = Integer.parseInt(catname.getName());
+      System.out.println(catname);
+       // int x = catname;
+        //System.out.println(x);
+        int prix= Integer.parseInt(price);
+        int quantity= Integer.parseInt(qty);
+        
+       
 
-        int id = Integer.parseInt(selected);
-
-        if (name.isEmpty() ||price.isEmpty()|| description.isEmpty() || qty.isEmpty()) {
+        if ( name.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("Please fill all required fields");
             alert.showAndWait();
         } else {
+           
             test.setName(name);
-            test.setPrice(price);
+            test.setPrice(prix);
             test.setDescription(description);
-
+            test.setQuantity(quantity);
             test.setImage(Picture);
-            cat.setId(id);
-            fn.createproduct(cat, test);
+            cat.setId(x);
+            fn.createproduct(test,cat );
+           
         }
+        this.refreshtables();
 
 
     }
@@ -141,11 +220,12 @@ public class ProductController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-   List<category> listCateg = cat.readType();
+   List<category> listCateg = fn1.getallcategory();
         for (category list : listCateg) {
-            int id = list.getId();
+            String id = list.getName();
             categ.getItems().add(id);
         }
+        this.prodview();
     }
 
 }

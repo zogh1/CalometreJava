@@ -34,8 +34,8 @@ public class StatProduitsController implements Initializable {
 
     productservice ps = new productservice();
 
-    public void goTopPROFILE() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
+    public void GoToCat() throws java.io.IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("addcategory.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
     }

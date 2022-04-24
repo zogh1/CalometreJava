@@ -49,19 +49,30 @@ public class CategoryController implements Initializable {
     categoryservice fn = new categoryservice();
     category cat = new category();
     category c = null;
-    
-    public void edit() throws IOException{
-    String name = nameField.getText();
-    c = catview.getSelectionModel().getSelectedItem();
-    c.setId(c.getId());
-    c.setName(name);
-    
-    fn.updatecategory(c);
+
+    public void edit() throws IOException {
+        String name = nameField.getText();
+        c = catview.getSelectionModel().getSelectedItem();
+        c.setId(c.getId());
+        c.setName(name);
+
+        fn.updatecategory(c);
+        this.refreshtables();
+    }
+
+    public void deleteCat() throws IOException {
+
+        c = catview.getSelectionModel().getSelectedItem();
+        c.setId(c.getId());
+        fn.deletecategory(c.getId());
+
+         this.refreshtables();
+    }
+private void refreshtables() throws IOException{
     Parent root = FXMLLoader.load(getClass().getResource("addcategory.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
-    }
-
+}
     private void catview() {
 
         // TODO
@@ -79,6 +90,12 @@ public class CategoryController implements Initializable {
     }
 
     //thez lel products
+    public void GoToProd() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Products.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+    }
+
     public void GoToStats() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("statProduits.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
@@ -86,7 +103,7 @@ public class CategoryController implements Initializable {
     }
 
     @FXML
-    private void addcategory() {
+    private void addcategory() throws IOException {
         String name = nameField.getText();
 
         if (name.isEmpty()) {
@@ -104,6 +121,8 @@ public class CategoryController implements Initializable {
 
             }
         }
+        this.refreshtables();
+        
     }
 
     @Override

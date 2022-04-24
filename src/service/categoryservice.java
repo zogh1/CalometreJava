@@ -39,10 +39,58 @@ public class categoryservice implements categoryInterface {
                         rs.getInt(1),
                         rs.getString(2));
             }
+            System.out.println(u.getId());
+        System.out.println(u.getName());
         } catch (Exception e) {
         }
         return u;
+      
     }
+   
+    @Override
+    public category findByName(String name) {
+        category u = null;
+        try {
+            String req = "SELECT id FROM category WHERE name=?";
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, name);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                u = new category(
+                        rs.getString(1));
+            }
+            System.out.println(u.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return u;
+    }
+   /*public category findByName(String name) {
+        List<category> li = new ArrayList();
+
+        try {
+            String req = "SELECT id FROM category WHERE name= '" + name + "'";
+            Statement s = cnx.createStatement();
+
+            ResultSet rs = s.executeQuery(req);
+            while (rs.next()) {
+                category p = new category();
+                 p.setId(rs.getInt("id"));
+                 
+                li.add(p);
+            }
+            for (int i = 0; i < li.size(); i++) {
+              System.out.println(li.get(i).getId());
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return li;
+
+    }*/
+    
     
     
     @Override
@@ -55,7 +103,7 @@ public class categoryservice implements categoryInterface {
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, c.getName());
             st.executeUpdate();
-            System.out.println("Categorie ajoutée avec succes.");
+           
             isadded=true;
 
         } catch (SQLException ex) {
@@ -79,12 +127,7 @@ public class categoryservice implements categoryInterface {
 
                 li.add(c);
             }
-            for (int i = 0; i < li.size(); i++) {
-                System.out.println("*********");
-                System.out.println(li.get(i).getName());
-
-            }
-
+          
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

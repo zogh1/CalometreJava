@@ -16,10 +16,10 @@
          <font>
             <Font size="22.0" />
          </font></Label>
-      <Button alignment="CENTER" layoutX="772.0" layoutY="516.0" mnemonicParsing="false" onAction="#addcategory" prefHeight="38.0" prefWidth="525.0" style="-fx-background-color: #FF0500;" text="Delete" />
+      <Button alignment="CENTER" layoutX="772.0" layoutY="516.0" mnemonicParsing="false" onAction="#deleteCat" prefHeight="38.0" prefWidth="525.0" style="-fx-background-color: #FF0500;" text="Delete" />
       <Button alignment="CENTER" layoutX="638.0" layoutY="268.0" mnemonicParsing="false" onAction="#edit" prefHeight="45.0" prefWidth="113.0" style="-fx-background-color: #FFDA5C;" text="Edit" />
-      <Button alignment="CENTER" layoutX="505.0" layoutY="152.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="64.0" text="&lt;" />
-      <Button alignment="CENTER" layoutX="697.0" layoutY="153.0" mnemonicParsing="false" onAction="#addcategory" prefHeight="45.0" prefWidth="64.0" text="&gt;" />
+      <Button alignment="CENTER" layoutX="505.0" layoutY="152.0" mnemonicParsing="false" onAction="#GoToProd" prefHeight="45.0" prefWidth="64.0" text="&lt;" />
+      <Button alignment="CENTER" layoutX="697.0" layoutY="153.0" mnemonicParsing="false" onAction="#GoToProd" prefHeight="45.0" prefWidth="64.0" text="&gt;" />
       <TableView fx:id="catview" layoutX="774.0" layoutY="148.0" prefHeight="360.0" prefWidth="524.0">
         <columns>
           <TableColumn fx:id="catID" prefWidth="75.0" text="ID" />

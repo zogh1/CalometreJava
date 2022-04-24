@@ -23,5 +23,6 @@ public interface categoryInterface {
     public void updatecategory(category c);
     
     public category findById(int id);
+    public category findByName(String name);
 
 }
