@@ -22,9 +22,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -46,7 +48,7 @@ import util.session;
  *
  * @author Souhail
  */
-public class ChangePasswordController implements Initializable {
+public class SettingsController implements Initializable {
 
     @FXML
     private VBox vBoxMenu;
@@ -54,6 +56,8 @@ public class ChangePasswordController implements Initializable {
     private ImageView UserProfilePicutre;
     @FXML
     private Label UserFirstName;
+    @FXML
+    private Button DeleteAccountButton;
 
     private final Background focusBackground = new Background(new BackgroundFill(Color.web("#E4E4E4"), CornerRadii.EMPTY, Insets.EMPTY));
     private final Background unfocusBackground = new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY));
@@ -79,27 +83,6 @@ public class ChangePasswordController implements Initializable {
 
     }
 
-    public void LinkToSettings() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("settings.fxml"));
-        Calometre.primaryStage.setScene(new Scene(root));
-        Calometre.primaryStage.show();
-
-    }
-
-    public void LinkToConditions() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("conditions.fxml"));
-        Calometre.primaryStage.setScene(new Scene(root));
-        Calometre.primaryStage.show();
-
-    }
-
-    public void LinkToProfile() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
-        Calometre.primaryStage.setScene(new Scene(root));
-        Calometre.primaryStage.show();
-
-    }
-
     @FXML
     public void selectMenueItem(MouseEvent event) {
         HBox hb = (HBox) event.getSource();
@@ -119,58 +102,105 @@ public class ChangePasswordController implements Initializable {
         }
     }
 
-    @FXML
-    private void test(MouseEvent event) {
-        try {
-            loadFxml("changepassword.fxml");
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void LinkToChangePassword() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("changepassword.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
     }
 
-    @FXML
-    private PasswordField oldpasswordField;
-    @FXML
-    private PasswordField newpasswordField;
-    @FXML
-    private PasswordField confirmpasswordField;
+    public void LinkToConditions() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("conditions.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
 
+    }
+
+    public void LinkToProfile() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
+    @FXML
+    private TextField UserEmail;
+    @FXML
+    private TextField UserFirstName1;
+    @FXML
+    private TextField UserLastName;
+    @FXML
+    private TextField UserPhoneNumber;
+
+    public void DisplayInfo() {
+
+    }
     userInterface fn = new userservice();
     user test = new user();
 
-    @FXML
-    private void changepassword() {
-        String opass = oldpasswordField.getText();
-        String npass = newpasswordField.getText();
-        String cpass = confirmpasswordField.getText();
+    public void DeleteAccount() throws IOException {
 
-        if (opass.isEmpty() || npass.isEmpty() || cpass.isEmpty()) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setHeaderText("null");
-            alert.setContentText("Please fill all required fields");
-            alert.showAndWait();
-        } else if (!npass.equals(cpass)) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setHeaderText("null");
-            alert.setContentText("password don't match");
-            alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Êtes-vous sûr de vouloir supprimer votre compte?");
 
-        } else if (newpasswordField.getText().length() < 8) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setHeaderText("null");
-            alert.setContentText("le mdp doit conteir plus que 8 characters");
-            alert.showAndWait();
+        ButtonType okButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
+        ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
 
-        } else {
+        alert.getButtonTypes().setAll(okButton, noButton);
+        alert.showAndWait().ifPresent(type -> {
+            if (type == ButtonType.OK) {
+                try {
+                    fn.deleteuser(session.getUser().getId());
+                    Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                    Calometre.primaryStage.setScene(new Scene(root));
+                    Calometre.primaryStage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-            fn.updatePassword(opass, npass);
-        }
+            } else if (type == ButtonType.NO) {
+            }
+        });
 
     }
+
+    public void UpdateInfo() {
+        String phone_number = UserPhoneNumber.getText();
+        int number = Integer.parseInt(phone_number);
+        String mail = UserEmail.getText();
+
+        String fname = UserFirstName1.getText();
+        String lname = UserLastName.getText();
+
+        test.setEmail(mail);
+        test.setFirstname(fname);
+        test.setLastname(lname);
+        test.setPhonenumber(number);
+        fn.updateuserinfo(test);
+
+    }
+
+    ;
+
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.showProfile();
 
+        String FirstName = session.getUser().getFirstname();
+        String Email = session.getUser().getEmail();
+        String LastName = session.getUser().getLastname();
+        int PhoneNumber = session.getUser().getPhonenumber();
+
+        String PN = String.valueOf(PhoneNumber);
+        UserEmail.setText(Email);
+
+        UserFirstName1.setText(FirstName);
+        UserLastName.setText(LastName);
+
+        UserPhoneNumber.setText(PN);
     }
+
 }

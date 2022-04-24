@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import service.userservice;
 
 /**
@@ -80,12 +81,11 @@ public class UsersListController implements Initializable {
 
     private void userList(int i, int j) {
 
+        ImageView imageView = new ImageView(getClass().getResource("..\\images\\icons8-next-page-100.png").toExternalForm());
+        NextPage.setGraphic(imageView);
+        ImageView imageViewv = new ImageView(getClass().getResource("..\\images\\icons8-next-page-99.png").toExternalForm());
+        PreviousPage.setGraphic(imageViewv);
         int testEndPage = fn.getRowCount() - UsersListController.row;
-//        System.out.println("1 : " + UsersListController.row);
-//        System.out.println("2 : " + this.size);
-//        System.out.println("3 : " + testEndPage);
-//        System.out.println("4 : " + fn.getRowCount());
-//        System.err.println("*************************");
 
         if (this.size >= fn.getRowCount() || this.size >= testEndPage) {
             NextPage.setDisable(true);

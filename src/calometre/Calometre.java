@@ -5,11 +5,13 @@
  */
 package calometre;
 
+import entity.user;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import service.userservice;
 
 /**
  *
@@ -21,8 +23,13 @@ public class Calometre extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        userservice us = new userservice();
+        user test = new user();
+        test.setEmail("crinnxx@gmail.com");
+        test.setPassword("password");
+        us.login(test);
         Calometre.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/signup.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/profile.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -98,7 +98,13 @@ public class LoginController implements Initializable {
             test.setPassword(pass);
             fn.login(test);
 
-            if (session.getUser().getRoles().contains("Admin")) {
+            if (fn.isUserBanned(test)) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setHeaderText("null");
+                alert.setContentText("This account is banned");
+                alert.showAndWait();
+                session.setUser(null);
+            } else if (session.getUser().getRoles().contains("Admin")) {
                 Parent root = FXMLLoader.load(getClass().getResource("userslist.fxml"));
                 Calometre.primaryStage.setScene(new Scene(root));
                 Calometre.primaryStage.show();

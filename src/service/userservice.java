@@ -173,11 +173,42 @@ public class userservice implements userInterface {
     @Override
     public void updateuser(user u) {
 
-        String req = "UPDATE `user` SET `password`='" + u.getPassword() + "',`email`='" + u.getEmail() + "',`roles`='" + u.getRoles() + "',`is_verified`=0,`firstname`='" + u.getFirstname() + "',`lastname`='" + u.getLastname() + "',`phonenumber`='" + u.getPhonenumber() + "',`profile_picture`='" + u.getProfile_picture() + "',`isbanned`=0,`country_code`='" + u.getCountry_code() + "' WHERE id='" + u.getId() + "'";
+        String req = "UPDATE `user` SET `password`='" + u.getPassword() + "',`email`='" + u.getEmail() + "',`roles`='" + u.getRoles() + "',`is_verified`=0,`firstname`='" + u.getFirstname() + "',`lastname`='" + u.getLastname() + "',`phonenumber`='" + u.getPhonenumber() + "',`profile_picture`='" + u.getProfile_picture() + "',`isbanned`=0,`country_code`='" + u.getCountry_code() + "' WHERE id='" + session.getUser().getId() + "'";
         try {
             PreparedStatement st = cnx.prepareStatement(req);
 
             st.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("error");
+        }
+    }
+
+    @Override
+    public void updateuserinfo(user u) {
+
+        String req = "UPDATE `user` SET `password`='" + u.getPassword() + "',`email`='" + u.getEmail() + "',`roles`='" + u.getRoles() + "',`is_verified`=0,`firstname`='" + u.getFirstname() + "',`lastname`='" + u.getLastname() + "',`phonenumber`='" + u.getPhonenumber() + "',`profile_picture`='" + u.getProfile_picture() + "',`isbanned`=0,`country_code`='" + u.getCountry_code() + "' WHERE id='" + session.getUser().getId() + "'";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+
+            st.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("error");
+        }
+    }
+
+    @Override
+    public void updateProfilePicture(user u) {
+
+        String req = "UPDATE `user` SET `profile_picture`='" + u.getProfile_picture() + "' WHERE id='" + session.getUser().getId() + "'";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+
+            st.executeUpdate();
+
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("error");
@@ -357,6 +388,7 @@ public class userservice implements userInterface {
 
             ps.executeUpdate(req);
             System.out.println("user banned");
+            this.logout();
 
         } catch (SQLException e) {
         }
@@ -606,6 +638,17 @@ public class userservice implements userInterface {
         }
         return captchaStrBuffer.toString();
 
+    }
+
+    @Override
+
+    public boolean isUserBanned(user user) {
+        boolean isBanned = false;
+        if (session.getUser().isIsbanned()) {
+            isBanned = true;
+            System.err.println("banned");
+        }
+        return isBanned;
     }
 
 }

@@ -33,6 +33,10 @@ public interface userInterface {
 
     public void updateuser(user u);
 
+    public void updateuserinfo(user u);
+
+    public void updateProfilePicture(user u);
+
     public void deleteuser(int id);
 
     public boolean verifyEmailExistance(String email);
@@ -68,6 +72,8 @@ public interface userInterface {
     public int countBannedAccounts();
 
     public String getRole();
+
+    public boolean isUserBanned(user user);
 
     public String CreateCaptchaValue();
 

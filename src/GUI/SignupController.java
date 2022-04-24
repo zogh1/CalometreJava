@@ -43,12 +43,16 @@ public class SignupController implements Initializable {
     private static String CurrentProfilePicture;
     private static String GeneratedCode;
 
+    private final int totaleattempts = 5;
+    private static int nbOfClicks = 0;
+
     public void linkToLoginPage() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
 
     }
+
     @FXML
     private Label CaptchaCode;
     @FXML
@@ -105,8 +109,17 @@ public class SignupController implements Initializable {
     @FXML
 
     private void ChangeCode() {
-        SignupController.GeneratedCode = fn.CreateCaptchaValue();
-        CaptchaCode.setText(SignupController.GeneratedCode);
+
+        if (SignupController.nbOfClicks < this.totaleattempts) {
+            SignupController.GeneratedCode = fn.CreateCaptchaValue();
+            CaptchaCode.setText(SignupController.GeneratedCode);
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("null");
+            alert.setContentText("No More Attempts");
+            alert.showAndWait();
+        }
+        SignupController.nbOfClicks = SignupController.nbOfClicks + 1;
 
     }
 
@@ -159,6 +172,9 @@ public class SignupController implements Initializable {
             test.setRoles(role);
             test.setProfile_picture(CurrentProfilePicture);
             fn.createuser(test);
+            Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
+            Calometre.primaryStage.setScene(new Scene(root));
+            Calometre.primaryStage.show();
         }
 
     }
@@ -171,10 +187,10 @@ public class SignupController implements Initializable {
         SignupController.GeneratedCode = fn.CreateCaptchaValue();
         CaptchaCode.setText(SignupController.GeneratedCode);
         MotionBlur mb = new MotionBlur();
-        mb.setRadius(8.0f);
+        mb.setRadius(7.0f);
         mb.setAngle(30.0f);
 
+//        CaptchaCode.setCache(true);
         CaptchaCode.setEffect(mb);
-
     }
 }
