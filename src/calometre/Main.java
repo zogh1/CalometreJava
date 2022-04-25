@@ -22,7 +22,6 @@ public class Main {
         // TODO code application logic here
         userInterface us = new userservice();
         user test = new user();
-        us.sendresetCode("crinnxx@gmail.com");
 
 //        test.setPassword("password");
 //        test.setEmail("souhail.krissaane@esprit.tn");

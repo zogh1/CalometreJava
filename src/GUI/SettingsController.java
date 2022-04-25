@@ -12,8 +12,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,9 +22,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -139,58 +139,43 @@ public class SettingsController implements Initializable {
 
     public void DeleteAccount() throws IOException {
 
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setHeaderText("Êtes-vous sûr de vouloir supprimer votre compte ?");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Êtes-vous sûr de vouloir supprimer votre compte?");
 
-        ButtonType buttonTypeOne = new ButtonType("Oui");
+        ButtonType okButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
+        ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
 
-        ButtonType buttonTypeCancel = new ButtonType("Non", ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(okButton, noButton);
+        alert.showAndWait().ifPresent(type -> {
+            if (type == ButtonType.OK) {
+                try {
+                    fn.deleteuser(session.getUser().getId());
+                    Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                    Calometre.primaryStage.setScene(new Scene(root));
+                    Calometre.primaryStage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeOne) {
-            fn.deleteuser(session.getUser().getId());
-            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-            Calometre.primaryStage.setScene(new Scene(root));
-            Calometre.primaryStage.show();
-        } else {
-            // ... user chose CANCEL or closed the dialog
-        }
+            } else if (type == ButtonType.NO) {
+            }
+        });
 
     }
 
-    public void UpdateInfo() throws IOException {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+    public void UpdateInfo() {
+        String phone_number = UserPhoneNumber.getText();
+        int number = Integer.parseInt(phone_number);
+        String mail = UserEmail.getText();
 
-        alert.setHeaderText("Êtes-vous sûr de changer vos information? ");
+        String fname = UserFirstName1.getText();
+        String lname = UserLastName.getText();
 
-        ButtonType buttonTypeOne = new ButtonType("Oui");
-
-        ButtonType buttonTypeCancel = new ButtonType("Non", ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeOne) {
-            String phone_number = UserPhoneNumber.getText();
-            int number = Integer.parseInt(phone_number);
-            String mail = UserEmail.getText();
-
-            String fname = UserFirstName1.getText();
-            String lname = UserLastName.getText();
-
-            test.setEmail(mail);
-            test.setFirstname(fname);
-            test.setLastname(lname);
-            test.setPhonenumber(number);
-            fn.updateuserinfo(test);
-            Parent root = FXMLLoader.load(getClass().getResource("setings.fxml"));
-            Calometre.primaryStage.setScene(new Scene(root));
-            Calometre.primaryStage.show();
-        } else {
-            // ... user chose CANCEL or closed the dialog
-        }
+        test.setEmail(mail);
+        test.setFirstname(fname);
+        test.setLastname(lname);
+        test.setPhonenumber(number);
+        fn.updateuserinfo(test);
 
     }
 

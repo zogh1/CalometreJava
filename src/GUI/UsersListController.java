@@ -8,13 +8,10 @@ package GUI;
 import calometre.Calometre;
 import entity.user;
 import interfacee.userInterface;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,15 +20,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.ImageViewBuilder;
 import service.userservice;
 
 /**
@@ -53,8 +45,6 @@ public class UsersListController implements Initializable {
     private TableColumn<user, Integer> userId;
     @FXML
     private TableColumn<user, String> userFirstName;
-    @FXML
-    private TableColumn<user, Image> userProfilePicture;
 
     @FXML
     private TableColumn<user, String> userLastName;
@@ -124,33 +114,9 @@ public class UsersListController implements Initializable {
             userCountryCode.setCellValueFactory(new PropertyValueFactory<>("country_code"));
             userPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phonenumber"));
             userBanStatus.setCellValueFactory(new PropertyValueFactory<>("isbanned"));
-            userProfilePicture.setCellValueFactory(new PropertyValueFactory<>("profile_picture"));
 
         }
         );
-        userProfilePicture.setCellValueFactory((CellDataFeatures<user, Image> p) -> {
-            String userImage = p.getValue().getProfile_picture();
-            FileInputStream inputstream = null;
-            try {
-                inputstream = new FileInputStream("C:\\Users\\Souhail\\Documents\\images\\" + userImage);
-            } catch (FileNotFoundException ex) {
-            }
-
-            return new SimpleObjectProperty<>(new Image(inputstream, 100, 100, false, false));
-        });
-        userProfilePicture.setStyle("-fx-alignment:center");
-        userProfilePicture.setCellFactory((TableColumn<user, Image> p) -> new TableCell<user, Image>() {
-            @Override
-            protected void updateItem(Image i, boolean empty) {
-                super.updateItem(i, empty);
-                setText(null);
-                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                double width = 60;
-                double height = 60;
-                ImageView imageView = (i == null || empty) ? null : ImageViewBuilder.create().image(i).build();
-                setGraphic(imageView);
-            }
-        });
 
 //
         usersList.setItems(oblist);
@@ -174,13 +140,6 @@ public class UsersListController implements Initializable {
         Calometre.primaryStage.show();
 
 //
-    }
-
-    public void LinkToStats() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("userstats.fxml"));
-        Calometre.primaryStage.setScene(new Scene(root));
-        Calometre.primaryStage.show();
-
     }
 
     @Override
