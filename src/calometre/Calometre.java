@@ -26,10 +26,10 @@ public class Calometre extends Application {
         userservice us = new userservice();
         user test = new user();
         test.setEmail("crinnxx@gmail.com");
-        test.setPassword("password");
+        test.setPassword("Souhailacc99**");
         us.login(test);
         Calometre.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/profile.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/login.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

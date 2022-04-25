@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,7 +9,7 @@
 
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UserStatsController">
     <children>
-        <AnchorPane layoutX="387.0" layoutY="46.0" prefHeight="138.0" prefWidth="343.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
+        <AnchorPane layoutX="417.0" layoutY="46.0" prefHeight="138.0" prefWidth="160.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
             <children>
                 <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="288.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -22,7 +23,7 @@
                 </Label>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="763.0" layoutY="49.0" prefHeight="138.0" prefWidth="336.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
+        <AnchorPane layoutX="790.0" layoutY="49.0" prefHeight="138.0" prefWidth="336.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
             <children>
                 <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="288.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -36,7 +37,7 @@
                 </Label>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="1156.0" layoutY="42.0" prefHeight="138.0" prefWidth="336.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
+        <AnchorPane layoutX="1174.0" layoutY="42.0" prefHeight="138.0" prefWidth="336.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
             <children>
                 <Label fx:id="coachCount" layoutX="15.0" layoutY="40.0" prefHeight="51.0" prefWidth="271.0" text="Label">
                     <font>
@@ -50,7 +51,7 @@
                 </ImageView>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="1541.0" layoutY="42.0" prefHeight="138.0" prefWidth="343.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
+        <AnchorPane layoutX="1552.0" layoutY="42.0" prefHeight="138.0" prefWidth="343.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
             <children>
                 <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="288.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -64,5 +65,29 @@
                 </Label>
             </children>
         </AnchorPane>
+      <AnchorPane layoutX="-15.0" layoutY="-77.0" prefHeight="1170.0" prefWidth="412.0" style="-fx-background-color: #0f2b44;">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="40.0" layoutX="58.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8-select-users-100.png" />
+               </image>
+            </ImageView>
+            <Hyperlink layoutX="112.0" layoutY="147.0" onAction="#LinkToUsersList" prefHeight="48.0" prefWidth="224.0" text="Users List" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="27.0" />
+               </font>
+            </Hyperlink>
+            <ImageView fitHeight="48.0" fitWidth="40.0" layoutX="57.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8-combo-chart-100.png" />
+               </image>
+            </ImageView>
+            <Hyperlink layoutX="111.0" layoutY="260.0" prefHeight="48.0" prefWidth="224.0" style="-fx-border-color: #42b9be; -fx-border-width: 0 0 1 0;" text="Stats" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="27.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>
