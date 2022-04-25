@@ -17,7 +17,7 @@ public class Reponse {
 
     @Override
     public String toString() {
-        return "Reponse{" + "id=" + id + ", date=" + date + ", repondre_id=" + repondre_id + ", reponse=" + reponse + '}';
+        return " date:" + date + ", repondre_id:" + repondre_id + ", **" + reponse + "";
     }
 
     public Reponse(int id, String date, int repondre_id, String reponse) {

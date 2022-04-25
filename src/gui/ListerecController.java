@@ -5,9 +5,31 @@
  */
 package GUI;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import entity.Reclamation;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +47,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -46,6 +69,13 @@ import javafx.stage.Window;
 import javax.swing.JOptionPane;
 import service.ServiceReclamation;
 
+
+
+import java.sql.Connection;
+import java.sql.Statement;
+import java.util.Date;
+import util.connexion;
+
 /**
  * FXML Controller class
  *
@@ -65,8 +95,9 @@ public class ListerecController implements Initializable {
     private final Border border = new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, null, null));
 
     private HBox selectedMenuItem = null;
-    @FXML
     private AnchorPane menuPane;
+    @FXML
+    private Button fpdf;
 
     /**
      * Initializes the controller class.
@@ -211,6 +242,112 @@ public class ListerecController implements Initializable {
             Logger.getLogger(ListerecController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @FXML
+    private void boutonpdf(ActionEvent event) throws ClassNotFoundException, SQLException, DocumentException {
+       try {
+       Class.forName("com.mysql.jdbc.Driver");
+     Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Calometre", "root", "");
+      PreparedStatement pt = con.prepareStatement("select * from Reclamation");
+            ResultSet rs = pt.executeQuery();
+            
+                       /* Step-2: Initialize PDF documents - logical objects */
+
+                       Document my_pdf_report = new Document();
+                       //OutputStream file = new FileOutputStream(new File("ProductReport.pdf"));
+                    
+                       my_pdf_report.open();  
+                       my_pdf_report.add(new Paragraph(new Date().toString())); 
+                       my_pdf_report.add(new Paragraph("calometre"));
+                       my_pdf_report.add(new Paragraph("Listes des reclamation"));
+
+                       PdfWriter.getInstance(my_pdf_report, new FileOutputStream("pdf_report_from_sql_using_java.pdf"));
+                       
+                        my_pdf_report.open();  
+                       my_pdf_report.add(new Paragraph(new Date().toString()));
+//                            Image img = Image.getInstance("c:/6.png");
+//                            my_pdf_report.add(img);
+                       my_pdf_report.add(new Paragraph("Listes des reclamation"));
+                             //Add Image
+//		       Image image1 = Image.getInstance("filmouk.png");
+//                       image1.scaleAbsolute(210, 210);
+//                       my_pdf_report.add(image1);
+                       my_pdf_report.addCreationDate();
+              
+                       
+                       //we have four columns in our table
+                       PdfPTable my_report_table = new PdfPTable((5));
+                       my_report_table.setWidthPercentage(100); //Width 100%
+			my_report_table.setSpacingBefore(10f); //Space before table
+			my_report_table.setSpacingAfter(10f); //Space after table
+                             
+                       //create a cell object
+                       PdfPCell table_cell;
+                       
+                       
+                                       table_cell=new PdfPCell(new Phrase(" Id"));
+                                      table_cell.setBackgroundColor(BaseColor.ORANGE);
+                                       my_report_table.addCell(table_cell);
+                                       table_cell=new PdfPCell(new Phrase("Date"));
+                                       table_cell.setBackgroundColor(BaseColor.ORANGE);
+                                       my_report_table.addCell(table_cell);
+                                       table_cell=new PdfPCell(new Phrase("Type"));
+                                       table_cell.setBackgroundColor(BaseColor.ORANGE);
+                                       my_report_table.addCell(table_cell);
+                                       table_cell=new PdfPCell(new Phrase("Email"));
+                                       table_cell.setBackgroundColor(BaseColor.ORANGE);
+                                       my_report_table.addCell(table_cell);
+                                       table_cell=new PdfPCell(new Phrase("Message"));
+                                       table_cell.setBackgroundColor(BaseColor.ORANGE);
+                                       my_report_table.addCell(table_cell);
+                                       
+                                       
+
+                                      while(rs.next()){
+                                      
+                                       String id= rs.getString("id");
+                                       table_cell=new PdfPCell(new Phrase(id));
+                                       my_report_table.addCell(table_cell);
+                                       
+                                       String Date=rs.getString("Date");
+                                       table_cell=new PdfPCell(new Phrase(Date));
+                                       my_report_table.addCell(table_cell);
+                                       
+                                       String type=rs.getString("type");
+                                       table_cell=new PdfPCell(new Phrase(type));
+                                       my_report_table.addCell(table_cell);
+                                       
+                                       String email=rs.getString("email");
+                                       table_cell=new PdfPCell(new Phrase(email));
+                                       my_report_table.addCell(table_cell);
+                                       
+                                        String message = rs.getString("message");
+                                       table_cell=new PdfPCell(new Phrase(message ));
+                                       my_report_table.addCell(table_cell);
+                                       
+                                      
+                       }
+                       /* Attach report table to PDF */
+                       
+                       my_pdf_report.add(my_report_table); 
+                       
+             System.out.println(my_pdf_report);
+                       my_pdf_report.close();
+                       JOptionPane.showMessageDialog(null, "imprimer avec succes");
+
+                       /* Close all DB related objects */
+                       rs.close();
+                       pt.close(); 
+                       con.close();               
+
+
+       } catch (FileNotFoundException e) {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+       }
+    }
+
+    }
     
     
-}
+

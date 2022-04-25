@@ -6,6 +6,7 @@
 package GUI;
 
 import entity.Reclamation;
+import entity.user;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -29,6 +30,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 import service.ServiceReclamation;
+import service.userservice;
+import util.session;
 
 /**
  *
@@ -50,12 +53,19 @@ public class ReclamationController implements Initializable {
     @FXML
     private Button btnajouter;
     
+    userservice  us = new userservice();
+user u = new user();    
     
     ServiceReclamation fn = new ServiceReclamation();
     Reclamation rec = new Reclamation();
     
     @FXML
     private void ajouterreclamation() throws IOException{ 
+      
+          //if (session.getUser().getRoles().contains("Admin"))
+        //{
+        
+        
     String mail= tfemail.getText();
     String type=tftype.getValue().toString();
     String message=tfmessage.getText();
@@ -68,6 +78,7 @@ public class ReclamationController implements Initializable {
             alert.showAndWait();
         }
     else{
+        
     
     rec.setEmail(mail);
        rec.setMessage(message);
@@ -85,7 +96,7 @@ public class ReclamationController implements Initializable {
     }catch (IOException ex) {
             Logger.getLogger(ModifierReclamationController.class.getName()).log(Level.SEVERE, null, ex);
         }}
-    
+        //}
     
     
     }

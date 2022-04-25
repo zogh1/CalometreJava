@@ -31,6 +31,7 @@ import static javafx.scene.input.KeyCode.T;
 import javax.swing.JOptionPane;
 import service.ServiceReclamation;
 import service.ServiceReponse;
+import util.session;
 
 /**
  * FXML Controller class
@@ -56,10 +57,13 @@ public class ReponseController implements Initializable {
         ObservableList<Reponse> data=FXCollections.observableArrayList(lrp);
         listerep.setItems(data);
                 
-    }    
+    }
 
     @FXML
     private void ajouterReponse(ActionEvent event) {
+     
+        
+        
         try {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("AjoutReponse.fxml"));
             Parent root=loader.load();

@@ -5,11 +5,15 @@
  */
 package calometre;
 
+import entity.Reclamation;
+import entity.user;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import service.ServiceReclamation;
+import service.userservice;
 
 /**
  *
@@ -18,11 +22,22 @@ import javafx.stage.Stage;
 public class Calometre extends Application {
 
     public static Stage primaryStage;
+    //aatini code mtaa ajout reclamaion
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        ServiceReclamation fn = new ServiceReclamation();
+        Reclamation rec = new Reclamation();
+
+        userservice us = new userservice();
+        user u = new user();
+//        u.setEmail("rym.baccouri@esprit.tn");
+//        u.setPassword("calometre222");
+//        us.login(u);
+        
+
         Calometre.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/listerec.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/login.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

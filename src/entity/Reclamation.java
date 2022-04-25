@@ -19,7 +19,7 @@ public class Reclamation {
 
     @Override
     public String toString() {
-        return "Reclamation{" + "id=" + id + ", email=" + email + ", type=" + type + ", message=" + message + ", date=" + date + '}';
+        return  " ** Email  : " + email + "** Type :" + type + "** Message :" + message + "** Date :" + date + '}';
     }
 
     public Reclamation(int id, String email, String type, String message, String date) {
