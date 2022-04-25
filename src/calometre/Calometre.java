@@ -5,11 +5,13 @@
  */
 package calometre;
 
+import entity.user;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import service.userservice;
 
 /**
  *
@@ -21,9 +23,13 @@ public class Calometre extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        userservice us = new userservice();
+        user test = new user();
+        test.setEmail("crinnxx@gmail.com");
+        test.setPassword("Souhailacc99**");
+        us.login(test);
         Calometre.primaryStage = primaryStage;
-        //Parent root = FXMLLoader.load(getClass().getResource("../GUI/userslist.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/listerec.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/login.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -34,7 +40,25 @@ public class Calometre extends Application {
      */
     public static void main(String[] args) {
 //        // TODO code application logic here
+
         launch(args);
     }
 
 }
+/*public class main extends Application {
+        private Stage primaryStage;
+        @Override
+        public void start(Stage primaryStage) throws Exception {
+            this.primaryStage = primaryStage;
+            mainWindow();
+        }
+        private void mainWindow() {
+            try {
+                FXMLLoader loader = new FXMLLoader(main.class.getResource("../GUI/login.fxml"));
+                AnchorPane pane = loader.load();
+            } catch (IOException e) {
+            }
+            //To change body of generated methods, choose Tools | Templates.
+        }
+    };
+}*/

@@ -141,5 +141,4 @@ public class user {
         this.country_code = country_code;
     }
 
-   
 }

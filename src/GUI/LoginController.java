@@ -46,7 +46,7 @@ public class LoginController implements Initializable {
     }
 
     public void LinkToResetPassword() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("resetpassword.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("sendresetcode.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
 
@@ -98,7 +98,13 @@ public class LoginController implements Initializable {
             test.setPassword(pass);
             fn.login(test);
 
-            if (session.getUser().getRoles().contains("Admin")) {
+            if (fn.isUserBanned(test)) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setHeaderText("null");
+                alert.setContentText("This account is banned");
+                alert.showAndWait();
+                session.setUser(null);
+            } else if (session.getUser().getRoles().contains("Admin")) {
                 Parent root = FXMLLoader.load(getClass().getResource("userslist.fxml"));
                 Calometre.primaryStage.setScene(new Scene(root));
                 Calometre.primaryStage.show();
@@ -176,6 +182,9 @@ public class LoginController implements Initializable {
         } else {
 
             if (fn.resetPassword(LoginController.currentMailReset, npass)) {
+                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                Calometre.primaryStage.setScene(new Scene(root));
+                Calometre.primaryStage.show();
 
             }
         }

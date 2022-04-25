@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,12 +36,25 @@
                     </textFill>
                 </Label>
                 <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="43.0" prefWidth="4.0" />
-                <HBox maxHeight="-Infinity" prefHeight="38.0" prefWidth="290.0" />
+                <HBox maxHeight="-Infinity" prefHeight="38.0" prefWidth="290.0">
+                    <children>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="35.0" prefWidth="290.0" styleClass="round-layout" stylesheets="@../css/styles.css">
+                            <children>
+                                <TextField prefHeight="25.0" prefWidth="247.0" promptText="Search" styleClass="transparent" stylesheets="@../css/styles.css" />
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icons/téléchargement.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
                 <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                 <HBox alignment="CENTER" prefHeight="60.0" prefWidth="202.0">
                     <children>
-                  <Label fx:id="UserFirstName" prefHeight="35.0" prefWidth="154.0" />
-                        <ImageView fx:id="UserProfilePicutre" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="UserFirstName" prefHeight="35.0" prefWidth="154.0" />
+                        <ImageView fx:id="UserProfilePicutre1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                     </children>
                 </HBox>
             </children>
@@ -146,7 +160,7 @@
                                         <Cursor fx:constant="N_RESIZE" />
                                     </cursor>
                                 </ImageView>
-                                <Label onMouseClicked="#logout" onMousePressed="#logout" prefHeight="17.0" prefWidth="103.0" text="Log out" />
+                                <Label prefHeight="17.0" prefWidth="103.0" text="Log out" />
                             </children>
                         </HBox>
                     </children>
@@ -154,15 +168,12 @@
             </children>
         </VBox>
     </left>
-    <right>
-        <VBox prefHeight="200.0" prefWidth="20.0" styleClass="white-background" stylesheets="@../css/styles.css" BorderPane.alignment="CENTER" />
-    </right>
     <center>
         <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1020.0" prefWidth="1734.0" style="-fx-background-color: #f1f4f7;" BorderPane.alignment="CENTER_LEFT">
             <children>
                 <AnchorPane layoutX="2.0" prefHeight="130.0" prefWidth="1738.0" style="-fx-background-color: #679db2;">
                     <children>
-                        <Hyperlink layoutX="107.0" layoutY="47.0" style="-fx-border-color: #000000; -fx-border-width: 0 0 1 0;" text="Profile" textFill="WHITE">
+                        <Hyperlink layoutX="107.0" layoutY="47.0" onAction="#LinkToChangePassword" style="-fx-border-color: #000000; -fx-border-width: 0 0 1 0;" text="Profile" textFill="WHITE">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -182,7 +193,7 @@
                                 <Image url="@../images/icons8-key-100.png" />
                             </image>
                         </ImageView>
-                        <Hyperlink layoutX="1001.0" layoutY="43.0" text="Paramètres" textFill="WHITE">
+                        <Hyperlink layoutX="1001.0" layoutY="43.0" onAction="#LinkToSettings" text="Paramètres" textFill="WHITE">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -204,6 +215,12 @@
                         </ImageView>
                     </children>
                 </AnchorPane>
+            <ImageView fx:id="UserProfilePicutre" fitHeight="271.0" fitWidth="239.0" layoutX="45.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="245.0" layoutY="440.0" onMouseClicked="#UploadProfilePicture" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8-update-100.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
     </center>

@@ -5,12 +5,17 @@
  */
 package GUI;
 
+import calometre.Calometre;
 import interfacee.userInterface;
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import service.userservice;
@@ -56,6 +61,13 @@ public class UserStatsController implements Initializable {
         clientCount.setText(fn.countuserbyRole("client") + " Clients");
         coachCount.setText(fn.countuserbyRole("coach") + " Coaches");
         blockedCount.setText(fn.countBannedAccounts() + " Comptes bloqués");
+    }
+
+    public void LinkToUsersList() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("userslist.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
     }
 
 }

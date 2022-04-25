@@ -8,6 +8,8 @@ package GUI;
 import calometre.Calometre;
 import entity.user;
 import interfacee.userInterface;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +23,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -35,6 +40,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import service.userservice;
+import util.session;
 
 /**
  *
@@ -44,6 +50,10 @@ public class ChangePasswordController implements Initializable {
 
     @FXML
     private VBox vBoxMenu;
+    @FXML
+    private ImageView UserProfilePicutre;
+    @FXML
+    private Label UserFirstName;
 
     private final Background focusBackground = new Background(new BackgroundFill(Color.web("#E4E4E4"), CornerRadii.EMPTY, Insets.EMPTY));
     private final Background unfocusBackground = new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY));
@@ -53,8 +63,45 @@ public class ChangePasswordController implements Initializable {
     @FXML
     private AnchorPane menuPane;
 
+    public void loadFxml(String page) throws IOException {
+        Pane newLoadedPane = FXMLLoader.load(getClass().getResource(page));
+        menuPane.getChildren().add(newLoadedPane);
+    }
+
+    public void showProfile() {
+        String firstName = session.getUser().getFirstname();
+        try {
+            FileInputStream inputstream = new FileInputStream("C:\\Users\\Souhail\\Documents\\images\\" + session.getUser().getProfile_picture());
+            UserProfilePicutre.setImage(new Image(inputstream));
+        } catch (FileNotFoundException ex) {
+        }
+        UserFirstName.setText(firstName);
+
+    }
+
+    public void LinkToSettings() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("settings.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
+
+    public void LinkToConditions() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("conditions.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
+
+    public void LinkToProfile() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
+
     @FXML
-    private void selectMenueItem(MouseEvent event) {
+    public void selectMenueItem(MouseEvent event) {
         HBox hb = (HBox) event.getSource();
 
         if (!(hb).equals(selectedMenuItem)) {
@@ -65,33 +112,20 @@ public class ChangePasswordController implements Initializable {
             selectedMenuItem = hb;
             selectedMenuItem.setBackground(focusBackground);
         }
-
         try {
             loadFxml("EventsView.fxml");
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void loadFxml(String page) throws IOException {
-        Pane newLoadedPane = FXMLLoader.load(getClass().getResource(page));
-        menuPane.getChildren().add(newLoadedPane);
-    }
-
     @FXML
-    private void viewProfile(MouseEvent event) {
+    private void test(MouseEvent event) {
         try {
-            loadFxml("profile.fxml");
+            loadFxml("changepassword.fxml");
         } catch (IOException ex) {
             Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void LinkToProfile() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
-        Calometre.primaryStage.setScene(new Scene(root));
-        Calometre.primaryStage.show();
-
     }
 
     @FXML
@@ -136,5 +170,7 @@ public class ChangePasswordController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.showProfile();
+
     }
 }

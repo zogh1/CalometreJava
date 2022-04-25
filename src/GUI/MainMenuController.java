@@ -5,29 +5,31 @@
  */
 package GUI;
 
+import interfacee.userInterface;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import service.userservice;
+import util.session;
 
 /**
  * FXML Controller class
@@ -37,25 +39,28 @@ import javafx.scene.paint.Color;
 public class MainMenuController implements Initializable {
 
     @FXML
-    private VBox vBoxMenu;
-
-    private final Background focusBackground = new Background(new BackgroundFill(Color.web("#E4E4E4"), CornerRadii.EMPTY, Insets.EMPTY));
-    private final Background unfocusBackground = new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY));
-    private final Border border = new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, null, null));
-
-    private HBox selectedMenuItem = null;
+    private ImageView UserProfilePicutre;
     @FXML
-    private AnchorPane menuPane;
+    private Label UserFirstName;
+    public final Background focusBackground = new Background(new BackgroundFill(Color.web("#E4E4E4"), CornerRadii.EMPTY, Insets.EMPTY));
+    public final Background unfocusBackground = new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY));
+    public HBox selectedMenuItem = null;
+    @FXML
+    public AnchorPane menuPane;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void showProfile() {
+        String firstName = session.getUser().getFirstname();
+        try {
+            FileInputStream inputstream = new FileInputStream("C:\\Users\\Souhail\\Documents\\images\\" + session.getUser().getProfile_picture());
+            UserProfilePicutre.setImage(new Image(inputstream));
+        } catch (FileNotFoundException ex) {
+        }
+        UserFirstName.setText(firstName);
+
     }
 
     @FXML
-    private void selectMenueItem(MouseEvent event) {
+    public void selectMenueItem(MouseEvent event) {
         HBox hb = (HBox) event.getSource();
 
         if (!(hb).equals(selectedMenuItem)) {
@@ -66,7 +71,6 @@ public class MainMenuController implements Initializable {
             selectedMenuItem = hb;
             selectedMenuItem.setBackground(focusBackground);
         }
-
         try {
             loadFxml("EventsView.fxml");
         } catch (Exception e) {
@@ -82,10 +86,25 @@ public class MainMenuController implements Initializable {
     @FXML
     private void viewProfile(MouseEvent event) {
         try {
-            loadFxml("profile.fxml");
+            loadFxml("profile11.fxml");
         } catch (IOException ex) {
             Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+//    @FXML
+//    private void test (MouseEvent event) {
+//        try {
+//            loadFxml("changepassword.fxml");
+//        } catch (IOException ex) {
+//            Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        userInterface fn = new userservice();
+        this.showProfile();
+
     }
 
 }
