@@ -22,7 +22,10 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(int event_id, String commentdate, int likecount, String commentcontent, int user_id) {
+
+    public Comment(int id, int event_id, String commentdate, int likecount, String commentcontent, int user_id) {
+        this.id = id;
+
         this.event_id = event_id;
         this.commentdate = commentdate;
         this.likecount = likecount;
@@ -30,7 +33,9 @@ public class Comment {
         this.user_id = user_id;
     }
 
-    public Comment(int id, int event_id, String commentdate, int likecount, String commentcontent, int user_id) {
+
+    public Comment(int id, int event_id, String commentdate, String commentcontent, int user_id) {
+
         this.id = id;
         this.event_id = event_id;
         this.commentdate = commentdate;

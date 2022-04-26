@@ -13,44 +13,44 @@ public class user {
 
     private int id;
     private String password;
+    private String firstname;
+    private String lastname;
     private String email;
     private String roles;
     private boolean isVerfied;
-    private String firstname;
-    private String lastname;
     private int phonenumber;
-    private String profile_picture;
-    private boolean isbanned;
     private String country_code;
+    private boolean isbanned;
+    private String profile_picture;
 
     public user() {
     }
 
-    public user(int id, String password, String email, String roles, boolean isVerfied, String firstname, String lastname, int phonenumber, String profile_picture, boolean isbanned, String country_code) {
+    public user(int id, String password, String firstname, String lastname, String email, String roles, boolean isVerfied, int phonenumber, String country_code, boolean isbanned, String profile_picture) {
         this.id = id;
         this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.roles = roles;
         this.isVerfied = isVerfied;
-        this.firstname = firstname;
-        this.lastname = lastname;
         this.phonenumber = phonenumber;
-        this.profile_picture = profile_picture;
-        this.isbanned = isbanned;
         this.country_code = country_code;
+        this.isbanned = isbanned;
+        this.profile_picture = profile_picture;
     }
 
-    public user(String password, String email, String roles, boolean isVerfied, String firstname, String lastname, int phonenumber, String profile_picture, boolean isbanned, String country_code) {
+    public user(String password, String firstname, String lastname, String email, String roles, boolean isVerfied, int phonenumber, String country_code, boolean isbanned, String profile_picture) {
         this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.roles = roles;
         this.isVerfied = isVerfied;
-        this.firstname = firstname;
-        this.lastname = lastname;
         this.phonenumber = phonenumber;
-        this.profile_picture = profile_picture;
-        this.isbanned = isbanned;
         this.country_code = country_code;
+        this.isbanned = isbanned;
+        this.profile_picture = profile_picture;
     }
 
     public int getId() {
@@ -67,6 +67,22 @@ public class user {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -93,22 +109,6 @@ public class user {
         this.isVerfied = isVerfied;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public int getPhonenumber() {
         return phonenumber;
     }
@@ -117,12 +117,12 @@ public class user {
         this.phonenumber = phonenumber;
     }
 
-    public String getProfile_picture() {
-        return profile_picture;
+    public String getCountry_code() {
+        return country_code;
     }
 
-    public void setProfile_picture(String profile_picture) {
-        this.profile_picture = profile_picture;
+    public void setCountry_code(String country_code) {
+        this.country_code = country_code;
     }
 
     public boolean isIsbanned() {
@@ -133,12 +133,17 @@ public class user {
         this.isbanned = isbanned;
     }
 
-    public String getCountry_code() {
-        return country_code;
+    public String getProfile_picture() {
+        return profile_picture;
     }
 
-    public void setCountry_code(String country_code) {
-        this.country_code = country_code;
+    public void setProfile_picture(String profile_picture) {
+        this.profile_picture = profile_picture;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

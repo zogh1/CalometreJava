@@ -19,11 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import util.connexion;
-<<<<<<< HEAD
-=======
-import static util.sendSMS.sendSMS;
-import util.session;
->>>>>>> reclamationjava
 
 /**
  *
@@ -33,56 +28,6 @@ public class ServiceReclamation implements IServiceReclamation {
 
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
-
-    public Reclamation getById(int id) {
-        Reclamation r = new Reclamation();
-        String req = "select * from Reclamation where id=?";
-        try {
-            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-
-                r.setId(rs.getInt("id"));
-                r.setEmail(rs.getString("email"));
-                r.setDate(rs.getString("Date"));
-                r.setType(rs.getString("TYPE"));
-                r.setMessage(rs.getString("message"));
-
-            }
-
-        } catch (SQLException erreur) {
-            System.out.println("erreurr");
-            erreur.printStackTrace();
-        }
-        System.out.println(r);
-        return r;
-    }
-
-    public Reclamation getBytype(String type) {
-        Reclamation r = new Reclamation();
-        String req = "select * from Reclamation where type=?";
-        try {
-            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
-            ps.setString(1, type);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-
-                r.setId(rs.getInt("id"));
-                r.setEmail(rs.getString("email"));
-                r.setDate(rs.getString("Date"));
-                r.setType(rs.getString("TYPE"));
-                r.setMessage(rs.getString("message"));
-
-            }
-
-        } catch (SQLException erreur) {
-            System.out.println("erreurr");
-            erreur.printStackTrace();
-        }
-        System.out.println(r);
-        return r;
-    }
 
     @Override
     public void createReclamation(Reclamation R) {
@@ -98,7 +43,6 @@ public class ServiceReclamation implements IServiceReclamation {
 
             st.executeUpdate();
             System.out.println("Reclamation ajoutée avec succes.");
-            sendSMS(R);
 
         } catch (SQLException ex) {
         }
@@ -108,7 +52,7 @@ public class ServiceReclamation implements IServiceReclamation {
     @Override
     public void editReclamation(Reclamation R) {
         try {
-            String req = "update reclamation set type = '" + R.getType() + "', message ='" + R.getMessage() + "', email = '" + R.getEmail() + "'   WHERE id='" + R.getId() + "'";
+            String req = "update reclamation set type = '" + R.getType() + "', message ='" + R.getMessage() + "', email = '" + R.getEmail() + "' WHERE id='" + R.getId() + "'";
             PreparedStatement st = cnx.prepareStatement(req);
 
             st.executeUpdate(req);
@@ -119,7 +63,6 @@ public class ServiceReclamation implements IServiceReclamation {
         }
 
     }
-
     @Override
     public boolean deleteReclamation(int id) {
         boolean isDeleted = false;
@@ -135,26 +78,6 @@ public class ServiceReclamation implements IServiceReclamation {
             System.out.println("error");
         }
         return isDeleted;
-    }
-
-    public List<Reclamation> getByUser() {
-        ArrayList<Reclamation> reclamationUser = new ArrayList();
-        String req1 = "SELECT * FROM reclamation where id_id="+ session.getUser().getId();
-        try {
-            PreparedStatement preparedStatement = cnx.prepareStatement(req1);
-
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-
-                reclamationUser.add(new Reclamation(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
-
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return reclamationUser;
     }
 
     @Override
@@ -180,30 +103,6 @@ public class ServiceReclamation implements IServiceReclamation {
         } catch (SQLException ex) {
         }
 
-        return reclamation;
-
-    }
-
-    @Override
-    public List<Reclamation> RechercherparEmail(String email) {
-        ArrayList<Reclamation> reclamation = new ArrayList();
-
-        String req1 = "SELECT * FROM reclamation where email=?";
-        try {
-            PreparedStatement preparedStatement = cnx.prepareStatement(req1);
-            preparedStatement.setString(1, email);
-
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-
-                reclamation.add(new Reclamation(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
-
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
         return reclamation;
 
     }

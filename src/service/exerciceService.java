@@ -81,8 +81,8 @@ public class exerciceService implements exerciceInterface {
             while (result.next()) {
                 exercices.add(new exercice(
                         result.getInt(1),
-                        result.getInt(3),
-                        result.getString(2),
+                        result.getInt(2),
+                        result.getString(3),
                         result.getString(4),
                         result.getString(5),
                         result.getString(6)

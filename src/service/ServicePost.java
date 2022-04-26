@@ -33,19 +33,17 @@ public class ServicePost {
             while (rs.next()) {
                 Post p = new Post();
                 p.setId(rs.getInt("id"));
-                ServiceEvent se = new ServiceEvent(); 
-                
-                Event ev  = se.getEventById(rs.getInt("event_id"));
-                
+                ServiceEvent se = new ServiceEvent();
+
+                Event ev = se.getEventById(rs.getInt("event_id"));
+
                 p.setEv(ev);
-				
-                 
-                 p.setName(rs.getString("name"));
-             
-              		p.setCreation_date(rs.getString("creation_date"));
-             p.setDescription(rs.getString("description"));
-             
-				
+
+                p.setName(rs.getString("name"));
+
+                p.setCreation_date(rs.getString("creation_date"));
+                p.setDescription(rs.getString("description"));
+
                 System.out.println(p);
 
                 le.add(p);
@@ -57,13 +55,6 @@ public class ServicePost {
 
         return le;
     }
-    
-    
-    
-    
-    
-    
- 
     public Post getPostById(int id) {
         Post p = new Post();
         String req = "select * from post where id=?";
@@ -89,9 +80,8 @@ public class ServicePost {
         System.out.println(p);
         return p;
    
-}
-    
-       public void createPost(Post p ) {
+}   
+    public void createPost(Post p ) {
 
         //req BD
         String req = "INSERT INTO `post`(`name`,`event_id`, `creation_date`, `description`) VALUES (?,?,?,?)";
@@ -114,7 +104,7 @@ public class ServicePost {
         }
 
     }
-       public void deletePost(int id) {
+    public void deletePost(int id) {
         String req = "delete from post where id=?";
         try {
             PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
@@ -125,7 +115,7 @@ public class ServicePost {
             er.printStackTrace();
         }
     }
-      public void updatePost(Post p , int id) {
+    public void updatePost(Post p , int id) {
 
         String req = "update post set name=?,creation_date	=?,description=? where id=?";
         try {

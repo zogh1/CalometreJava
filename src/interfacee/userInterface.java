@@ -6,9 +6,9 @@
  */
 package interfacee;
 
+import java.util.List;
 import entity.user;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  *
@@ -16,8 +16,7 @@ import java.util.List;
  */
 public interface userInterface {
 
-    //CRUD
-    public void createuser(user u);
+     public void createuser(user u);
 
     public List<user> getalluser();
 
