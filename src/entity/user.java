@@ -126,6 +126,7 @@ public class user {
     }
 
 
+
     public boolean isIsbanned() {
         return isbanned;
     }

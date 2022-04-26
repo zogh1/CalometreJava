@@ -8,6 +8,9 @@ package service;
 
 import entity.user;
 
+
+
+
 import interfacee.userInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,9 +25,11 @@ import java.util.Random;
 import util.BCrypt;
 import static util.EmailSender.sendEmailWithAttachments;
 
+
 import java.util.List;
 import entity.user;
 import util.BCrypt;
+
 
 import util.connexion;
 import util.session;
@@ -36,8 +41,10 @@ import util.session;
 public class userservice implements userInterface {
 
 
+
     public static int code;
     public static String email;
+
 
 
     //var
@@ -54,7 +61,9 @@ public class userservice implements userInterface {
             st.setString(1, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt()));
             st.setString(2, u.getEmail());
 
+
             st.setString(3, "[\"" + u.getRoles() + "\"]");
+
 
             st.setBoolean(4, false);
             st.setString(5, u.getFirstname());
@@ -67,6 +76,7 @@ public class userservice implements userInterface {
             System.out.println("Personne ajoutée avec succes.");
 
         } catch (SQLException ex) {
+
             ex.printStackTrace();
         }
 
@@ -104,7 +114,9 @@ public class userservice implements userInterface {
 
         } catch (SQLException ex) {
 
+
             ex.printStackTrace();
+
 
         }
 
@@ -195,7 +207,9 @@ public class userservice implements userInterface {
                         rs.getString(3),
                         rs.getString(4),
 
+
                         rs.getString(5),
+
                         rs.getString(6),
                         rs.getBoolean(7),
                         rs.getInt(8),
@@ -226,7 +240,9 @@ public class userservice implements userInterface {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
+
                         rs.getBoolean(7),
+
 
                         rs.getInt(8),
                         rs.getString(9),
@@ -234,7 +250,10 @@ public class userservice implements userInterface {
                         rs.getString(11));
             }
 
+
             System.out.println(u.getFirstname());
+
+
 
         } catch (Exception a) {
             a.printStackTrace();
@@ -317,6 +336,8 @@ public class userservice implements userInterface {
                     user = this.findById(rs.getInt("id"));
                     session.setUser(user);
                     System.out.println("connected");
+
+
 
 
                 } else {
@@ -590,4 +611,6 @@ public class userservice implements userInterface {
         return userservice.code;
 
     }
+
+
 }

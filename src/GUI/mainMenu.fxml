@@ -23,6 +23,9 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="1315.0" styleClass="white-background" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainMenuController">
 =======
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="white-background" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainMenuController">
+<<<<<<< HEAD
+>>>>>>> parent of 263600b (Merge)
+=======
 >>>>>>> parent of 263600b (Merge)
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="white-background" stylesheets="@../css/styles.css" BorderPane.alignment="CENTER">
@@ -68,7 +71,11 @@
                      </styleClass>
                   </Label>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+=======
+                  <ImageView fx:id="UserProfilePicutre" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+>>>>>>> parent of 263600b (Merge)
 =======
                   <ImageView fx:id="UserProfilePicutre" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
 >>>>>>> parent of 263600b (Merge)

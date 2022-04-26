@@ -7,14 +7,17 @@
 package interfacee;
 
 
+
 import java.util.List;
 import entity.user;
 import java.util.HashMap;
 
 
+
 import entity.user;
 import java.util.HashMap;
 import java.util.List;
+
 
 import java.util.List;
 import entity.user;
@@ -31,7 +34,11 @@ public interface userInterface {
     public List<user> getalluser();
 
 
+
     public List<user> pagination();
+
+
+
 
 
     public boolean login(user user);
@@ -40,6 +47,7 @@ public interface userInterface {
 
 
     public user findByEmail(String email);
+
 
 
     public void updateuser(user u);
