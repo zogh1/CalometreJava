@@ -5,6 +5,7 @@
  */
 package entity;
 
+
 /**
  *
  * @author seifd
@@ -19,6 +20,7 @@ public class product {
     private category category_id;
     private String image;
     private int count;
+    private String color;
 
     public product(int id, String name, double price, String description, int quantity, category category_id, String image) {
         this.id = id;
@@ -114,8 +116,15 @@ public class product {
     }
 
     public void setPrice(String price) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+    }
+  public String getColor() {
+        return color;
     }
 
-  
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+   
 }

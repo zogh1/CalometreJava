@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -11,18 +12,18 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ProductController">
    <children>
-      <Button alignment="CENTER" layoutX="520.0" layoutY="548.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="45.0" prefWidth="108.0" style="-fx-background-color: #30B21A;" text="Add" />
-      <TextField fx:id="nameProd" alignment="CENTER" layoutX="521.0" layoutY="233.0" prefHeight="38.0" prefWidth="239.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: #000000;" />
-      <Label layoutX="594.0" layoutY="170.0" prefHeight="32.0" prefWidth="92.0" text="Products" textOverrun="CLIP">
+      <Button alignment="CENTER" layoutX="440.0" layoutY="548.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="45.0" prefWidth="108.0" style="-fx-background-color: #30B21A;" text="Add" />
+      <TextField fx:id="nameProd" alignment="CENTER" layoutX="441.0" layoutY="233.0" prefHeight="38.0" prefWidth="239.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: #000000;" />
+      <Label layoutX="514.0" layoutY="170.0" prefHeight="32.0" prefWidth="92.0" text="Products" textOverrun="CLIP">
          <font>
             <Font name="Centaur" size="27.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" layoutX="782.0" layoutY="526.0" mnemonicParsing="false" onAction="#deleteprod" prefHeight="38.0" prefWidth="525.0" style="-fx-background-color: #FF0500;" text="Delete" />
-      <Button alignment="CENTER" layoutX="648.0" layoutY="548.0" mnemonicParsing="false" onAction="#editProd" prefHeight="45.0" prefWidth="113.0" style="-fx-background-color: #FFDA5C;" text="Edit" />
-      <Button alignment="CENTER" layoutX="548.0" layoutY="175.0" mnemonicParsing="false" onAction="#GoToCat" prefHeight="25.0" prefWidth="38.0" text="&lt;" />
-      <Button alignment="CENTER" layoutX="689.0" layoutY="175.0" mnemonicParsing="false" onAction="#GoToCat" prefHeight="24.0" prefWidth="38.0" text="&gt;" />
-      <TableView fx:id="prodview" layoutX="784.0" layoutY="158.0" prefHeight="360.0" prefWidth="524.0">
+      <Button alignment="CENTER" layoutX="690.0" layoutY="525.0" mnemonicParsing="false" onAction="#deleteprod" prefHeight="38.0" prefWidth="592.0" style="-fx-background-color: #FF0500;" text="Delete" />
+      <Button alignment="CENTER" layoutX="568.0" layoutY="548.0" mnemonicParsing="false" onAction="#editProd" prefHeight="45.0" prefWidth="113.0" style="-fx-background-color: #FFDA5C;" text="Edit" />
+      <Button alignment="CENTER" layoutX="468.0" layoutY="175.0" mnemonicParsing="false" onAction="#GoToCat" prefHeight="25.0" prefWidth="38.0" text="&lt;" />
+      <Button alignment="CENTER" layoutX="609.0" layoutY="175.0" mnemonicParsing="false" onAction="#GoToCat" prefHeight="24.0" prefWidth="38.0" text="&gt;" />
+      <TableView fx:id="prodview" layoutX="692.0" layoutY="157.0" prefHeight="360.0" prefWidth="586.0">
          <columns>
             <TableColumn fx:id="prodID" prefWidth="75.0" text="ID" />
             <TableColumn fx:id="prodName" prefWidth="75.0" text="Name" />
@@ -30,17 +31,26 @@
             <TableColumn fx:id="prodDesc" prefWidth="75.0" text="Description" />
             <TableColumn fx:id="prodQty" prefWidth="75.0" text="Quantity" />
             <TableColumn fx:id="Category" prefWidth="75.0" text="Category" />
-            <TableColumn fx:id="prodImg" prefWidth="75.0" text="Image" />
+            <TableColumn fx:id="prodImg" prefWidth="135.0" text="Image" />
          </columns>
       </TableView>
-      <Button alignment="CENTER" layoutX="580.0" layoutY="655.0" mnemonicParsing="false" onAction="#GoToStats" prefHeight="41.0" prefWidth="108.0" style="-fx-background-color: #30BA;" text="Stats" />
-      <TextField fx:id="PriceProd" alignment="CENTER" layoutX="520.0" layoutY="276.0" prefHeight="38.0" prefWidth="239.0" promptText="Price" style="-fx-background-color: transparent; -fx-border-color: #000000;" />
-      <TextField fx:id="descProd" alignment="CENTER" layoutX="520.0" layoutY="316.0" prefHeight="38.0" prefWidth="239.0" promptText="Description" style="-fx-background-color: transparent; -fx-border-color: #000000;" />
-      <Button layoutX="520.0" layoutY="449.0" mnemonicParsing="false" onAction="#uploadImage" prefHeight="43.0" prefWidth="240.0" text="Upload a file" textOverrun="CLIP">
+      <Button alignment="CENTER" layoutX="506.0" layoutY="600.0" mnemonicParsing="false" onAction="#GoToStats" prefHeight="41.0" prefWidth="108.0" style="-fx-background-color: #30BA;" text="Stats" />
+      <TextField fx:id="PriceProd" alignment="CENTER" layoutX="440.0" layoutY="276.0" prefHeight="38.0" prefWidth="239.0" promptText="Price" style="-fx-background-color: transparent; -fx-border-color: #000000;" />
+      <TextField fx:id="descProd" alignment="CENTER" layoutX="440.0" layoutY="316.0" prefHeight="38.0" prefWidth="239.0" promptText="Description" style="-fx-background-color: transparent; -fx-border-color: #000000;" />
+      <Button layoutX="440.0" layoutY="449.0" mnemonicParsing="false" onAction="#uploadImage" prefHeight="43.0" prefWidth="240.0" text="Upload a file" textOverrun="CLIP">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <TextField fx:id="qtyProd" alignment="CENTER" layoutX="521.0" layoutY="360.0" prefHeight="38.0" prefWidth="239.0" promptText="Quantity" style="-fx-background-color: transparent; -fx-border-color: #000000;" />
-      <ComboBox fx:id="categ" layoutX="521.0" layoutY="406.0" opacity="0.55" prefHeight="35.0" prefWidth="240.0" promptText="Category" />
+      <TextField fx:id="qtyProd" alignment="CENTER" layoutX="441.0" layoutY="360.0" prefHeight="38.0" prefWidth="239.0" promptText="Quantity" style="-fx-background-color: transparent; -fx-border-color: #000000;" />
+      <ComboBox fx:id="categ" layoutX="441.0" layoutY="406.0" opacity="0.55" prefHeight="35.0" prefWidth="240.0" promptText="Category" />
+      <Button alignment="CENTER" layoutX="1215.0" layoutY="100.0" mnemonicParsing="false" onAction="#GoToMarket" prefHeight="34.0" prefWidth="53.0" style="-fx-background-color: #32CD32;" stylesheets="@Seifcss/style.css" text="◨">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="add-btn" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

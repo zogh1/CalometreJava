@@ -19,11 +19,11 @@ import javafx.stage.Stage;
 public class Calometre extends Application {
 
     public static Stage primaryStage;
-
+    public static final String CURRENCY = "$";
     @Override
     public void start(Stage primaryStage) throws Exception {
         Calometre.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/Products.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/products.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

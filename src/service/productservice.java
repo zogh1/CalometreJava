@@ -30,8 +30,54 @@ public class productservice implements productInterface {
 
     categoryservice cs = new categoryservice();
 
+    public product findById(int id) {
+        product u = null;
+        try {
+            String req = "select * from product where id=? ";
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                u = new product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("price"),
+                        rs.getString("description"),
+                        rs.getInt("quantity"),
+                        cs.findById(rs.getInt("category_id")),
+                        rs.getString("image")
+                );
+            }
+            System.out.println(u.getId());
+            System.out.println(u.getName());
+        } catch (Exception e) {
+        }
+        return u;
+
+    }
+
+    public List<String> getQrCodeInfo() {
+        int count = 0;
+        String prodName = "";
+        ArrayList<String> list = new ArrayList();
+        try {
+            String req = "SELECT *,COUNT(*) FROM cart_prods WHERE qty IN (SELECT MAX(qty) FROM cart_prods)";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                prodName = this.findById(rs.getInt(2)).getName();
+                count = rs.getInt("qty");
+            }
+            list.add(prodName);
+            list.add(String.valueOf(count));
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+
     @Override
-     public void createproduct(product p, category cat) {
+    public void createproduct(product p, category cat) {
 
         //request
         try {
@@ -74,7 +120,6 @@ public class productservice implements productInterface {
 
                 li.add(p);
             }
-    
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -103,7 +148,6 @@ public class productservice implements productInterface {
 
                 li.add(p);
             }
-        
 
         } catch (SQLException ex) {
         }
@@ -130,10 +174,11 @@ public class productservice implements productInterface {
                 p.setImage(rs.getString("image"));
 
                 li.add(p);
+            
             }
-         
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
         return li;
@@ -158,8 +203,12 @@ public class productservice implements productInterface {
                 p.setImage(rs.getString("image"));
 
                 li.add(p);
+                 for(int i=0; i<li.size();i++){
+                    System.out.println();
+                }
             }
         } catch (SQLException ex) {
+              ex.printStackTrace();
         }
 
         return li;
@@ -209,7 +258,7 @@ public class productservice implements productInterface {
                         cs.findById(result.getInt(3)),
                         result.getInt(4)
                 ));
-               /* for (int i = 0; i < prods.size(); i++) {
+                /* for (int i = 0; i < prods.size(); i++) {
                     System.out.println(prods.get(i).getName());
                     System.out.println(prods.get(i).getCount());
                     System.err.println("*********");
@@ -240,5 +289,4 @@ public class productservice implements productInterface {
         return stat;
     }
 
-  
 }

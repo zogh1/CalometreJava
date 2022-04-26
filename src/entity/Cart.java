@@ -45,15 +45,15 @@ public class Cart {
      * @return the total
      */
     public double getTotal() {
-        return total;
+        double total=0;
+       for(CartItem ci: this.getItems()){
+       total+=ci.getQuantity()*ci.getProduct().getPrice();
+       
+       }
+       return total;
     }
 
-    /**
-     * @param total the total to set
-     */
-    public void setTotal(double total) {
-        this.total = total;
-    }
+
 
     /**
      * @return the user_cart_id

@@ -5,10 +5,14 @@
  */
 package calometre;
 
+import entity.Cart;
 import entity.category;
+import entity.product;
 import entity.user;
 import interfacee.userInterface;
+import service.cartService;
 import service.categoryservice;
+import service.productservice;
 import service.userservice;
 
 /**
@@ -20,14 +24,20 @@ public class test {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // TODO code application logic here
        
-    category cat = new category();
-    categoryservice fn = new categoryservice();
-    
-    fn.findByName("Food");
+//    Cart crt = new Cart();
+//    cartService fn2 = new cartService();
+        productservice fn = new productservice();
+        product test = new product();
+//    
+//    
+//    System.out.println(fn.findById(1).getTotal());
 
+    fn.searchProduct("finally");
     
+ 
+ 
 }
 }

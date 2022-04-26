@@ -10,6 +10,8 @@ import calometre.Calometre;
 import entity.category;
 import entity.product;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -17,6 +19,9 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,12 +32,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.image.ImageView;
 
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageViewBuilder;
 import javafx.stage.FileChooser;
+import javafx.util.Callback;
 
 import service.categoryservice;
 import service.productservice;
@@ -63,19 +75,19 @@ public class ProductController implements Initializable {
     @FXML
     TableView<product> prodview;
     @FXML
-    private TableColumn<category, String> prodID;
+    private TableColumn<product, String> prodID;
     @FXML
-    private TableColumn<category, String> prodName;
+    private TableColumn<product, String> prodName;
     @FXML
-    private TableColumn<category, String> prodPrice;
+    private TableColumn<product, String> prodPrice;
     @FXML
-    private TableColumn<category, String> prodDesc;
+    private TableColumn<product, String> prodDesc;
     @FXML
-    private TableColumn<category, String> prodQty;
+    private TableColumn<product, String> prodQty;
     @FXML
-    private TableColumn<category, String> prodImg;
+    private TableColumn<product, Image> prodImg;
     @FXML
-    private TableColumn<category, String> Category;
+    private TableColumn<category, Integer> Category;
     ObservableList<product> oblist = FXCollections.observableArrayList();
     product p = null;
     
@@ -92,11 +104,33 @@ public class ProductController implements Initializable {
             prodQty.setCellValueFactory(new PropertyValueFactory<>("quantity"));
             Category.setCellValueFactory(new PropertyValueFactory<>("category_id"));
           
+            });
        
             //prodImg.setCellValueFactory(new PropertyValueFactory<>("image"));
             
+    
+        prodImg.setCellValueFactory((CellDataFeatures<product, Image> b) -> {
+            String productImg = b.getValue().getImage();
+            FileInputStream inputstream = null;
+            try {
+                inputstream = new FileInputStream("C:\\Users\\seifd\\Documents\\images\\" + productImg);
+            } catch (FileNotFoundException ex) {
+            }
+
+            return new SimpleObjectProperty<>(new Image(inputstream, 100, 100, false, false));
         });
-        
+        prodImg.setCellFactory((TableColumn<product, Image> b) -> new TableCell<product, Image>() {
+            @Override
+            protected void updateItem(Image i, boolean empty) {
+                super.updateItem(i, empty);
+                setText(null);
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                double width = 60;
+                double height = 60;
+                ImageView imageView = (i == null || empty) ? null : ImageViewBuilder.create().image(i).build();
+                setGraphic(imageView);
+            }
+        });
  /*Category.setCellValueFactory(new PropertyValueFactory<>("category_id"),ObservableValue<String>(){
 
                 @Override
@@ -108,12 +142,17 @@ public class ProductController implements Initializable {
 
     }
     
-    
     private void refreshtables() throws java.io.IOException{
     Parent root = FXMLLoader.load(getClass().getResource("Products.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
 }
+    
+            public void GoToMarket() throws java.io.IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("market.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+    }
     public void GoToCat() throws java.io.IOException {
         Parent root = FXMLLoader.load(getClass().getResource("addcategory.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));

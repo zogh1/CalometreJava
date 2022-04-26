@@ -67,7 +67,7 @@ public class cartService implements ICart {
         PreparedStatement st;
         try {
             st = cnx.prepareStatement(req);
-            st.setLong(0, id);
+            st.setLong(1, id);
             st.execute();
         } catch (SQLException ex) {
 
@@ -77,7 +77,7 @@ public class cartService implements ICart {
         
         try {
             st = cnx.prepareStatement(req);
-            st.setLong(0, id);
+            st.setLong(1, id);
             st.execute();
         } catch (SQLException ex) {
 
@@ -112,9 +112,9 @@ public class cartService implements ICart {
             try {
                 PreparedStatement st;
                 st = cnx.prepareStatement(req);
-                st.setInt(0, quantity);
-                st.setInt(1, item.getProduct().getId());
-                st.setInt(2, cart.getId());
+                st.setInt(1, quantity);
+                st.setInt(2, item.getProduct().getId());
+                st.setInt(3, cart.getId());
                 st.executeUpdate();
             } catch (SQLException sq) {
 
@@ -125,9 +125,9 @@ public class cartService implements ICart {
             try {
                 PreparedStatement st;
                 st = cnx.prepareStatement(req);
-                st.setInt(0, pid);
-                st.setInt(1, cart.getId());
-                st.setInt(2, quantity);
+                st.setInt(1, pid);
+                st.setInt(2, cart.getId());
+                st.setInt(3, quantity);
                 st.execute();
 
             } catch (SQLException sq) {
@@ -144,8 +144,8 @@ public class cartService implements ICart {
         try {
             PreparedStatement st;
             st = cnx.prepareStatement(req);
-            st.setInt(0, pid);
-            st.setInt(1, cartId);
+            st.setInt(1, pid);
+            st.setInt(2, cartId);
             st.execute();
         } catch (SQLException sq) {
 
@@ -190,7 +190,7 @@ public class cartService implements ICart {
         ArrayList<CartItem> pl = new ArrayList<CartItem>();
         try {
             st = cnx.prepareStatement(req);
-            st.setLong(0, id);
+            st.setLong(1, id);
             ResultSet result = st.executeQuery();
             while (result.next()) {
                 CartItem cartItem = new CartItem();
