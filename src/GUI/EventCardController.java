@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Api.twilioSmsApi;
 import entity.Event;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -62,8 +63,9 @@ public class EventCardController implements Initializable {
         "#le8lb0",
         "#eeeee4"
     };
-
     private ServiceEvent serviceEvent;
+    
+    private twilioSmsApi serviceSMS;
     @FXML
     private VBox box;
     @FXML
@@ -72,6 +74,8 @@ public class EventCardController implements Initializable {
     private int parsedId;
     @FXML
     private AnchorPane eventCardContainer;
+    
+    
 
     /**
      * Initializes the controller class.
@@ -79,6 +83,7 @@ public class EventCardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         serviceEvent = new ServiceEvent();
+        serviceSMS = new twilioSmsApi();
     }
 
     @FXML
@@ -86,7 +91,9 @@ public class EventCardController implements Initializable {
 
         try {
             parsedId = Integer.parseInt(id.getText());
+            Event ev = serviceEvent.getEventById(parsedId);
             serviceEvent.applyToEvent(5, parsedId);
+            serviceSMS.sendMessage("Hello , You just applied to '"+ev.getNom()+"' event don't miss it .Dont't miss it !!! Meet you there on: "+ev.getDate_debut(), "+21650310220");
 
             String nbApplyed = "" + serviceEvent.getNombre_participants_byevent(parsedId);
             this.nb_applyed.setText(nbApplyed);

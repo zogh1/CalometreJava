@@ -23,6 +23,8 @@ import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +33,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -119,6 +123,7 @@ public class AddEventsController {
         Stage current = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         if (event.getSource() == btnajouter) {
+            if(validateName(txtname) & validatedesc(txtdescrip)& validaten_nbr(txtnbrplace) &validateName(txtlocation) ){ 
 
             FileInputStream fl = new FileInputStream(file);
             byte[] data = new byte[(int) file.length()];
@@ -130,11 +135,55 @@ public class AddEventsController {
 
             goToEventsView();
         }
+        }
     }
 
     private void goToEventsView() throws IOException {
         calometre.Calometre.mainController.getMenuPane().getChildren().clear();
         calometre.Calometre.mainController.loadFxml("EventsView.fxml");
     }
-
+private boolean validateName(TextField name) {
+        Pattern p = Pattern.compile("[a-zA-Z]+");
+        Matcher m = p.matcher(name.getText());
+        if ((name.getText().length() == 0)
+                || (m.find() && m.group().equals(name.getText()))) {
+          name.setEffect(null);   
+            return true;
+        } else {
+            new animatefx.animation.Shake(name).play();
+            InnerShadow in = new InnerShadow();
+            in.setColor(Color.web("#f80000"));
+            name.setEffect(in);
+           
+            return false;
+        }
+    }
+//va
+private boolean validatedesc(TextArea name) {
+        if ((name.getText().length() == 0)) {
+            new animatefx.animation.Shake(name).play();
+            InnerShadow in = new InnerShadow();
+            in.setColor(Color.web("#f80000"));
+            name.setEffect(in);
+            return false;
+        } else {
+            name.setEffect(null);
+            return true;
+        }
+    }
+private boolean validaten_nbr(TextField name) {
+        Pattern p = Pattern.compile("[0-9 ]+");
+        Matcher m = p.matcher(name.getText());
+        if ((name.getText().length() == 0)
+                || (m.find() && m.group().equals(name.getText()))) {
+            name.setEffect(null);
+            return true;
+        } else { new animatefx.animation.Shake(name).play();
+            InnerShadow in = new InnerShadow();
+            in.setColor(Color.web("#f80000"));
+            name.setEffect(in);
+            return false;
+           
+        }
+    }
 }

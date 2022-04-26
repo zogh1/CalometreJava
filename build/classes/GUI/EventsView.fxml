@@ -18,7 +18,7 @@
             <Font name="Arial Black" size="21.0" />
          </font>
       </Label>
-      <HBox fx:id="topThreeEventsLayout" maxHeight="-Infinity" prefHeight="220.0" prefWidth="1140.0" styleClass="mainFxmlClass" />
+      <HBox fx:id="topThreeEventsLayout" maxHeight="-Infinity" prefHeight="220.0" prefWidth="1140.0" styleClass="CARD" stylesheets="@ajouteroffre.css" />
       <Label maxHeight="-Infinity" prefHeight="24.0" prefWidth="128.0" styleClass="fontsFxmlClass" stylesheets="@ajouteroffre.css" text="ALL EVENTS">
          <opaqueInsets>
             <Insets />
@@ -38,7 +38,7 @@
       </Label>
       <ScrollPane prefHeight="393.0" prefWidth="1140.0">
          <content>
-            <HBox fx:id="allEventsLayout" maxHeight="-Infinity" prefHeight="421.0" prefWidth="1140.0" styleClass="mainFxmlClass" />
+            <HBox fx:id="allEventsLayout" maxHeight="-Infinity" prefHeight="421.0" prefWidth="1140.0" styleClass="CARD" stylesheets="@ajouteroffre.css" />
          </content>
       </ScrollPane>
    </children>

@@ -37,7 +37,7 @@
                <children>
                   <ImageView fitHeight="597.0" fitWidth="829.0" layoutX="-1.0" layoutY="-199.0" pickOnBounds="true" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                      <image>
-                        <Image url="file:/C:/Users/wassim/Documents/NetBeansProjects/Calometre/src/img/1093585.jpg" />
+                        <Image url="@../img/wallpaper.jpg" />
                      </image>
                   </ImageView>
                   <Label layoutX="340.0" layoutY="23.0" prefHeight="51.0" prefWidth="274.0" text="Ajouter Offres" textFill="#ddd9d9" AnchorPane.bottomAnchor="617.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="257.0" AnchorPane.topAnchor="23.0">
@@ -45,7 +45,7 @@
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="83.0" layoutY="396.0" text="Places" textFill="#930200">
+                  <Label layoutX="63.0" layoutY="394.0" text="Places" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -79,23 +79,23 @@
                   </JFXTextField>
                   <JFXTextField fx:id="txtlocation" focusColor="#930200" layoutX="152.0" layoutY="310.0" prefHeight="31.0" prefWidth="281.0" styleClass="input2" stylesheets="@Styles/cardoffres.css" unFocusColor="#930200" />
                   <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" layoutX="621.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label layoutX="48.0" layoutY="155.0" stylesheets="@Styles/style-AjoutOffre.css" text="Event name" textFill="#930200">
+                  <Label layoutX="48.0" layoutY="155.0" stylesheets="@Styles/style-AjoutOffre.css" text="Event name" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <JFXTextField fx:id="txtnbrplace" focusColor="#930200" layoutX="152.0" layoutY="373.0" prefHeight="31.0" prefWidth="281.0" styleClass="input2" stylesheets="@Styles/cardoffres.css" unFocusColor="#930200" />
-                  <Label layoutX="62.0" layoutY="259.0" stylesheets="@Styles/style-AjoutOffre.css" text="End date" textFill="#930200">
+                  <Label layoutX="50.0" layoutY="237.0" prefHeight="61.0" prefWidth="67.0" stylesheets="@Styles/style-AjoutOffre.css" text="End date" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="64.0" layoutY="215.0" stylesheets="@Styles/style-AjoutOffre.css" text="Start date" textFill="#930200">
+                  <Label layoutX="43.0" layoutY="203.0" stylesheets="@Styles/style-AjoutOffre.css" text="Start date" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="63.0" layoutY="318.0" stylesheets="@Styles/style-AjoutOffre.css" text="Location" textFill="#930200">
+                  <Label layoutX="57.0" layoutY="331.0" stylesheets="@Styles/style-AjoutOffre.css" text="Location" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
