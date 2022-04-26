@@ -31,7 +31,7 @@
                     <Font size="32.0" />
                 </font>
             </Button>
-            <Hyperlink layoutX="334.0" layoutY="724.0" onAction="#linkToLoginPage" text="Remember your password? Login">
+            <Hyperlink layoutX="334.0" layoutY="724.0" text="Forgot your password?">
                 <font>
                     <Font size="29.0" />
                 </font>

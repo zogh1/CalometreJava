@@ -125,6 +125,7 @@ public class user {
         this.country_code = country_code;
     }
 
+
     public boolean isIsbanned() {
         return isbanned;
     }
@@ -145,5 +146,6 @@ public class user {
     public String toString() {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
+
 
 }
