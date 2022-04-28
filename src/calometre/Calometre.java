@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class Calometre extends Application {
 
     public static Stage primaryStage;
-    public static final String CURRENCY = "$";
+    public static final String CURRENCY = "TND";
     @Override
     public void start(Stage primaryStage) throws Exception {
         Calometre.primaryStage = primaryStage;

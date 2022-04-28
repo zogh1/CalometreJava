@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
+import javafx.beans.InvalidationListener;
 import util.connexion;
 
 /**
@@ -277,12 +278,12 @@ public class productservice implements productInterface {
         HashMap<String, Integer> stat = new HashMap<>();
 
         for (product ps : list) {
-            stat.put(ps.getCategory_id().getName(), 0);
+            stat.put(ps.getCategory_id(), 0);
         }
 
         list.stream().map((product) -> product.getCount()).forEachOrdered((count) -> {
             list.stream().filter((ps) -> (count != 0)).forEachOrdered((ps) -> {
-                stat.put(ps.getCategory_id().getName(), stat.get(ps.getCategory_id().getName()) + 1);
+                stat.put(ps.getCategory_id(), stat.get(ps.getCategory_id()) + 1);
             });
         });
 

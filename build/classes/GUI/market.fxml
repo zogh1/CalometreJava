@@ -26,12 +26,12 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="110.0" prefWidth="200.0">
                      <children>
-                        <Label prefHeight="49.0" prefWidth="128.0" text="Fruits" textFill="#878787">
+                        <Label prefHeight="49.0" prefWidth="157.0" text="Product" textFill="#878787">
                            <font>
                               <Font name="Cambria Bold" size="40.0" />
                            </font>
                         </Label>
-                        <Label text="Market" textFill="#878787">
+                        <Label text="market" textFill="#878787">
                            <font>
                               <Font name="Cambria" size="40.0" />
                            </font>
@@ -43,7 +43,7 @@
                         <Insets left="30.0" right="30.0" />
                      </VBox.margin>
                      <children>
-                        <TextField fx:id="searchprod" prefHeight="40.0" prefWidth="235.0" promptText="Type here to search" styleClass="transparent" stylesheets="@../values/style.css">
+                        <TextField fx:id="searchprod" onInputMethodTextChanged="#searchProduct" prefHeight="40.0" prefWidth="235.0" promptText="Type here to search" styleClass="transparent" stylesheets="@../values/style.css">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -71,9 +71,9 @@
                                     <Font name="Cambria" size="36.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="fruitPriceLabel" prefHeight="57.0" prefWidth="171.0" text="\$2.99" textFill="WHITE">
+                              <Label fx:id="fruitPriceLabel" prefHeight="54.0" prefWidth="179.0" text="\$2.99" textFill="WHITE">
                                  <font>
-                                    <Font name="Cambria" size="36.0" />
+                                    <Font name="Cambria" size="23.0" />
                                  </font>
                               </Label>
                            </children>

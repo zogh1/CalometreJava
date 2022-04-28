@@ -85,7 +85,7 @@ public class MarketController implements Initializable {
     ImageView qrcode;
     product p = null;
     
-                List<product> li = fn.getallproduct();
+             
                 
     private List<product> products = new ArrayList<>();
     private Image image;
@@ -97,43 +97,7 @@ public class MarketController implements Initializable {
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
 }
- public void searchProduct() throws IOException{
-     
-     String searched = searchprod.getText();
-   List<product> li = fn.searchProduct(searched);
-        
-   
-         int column = 0;
-        int row = 1;
-        for (int i = 0; i < li.size(); i++) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("item.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
-
-                ItemController itemController = fxmlLoader.getController();
-                itemController.setData(li.get(i), myListener);
-
-                if (column == 3) {
-                    column = 0;
-                    row++;
-                }
-
-                grid.add(anchorPane, column++, row); //(child,column,row)
-                //set grid width
-                grid.setMinWidth(Region.USE_COMPUTED_SIZE);
-                grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                grid.setMaxWidth(Region.USE_PREF_SIZE);
-
-                //set grid height
-                grid.setMinHeight(Region.USE_COMPUTED_SIZE);
-                grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                grid.setMaxHeight(Region.USE_PREF_SIZE);
-
-                GridPane.setMargin(anchorPane, new Insets(10));
-            this.RefreshPage();
-  
-    }
- }
+ 
     
     private List<product> getData() {
 
@@ -185,8 +149,53 @@ public class MarketController implements Initializable {
 
         qrcode.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
     }
+     public void searchProduct() throws java.io.IOException {
+         
+        String searched = searchprod.getText();
+        System.out.println(searched);
+        if(searched != null){
+            grid.getChildren().clear();
+        List<product> li = fn.searchProduct(searched);
+
+        int column = 0;
+        int row = 1;
+        for (int i = 0; i < li.size(); i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("item.fxml"));
+            AnchorPane anchorPane = fxmlLoader.load();
+
+            ItemController itemController = fxmlLoader.getController();
+            itemController.setData(li.get(i), myListener);
+
+            if (column == 3) {
+                column = 0;
+                row++;
+            }
+
+            grid.add(anchorPane, column++, row); //(child,column,row)
+            //set grid width
+            grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+            grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            grid.setMaxWidth(Region.USE_PREF_SIZE);
+
+            //set grid height
+            grid.setMinHeight(Region.USE_COMPUTED_SIZE);
+            grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            grid.setMaxHeight(Region.USE_PREF_SIZE);
+
+            GridPane.setMargin(anchorPane, new Insets(10));
+
+        }
+        }
+        else{
+            this.RefreshPage();
+            List<product> li = fn.getallproduct();
+        
+        }
+    }
 
     private void setChosenProduct(product product) {
+        
         fruitNameLable.setText(product.getName());
         fruitPriceLabel.setText(Calometre.CURRENCY + product.getPrice());
         prodDesc.setText(product.getDescription());
@@ -205,6 +214,7 @@ public class MarketController implements Initializable {
                 + "    -fx-background-radius: 30;");
 
         int y = product.getId();
+        
         System.out.println(y);
 
     }
@@ -223,7 +233,7 @@ public class MarketController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.setQrCode();
         products.addAll(this.getData());
-
+        List<product> li = fn.getallproduct();
         if (li.size() > 0) {
             setChosenProduct(li.get(0));
             myListener = new MyListener() {
@@ -266,6 +276,7 @@ public class MarketController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
 
     }
 
