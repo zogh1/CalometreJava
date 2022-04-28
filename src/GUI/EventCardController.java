@@ -93,7 +93,7 @@ public class EventCardController implements Initializable {
             parsedId = Integer.parseInt(id.getText());
             Event ev = serviceEvent.getEventById(parsedId);
             serviceEvent.applyToEvent(5, parsedId);
-            serviceSMS.sendMessage("Hello , You just applied to '"+ev.getNom()+"' event don't miss it .Dont't miss it !!! Meet you there on: "+ev.getDate_debut(), "+21650310220");
+            serviceSMS.sendMessage("Hello , You just applied to '"+ev.getNom()+"' event don't miss it . Meet you there on: "+ev.getDate_debut()+". This sms can  be you entry pass", "+21650310220");
 
             String nbApplyed = "" + serviceEvent.getNombre_participants_byevent(parsedId);
             this.nb_applyed.setText(nbApplyed);

@@ -22,12 +22,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import service.ServiceComment;
 import service.ServiceEvent;
 
@@ -69,6 +71,8 @@ public class DetailsController implements Initializable {
     private ServiceComment serviceComment;
     @FXML
     private VBox commentsList;
+    @FXML
+    private Label errorMessagelabel;
 
     /**
      * Initializes the controller class.
@@ -78,13 +82,13 @@ public class DetailsController implements Initializable {
         serviceEvent = new ServiceEvent();
         serviceComment = new ServiceComment();
 
-        comment_area.textProperty().addListener((observable, oldVal, newVal) -> {
-            if (newVal != null && !newVal.equals("")) {
-                bouton_ajouter.setDisable(false);
-            } else {
-                bouton_ajouter.setDisable(true);
-            }
-        });
+//        comment_area.textProperty().addListener((observable, oldVal, newVal) -> {
+//            if (newVal != null && !newVal.equals("")) {
+//                bouton_ajouter.setDisable(false);
+//            } else {
+//                bouton_ajouter.setDisable(true);
+//            }
+//        });
     }
 
     public void setData(int idEvent) throws FileNotFoundException {
@@ -116,7 +120,8 @@ public class DetailsController implements Initializable {
     private void addComment(MouseEvent event) {
         int parsedId;
         try {
-            Comment comment = new Comment();
+            if(validateComment(comment_area)){
+               Comment comment = new Comment();
 
             parsedId = Integer.parseInt(id.getText());
             comment.setEvent_id(parsedId);
@@ -136,7 +141,9 @@ public class DetailsController implements Initializable {
             serviceComment.addComment(comment);
 
             commentsList.getChildren().clear();
-            setComments();
+            setComments(); 
+            }
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -146,6 +153,7 @@ public class DetailsController implements Initializable {
         int parsedId;
         try {
             parsedId = Integer.parseInt(id.getText());
+                nb_commentaires.setText(String.valueOf(serviceComment.getCommentsByEvent(parsedId).size()));
 
             List<Comment> comments = serviceComment.getCommentsByEvent(parsedId);
 
@@ -171,5 +179,20 @@ public class DetailsController implements Initializable {
             System.out.println(e.getMessage());
         }
 
+    }
+    
+    
+    
+    private boolean validateComment(TextArea name) {
+        if ((name.getText().length() == 0)) {
+            new animatefx.animation.Shake(name).play();
+            InnerShadow in = new InnerShadow();
+            in.setColor(Color.web("#f80000"));
+            name.setEffect(in);
+            return false;
+        } else {
+            name.setEffect(null);
+            return true;
+        }
     }
 }
