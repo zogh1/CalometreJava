@@ -35,7 +35,7 @@ public class test {
 //    
 //    System.out.println(fn.findById(1).getTotal());
 
-    fn.searchProduct("finally");
+  
     
  
  

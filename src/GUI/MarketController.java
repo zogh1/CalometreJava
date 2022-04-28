@@ -152,7 +152,7 @@ public class MarketController implements Initializable {
      public void searchProduct() throws java.io.IOException {
          
         String searched = searchprod.getText();
-        System.out.println(searched);
+        
         if(searched != null){
             grid.getChildren().clear();
         List<product> li = fn.searchProduct(searched);
@@ -201,7 +201,7 @@ public class MarketController implements Initializable {
             inputstream = new FileInputStream("C:\\Users\\seifd\\Documents\\images\\" + product.getImage());
             image = new Image(inputstream, 100, 100, false, false);
             fruitImg.setImage(image);
-            System.out.println(product.getCategory_id());
+            
            
 
         } catch (FileNotFoundException ex) {
@@ -220,17 +220,24 @@ public class MarketController implements Initializable {
 
         int y = product.getId();
         
-        System.out.println(y);
+        
 
     }
-
+    public product itemid(product product){
+        
+        
+         int y = product.getId();
+         test.setId(y);
+         return test;
+}
     public void AddToChart() throws Exception {
         String quantity = qty.getText();
-
-//      p.setId(p.getId());
         int x = Integer.parseInt(quantity);
-
-        cart.addProduct(90, 1, x);
+        
+       
+        int y = test.getId();
+        System.out.println(y);
+        cart.addProduct(y, 1, x);
         this.RefreshPage();
     }
 
@@ -245,6 +252,7 @@ public class MarketController implements Initializable {
                 @Override
                 public void onClickListener(product product) {
                     setChosenProduct(product);
+                    itemid(product);
 
                 }
             };

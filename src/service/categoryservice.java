@@ -39,8 +39,7 @@ public class categoryservice implements categoryInterface {
                         rs.getInt(1),
                         rs.getString(2));
             }
-            System.out.println(u.getId());
-        System.out.println(u.getName());
+         
         } catch (Exception e) {
         }
         return u;
@@ -60,7 +59,7 @@ public class categoryservice implements categoryInterface {
                 u = new category(
                         rs.getString(1));
             }
-            System.out.println(u.getName());
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

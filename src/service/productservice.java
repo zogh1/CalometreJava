@@ -50,8 +50,7 @@ public class productservice implements productInterface {
                         rs.getString("image")
                 );
             }
-            System.out.println(u.getId());
-            System.out.println(u.getName());
+            
         } catch (Exception e) {
         }
         return u;
@@ -204,9 +203,7 @@ public class productservice implements productInterface {
                 p.setImage(rs.getString("image"));
 
                 li.add(p);
-                 for(int i=0; i<li.size();i++){
-                    System.out.println();
-                }
+                
             }
         } catch (SQLException ex) {
               ex.printStackTrace();
