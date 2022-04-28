@@ -97,7 +97,7 @@ public class MarketController implements Initializable {
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
 }
- 
+
     
     private List<product> getData() {
 
@@ -185,12 +185,9 @@ public class MarketController implements Initializable {
 
             GridPane.setMargin(anchorPane, new Insets(10));
 
-        }
-        }
-        else{
+        }}
+        else {
             this.RefreshPage();
-            List<product> li = fn.getallproduct();
-        
         }
     }
 
@@ -209,7 +206,15 @@ public class MarketController implements Initializable {
 
         } catch (FileNotFoundException ex) {
         }
-
+         if("Food".equals(product.getCategory_id())){
+            product.setColor("3CB371");
+        }
+        if("Brands".equals(product.getCategory_id())){
+            product.setColor("9370DB");
+        }
+        if("Sport".equals(product.getCategory_id())){
+            product.setColor("4169E1");
+        }
         chosenFruitCard.setStyle("-fx-background-color: #" + product.getColor() + ";\n"
                 + "    -fx-background-radius: 30;");
 
@@ -251,9 +256,10 @@ public class MarketController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("item.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
-
+                
                 ItemController itemController = fxmlLoader.getController();
                 itemController.setData(li.get(i), myListener);
+                
 
                 if (column == 3) {
                     column = 0;
