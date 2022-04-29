@@ -145,7 +145,7 @@ public class DetailsController implements Initializable {
             comment.setLikecount(0);
 
             serviceComment.addComment(comment);
-
+            comment_area.clear();
             commentsList.getChildren().clear();
             setComments(); 
             }
