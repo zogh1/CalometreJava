@@ -124,7 +124,7 @@
                <children>
                   <HBox prefHeight="17.0" prefWidth="544.0">
                      <children>
-                        <Label fx:id="errorMessagelabel" prefHeight="17.0" prefWidth="366.0" />
+                        <Label fx:id="errorMessagelabel" prefHeight="17.0" prefWidth="366.0" textFill="RED" />
                      </children>
                   </HBox>
                   <Label fx:id="nb_commentaires" alignment="BASELINE_LEFT" text="10" textFill="#4249dd" />

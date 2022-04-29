@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import Api.DirtyWordsApi;
+import dto.DirtyWords;
+import dto.DirtyWordsList;
 import entity.Comment;
 import entity.Event;
 import java.io.FileInputStream;
@@ -73,6 +76,8 @@ public class DetailsController implements Initializable {
     private VBox commentsList;
     @FXML
     private Label errorMessagelabel;
+    
+    private DirtyWordsApi dirtyWordsApi;
 
     /**
      * Initializes the controller class.
@@ -81,6 +86,7 @@ public class DetailsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         serviceEvent = new ServiceEvent();
         serviceComment = new ServiceComment();
+        dirtyWordsApi = new DirtyWordsApi();
 
 //        comment_area.textProperty().addListener((observable, oldVal, newVal) -> {
 //            if (newVal != null && !newVal.equals("")) {
@@ -183,16 +189,24 @@ public class DetailsController implements Initializable {
     
     
     
-    private boolean validateComment(TextArea name) {
-        if ((name.getText().length() == 0)) {
+   private boolean validateComment(TextArea name) {
+       DirtyWordsList list = dirtyWordsApi.listOfBadWords();
+       for (DirtyWords dw : list.getListofBadWords()) {
+        if ((name.getText().contains(dw.getWord()))) {
             new animatefx.animation.Shake(name).play();
             InnerShadow in = new InnerShadow();
             in.setColor(Color.web("#f80000"));
+            errorMessagelabel.setText("This message contains an inacceptable content");
+            name.setText("*******");
             name.setEffect(in);
             return false;
-        } else {
+        }} 
+            errorMessagelabel.setText("");
             name.setEffect(null);
             return true;
-        }
+        
+       
     }
 }
+
+
