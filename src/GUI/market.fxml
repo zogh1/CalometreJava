@@ -150,7 +150,6 @@
                      </styleClass>
                   </VBox>
                   <Pane prefHeight="57.0" prefWidth="435.0" VBox.vgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#searchProduct" prefHeight="40.0" prefWidth="100.0" styleClass="search-button" stylesheets="@../values/style.css" text="Search" textFill="WHITE" />
                </children>
             </VBox>
          </left>

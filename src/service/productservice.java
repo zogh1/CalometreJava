@@ -5,6 +5,8 @@
  */
 package service;
 
+import entity.Cart;
+import entity.CartItem;
 import entity.category;
 import entity.product;
 import interfacee.productInterface;
@@ -30,7 +32,8 @@ public class productservice implements productInterface {
     Connection cnx = instance.getCnx();
 
     categoryservice cs = new categoryservice();
-
+cartService cart = new cartService();
+    Cart cr = new Cart();
     public product findById(int id) {
         product u = null;
         try {
@@ -65,12 +68,17 @@ public class productservice implements productInterface {
             String req = "SELECT *,COUNT(*) FROM cart_prods WHERE qty IN (SELECT MAX(qty) FROM cart_prods)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ResultSet rs = ps.executeQuery();
+           
+                
             while (rs.next()) {
+                if(count != 0){
                 prodName = this.findById(rs.getInt(2)).getName();
                 count = rs.getInt("qty");
-            }
+            
+            }}
             list.add(prodName);
             list.add(String.valueOf(count));
+            
         } catch (SQLException e) {
         }
         return list;

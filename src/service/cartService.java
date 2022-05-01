@@ -183,6 +183,37 @@ public class cartService implements ICart {
         }
 
     }
+    @Override
+    public void createCart(int cid, int tot, int uid) throws Exception {
+        int count = 0;
+        
+        try {
+            String req1 = "SELECT *,COUNT(*) FROM cart";
+            PreparedStatement ps = cnx.prepareStatement(req1);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                
+                if (count == 0) {
+                    String req = "INSERT INTO `cart` (`id`,`total`, `user_cart_id`) VALUES (?, ?, ?);";
+        try {
+            PreparedStatement st;
+            st = cnx.prepareStatement(req);
+            st.setInt(1, cid);
+            st.setInt(2, tot);
+            st.setInt(3, uid);
+            st.execute();
+
+        } catch (SQLException sq) {
+
+        }
+                }
+            }
+        } catch (SQLException e) {
+        }
+
+        
+    }
 
     public ArrayList<CartItem> loadProductsFromCart(int id) {
         String req = "select * from product p, cart_prods cp where p.id = cp.idprod_id and cp.idcart_id = ?";

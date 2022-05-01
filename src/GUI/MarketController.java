@@ -96,6 +96,7 @@ public class MarketController implements Initializable {
     double price;
 
     private void RefreshPage() throws java.io.IOException {
+        
         Parent root = FXMLLoader.load(getClass().getResource("market.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
@@ -225,6 +226,11 @@ public class MarketController implements Initializable {
         int y = product.getId();
 
     }
+     public void TotalText() {
+
+       List<CartItem> crtitem = cart.loadProductsFromCart(1);
+        ItemsCount.setText("ItemsCount:"+ crtitem.size());
+    }
 
     public product itemid(product product) {
 
@@ -234,20 +240,22 @@ public class MarketController implements Initializable {
     }
 
     public void AddToChart() throws Exception {
+        cart.createCart(1,0, 1);
         String quantity = qty.getText();
         int x = Integer.parseInt(quantity);
-
         int y = test.getId();
-        System.out.println(y);
-        cart.addProduct(y, 1, x);
+        
+        if(x != 0){
+         cart.addProduct(y, 1, x);
+        }
+        
         this.RefreshPage();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.setQrCode();
-        List<CartItem> crtitem = cart.loadProductsFromCart(1);
-        ItemsCount.setText("ItemsCount:"+ crtitem.size());
+        
         List<product> li = fn.getallproduct();
         if (li.size() > 0) {
             setChosenProduct(li.get(0));
@@ -292,7 +300,7 @@ public class MarketController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        this.TotalText();
     }
 
 }

@@ -28,7 +28,10 @@ import javafx.collections.ObservableList;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import service.cartService;
 import service.categoryservice;
@@ -46,26 +49,40 @@ public class CartController implements Initializable {
     Cart cr = new Cart();
     CartItem crtProd = new CartItem();
     ObservableList<CartItem> oblist = FXCollections.observableArrayList();
+    
+    @FXML
+    Label TotalShop;
+    @FXML
+    Button closewindow;
     @FXML
     private ScrollPane scroll;
- 
     @FXML
     private GridPane grid;
 
     private List<CartItem> CartItem = new ArrayList<>();
     private Image image;
-   
+
     String name;
     double price;
-
-  
+    
+     public void Checkout() throws Exception {
+         cart.deleteById(1);
+         Stage stage = (Stage) closewindow.getScene().getWindow();
+         stage.close(); 
+     }
+     
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        int test =0;
+        
         List<CartItem> li = cart.loadProductsFromCart(1);
-
-     
+        for (int i = 0; i < li.size(); i++){
+           test += (li.get(i).getProduct().getPrice() * li.get(i).getQuantity());
+                }
+        String Total = Integer.toString(test);
+        
+        TotalShop.setText( "Total:"+ " "+Total + " "+Calometre.CURRENCY);
         int column = 0;
         int row = 1;
         try {
@@ -73,7 +90,7 @@ public class CartController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("item-Shop.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
-                
+
                 ItemCartController ItemCartController = fxmlLoader.getController();
                 ItemCartController.setData(li.get(i));
 
@@ -97,7 +114,6 @@ public class CartController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-       
 
     }
 
