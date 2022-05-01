@@ -52,9 +52,7 @@ public class Cart {
        }
        return total;
     }
-
-
-
+    
     /**
      * @return the user_cart_id
      */

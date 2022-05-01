@@ -84,37 +84,23 @@ public class MarketController implements Initializable {
     @FXML
     ImageView qrcode;
     product p = null;
-    
-             
-                
+
     private List<product> products = new ArrayList<>();
     private Image image;
     private MyListener myListener;
     String name;
     double price;
-   private void RefreshPage() throws java.io.IOException{
-    Parent root = FXMLLoader.load(getClass().getResource("market.fxml"));
+
+    private void RefreshPage() throws java.io.IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("market.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
-}
+    }
 
-    
-    private List<product> getData() {
-
-        List<product> li = fn.getallproduct();
-        List<product> products = new ArrayList<>();
-        product product;
-        for (int i = 0; i < li.size(); i++) {
-            product = new product();
-            product.setName(name);
-            product.setPrice(price);
-
-            product.setImage("C:\\Users\\seifd\\Documents\\images\\" + product.getImage());
-            product.setColor("6A7324");
-            products.add(product);
-
-        }
-        return products;
+    private void Cart() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Cart.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
     }
 
     public void setQrCode() {
@@ -149,50 +135,51 @@ public class MarketController implements Initializable {
 
         qrcode.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
     }
-     public void searchProduct() throws java.io.IOException {
-         
+
+    public void searchProduct() throws java.io.IOException {
+
         String searched = searchprod.getText();
-        
-        if(searched != null){
+
+        if (searched != null) {
             grid.getChildren().clear();
-        List<product> li = fn.searchProduct(searched);
+            List<product> li = fn.searchProduct(searched);
 
-        int column = 0;
-        int row = 1;
-        for (int i = 0; i < li.size(); i++) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("item.fxml"));
-            AnchorPane anchorPane = fxmlLoader.load();
+            int column = 0;
+            int row = 1;
+            for (int i = 0; i < li.size(); i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("item.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
 
-            ItemController itemController = fxmlLoader.getController();
-            itemController.setData(li.get(i), myListener);
+                ItemController itemController = fxmlLoader.getController();
+                itemController.setData(li.get(i), myListener);
 
-            if (column == 3) {
-                column = 0;
-                row++;
+                if (column == 3) {
+                    column = 0;
+                    row++;
+                }
+
+                grid.add(anchorPane, column++, row); //(child,column,row)
+                //set grid width
+                grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+                grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                grid.setMaxWidth(Region.USE_PREF_SIZE);
+
+                //set grid height
+                grid.setMinHeight(Region.USE_COMPUTED_SIZE);
+                grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                grid.setMaxHeight(Region.USE_PREF_SIZE);
+
+                GridPane.setMargin(anchorPane, new Insets(10));
+
             }
-
-            grid.add(anchorPane, column++, row); //(child,column,row)
-            //set grid width
-            grid.setMinWidth(Region.USE_COMPUTED_SIZE);
-            grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
-            grid.setMaxWidth(Region.USE_PREF_SIZE);
-
-            //set grid height
-            grid.setMinHeight(Region.USE_COMPUTED_SIZE);
-            grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
-            grid.setMaxHeight(Region.USE_PREF_SIZE);
-
-            GridPane.setMargin(anchorPane, new Insets(10));
-
-        }}
-        else {
+        } else {
             this.RefreshPage();
         }
     }
 
     private void setChosenProduct(product product) {
-        
+
         fruitNameLable.setText(product.getName());
         fruitPriceLabel.setText(Calometre.CURRENCY + product.getPrice());
         prodDesc.setText(product.getDescription());
@@ -201,40 +188,36 @@ public class MarketController implements Initializable {
             inputstream = new FileInputStream("C:\\Users\\seifd\\Documents\\images\\" + product.getImage());
             image = new Image(inputstream, 100, 100, false, false);
             fruitImg.setImage(image);
-            
-           
 
         } catch (FileNotFoundException ex) {
         }
-         if("Food".equals(product.getCategory_id())){
+        if ("Food".equals(product.getCategory_id())) {
             product.setColor("3CB371");
         }
-        if("Brands".equals(product.getCategory_id())){
+        if ("Brands".equals(product.getCategory_id())) {
             product.setColor("9370DB");
         }
-        if("Sport".equals(product.getCategory_id())){
+        if ("Sport".equals(product.getCategory_id())) {
             product.setColor("4169E1");
         }
         chosenFruitCard.setStyle("-fx-background-color: #" + product.getColor() + ";\n"
                 + "    -fx-background-radius: 30;");
 
         int y = product.getId();
-        
-        
 
     }
-    public product itemid(product product){
-        
-        
-         int y = product.getId();
-         test.setId(y);
-         return test;
-}
+
+    public product itemid(product product) {
+
+        int y = product.getId();
+        test.setId(y);
+        return test;
+    }
+
     public void AddToChart() throws Exception {
         String quantity = qty.getText();
         int x = Integer.parseInt(quantity);
-        
-       
+
         int y = test.getId();
         System.out.println(y);
         cart.addProduct(y, 1, x);
@@ -244,7 +227,7 @@ public class MarketController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.setQrCode();
-        products.addAll(this.getData());
+
         List<product> li = fn.getallproduct();
         if (li.size() > 0) {
             setChosenProduct(li.get(0));
@@ -264,10 +247,9 @@ public class MarketController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("item.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
-                
+
                 ItemController itemController = fxmlLoader.getController();
                 itemController.setData(li.get(i), myListener);
-                
 
                 if (column == 3) {
                     column = 0;
@@ -290,7 +272,6 @@ public class MarketController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
 
     }
 

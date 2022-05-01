@@ -23,7 +23,7 @@ public class Calometre extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Calometre.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/products.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/market.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

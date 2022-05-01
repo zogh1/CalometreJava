@@ -6,10 +6,12 @@
 package calometre;
 
 import entity.Cart;
+import entity.CartItem;
 import entity.category;
 import entity.product;
 import entity.user;
 import interfacee.userInterface;
+import java.util.List;
 import service.cartService;
 import service.categoryservice;
 import service.productservice;
@@ -27,17 +29,17 @@ public class test {
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
        
-//    Cart crt = new Cart();
-//    cartService fn2 = new cartService();
+    Cart crt = new Cart();
+   cartService fn2 = new cartService();
+   CartItem crti = new CartItem();
         productservice fn = new productservice();
         product test = new product();
-//    
-//    
-//    System.out.println(fn.findById(1).getTotal());
-
-  
+    fn2.loadProductsFromCart(1);
+    List<CartItem> li = fn2.loadProductsFromCart(1);
+    for (int i = 0; i < li.size(); i++) {
+    System.out.println(li.get(i).getProduct().getName());
+    }
+        }
     
- 
- 
-}
+    
 }
