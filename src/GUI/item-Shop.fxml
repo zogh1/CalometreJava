@@ -48,7 +48,7 @@
                <children>
                   <TextField fx:id="qtyCart" promptText="Chose quantity:" />
                   <Button mnemonicParsing="false" onAction="#AddQtyCart" text="Add" />
-                  <Button mnemonicParsing="false" onAction="#DelQtyCart" text="Delete" />
+                  <Button fx:id="Del" mnemonicParsing="false" onAction="#DelQtyCart" text="Delete" />
                   <Label fx:id="TotalItem" prefHeight="49.0" prefWidth="99.0" text="\$0.99">
                      <font>
                         <Font name="Cambria Bold" size="18.0" />

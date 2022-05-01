@@ -20,6 +20,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import entity.Cart;
+import entity.CartItem;
 import entity.category;
 import entity.product;
 import java.awt.Color;
@@ -45,6 +46,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import service.cartService;
 import service.categoryservice;
 import service.productservice;
@@ -68,6 +70,8 @@ public class MarketController implements Initializable {
     private Label fruitNameLable;
     @FXML
     private Label prodDesc;
+     @FXML
+    private Label ItemsCount;
 
     @FXML
     private Label fruitPriceLabel;
@@ -96,12 +100,27 @@ public class MarketController implements Initializable {
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
     }
-
-    private void Cart() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Cart.fxml"));
-        Calometre.primaryStage.setScene(new Scene(root));
-        Calometre.primaryStage.show();
+    public void GoToCart() throws java.io.IOException {
+        try {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("Cart.fxml"));
+        /*
+         * if "fx:controller" is not set in fxml
+         * fxmlLoader.setController(NewWindowController);
+         */
+        Scene scene = new Scene(fxmlLoader.load(), 800, 550);
+        Stage stage = new Stage();
+        stage.setTitle("Cart Items");
+        stage.setScene(scene);
+        stage.show();
+    } catch (IOException e) {
+        Logger logger = Logger.getLogger(getClass().getName());
+        logger.log(Level.SEVERE, "Failed to create new Window.", e);
     }
+
+}
+
+    
 
     public void setQrCode() {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -227,7 +246,8 @@ public class MarketController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.setQrCode();
-
+        List<CartItem> crtitem = cart.loadProductsFromCart(1);
+        ItemsCount.setText("ItemsCount:"+ crtitem.size());
         List<product> li = fn.getallproduct();
         if (li.size() > 0) {
             setChosenProduct(li.get(0));

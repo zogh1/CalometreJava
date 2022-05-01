@@ -77,12 +77,11 @@ public class CartController implements Initializable {
                 ItemCartController ItemCartController = fxmlLoader.getController();
                 ItemCartController.setData(li.get(i));
 
-                if (column == 3) {
-                    column = 0;
+                if (true) {
                     row++;
                 }
 
-                grid.add(anchorPane, column++, row); //(child,column,row)
+                grid.add(anchorPane, 1, row); //(child,column,row)
                 //set grid width
                 grid.setMinWidth(Region.USE_COMPUTED_SIZE);
                 grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
