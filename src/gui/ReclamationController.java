@@ -24,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,7 +45,7 @@ public class ReclamationController implements Initializable {
     @FXML
     private TextField tfemail;
     @FXML
-    private TextField tfdate;
+    private DatePicker tfdate;
     @FXML
     private ComboBox tftype;
     @FXML
@@ -69,7 +70,7 @@ user u = new user();
     String mail= tfemail.getText();
     String type=tftype.getValue().toString();
     String message=tfmessage.getText();
-    String date=tfdate.getText();
+    String date=String.valueOf(tfdate.getValue());
     
     if (mail.isEmpty()  || type.isEmpty() || message.isEmpty()|| date.isEmpty() ) {
             Alert alert = new Alert(AlertType.ERROR);

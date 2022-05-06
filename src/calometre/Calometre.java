@@ -37,7 +37,7 @@ public class Calometre extends Application {
         
 
         Calometre.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/reclamation.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
