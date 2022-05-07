@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import entity.Event;
 import interfacee.userInterface;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -48,6 +49,10 @@ public class MainMenuController implements Initializable {
     @FXML
     public AnchorPane menuPane;
 
+    public AnchorPane getMenuPane() {
+        return menuPane;
+    }
+
     public void showProfile() {
         String firstName = session.getUser().getFirstname();
         try {
@@ -74,12 +79,32 @@ public class MainMenuController implements Initializable {
         try {
             loadFxml("EventsView.fxml");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "++");
         }
     }
 
     public void loadFxml(String page) throws IOException {
         Pane newLoadedPane = FXMLLoader.load(getClass().getResource(page));
+        menuPane.getChildren().add(newLoadedPane);
+    }
+
+    public void loadEventDetails(String page, int idEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
+        Pane newLoadedPane = loader.load();
+
+        DetailsController detailsController = loader.getController();
+        detailsController.setData(idEvent);
+
+        menuPane.getChildren().add(newLoadedPane);
+    }
+
+    public void loadUpdateEventView(String page, Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
+        AnchorPane newLoadedPane = loader.load();
+
+        UpdateEventController detailsController = loader.getController();
+        detailsController.initData(event);
+
         menuPane.getChildren().add(newLoadedPane);
     }
 

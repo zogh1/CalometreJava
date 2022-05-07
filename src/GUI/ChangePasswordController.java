@@ -93,6 +93,12 @@ public class ChangePasswordController implements Initializable {
 
     }
 
+    public void LinkToChangePassword() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("changepassword.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+    }
+
     public void LinkToProfile() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));

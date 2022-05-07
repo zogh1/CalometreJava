@@ -71,6 +71,8 @@ public class SignupController implements Initializable {
     private TextField captchaField;
     @FXML
     private ComboBox roleCombo;
+    @FXML
+    private PasswordField confirmpasswordField;
 
     @FXML
     private Hyperlink linktoLogin;
@@ -116,7 +118,7 @@ public class SignupController implements Initializable {
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
-            alert.setContentText("No More Attempts");
+            alert.setContentText("Pas plus de tentatives");
             alert.showAndWait();
         }
         SignupController.nbOfClicks = SignupController.nbOfClicks + 1;
@@ -133,11 +135,12 @@ public class SignupController implements Initializable {
         String country_code = ccField.getText();
         String phone_number = pnField.getText();
         String captcha_code = captchaField.getText();
+        String cpass = confirmpasswordField.getText();
 
         if (mail.isEmpty() || pass.isEmpty() || fname.isEmpty() || lname.isEmpty() || roleCombo.getValue() == null || phone_number.isEmpty() || country_code.isEmpty() || captcha_code.isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
-            alert.setContentText("Please fill all required fields");
+            alert.setContentText("Veuillez remplir tous les champs obligatoires");
             alert.showAndWait();
         } else if (passwordField.getText().length() < 8) {
             Alert alert = new Alert(AlertType.ERROR);
@@ -154,7 +157,14 @@ public class SignupController implements Initializable {
         } else if (!captchaField.getText().equals(SignupController.GeneratedCode)) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
-            alert.setContentText("WrongCaptchaCode");
+            alert.setContentText("CaptchaCode incorrecte");
+            alert.showAndWait();
+
+        } else if (!pass.equals(cpass)) {
+
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("null");
+            alert.setContentText("Les mots de passe ne correspondent pas");
             alert.showAndWait();
 
         } else {
@@ -192,5 +202,6 @@ public class SignupController implements Initializable {
 
 //        CaptchaCode.setCache(true);
         CaptchaCode.setEffect(mb);
+
     }
 }

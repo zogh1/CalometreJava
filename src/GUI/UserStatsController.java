@@ -6,6 +6,7 @@
 package GUI;
 
 import calometre.Calometre;
+import entity.user;
 import interfacee.userInterface;
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +28,8 @@ import service.userservice;
  */
 public class UserStatsController implements Initializable {
 
+    userInterface fn = new userservice();
+    user test = new user();
     @FXML
     private Label adminCount;
     @FXML
@@ -61,6 +64,15 @@ public class UserStatsController implements Initializable {
         clientCount.setText(fn.countuserbyRole("client") + " Clients");
         coachCount.setText(fn.countuserbyRole("coach") + " Coaches");
         blockedCount.setText(fn.countBannedAccounts() + " Comptes bloqués");
+    }
+
+    public void logout() throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+        fn.logout();
+
     }
 
     public void LinkToUsersList() throws IOException {

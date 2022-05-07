@@ -26,20 +26,20 @@
             <font>
                <Font size="26.0" />
             </font></TextField>
-            <PasswordField fx:id="passwordField" layoutX="144.0" layoutY="394.0" prefHeight="58.0" prefWidth="672.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0px 0px 2px 0px;">
+            <PasswordField fx:id="passwordField" layoutX="144.0" layoutY="394.0" prefHeight="58.0" prefWidth="672.0" promptText="Mot de passe" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0px 0px 2px 0px;">
             <font>
                <Font size="26.0" />
             </font></PasswordField>
-            <Button fx:id="loginbutton" layoutX="402.0" layoutY="575.0" mnemonicParsing="false" onAction="#loginuser" style="-fx-background-color: #02a8b9;" text="Login" textFill="WHITE">
+            <Button fx:id="loginbutton" layoutX="402.0" layoutY="575.0" mnemonicParsing="false" onAction="#loginuser" style="-fx-background-color: #02a8b9;" text=" Se connecter" textFill="WHITE">
                 <font>
                     <Font size="32.0" />
                 </font>
             </Button>
-            <Hyperlink fx:id="ForgotPassword" layoutX="93.0" layoutY="724.0" onAction="#LinkToResetPassword" text="Forgot  password?">
+            <Hyperlink fx:id="ForgotPassword" layoutX="93.0" layoutY="724.0" onAction="#LinkToResetPassword" text="Mot de passe oublié">
             <font>
                <Font size="29.0" />
             </font></Hyperlink>
-         <Hyperlink fx:id="CreateAnAccount" layoutX="561.0" layoutY="724.0" onAction="#LinkToCreateAnAccount" text="New member? create an account">
+         <Hyperlink fx:id="CreateAnAccount" layoutX="561.0" layoutY="724.0" onAction="#LinkToCreateAnAccount" text="Nouveau membre? créer un compte">
             <font>
                <Font size="29.0" />
             </font>

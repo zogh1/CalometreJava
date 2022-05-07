@@ -5,8 +5,12 @@
  */
 package calometre;
 
+import entity.exercice;
+import entity.typeExercice;
 import entity.user;
 import interfacee.userInterface;
+import service.exerciceService;
+import service.typeExerciceService;
 import service.userservice;
 
 /**
@@ -22,7 +26,13 @@ public class Main {
         // TODO code application logic here
         userInterface us = new userservice();
         user test = new user();
-        us.sendresetCode("crinnxx@gmail.com");
+//        us.sendresetCode("crinnxx@gmail.com");
+        exerciceService fn = new exerciceService();
+        exercice test1 = new exercice();
+
+        typeExerciceService fn1 = new typeExerciceService();
+        typeExercice test2 = new typeExercice();
+        fn.readExercice();
 
 //        test.setPassword("password");
 //        test.setEmail("souhail.krissaane@esprit.tn");

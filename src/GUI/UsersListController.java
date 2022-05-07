@@ -89,6 +89,15 @@ public class UsersListController implements Initializable {
         fn.unbanUser(selecteduser.getId());
     }
 
+    public void logout() throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+        fn.logout();
+
+    }
+
     private void userList(int i, int j) {
 
         ImageView imageView = new ImageView(getClass().getResource("..\\images\\icons8-next-page-100.png").toExternalForm());

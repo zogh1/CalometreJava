@@ -53,6 +53,7 @@ public class userservice implements userInterface {
             st.setString(10, u.getCountry_code());
             st.executeUpdate();
             System.out.println("Personne ajoutée avec succes.");
+            session.setUser(u);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -558,7 +559,7 @@ public class userservice implements userInterface {
     public boolean sendresetCode(String email) {
         boolean isSent = false;
 
-        String subject = "test";
+        String subject = "Réinitialiser votre mot de passe";
         String message = "  <!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional //EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n"
                 + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n"
                 + "<head>\n"

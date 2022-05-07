@@ -91,7 +91,7 @@ public class LoginController implements Initializable {
         if (mail.isEmpty() || pass.isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
-            alert.setContentText("Please fill all required fields");
+            alert.setContentText("Veuillez remplir tous les champs obligatoires");
             alert.showAndWait();
         } else {
             test.setEmail(mail);
@@ -125,7 +125,7 @@ public class LoginController implements Initializable {
         if (emailField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("null");
-            alert.setContentText("Please enter your email");
+            alert.setContentText("Veuillez saisir votre e-mail");
             alert.showAndWait();
         } else {
             if (fn.sendresetCode(LoginController.currentMailReset)) {
@@ -145,12 +145,12 @@ public class LoginController implements Initializable {
         if (resetCode.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("null");
-            alert.setContentText("Please enter reset code");
+            alert.setContentText("Veuillez entrer le code de réinitialisation");
             alert.showAndWait();
         } else if (code != userservice.code) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("null");
-            alert.setContentText("Please verify reset code");
+            alert.setContentText("Veuillez vérifier le code de réinitialisation");
             alert.showAndWait();
         } else {
             if (code == userservice.code) {
@@ -171,12 +171,12 @@ public class LoginController implements Initializable {
         if (npass.isEmpty() || cpass.isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
-            alert.setContentText("Please fill all required fields");
+            alert.setContentText("Veuillez remplir tous les champs obligatoires");
             alert.showAndWait();
         } else if (!npass.equals(cpass)) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
-            alert.setContentText("password don't match");
+            alert.setContentText("les mot de passes ne correspondent pas");
             alert.showAndWait();
 
         } else {

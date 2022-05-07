@@ -16,6 +16,8 @@ public interface typeExerciceInterface {
 
     public void addType(typeExercice type);
 
+    public typeExercice findByName(String name);
+
     public void editType(typeExercice type);
 
     public void deleteType(int id);

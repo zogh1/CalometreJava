@@ -22,4 +22,5 @@ public interface exerciceInterface {
     public void deleteExercice(int id);
 
     public List<exercice> readExercice();
+
 }

@@ -40,6 +40,26 @@ public class typeExerciceService implements typeExerciceInterface {
     }
 
     @Override
+    public typeExercice findByName(String name) {
+        typeExercice u = null;
+        try {
+            String req = "SELECT id FROM typeexercice WHERE nom=?";
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, name);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                u = new typeExercice(
+                        rs.getString(1));
+            }
+            System.out.println(u.getNom());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return u;
+    }
+
+    @Override
     public void editType(typeExercice type) {
         try {
             String req = "update typeexercice set nom='" + type.getNom() + "' where id='" + type.getId() + "'";
