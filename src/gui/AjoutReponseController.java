@@ -76,7 +76,9 @@ public class AjoutReponseController implements Initializable {
     private void ajouterReponse(ActionEvent event) {
         String date= tf_date.getText();
     int idRep=combo_id.getSelectionModel().getSelectedItem();
+   
     String reponse=tf_reponse.getText();
+    
     if (date.isEmpty() || reponse.isEmpty() ) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("null");

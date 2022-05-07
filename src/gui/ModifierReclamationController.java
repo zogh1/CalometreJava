@@ -83,6 +83,7 @@ public class ModifierReclamationController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(ModifierReclamationController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }    
 
 
@@ -92,6 +93,7 @@ public class ModifierReclamationController implements Initializable {
             
         sr.editReclamation(new Reclamation(combo_id.getSelectionModel().getSelectedItem(), tfemail.getText(), tfdate.getText(),tftype.getSelectionModel().getSelectedItem().toString(),tfmessage.getText()));       
         JOptionPane.showMessageDialog(null, "Reclamation modifié");
+        
         
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("listerec.fxml"));

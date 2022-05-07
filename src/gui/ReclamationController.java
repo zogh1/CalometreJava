@@ -39,7 +39,7 @@ import util.session;
  * @author RYM BACCOURI
  */
 public class ReclamationController implements Initializable {
-    
+
     @FXML
     private Label label;
     @FXML
@@ -53,77 +53,71 @@ public class ReclamationController implements Initializable {
 
     @FXML
     private Button btnajouter;
-    
-    userservice  us = new userservice();
-user u = new user();    
-    
+
+    userservice us = new userservice();
+    user u = new user();
+
     ServiceReclamation fn = new ServiceReclamation();
     Reclamation rec = new Reclamation();
-    
+
     @FXML
-    private void ajouterreclamation() throws IOException{ 
-      
-          //if (session.getUser().getRoles().contains("Admin"))
+    private void ajouterreclamation() throws IOException {
+
+        //if (session.getUser().getRoles().contains("Admin"))
         //{
-        
-       // Parent Parent=FXMLLoader.load(getClass().getRessource("/GUI/Listerec.fxml"));
-    String mail= tfemail.getText();
-    String type=tftype.getValue().toString();
-    String message=tfmessage.getText();
-    String date=String.valueOf(tfdate.getValue());
-    
-              
-    
-    if (mail.isEmpty()  || type.isEmpty() || message.isEmpty()|| date.isEmpty() ) {
+        // Parent Parent=FXMLLoader.load(getClass().getRessource("/GUI/Listerec.fxml"));
+        String mail = tfemail.getText();
+        String type = tftype.getValue().toString();
+        String message = tfmessage.getText();
+        String date = String.valueOf(tfdate.getValue());
+
+        if (mail.isEmpty() || type.isEmpty() || message.isEmpty() || date.isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("Please fill all required fields");
             alert.showAndWait();
-        }
-    else if (!(tfemail.getText().matches("^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
+        } else if (!(tfemail.getText().matches("^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
                 + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$"))) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("verifier votre email");
-            alert.showAndWait();}
-    else if (tfmessage.getText().length() < 5 ||tfmessage.getText().length() >30) {
+            alert.showAndWait();
+        } else if (tfmessage.getText().length() < 5 || tfmessage.getText().length() > 30) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("votre message doit etre entre 5 et 30 caratere");
-            alert.showAndWait();}
-    else{
-        
-    
-    rec.setEmail(mail);
-       rec.setMessage(message);
-       rec.setType(type);
-       rec.setDate(date);
-       try{
-      fn.createReclamation(rec);
-    
-        JOptionPane.showMessageDialog(null, "Reclamation ajouter");
-    FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("listerec.fxml"));
-        Parent root = loader.load(); 
-         tfemail.getScene().setRoot(root);
-    
-    }catch (IOException ex) {
-            Logger.getLogger(ModifierReclamationController.class.getName()).log(Level.SEVERE, null, ex);
-        }}
+            alert.showAndWait();
+        } else {
+
+            rec.setEmail(mail);
+            rec.setMessage(message);
+            rec.setType(type);
+            rec.setDate(date);
+            try {
+                fn.createReclamation(rec);
+
+                JOptionPane.showMessageDialog(null, "Reclamation ajouter");
+                FXMLLoader loader = new FXMLLoader(getClass()
+                        .getResource("listerec.fxml"));
+                Parent root = loader.load();
+                tfemail.getScene().setRoot(root);
+
+            } catch (IOException ex) {
+                Logger.getLogger(ModifierReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         //}
-    
-    
+
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tftype.getItems().removeAll(tftype.getItems());
-        tftype.getItems().addAll("Food", "Coach","Exercice");
+        tftype.getItems().addAll("Food", "Coach", "Exercice");
 
     }
-      
-    
-    
-/*
+
+    /*
  private void modifierreclamation(){ 
     String id= tfid.getText();
     String mail= tfemail.getText();
@@ -152,9 +146,5 @@ user u = new user();
     
     
     
-    }*/}
-
-    
-
-    
-
+    }*/
+}

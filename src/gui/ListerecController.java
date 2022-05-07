@@ -9,6 +9,7 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
+
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -28,6 +29,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.twilio.rest.preview.understand.assistant.task.Sample;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -69,15 +71,16 @@ import javafx.stage.Window;
 import javax.swing.JOptionPane;
 import service.ServiceReclamation;
 
-
-
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.Date;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.util.Callback;
 import util.connexion;
 
 /**
@@ -87,11 +90,11 @@ import util.connexion;
  */
 public class ListerecController implements Initializable {
 
-  //  @FXML
-   // private ListView<Reclamation> listRec;
+    //  @FXML
+    // private ListView<Reclamation> listRec;
     @FXML
     private TextField tf_recherche;
-     @FXML
+    @FXML
     private VBox vBoxMenu;
 
     private final Background focusBackground = new Background(new BackgroundFill(Color.web("#E4E4E4"), CornerRadii.EMPTY, Insets.EMPTY));
@@ -104,7 +107,7 @@ public class ListerecController implements Initializable {
     private ImageView fpdf;
     @FXML
     private TableView<Reclamation> tabreclamation;
-   
+
     @FXML
     private TableColumn<Reclamation, String> tfemail;
     @FXML
@@ -117,15 +120,18 @@ public class ListerecController implements Initializable {
     private Button btnm;
     @FXML
     private TableColumn<Reclamation, String> tfaction;
-    
-    
-    
+
+    private final int sizeUser = 5;
+
+    private static int startUser = 0;
+    @FXML
+    private Button nextPage;
+    @FXML
+    private Button previousPage;
 
     /**
      * Initializes the controller class.
      */
-    
-
     @FXML
     private void selectMenueItem(MouseEvent event) {
         HBox hb = (HBox) event.getSource();
@@ -160,26 +166,22 @@ public class ListerecController implements Initializable {
         }
     }
 
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ServiceReclamation sr = new ServiceReclamation();
-        List<Reclamation> lr = sr.readReclamation();
-        ObservableList<Reclamation> data=FXCollections.observableArrayList(lr);
-        tabreclamation.setItems(data);
-        this.loadReclamations();
-                
-    }    
+
+        this.loadReclamations(this.sizeUser, ListerecController.startUser);
+
+    }
 
     @FXML
-    private void ajoutRec( MouseEvent event) {
+    private void ajoutRec(MouseEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("reclamation.fxml"));
-            Parent root=loader.load();
-            ReclamationController aac=loader.getController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("reclamation.fxml"));
+            Parent root = loader.load();
+            ReclamationController aac = loader.getController();
             tabreclamation.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(ListerecController.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,9 +189,31 @@ public class ListerecController implements Initializable {
 
     }
 
+    public void nextUserPage() throws IOException {
+
+        ListerecController.startUser = ListerecController.startUser + this.sizeUser;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("listerec.fxml"));
+        Parent root = loader.load();
+        ListerecController aac = loader.getController();
+        tabreclamation.getScene().setRoot(root);
+        nextPage.setDisable(false);
+
+    }
+
+    public void previousUserPage() throws IOException {
+
+        ListerecController.startUser = ListerecController.startUser - this.sizeUser;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("listerec.fxml"));
+        Parent root = loader.load();
+        ListerecController aac = loader.getController();
+        tabreclamation.getScene().setRoot(root);
+        previousPage.setDisable(false);
+
+    }
+
     @FXML
     private void supprimerRec(ActionEvent event) {
-       
+
         Reclamation R = new Reclamation();
         R = tabreclamation.getSelectionModel().getSelectedItem();
         if (R == null) {
@@ -198,7 +222,7 @@ public class ListerecController implements Initializable {
             alert.setHeaderText("Alerte");
             alert.setContentText("Veuillez Choisir une reclamation à supprimer");
             alert.show();
-        }else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation ");
             alert.setHeaderText(null);
@@ -206,179 +230,111 @@ public class ListerecController implements Initializable {
             Optional<ButtonType> action = alert.showAndWait();
 
             if (action.get() == ButtonType.OK) {
-                ServiceReclamation SR= new ServiceReclamation();
+                ServiceReclamation SR = new ServiceReclamation();
                 SR.deleteReclamation(R.getId());
                 JOptionPane.showMessageDialog(null, "Reclamation supprimé");
-                loadReclamations();
+                loadReclamations(this.sizeUser, ListerecController.startUser);
             }
+        }
     }
-    }
-    
-    public void loadReclamations() {
-      /*  ServiceReclamation SR = new ServiceReclamation();
-        ArrayList<Reclamation> listeRec = (ArrayList<Reclamation>) SR.readReclamation();
 
-        ObservableList observableList = FXCollections.observableArrayList(listeRec);
-        tabreclamation.setItems(observableList);
-        */
-      tfemail.setCellValueFactory(new PropertyValueFactory<>("email"));
-       tfdate.setCellValueFactory(new PropertyValueFactory<>("date"));
- tftype.setCellValueFactory(new PropertyValueFactory<>("type"));
- tfmessage.setCellValueFactory(new PropertyValueFactory<>("message"));
- // btnm.setCellValueFactory(new PropertyValueFactory<>("modifierRec"));
+    Reclamation selectedReponse = null;
 
+    public void loadReclamations(int i, int j) {
+        ServiceReclamation sr = new ServiceReclamation();
+        List<Reclamation> lr = sr.pagination(i, j);
+        ObservableList<Reclamation> data = FXCollections.observableArrayList(lr);
+        tfemail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        tfdate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tftype.setCellValueFactory(new PropertyValueFactory<>("type"));
+        tfmessage.setCellValueFactory(new PropertyValueFactory<>("message"));
+
+        Callback<TableColumn<Reclamation, String>, TableCell<Reclamation, String>> cellDelete = (TableColumn<Reclamation, String> param) -> {
+            final TableCell<Reclamation, String> cell = new TableCell<Reclamation, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+
+                    } else {
+                        Button editButton = new Button();
+                        editButton.setText("Supp");
+                        editButton.setStyle("-fx-font-size:14;-fx-text-fill:white;-fx-background-color:#ff0000; -fx-background-radius:20px;-fx-border-radius:20px");
+                        editButton.setPrefSize(65, 50);
+
+                        editButton.setOnMouseClicked((MouseEvent event) -> {
+                            selectedReponse = tabreclamation.getSelectionModel().getSelectedItem();
+                            if (selectedReponse == null) {
+                            } else {
+                                try {
+                                    sr.deleteReclamation(selectedReponse.getId());
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("listerec.fxml"));
+                                    Parent root = loader.load();
+                                    ListerecController aac = loader.getController();
+                                    tabreclamation.getScene().setRoot(root);
+                                } catch (IOException ex) {
+                                }
+                            }
+                        });
+
+                        HBox managebtn = new HBox(editButton);
+                        managebtn.setStyle("-fx-alignment:center");
+                        HBox.setMargin(editButton, new Insets(2, 2, 0, 3));
+                        setGraphic(managebtn);
+                        setText(null);
+                    }
+                }
+            };
+            return cell;
+        };
+        tfaction.setCellFactory(cellDelete);
+        tabreclamation.setItems(data);
 
     }
 
     @FXML
     private void stats(MouseEvent event) throws ParseException {
         try {
-        // Load the fxml file and create a new stage for the popup.
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXBarChart.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("Statistiques reclamation");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        Window primaryStage = null;
-        dialogStage.initOwner(primaryStage);
-        Scene scene = new Scene(page);
-        dialogStage.setScene(scene);
+            // Load the fxml file and create a new stage for the popup.
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXBarChart.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Statistiques reclamation");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            Window primaryStage = null;
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
 
-        // Set the persons into the controller.
+            // Set the persons into the controller.
             gui.FXBarChartController controller = loader.getController();
-        ServiceReclamation sr = new ServiceReclamation();
-        List<Reclamation> lr = sr.readReclamation();
-        ObservableList<Reclamation> data=FXCollections.observableArrayList(lr);
-    
-    tabreclamation.setItems(data);
-        controller.setReclamationData(data);
+            ServiceReclamation sr = new ServiceReclamation();
+            List<Reclamation> lr = sr.readReclamation();
+            ObservableList<Reclamation> data = FXCollections.observableArrayList(lr);
 
-        dialogStage.show();
+            tabreclamation.setItems(data);
+            controller.setReclamationData(data);
 
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+            dialogStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void modifierRec(ActionEvent event) {
-       
+
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("ModifierReclamation.fxml"));
-            Parent root=loader.load();
-            ModifierReclamationController aac=loader.getController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierReclamation.fxml"));
+            Parent root = loader.load();
+            ModifierReclamationController aac = loader.getController();
             tabreclamation.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(ListerecController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    @FXML
-    private void boutonpdf(MouseEvent event) throws ClassNotFoundException, SQLException, DocumentException {
-       try {
-       Class.forName("com.mysql.jdbc.Driver");
-     Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Calometre", "root", "");
-      PreparedStatement pt = con.prepareStatement("select * from Reclamation");
-            ResultSet rs = pt.executeQuery();
-            
-                       /* Step-2: Initialize PDF documents - logical objects */
-
-                       Document my_pdf_report = new Document();
-                       //OutputStream file = new FileOutputStream(new File("ProductReport.pdf"));
-                    
-                       my_pdf_report.open();  
-                       my_pdf_report.add(new Paragraph(new Date().toString())); 
-                       my_pdf_report.add(new Paragraph("calometre"));
-                       my_pdf_report.add(new Paragraph("Listes des reclamation"));
-
-                       PdfWriter.getInstance(my_pdf_report, new FileOutputStream("pdf_report_from_sql_using_java.pdf"));
-                       
-                        my_pdf_report.open();  
-                       my_pdf_report.add(new Paragraph(new Date().toString()));
-//                            Image img = Image.getInstance("c:/6.png");
-//                            my_pdf_report.add(img);
-                       my_pdf_report.add(new Paragraph("Listes des reclamation"));
-                             //Add Image
-//		       Image image1 = Image.getInstance("filmouk.png");
-//                       image1.scaleAbsolute(210, 210);
-//                       my_pdf_report.add(image1);
-                       my_pdf_report.addCreationDate();
-              
-                       
-                       //we have four columns in our table
-                       PdfPTable my_report_table = new PdfPTable((5));
-                       my_report_table.setWidthPercentage(100); //Width 100%
-			my_report_table.setSpacingBefore(10f); //Space before table
-			my_report_table.setSpacingAfter(10f); //Space after table
-                             
-                       //create a cell object
-                       PdfPCell table_cell;
-                       
-                       
-                                       table_cell=new PdfPCell(new Phrase(" Id"));
-                                      table_cell.setBackgroundColor(BaseColor.ORANGE);
-                                       my_report_table.addCell(table_cell);
-                                       table_cell=new PdfPCell(new Phrase("Date"));
-                                       table_cell.setBackgroundColor(BaseColor.ORANGE);
-                                       my_report_table.addCell(table_cell);
-                                       table_cell=new PdfPCell(new Phrase("Type"));
-                                       table_cell.setBackgroundColor(BaseColor.ORANGE);
-                                       my_report_table.addCell(table_cell);
-                                       table_cell=new PdfPCell(new Phrase("Email"));
-                                       table_cell.setBackgroundColor(BaseColor.ORANGE);
-                                       my_report_table.addCell(table_cell);
-                                       table_cell=new PdfPCell(new Phrase("Message"));
-                                       table_cell.setBackgroundColor(BaseColor.ORANGE);
-                                       my_report_table.addCell(table_cell);
-                                       
-                                       
-
-                                      while(rs.next()){
-                                      
-                                       String id= rs.getString("id");
-                                       table_cell=new PdfPCell(new Phrase(id));
-                                       my_report_table.addCell(table_cell);
-                                       
-                                       String Date=rs.getString("Date");
-                                       table_cell=new PdfPCell(new Phrase(Date));
-                                       my_report_table.addCell(table_cell);
-                                       
-                                       String type=rs.getString("type");
-                                       table_cell=new PdfPCell(new Phrase(type));
-                                       my_report_table.addCell(table_cell);
-                                       
-                                       String email=rs.getString("email");
-                                       table_cell=new PdfPCell(new Phrase(email));
-                                       my_report_table.addCell(table_cell);
-                                       
-                                        String message = rs.getString("message");
-                                       table_cell=new PdfPCell(new Phrase(message ));
-                                       my_report_table.addCell(table_cell);
-                                       
-                                      
-                       }
-                       /* Attach report table to PDF */
-                       
-                       my_pdf_report.add(my_report_table); 
-                       
-             System.out.println(my_pdf_report);
-                       my_pdf_report.close();
-                       JOptionPane.showMessageDialog(null, "imprimer avec succes");
-
-                       /* Close all DB related objects */
-                       rs.close();
-                       pt.close(); 
-                       con.close();               
-
-
-       } catch (FileNotFoundException e) {
-       // TODO Auto-generated catch block
-       e.printStackTrace();
-       }
-    }
-
-
-    }
-    
-    
-
+}

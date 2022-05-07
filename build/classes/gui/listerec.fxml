@@ -215,11 +215,13 @@
                   <Image url="@../icons/icon_stats.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="fpdf" fitHeight="56.0" fitWidth="51.0" layoutX="208.0" layoutY="164.0" onMouseClicked="#boutonpdf" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="fpdf" fitHeight="56.0" fitWidth="51.0" layoutX="208.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/833px-PDF_file_icon.svg.png" />
                </image>
             </ImageView>
+            <Button fx:id="nextPage" layoutX="397.0" layoutY="590.0" mnemonicParsing="false" onAction="#nextUserPage" text="+" />
+            <Button fx:id="previousPage" layoutX="311.0" layoutY="590.0" mnemonicParsing="false" onAction="#previousUserPage" text="-" />
             
          </children>
       </AnchorPane>

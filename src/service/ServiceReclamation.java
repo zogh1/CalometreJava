@@ -52,7 +52,6 @@ public class ServiceReclamation implements IServiceReclamation {
             System.out.println("erreurr");
             erreur.printStackTrace();
         }
-        System.out.println(r);
         return r;
     }
 
@@ -101,6 +100,31 @@ public class ServiceReclamation implements IServiceReclamation {
         } catch (SQLException ex) {
         }
 
+    }
+    
+    public List<Reclamation> pagination(int start, int size) {
+        ArrayList<Reclamation> reclamations = new ArrayList();
+        try {
+            String req = "SELECT * FROM `reclamation` LIMIT ? OFFSET ? ";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, start);
+            ps.setInt(2, size);
+           ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                reclamations.add(new Reclamation(rs.getInt(1), rs.getString("email"), rs.getString("type"), rs.getString("message"), rs.getString("date")));
+            }
+            for (int i = 0; i < reclamations.size(); i++) {
+                System.out.println("*********");
+                System.out.println(reclamations.get(i).getEmail());
+                System.out.println(reclamations.get(i).getMessage());
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return reclamations;
     }
 
     @Override

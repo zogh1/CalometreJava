@@ -5,6 +5,7 @@
  */
 package service;
 
+import entity.RecRep;
 import entity.Reclamation;
 import interfacee.IServiceReponse;
 import entity.Reponse;
@@ -18,6 +19,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import util.EmailSender;
 
 import util.connexion;
 
@@ -46,6 +51,11 @@ public class ServiceReponse implements IServiceReponse {
             st.setInt(2, rec.getId());
             st.setString(3, Rp.getReponse());
             st.executeUpdate();
+            try {
+                System.out.println(rec.getEmail());
+                EmailSender.sendEmailWithAttachments(rec.getEmail(), "Reponse sur votre reclamation", Rp.getReponse());
+            } catch (MessagingException ex) {
+            }
 
             System.out.println("Reponse ajoutée avec succes.");
 
@@ -68,7 +78,7 @@ public class ServiceReponse implements IServiceReponse {
             ex.printStackTrace();
         }
     }
-    
+
     @Override
     public boolean deleteReponse(int id) {
         boolean isDeleted = false;
@@ -85,7 +95,7 @@ public class ServiceReponse implements IServiceReponse {
         }
         return isDeleted;
     }
-    
+
     @Override
     public List<Reponse> readReponse() {
         ArrayList<Reponse> reponse = new ArrayList();
@@ -97,7 +107,41 @@ public class ServiceReponse implements IServiceReponse {
 
             while (rs.next()) {
 
-                reponse.add(new Reponse(rs.getInt(1),rs.getString("date"), rs.getInt("repondre_id"), rs.getString("reponse")));
+                reponse.add(new Reponse(rs.getInt(1), rs.getString("date"), rs.getInt("repondre_id"), rs.getString("reponse")));
+            }
+
+            for (int i = 0; i < reponse.size(); i++) {
+                System.out.println("*********");
+                System.out.println(reponse.get(i).getId());
+                System.out.println(reponse.get(i).getReponse());
+            }
+
+        } catch (SQLException ex) {
+        }
+
+        return reponse;
+
+    }
+
+    public List<RecRep> getAll() {
+        ServiceReclamation recc = new ServiceReclamation();
+        ArrayList<RecRep> reponse = new ArrayList();
+
+        try {
+            Statement st = cnx.createStatement();
+            String req = "SELECT * FROM reponse";
+            ResultSet rs = st.executeQuery(req);
+
+            while (rs.next()) {
+
+                reponse.add(new RecRep(
+                        rs.getInt("repondre_id"),
+                        recc.getById(rs.getInt("repondre_id")).getEmail(),
+                        recc.getById(rs.getInt("repondre_id")).getDate(),
+                        recc.getById(rs.getInt("repondre_id")).getType(),
+                        recc.getById(rs.getInt("repondre_id")).getMessage(),
+                        rs.getString("reponse")
+                ));
             }
 
             for (int i = 0; i < reponse.size(); i++) {

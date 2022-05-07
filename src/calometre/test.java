@@ -50,6 +50,11 @@ public class test {
         // TODO code application logic here
 
         Connection cnx = connexion.getInstance().getCnx();
+        ServiceReponse rs = new ServiceReponse();
+        System.out.println(rs.getAll());
+        ServiceReclamation rex = new ServiceReclamation();
+        
+        //tra hel fichier li feha affichage fel controller !ayy mtaa reclamation wala reponse repons
 
         /*List<Aliment> listAliment = new ArrayList();
         AlimentInterface RI = new AlimentService();
