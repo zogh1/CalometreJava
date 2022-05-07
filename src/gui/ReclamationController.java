@@ -72,12 +72,25 @@ user u = new user();
     String message=tfmessage.getText();
     String date=String.valueOf(tfdate.getValue());
     
+              
+    
     if (mail.isEmpty()  || type.isEmpty() || message.isEmpty()|| date.isEmpty() ) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("Please fill all required fields");
             alert.showAndWait();
         }
+    else if (!(tfemail.getText().matches("^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
+                + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$"))) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("null");
+            alert.setContentText("verifier votre email");
+            alert.showAndWait();}
+    else if (tfmessage.getText().length() < 5 ||tfmessage.getText().length() >30) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("null");
+            alert.setContentText("votre message doit etre entre 5 et 30 caratere");
+            alert.showAndWait();}
     else{
         
     
