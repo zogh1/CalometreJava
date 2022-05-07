@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,7 +42,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageViewBuilder;
 import javafx.stage.FileChooser;
-import javafx.util.Callback;
 
 import service.categoryservice;
 import service.productservice;
@@ -56,7 +53,7 @@ import service.productservice;
  */
 public class ProductController implements Initializable {
 
-    private static String Picture;
+    static String Picture;
     productservice fn = new productservice();
     product test = new product();
 

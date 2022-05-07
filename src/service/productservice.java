@@ -71,13 +71,16 @@ cartService cart = new cartService();
            
                 
             while (rs.next()) {
-                if(count != 0){
-                prodName = this.findById(rs.getInt(2)).getName();
                 count = rs.getInt("qty");
+                if(count !=0){
+                prodName = this.findById(rs.getInt(2)).getName();
+                
+            }
+            }
             
-            }}
             list.add(prodName);
             list.add(String.valueOf(count));
+            
             
         } catch (SQLException e) {
         }

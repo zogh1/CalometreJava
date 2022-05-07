@@ -96,8 +96,8 @@ public class product {
         this.quantity = quantity;
     }
 
-    public String getCategory_id() {
-        return category_id.getName();
+    public category getCategory_id() {
+        return category_id;
     }
 
     public void setCategory_id(category category_id) {
@@ -126,5 +126,6 @@ public class product {
         this.color = color;
     }
 
+  
    
 }

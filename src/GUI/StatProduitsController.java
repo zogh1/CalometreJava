@@ -53,7 +53,7 @@ public class StatProduitsController implements Initializable {
 
         list.stream().map((prod) -> {
             int number = prod.getCount();
-            PieChart.Data slice = new PieChart.Data(prod.getCategory_id(), number);
+            PieChart.Data slice = new PieChart.Data(prod.getCategory_id().getName(), number);
             return slice;
         }).forEachOrdered((slice) -> {
             pieChart.getData().add(slice);
