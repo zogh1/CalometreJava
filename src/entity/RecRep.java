@@ -16,9 +16,19 @@ public class RecRep {
     private String type;
     private String message;
     private String reponse;
+    private int idRep;
 
-    public RecRep(int id, String email, String date, String type, String message, String reponse) {
+    public int getIdRep() {
+        return idRep;
+    }
+
+    public void setIdRep(int idRep) {
+        this.idRep = idRep;
+    }
+
+    public RecRep(int id,int idRep, String email, String date, String type, String message, String reponse) {
         this.id = id;
+        this.idRep = idRep;
         this.email = email;
         this.date = date;
         this.type = type;

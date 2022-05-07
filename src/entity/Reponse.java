@@ -15,6 +15,13 @@ public class Reponse {
     private int repondre_id;
     private String reponse;
 
+    public Reponse(int id, String reponse) {
+        this.id = id;
+        this.reponse = reponse;
+    }
+    
+    
+
     @Override
     public String toString() {
         return " date:" + date + ", repondre_id:" + repondre_id + ", **" + reponse + "";

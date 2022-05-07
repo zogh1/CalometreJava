@@ -77,13 +77,13 @@ public class ModifierReponseController implements Initializable {
     private void modifierReponse(MouseEvent event) {
         try {
 
-            sr.editReponse(new Reponse(combo_id.getSelectionModel().getSelectedItem(), tf_date.getText(), Integer.parseInt(tf_repondre.getText()), tf_reponse.getText()));
+            sr.editReponse(new Reponse(combo_id.getSelectionModel().getSelectedItem(), tf_reponse.getText()));
             JOptionPane.showMessageDialog(null, "Reponse modifié");
 
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("reponse.fxml"));
             Parent root = loader.load();
-            tf_date.getScene().setRoot(root);
+            tf_reponse.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(ModifierReponseController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -99,8 +99,6 @@ public class ModifierReponseController implements Initializable {
                 pst.setInt(1, (Integer) combo_id.getSelectionModel().getSelectedItem());
                 ResultSet rs = pst.executeQuery();
                 while (rs.next()) {
-                    tf_date.setText(rs.getString("date"));
-                    tf_repondre.setText(rs.getString("repondre_id"));
                     tf_reponse.setText(rs.getString("reponse"));
 
                 }

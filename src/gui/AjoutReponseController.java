@@ -49,21 +49,22 @@ public class AjoutReponseController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    ServiceReponse sr= new ServiceReponse();
-    Reponse rep= new Reponse();
+    ServiceReponse sr = new ServiceReponse();
+    Reponse rep = new Reponse();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            String req="select id from reclamation";
-            PreparedStatement pst = connexion.getInstance().getCnx()   
-                   .prepareStatement(req);
-            ResultSet rs=pst.executeQuery();
+            String req = "select id from reclamation";
+            PreparedStatement pst = connexion.getInstance().getCnx()
+                    .prepareStatement(req);
+            ResultSet rs = pst.executeQuery();
             ObservableList<Integer> id = null;
             List<Integer> list = new ArrayList<>();
-            while(rs.next()){
-                
+            while (rs.next()) {
+
                 list.add(rs.getInt("id"));
-                
+
             }
             id = FXCollections
                     .observableArrayList(list);
@@ -71,41 +72,38 @@ public class AjoutReponseController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(AjoutReponseController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
 
     @FXML
     private void ajouterReponse(MouseEvent event) {
-        String date= tf_date.getText();
-    int idRep=combo_id.getSelectionModel().getSelectedItem();
-   
-    String reponse=tf_reponse.getText();
-    
-    if (date.isEmpty() || reponse.isEmpty() ) {
+        int idRep = combo_id.getSelectionModel().getSelectedItem();
+
+        String reponse = tf_reponse.getText();
+
+        if (reponse.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("null");
             alert.setContentText("Please fill all required fields");
             alert.showAndWait();
+        } else {
+            ServiceReclamation rs = new ServiceReclamation();
+            rep.setRepondre_id(idRep);
+            rep.setReponse(reponse);
+            Reclamation rec = rs.getById(idRep);
+            try {
+                sr.createReponse(rep, rec);
+                JOptionPane.showMessageDialog(null, "Reponse ajouter");
+                FXMLLoader loader = new FXMLLoader(getClass()
+                        .getResource("reponse.fxml"));
+                Parent root = loader.load();
+                tf_reponse.getScene().setRoot(root);
+
+            } catch (IOException ex) {
+                Logger.getLogger(ModifierReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
         }
-    else{
-    ServiceReclamation rs = new ServiceReclamation();
-    rep.setDate(date);
-       rep.setRepondre_id(idRep);
-       rep.setReponse(reponse);
-       Reclamation rec=  rs.getById(idRep);
-     try { sr.createReponse(rep,rec);
-     JOptionPane.showMessageDialog(null, "Reponse ajouter");
-    FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("reponse.fxml"));
-        Parent root = loader.load(); 
-         tf_date.getScene().setRoot(root);
-    
-    }catch (IOException ex) {
-            Logger.getLogger(ModifierReclamationController.class.getName()).log(Level.SEVERE, null, ex);
-    
-    }}
-    
-    
+
     }
 
-    
 }

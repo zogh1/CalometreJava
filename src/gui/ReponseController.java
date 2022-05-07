@@ -120,24 +120,25 @@ public class ReponseController implements Initializable {
         tabrep.setItems(observableList);*/
         ServiceReponse st = new ServiceReponse();
         List<RecRep> lrep = st.getAll();
-        
+        System.out.println(lrep);
+
         ObservableList<RecRep> data = FXCollections.observableArrayList(lrep);
-        
+
         tfmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         tfdate.setCellValueFactory(new PropertyValueFactory<>("date"));
         tftype.setCellValueFactory(new PropertyValueFactory<>("type"));
         tfmessage.setCellValueFactory(new PropertyValueFactory<>("message"));
         tfidrec.setCellValueFactory(new PropertyValueFactory<>("id"));
         tf_reponse.setCellValueFactory(new PropertyValueFactory<>("reponse"));
-        
+
         tabrep.setItems(data);
 
     }
 
     @FXML
-    private void supprimerReponse(MouseEvent event) {
-        Reponse R = new Reponse();
-        // R =tabrep.getSelectionModel().getSelectedItem();
+    private void supprimerReponse(MouseEvent event) throws IOException {
+        
+        RecRep R =tabrep.getSelectionModel().getSelectedItem();
         if (R == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Alerte");
@@ -153,9 +154,13 @@ public class ReponseController implements Initializable {
 
             if (action.get() == ButtonType.OK) {
                 ServiceReponse SR = new ServiceReponse();
-                SR.deleteReponse(R.getId());
+                System.out.println(R.getIdRep());
+                SR.deleteReponse(R.getIdRep());
                 JOptionPane.showMessageDialog(null, "Reponse supprimé");
-                loadReponses();
+                FXMLLoader loader = new FXMLLoader(getClass()
+                        .getResource("reponse.fxml"));
+                Parent root = loader.load();
+                tabrep.getScene().setRoot(root);
             }
         }
     }
@@ -260,7 +265,6 @@ public class ReponseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        
         this.loadReponses();
 
     }

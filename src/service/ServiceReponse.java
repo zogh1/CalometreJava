@@ -129,24 +129,25 @@ public class ServiceReponse implements IServiceReponse {
 
         try {
             Statement st = cnx.createStatement();
-            String req = "SELECT * FROM reponse";
+            String req = "select * from reclamation left join reponse on reponse.repondre_id = reclamation.id UNION select * from reclamation right join reponse on reponse.repondre_id = reclamation.id";
             ResultSet rs = st.executeQuery(req);
 
             while (rs.next()) {
-
+                System.out.println("test : "+rs.getInt(1));
                 reponse.add(new RecRep(
-                        rs.getInt("repondre_id"),
-                        recc.getById(rs.getInt("repondre_id")).getEmail(),
-                        recc.getById(rs.getInt("repondre_id")).getDate(),
-                        recc.getById(rs.getInt("repondre_id")).getType(),
-                        recc.getById(rs.getInt("repondre_id")).getMessage(),
+                        rs.getInt(1),
+                        rs.getInt(9),
+                        recc.getById(rs.getInt(1)).getEmail(),
+                        recc.getById(rs.getInt(1)).getDate(),
+                        recc.getById(rs.getInt(1)).getType(),
+                        recc.getById(rs.getInt(1)).getMessage(),
                         rs.getString("reponse")
                 ));
             }
 
             for (int i = 0; i < reponse.size(); i++) {
                 System.out.println("*********");
-                System.out.println(reponse.get(i).getId());
+                System.out.println(reponse.get(i).toString());
                 System.out.println(reponse.get(i).getReponse());
             }
 

@@ -189,6 +189,7 @@ public class ListerecController implements Initializable {
 
     }
 
+    @FXML
     public void nextUserPage() throws IOException {
 
         ListerecController.startUser = ListerecController.startUser + this.sizeUser;
@@ -200,6 +201,7 @@ public class ListerecController implements Initializable {
 
     }
 
+    @FXML
     public void previousUserPage() throws IOException {
 
         ListerecController.startUser = ListerecController.startUser - this.sizeUser;
@@ -211,7 +213,6 @@ public class ListerecController implements Initializable {
 
     }
 
-    @FXML
     private void supprimerRec(ActionEvent event) {
 
         Reclamation R = new Reclamation();
