@@ -8,8 +8,6 @@ package GUI;
 import calometre.Calometre;
 import entity.user;
 import interfacee.userInterface;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +23,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -40,7 +37,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import service.userservice;
-import util.session;
 
 /**
  *
@@ -66,17 +62,6 @@ public class ChangePasswordController implements Initializable {
     public void loadFxml(String page) throws IOException {
         Pane newLoadedPane = FXMLLoader.load(getClass().getResource(page));
         menuPane.getChildren().add(newLoadedPane);
-    }
-
-    public void showProfile() {
-        String firstName = session.getUser().getFirstname();
-        try {
-            FileInputStream inputstream = new FileInputStream("C:\\Users\\Souhail\\Documents\\images\\" + session.getUser().getProfile_picture());
-            UserProfilePicutre.setImage(new Image(inputstream));
-        } catch (FileNotFoundException ex) {
-        }
-        UserFirstName.setText(firstName);
-
     }
 
     public void LinkToSettings() throws IOException {
@@ -176,7 +161,6 @@ public class ChangePasswordController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.showProfile();
 
     }
 }

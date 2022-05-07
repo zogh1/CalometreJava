@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import calometre.Calometre;
 import entity.Event;
 import interfacee.userInterface;
 import java.io.FileInputStream;
@@ -51,7 +52,7 @@ public class MainMenuController implements Initializable {
 
     public AnchorPane getMenuPane() {
         return menuPane;
-    }
+    }//theb thel scene builder? eyy
 
     public void showProfile() {
         String firstName = session.getUser().getFirstname();
@@ -129,7 +130,7 @@ public class MainMenuController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         userInterface fn = new userservice();
         this.showProfile();
-
+        Calometre.mainController = this;
     }
 
 }

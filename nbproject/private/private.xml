@@ -14,9 +14,10 @@
         <group>
             <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/ProfileController.java</file>
             <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/LoginController.java</file>
-            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/SignupController.java</file>
-            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/service/userservice.java</file>
+            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/profile.fxml</file>
             <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/calometre/Calometre.java</file>
+            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/MainMenuController.java</file>
+            <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/changepassword.fxml</file>
             <file>file:/C:/Users/Souhail/Documents/java%20validation1/src/GUI/ChangePasswordController.java</file>
         </group>
     </open-files>
