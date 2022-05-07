@@ -42,11 +42,9 @@ public class ModifierReponseController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @FXML
     private TextField tf_date;
     @FXML
     private TextField tf_reponse;
-    @FXML
     private TextField tf_repondre;
     @FXML
     private ComboBox<Integer> combo_id;
@@ -76,7 +74,7 @@ public class ModifierReponseController implements Initializable {
     }
 
     @FXML
-    private void modifierReponse(ActionEvent event) {
+    private void modifierReponse(MouseEvent event) {
         try {
 
             sr.editReponse(new Reponse(combo_id.getSelectionModel().getSelectedItem(), tf_date.getText(), Integer.parseInt(tf_repondre.getText()), tf_reponse.getText()));
@@ -112,8 +110,5 @@ public class ModifierReponseController implements Initializable {
         });
     }
 
-    @FXML
-    private void ajouterReponse(ActionEvent event) {
-    }
 
 }

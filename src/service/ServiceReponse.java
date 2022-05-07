@@ -51,8 +51,8 @@ public class ServiceReponse implements IServiceReponse {
             st.setInt(2, rec.getId());
             st.setString(3, Rp.getReponse());
             st.executeUpdate();
+            System.out.println(rec.getEmail());
             try {
-                System.out.println(rec.getEmail());
                 EmailSender.sendEmailWithAttachments(rec.getEmail(), "Reponse sur votre reclamation", Rp.getReponse());
             } catch (MessagingException ex) {
             }

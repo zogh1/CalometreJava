@@ -63,7 +63,7 @@ import util.session;
 public class ReponseController implements Initializable {
 
     @FXML
-    private Button addreponse;
+    private ImageView addreponse;
     // @FXML
     // private ListView<Reponse> listerep;
     @FXML
@@ -88,7 +88,7 @@ public class ReponseController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private void ajouterReponse(ActionEvent event) {
+    private void ajouterReponse(MouseEvent event) {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutReponse.fxml"));
@@ -101,7 +101,7 @@ public class ReponseController implements Initializable {
     }
 
     @FXML
-    private void modifierReponse(ActionEvent event) {
+    private void modifierReponse(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierReponse.fxml"));
             Parent root = loader.load();
@@ -135,7 +135,7 @@ public class ReponseController implements Initializable {
     }
 
     @FXML
-    private void supprimerReponse(ActionEvent event) {
+    private void supprimerReponse(MouseEvent event) {
         Reponse R = new Reponse();
         // R =tabrep.getSelectionModel().getSelectedItem();
         if (R == null) {

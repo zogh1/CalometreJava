@@ -27,7 +27,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
+import service.ServiceReclamation;
 import service.ServiceReponse;
 import util.connexion;
 
@@ -38,7 +40,6 @@ import util.connexion;
  */
 public class AjoutReponseController implements Initializable {
 
-    @FXML
     private TextField tf_date;
     @FXML
     private ComboBox<Integer> combo_id;
@@ -73,7 +74,7 @@ public class AjoutReponseController implements Initializable {
     }    
 
     @FXML
-    private void ajouterReponse(ActionEvent event) {
+    private void ajouterReponse(MouseEvent event) {
         String date= tf_date.getText();
     int idRep=combo_id.getSelectionModel().getSelectedItem();
    
@@ -86,12 +87,11 @@ public class AjoutReponseController implements Initializable {
             alert.showAndWait();
         }
     else{
-    
+    ServiceReclamation rs = new ServiceReclamation();
     rep.setDate(date);
        rep.setRepondre_id(idRep);
        rep.setReponse(reponse);
-       Reclamation rec= new Reclamation();
-       rec.setId(idRep);
+       Reclamation rec=  rs.getById(idRep);
      try { sr.createReponse(rep,rec);
      JOptionPane.showMessageDialog(null, "Reponse ajouter");
     FXMLLoader loader = new FXMLLoader(getClass()
@@ -106,5 +106,6 @@ public class AjoutReponseController implements Initializable {
     
     
     }
+
     
 }
