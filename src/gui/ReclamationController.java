@@ -66,7 +66,7 @@ user u = new user();
           //if (session.getUser().getRoles().contains("Admin"))
         //{
         
-        
+       // Parent Parent=FXMLLoader.load(getClass().getRessource("/GUI/Listerec.fxml"));
     String mail= tfemail.getText();
     String type=tftype.getValue().toString();
     String message=tfmessage.getText();
@@ -135,6 +135,7 @@ user u = new user();
       
     
     }
+    //mtaa affichage win
     
     
     

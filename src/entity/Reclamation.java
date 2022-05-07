@@ -17,10 +17,10 @@ public class Reclamation {
     private String message;
     private String date;
 
-    @Override
-    public String toString() {
-        return  " ** Email  : " + email + "** Type :" + type + "** Message :" + message + "** Date :" + date + '}';
-    }
+   // @Override
+   // public String toString() {
+   //     return  " ** Email  : " + email + "** Type :" + type + "** Message :" + message + "** Date :" + date + '}';
+    //}
 
     public Reclamation(int id, String email, String type, String message, String date) {
         this.id = id;

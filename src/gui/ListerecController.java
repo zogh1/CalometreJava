@@ -74,6 +74,10 @@ import service.ServiceReclamation;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.Date;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import util.connexion;
 
 /**
@@ -83,8 +87,8 @@ import util.connexion;
  */
 public class ListerecController implements Initializable {
 
-    @FXML
-    private ListView<Reclamation> listRec;
+  //  @FXML
+   // private ListView<Reclamation> listRec;
     @FXML
     private TextField tf_recherche;
      @FXML
@@ -97,7 +101,25 @@ public class ListerecController implements Initializable {
     private HBox selectedMenuItem = null;
     private AnchorPane menuPane;
     @FXML
-    private Button fpdf;
+    private ImageView fpdf;
+    @FXML
+    private TableView<Reclamation> tabreclamation;
+   
+    @FXML
+    private TableColumn<Reclamation, String> tfemail;
+    @FXML
+    private TableColumn<Reclamation, String> tfdate;
+    @FXML
+    private TableColumn<Reclamation, String> tftype;
+    @FXML
+    private TableColumn<Reclamation, String> tfmessage;
+    @FXML
+    private Button btnm;
+    @FXML
+    private TableColumn<Reclamation, String> tfaction;
+    
+    
+    
 
     /**
      * Initializes the controller class.
@@ -147,17 +169,18 @@ public class ListerecController implements Initializable {
         ServiceReclamation sr = new ServiceReclamation();
         List<Reclamation> lr = sr.readReclamation();
         ObservableList<Reclamation> data=FXCollections.observableArrayList(lr);
-        listRec.setItems(data);
+        tabreclamation.setItems(data);
+        this.loadReclamations();
                 
     }    
 
     @FXML
-    private void ajoutRec(ActionEvent event) {
+    private void ajoutRec( MouseEvent event) {
         try {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("reclamation.fxml"));
             Parent root=loader.load();
             ReclamationController aac=loader.getController();
-            listRec.getScene().setRoot(root);
+            tabreclamation.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(ListerecController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -168,7 +191,7 @@ public class ListerecController implements Initializable {
     private void supprimerRec(ActionEvent event) {
        
         Reclamation R = new Reclamation();
-        R = listRec.getSelectionModel().getSelectedItem();
+        R = tabreclamation.getSelectionModel().getSelectedItem();
         if (R == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Alerte");
@@ -192,16 +215,23 @@ public class ListerecController implements Initializable {
     }
     
     public void loadReclamations() {
-        ServiceReclamation SR = new ServiceReclamation();
+      /*  ServiceReclamation SR = new ServiceReclamation();
         ArrayList<Reclamation> listeRec = (ArrayList<Reclamation>) SR.readReclamation();
 
         ObservableList observableList = FXCollections.observableArrayList(listeRec);
-        listRec.setItems(observableList);
+        tabreclamation.setItems(observableList);
+        */
+      tfemail.setCellValueFactory(new PropertyValueFactory<>("email"));
+       tfdate.setCellValueFactory(new PropertyValueFactory<>("date"));
+ tftype.setCellValueFactory(new PropertyValueFactory<>("type"));
+ tfmessage.setCellValueFactory(new PropertyValueFactory<>("message"));
+ // btnm.setCellValueFactory(new PropertyValueFactory<>("modifierRec"));
+
 
     }
 
     @FXML
-    private void stats(ActionEvent event) throws ParseException {
+    private void stats(MouseEvent event) throws ParseException {
         try {
         // Load the fxml file and create a new stage for the popup.
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXBarChart.fxml"));
@@ -220,7 +250,7 @@ public class ListerecController implements Initializable {
         List<Reclamation> lr = sr.readReclamation();
         ObservableList<Reclamation> data=FXCollections.observableArrayList(lr);
     
-    listRec.setItems(data);
+    tabreclamation.setItems(data);
         controller.setReclamationData(data);
 
         dialogStage.show();
@@ -237,14 +267,14 @@ public class ListerecController implements Initializable {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("ModifierReclamation.fxml"));
             Parent root=loader.load();
             ModifierReclamationController aac=loader.getController();
-            listRec.getScene().setRoot(root);
+            tabreclamation.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(ListerecController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
-    private void boutonpdf(ActionEvent event) throws ClassNotFoundException, SQLException, DocumentException {
+    private void boutonpdf(MouseEvent event) throws ClassNotFoundException, SQLException, DocumentException {
        try {
        Class.forName("com.mysql.jdbc.Driver");
      Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Calometre", "root", "");
@@ -346,6 +376,7 @@ public class ListerecController implements Initializable {
        e.printStackTrace();
        }
     }
+
 
     }
     

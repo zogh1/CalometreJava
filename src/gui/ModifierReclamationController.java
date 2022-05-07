@@ -85,9 +85,6 @@ public class ModifierReclamationController implements Initializable {
         }
     }    
 
-    @FXML
-    private void ajouterreclamation(ActionEvent event) {
-    }
 
     @FXML
     private void modifierRec(ActionEvent event) {

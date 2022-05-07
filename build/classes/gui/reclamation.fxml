@@ -31,15 +31,15 @@
             <Label text="Message" />
          </children>
       </VBox>
-      <VBox layoutX="308.0" layoutY="90.0" prefHeight="170.0" prefWidth="283.0" spacing="9.0">
+      <VBox layoutX="308.0" layoutY="90.0" prefHeight="226.0" prefWidth="283.0" spacing="9.0">
          <children>
             <TextField fx:id="tfemail" prefHeight="0.0" prefWidth="325.0" style="-fx-background-color: beige;" />
             <DatePicker fx:id="tfdate" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black;" />
             <ComboBox fx:id="tftype" prefHeight="26.0" prefWidth="325.0" style="-fx-background-color: beige;" />
-            <TextField fx:id="tfmessage" style="-fx-background-color: beige;" />
+            <TextField fx:id="tfmessage" prefHeight="119.0" prefWidth="283.0" style="-fx-background-color: beige;" />
          </children>
       </VBox>
-      <Button fx:id="btnajouter" layoutX="302.0" layoutY="260.0" mnemonicParsing="false" onAction="#ajouterreclamation" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: green;" text="ajouter" />
+      <Button fx:id="btnajouter" layoutX="107.0" layoutY="282.0" mnemonicParsing="false" onAction="#ajouterreclamation" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: green;" text="ajouter" />
       <Pane layoutX="14.0" layoutY="56.0" prefHeight="4.0" prefWidth="578.0" style="-fx-background-color: black;" />
       <Text layoutX="51.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reclamation" wrappingWidth="170.93675994873047">
          <font>
@@ -51,11 +51,11 @@
        
          </children>
       </HBox>
-      <Button layoutX="375.0" layoutY="261.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: yellow;" text="retour" />
       <ImageView fitHeight="235.0" fitWidth="147.0" layoutX="23.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/recimage.png" />
          </image>
       </ImageView>
+      <Button layoutX="176.0" layoutY="281.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: yellow;" text="retour" />
     </children>
 </AnchorPane>

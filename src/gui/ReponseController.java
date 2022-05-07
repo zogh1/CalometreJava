@@ -26,7 +26,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import static javafx.scene.input.KeyCode.T;
 import javax.swing.JOptionPane;
 import service.ServiceReclamation;
@@ -43,8 +46,20 @@ public class ReponseController implements Initializable {
     
     @FXML
     private Button addreponse;
+   // @FXML
+   // private ListView<Reponse> listerep;
     @FXML
-    private ListView<Reponse> listerep;
+    private TableView<Reclamation> tabrep;
+    @FXML
+    private TableColumn<Reclamation, String> tfmail;
+    @FXML
+    private TableColumn<Reclamation, String> tfdate;
+    @FXML
+    private TableColumn<Reclamation, String> tftype;
+    @FXML
+    private TableColumn<Reclamation, String> tfmessage;
+    @FXML
+    private TableColumn<Reponse, String> tfreponse;
   
 
     /**
@@ -52,11 +67,13 @@ public class ReponseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ServiceReponse sr = new ServiceReponse();
-        List<Reponse> lrp = sr.readReponse();
-        ObservableList<Reponse> data=FXCollections.observableArrayList(lrp);
-        listerep.setItems(data);
-                
+    
+          ServiceReclamation sr = new ServiceReclamation();
+        List<Reclamation> lr = sr.readReclamation();
+        ObservableList<Reclamation> data=FXCollections.observableArrayList(lr);
+        tabrep.setItems(data);
+         this.loadReponses();
+    
     }
 
     @FXML
@@ -68,7 +85,7 @@ public class ReponseController implements Initializable {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("AjoutReponse.fxml"));
             Parent root=loader.load();
             AjoutReponseController aac=loader.getController();
-            listerep.getScene().setRoot(root);
+            tabrep.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(ReponseController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -80,25 +97,29 @@ public class ReponseController implements Initializable {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("ModifierReponse.fxml"));
             Parent root=loader.load();
             ModifierReponseController aac=loader.getController();
-            listerep.getScene().setRoot(root);
+            tabrep.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(ReponseController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void loadReponses() {
-        ServiceReponse sr = new ServiceReponse();
+       /* ServiceReponse sr = new ServiceReponse();
         ArrayList<Reponse> listeReponse = (ArrayList<Reponse>) sr.readReponse();
 
         ObservableList observableList = FXCollections.observableArrayList(listeReponse);
-        listerep.setItems(observableList);
+        tabrep.setItems(observableList);*/
+         tfmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+       tfdate.setCellValueFactory(new PropertyValueFactory<>("date"));
+ tftype.setCellValueFactory(new PropertyValueFactory<>("type"));
+ tfmessage.setCellValueFactory(new PropertyValueFactory<>("message"));
 
     }
 
     @FXML
     private void supprimerReponse(ActionEvent event) {
         Reponse R = new Reponse();
-        R = listerep.getSelectionModel().getSelectedItem();
+       // R =tabrep.getSelectionModel().getSelectedItem();
         if (R == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Alerte");
