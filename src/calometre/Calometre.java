@@ -5,7 +5,6 @@
  */
 package calometre;
 
-import GUI.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +18,6 @@ import javafx.stage.Stage;
 public class Calometre extends Application {
 
     public static Stage primaryStage;
-    public static MainMenuController mainController;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
