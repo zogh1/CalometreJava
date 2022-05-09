@@ -3,46 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/MarketController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/entity/exercice.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/interfacee/categoryInterface.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/ProductController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/service/typeExerciceService.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/AddExerciceController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/CartController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/EditExercice.fxml</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/mediplayertest.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/Seifcss/style.css</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/StatProduitsController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/interfacee/typeExerciceInterface.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/ExerciceItem.fxml</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/calometre/test.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/AddExercice.fxml</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/ItemController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/BackExerciceViewController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/BackProductsController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/entity/typeExercice.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/EditExerciceController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/service/productservice.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/BackExerciceView.fxml</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/EditProductController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/service/categoryservice.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/service/exerciceService.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/ExerciceItemController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/entity/product.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/service/cartService.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/TypeExercice.fxml</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/mediaplayertest1.fxml</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/calometre/MyListenerExercice.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/CategoryController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/NewProductController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/interfacee/exerciceInterface.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/TypeExerciceController.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/addcategory.fxml</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/calometre/Calometre.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/GUI/Products.fxml</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/calometre/MyListener.java</file>
-            <file>file:/C:/Users/seifd/Documents/CalometreJava/src/interfacee/productInterface.java</file>
+            <file>file:/C:/Users/yassine/Desktop/java/yassin/src/GUI/ExerciceItemController.java</file>
+            <file>file:/C:/Users/yassine/Desktop/java/yassin/src/GUI/ExerciceItem.fxml</file>
+            <file>file:/C:/Users/yassine/Desktop/java/yassin/src/GUI/frontExerciceViewController.java</file>
         </group>
     </open-files>
 </project-private>

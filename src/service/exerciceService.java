@@ -45,7 +45,8 @@ public class exerciceService implements exerciceInterface {
             ex.printStackTrace();
         }
     }
-@Override
+
+    @Override
     public void editExercice(exercice exc, typeExercice type) {
 
         String req = "UPDATE `exercice` SET `nom`='" + exc.getNom() + "',`video`='" + exc.getVideo() + "',`description`='" + exc.getDescription() + "',`objectif`='" + exc.getObjectif() + "' ,`nomtype_id`='" + type.getId() + "' WHERE id='" + exc.getId() + "'";
@@ -84,6 +85,7 @@ public class exerciceService implements exerciceInterface {
             e.printStackTrace();
         }
     }
+
     @Override
     public List<exercice> searchExercice(String search) {
         List<exercice> li = new ArrayList();
@@ -97,25 +99,24 @@ public class exerciceService implements exerciceInterface {
                 exercice ex = new exercice();
                 ex.setId(rs.getInt("id"));
                 ex.setNom(rs.getString("nom"));
-                 ex.setVideo(rs.getString("video"));
-                 ex.setObjectif(rs.getString("objectif"));
-                 ex.setDescription(rs.getString("description"));
-                 
-                 ex.setNomtype_id(tex.findById(rs.getInt("nomtype_id")));
-                 
+                ex.setVideo(rs.getString("video"));
+                ex.setObjectif(rs.getString("objectif"));
+                ex.setDescription(rs.getString("description"));
+
+                ex.setNomtype_id(tex.findById(rs.getInt("nomtype_id")));
+
                 li.add(ex);
-                
+
             }
             System.out.println(li);
         } catch (SQLException ex) {
-              ex.printStackTrace();
+            ex.printStackTrace();
         }
 
         return li;
 
     }
 
-   
     public List<exercice> readExercice() {
         List<exercice> li = new ArrayList<exercice>();
 
@@ -131,8 +132,9 @@ public class exerciceService implements exerciceInterface {
                 ex.setVideo(rs.getString("video"));
                 ex.setDescription(rs.getString("description"));
                 ex.setObjectif(rs.getString("objectif"));
+                ex.setRating(rs.getInt("rating"));
                 ex.setNomtype_id(tex.findById(rs.getInt("nomtype_id")));
-                
+
                 li.add(ex);
             }
 
@@ -141,6 +143,17 @@ public class exerciceService implements exerciceInterface {
         }
 
         return li;
+    }
+
+    public void addRating(int value, int id) {
+        String sql = "update exercice set rating ='" + value + "' where id =" + id;
+        try {
+            PreparedStatement ps = cnx.prepareStatement(sql);
+            ps.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
     }
 
 }

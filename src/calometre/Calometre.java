@@ -25,7 +25,7 @@ public class Calometre extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Calometre.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/BackExerciceView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FrontExerciceView.fxml"));
         Scene scene = new Scene(root);
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();

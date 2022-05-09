@@ -20,10 +20,28 @@ public class exercice {
     private String description;
     private String objectif;
     private String color;
+    private int rating;
    
 
     public exercice() {
     }
+
+    public exercice(int id, int rating) {
+        this.id = id;
+        this.rating = rating;
+    }
+    
+    
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+    
+    
 
     public exercice(int nomtype_id, String nom, String video, String description, String objectif) {
         
@@ -105,7 +123,9 @@ public class exercice {
 
     @Override
     public String toString() {
-        return "exercice{" + "id=" + id + ", nomtype_id=" + nomtype_id + ", nom=" + nom + ", video=" + video + ", description=" + description + ", objectif=" + objectif + '}';
+        return "exercice{" + "id=" + id + ", nomtype_id=" + nomtype_id + ", nom=" + nom + ", video=" + video + ", description=" + description + ", objectif=" + objectif + ", color=" + color + ", rating=" + rating + '}';
     }
+
+    
 
 }
