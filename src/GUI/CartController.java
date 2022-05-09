@@ -64,11 +64,17 @@ public class CartController implements Initializable {
 
     String name;
     double price;
-    
+    private void RefreshMarketPage() throws java.io.IOException {
+        
+        Parent root = FXMLLoader.load(getClass().getResource("market.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+    }
      public void Checkout() throws Exception {
          cart.deleteById(1);
          Stage stage = (Stage) closewindow.getScene().getWindow();
          stage.close(); 
+         this.RefreshMarketPage();
      }
      
 

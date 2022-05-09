@@ -21,20 +21,27 @@ public class Calometre extends Application {
 
     public static Stage primaryStage;
     public static final String CURRENCY = "TND";
-
+    long lastRefreshTime = 0;
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         Calometre.primaryStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("../GUI/BackOfficeProducts.fxml"));
+
         Scene scene = new Scene(root);
         Screen screen = Screen.getPrimary();
+
         Rectangle2D bounds = screen.getVisualBounds();
+
         primaryStage.setX(bounds.getMinX());
         primaryStage.setY(bounds.getMinY());
         primaryStage.setWidth(bounds.getWidth());
         primaryStage.setHeight(bounds.getHeight());
+
         primaryStage.setScene(scene);
+
         primaryStage.show();
+
         //Calometre.primaryStage.setFullScreen(true);
     }
 

@@ -1,5 +1,5 @@
-
 package GUI;
+
 import GUI.ItemController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -50,7 +51,7 @@ public class BackProductsController implements Initializable {
     ObservableList<product> oblist = FXCollections.observableArrayList();
     @FXML
     private VBox ChosenProd;
-   
+
     @FXML
     private Label ProdName;
     @FXML
@@ -65,8 +66,7 @@ public class BackProductsController implements Initializable {
     private TextField searchprod;
     @FXML
     private GridPane grid;
-    
-   
+
     product p = null;
 
     private List<product> products = new ArrayList<>();
@@ -74,39 +74,45 @@ public class BackProductsController implements Initializable {
     private MyListener myListener;
     String name;
     double price;
+    
+    
+    
+    
 
-     public void GoToMarket() throws java.io.IOException {
+    public void GoToMarket() throws java.io.IOException {
         Parent root = FXMLLoader.load(getClass().getResource("market.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
     }
+
     private void RefreshPage() throws java.io.IOException {
-        
+
         Parent root = FXMLLoader.load(getClass().getResource("BackOfficeProducts.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
     }
+
     public void AddMoreProduct() throws java.io.IOException {
-    try {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("AddProduct.fxml"));
-        /*
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("AddProduct.fxml"));
+            /*
          * if "fx:controller" is not set in fxml
          * fxmlLoader.setController(NewWindowController);
-         */
-        Scene scene = new Scene(fxmlLoader.load(), 800, 550);
-        Stage stage = new Stage();
-        stage.setTitle("New Product");
-        stage.setScene(scene);
-        stage.show();
-    } catch (IOException e) {
-        Logger logger = Logger.getLogger(getClass().getName());
-        logger.log(Level.SEVERE, "Failed to create new Window.", e);
+             */
+            Scene scene = new Scene(fxmlLoader.load(), 800, 550);
+            Stage stage = new Stage();
+            stage.setTitle("New Product");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
     }
-}
-    public void searchProduct() throws java.io.IOException {
 
-        String searched = searchprod.getText();
+    public void searchProduct() throws IOException{
+               String searched = searchprod.getText();
 
         if (searched != null) {
             grid.getChildren().clear();
@@ -144,6 +150,7 @@ public class BackProductsController implements Initializable {
         } else {
             this.RefreshPage();
         }
+           
     }
 
     private void setChosenProduct(product product) {
@@ -151,10 +158,10 @@ public class BackProductsController implements Initializable {
         ProdName.setText(product.getName());
         ProdPrice.setText(Calometre.CURRENCY + product.getPrice());
         prodDesc.setText(product.getDescription());
-        
-        prodDesc.setMaxWidth(Region.USE_COMPUTED_SIZE);  
+
+        prodDesc.setMaxWidth(Region.USE_COMPUTED_SIZE);
         prodDesc.setWrapText(true);
-          
+
         FileInputStream inputstream = null;
         try {
             inputstream = new FileInputStream("C:\\Users\\seifd\\Documents\\images\\" + product.getImage());
@@ -179,35 +186,34 @@ public class BackProductsController implements Initializable {
 
     }
 
-
-    
     public product itemid(product product) {
 
-         test.setId(product.getId());
+        test.setId(product.getId());
         test.setName(product.getName());
         test.setPrice(product.getPrice());
         test.setDescription(product.getDescription());
-         test.setQuantity(product.getQuantity());
-         test.setCategory_id(product.getCategory_id());
-         test.setImage(product.getImage());
-        
-        
+        test.setQuantity(product.getQuantity());
+        test.setCategory_id(product.getCategory_id());
+        test.setImage(product.getImage());
+
         return test;
     }
 
-    public void deleteprod() throws java.io.IOException {
+    public void deleteprod() throws IOException{
         int y = test.getId();
         System.out.println(y);
         fn.deleteproduct(y);
         this.RefreshPage();
+       
     }
+
     public void GoToEditProduct() throws IOException {
- try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("EditProduct.fxml"));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("EditProduct.fxml"));
             Parent root = (Parent) loader.load();
-            EditProductController secController=loader.getController();
+            EditProductController secController = loader.getController();
             secController.itemSelected(test);
-            Stage stage=new Stage();
+            Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -237,8 +243,9 @@ public class BackProductsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
        
-        List<product> li = fn.getallproduct();
+       List<product> li = fn.getallproduct();
         if (li.size() > 0) {
             setChosenProduct(li.get(0));
             myListener = new MyListener() {
@@ -246,6 +253,7 @@ public class BackProductsController implements Initializable {
                 public void onClickListener(product product) {
                     setChosenProduct(product);
                     itemid(product);
+                    
 
                 }
             };
@@ -282,7 +290,7 @@ public class BackProductsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 
 }

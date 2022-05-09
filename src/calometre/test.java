@@ -34,11 +34,10 @@ public class test {
    CartItem crti = new CartItem();
         productservice fn = new productservice();
         product test = new product();
-    fn2.loadProductsFromCart(1);
-    List<CartItem> li = fn2.loadProductsFromCart(1);
-    for (int i = 0; i < li.size(); i++) {
-    System.out.println(li.get(i).getProduct().getName());
-    }
+//    fn.searchProduct("hi");
+//    
+//    System.out.println(fn.searchProduct(""));
+    
         }
     
     

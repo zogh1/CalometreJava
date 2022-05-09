@@ -200,7 +200,7 @@ cartService cart = new cartService();
         List<product> li = new ArrayList();
 
         try {
-            String req = "SELECT * FROM product WHERE name LIKE '%" + search + "%' OR price LIKE '%" + search + "%' OR description LIKE '%" + search + "%'";
+            String req = "SELECT * FROM product WHERE name LIKE '%" + search + "%'";
             Statement s = cnx.createStatement();
 
             ResultSet rs = s.executeQuery(req);
@@ -212,10 +212,12 @@ cartService cart = new cartService();
                 p.setDescription(rs.getString("description"));
                 p.setQuantity(rs.getInt("quantity"));
                 p.setImage(rs.getString("image"));
+                p.setCategory_id(cs.findById(rs.getInt("category_id")));
 
                 li.add(p);
                 
             }
+            
         } catch (SQLException ex) {
               ex.printStackTrace();
         }
@@ -286,12 +288,12 @@ cartService cart = new cartService();
         HashMap<String, Integer> stat = new HashMap<>();
 
         for (product ps : list) {
-            stat.put(ps.getCategory_id(), 0);
+            stat.put(ps.getCategory_id().getName(), 0);
         }
 
         list.stream().map((product) -> product.getCount()).forEachOrdered((count) -> {
             list.stream().filter((ps) -> (count != 0)).forEachOrdered((ps) -> {
-                stat.put(ps.getCategory_id(), stat.get(ps.getCategory_id()) + 1);
+                stat.put(ps.getCategory_id().getName(), stat.get(ps.getCategory_id().getName()) + 1);
             });
         });
 

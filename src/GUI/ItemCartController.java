@@ -66,7 +66,12 @@ public class ItemCartController {
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
     }
+    private void RefreshMarketPage() throws java.io.IOException {
 
+        Parent root = FXMLLoader.load(getClass().getResource("market.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+    }
     public void setData(CartItem CartItem) {
 
         this.CartItem = CartItem;
@@ -90,6 +95,7 @@ public class ItemCartController {
         cart.removeProduct(y, 1);
         Stage stage = (Stage) Del.getScene().getWindow();
         stage.close();
+        this.RefreshMarketPage();
         this.RefreshPage();
     }
 
@@ -102,6 +108,7 @@ public class ItemCartController {
         cart.addProduct(y, 1, x);
         Stage stage = (Stage) Del.getScene().getWindow();
         stage.close();
+        this.RefreshMarketPage();
         this.RefreshPage();
     }
 }
