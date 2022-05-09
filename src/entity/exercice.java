@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author louay
@@ -12,17 +14,19 @@ package entity;
 public class exercice {
 
     private int id;
-    private int nomtype_id;
+    private typeExercice nomtype_id;
     private String nom;
     private String video;
     private String description;
     private String objectif;
+    private String color;
+   
 
     public exercice() {
     }
 
     public exercice(int nomtype_id, String nom, String video, String description, String objectif) {
-        this.nomtype_id = nomtype_id;
+        
         this.nom = nom;
         this.video = video;
         this.description = description;
@@ -31,7 +35,7 @@ public class exercice {
 
     public exercice(int id, int nomtype_id, String nom, String video, String description, String objectif) {
         this.id = id;
-        this.nomtype_id = nomtype_id;
+        
         this.nom = nom;
         this.video = video;
         this.description = description;
@@ -46,14 +50,20 @@ public class exercice {
         this.id = id;
     }
 
-    public int getNomtype_id() {
+    public exercice(typeExercice nomtype_id) {
+        this.nomtype_id = nomtype_id;
+    }
+    private static final Logger LOG = Logger.getLogger(exercice.class.getName());
+
+    public typeExercice getNomtype_id() {
         return nomtype_id;
     }
 
-    public void setNomtype_id(int nomtype_id) {
+    public void setNomtype_id(typeExercice nomtype_id) {
         this.nomtype_id = nomtype_id;
     }
-
+ 
+ 
     public String getNom() {
         return nom;
     }
@@ -84,6 +94,13 @@ public class exercice {
 
     public void setObjectif(String objectif) {
         this.objectif = objectif;
+    }
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     @Override

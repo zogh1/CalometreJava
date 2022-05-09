@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="786.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CategoryController">
+   <children>
+      <Button alignment="CENTER" layoutX="510.0" layoutY="268.0" mnemonicParsing="false" onAction="#addcategory" prefHeight="45.0" prefWidth="108.0" style="-fx-background-color: #30B21A;" text="Add" />
+      <TextField fx:id="nameField" alignment="CENTER" layoutX="510.0" layoutY="216.0" prefHeight="38.0" prefWidth="239.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: #000000;" />
+      <Label layoutX="579.0" layoutY="160.0" prefHeight="32.0" prefWidth="120.0" text="Categories">
+         <font>
+            <Font size="22.0" />
+         </font></Label>
+      <Button alignment="CENTER" layoutX="772.0" layoutY="516.0" mnemonicParsing="false" onAction="#deleteCat" prefHeight="38.0" prefWidth="525.0" style="-fx-background-color: #FF0500;" text="Delete" />
+      <Button alignment="CENTER" layoutX="638.0" layoutY="268.0" mnemonicParsing="false" onAction="#edit" prefHeight="45.0" prefWidth="113.0" style="-fx-background-color: #FFDA5C;" text="Edit" />
+      <Button alignment="CENTER" layoutX="505.0" layoutY="152.0" mnemonicParsing="false" onAction="#GoToProd" prefHeight="45.0" prefWidth="64.0" text="&lt;" />
+      <Button alignment="CENTER" layoutX="697.0" layoutY="153.0" mnemonicParsing="false" onAction="#GoToProd" prefHeight="45.0" prefWidth="64.0" text="&gt;" />
+      <TableView fx:id="catview" layoutX="774.0" layoutY="148.0" prefHeight="360.0" prefWidth="524.0">
+        <columns>
+          <TableColumn fx:id="catID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="catName" prefWidth="75.0" text="Name" />
+        </columns>
+      </TableView>
+      <Button alignment="CENTER" layoutX="570.0" layoutY="375.0" mnemonicParsing="false" onAction="#GoToStats" prefHeight="41.0" prefWidth="108.0" style="-fx-background-color: #30BA;" text="Stats" />
+   </children>
+</AnchorPane>

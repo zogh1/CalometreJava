@@ -6,6 +6,7 @@
 package service;
 
 import entity.exercice;
+import entity.product;
 import entity.typeExercice;
 import interfacee.exerciceInterface;
 import java.sql.Connection;
@@ -25,6 +26,7 @@ public class exerciceService implements exerciceInterface {
 
     Connection cnx = connexion.getInstance().getCnx();
     Statement stmt;
+    typeExerciceService tex = new typeExerciceService();
 
     @Override
     public void addExercice(typeExercice type, exercice exc) {
@@ -43,20 +45,32 @@ public class exerciceService implements exerciceInterface {
             ex.printStackTrace();
         }
     }
+@Override
+    public void editExercice(exercice exc, typeExercice type) {
 
-    @Override
-    public void editExercice(exercice exc) {
+        String req = "UPDATE `exercice` SET `nom`='" + exc.getNom() + "',`video`='" + exc.getVideo() + "',`description`='" + exc.getDescription() + "',`objectif`='" + exc.getObjectif() + "' ,`nomtype_id`='" + type.getId() + "' WHERE id='" + exc.getId() + "'";
         try {
-            String req = "update exercice set nom='" + exc.getNom() + "',video='" + exc.getVideo() + "',description='" + exc.getDescription() + "',objectif='" + exc.getObjectif() + "' where id='" + exc.getId() + "'";
+            PreparedStatement st = cnx.prepareStatement(req);
 
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ps.executeUpdate(req);
-            System.out.println("exercice updated");
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            st.executeUpdate(req);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("error");
         }
     }
+//    @Override
+//    public void editExercice(exercice exc, typeExercice type) {
+//        try {
+//            String req = "update exercice set nom='" + exc.getNom() + "',video='" + exc.getVideo() + "',description='" + exc.getDescription() + "',objectif='" + exc.getObjectif() + "' ,`type_exercice`='" + type.getId() + "' where id='" + exc.getId() + "'";
+//
+//            PreparedStatement ps = cnx.prepareStatement(req);
+//            ps.executeUpdate(req);
+//            System.out.println("exercice updated");
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public void deleteExercice(int id) {
@@ -70,34 +84,63 @@ public class exerciceService implements exerciceInterface {
             e.printStackTrace();
         }
     }
-
     @Override
-    public List<exercice> readExercice() {
-        ArrayList<exercice> exercices = new ArrayList();
+    public List<exercice> searchExercice(String search) {
+        List<exercice> li = new ArrayList();
+
         try {
-            Statement st = cnx.createStatement();
-            String req = "SELECT * FROM exercice";
-            ResultSet result = st.executeQuery(req);
-            while (result.next()) {
-                exercices.add(new exercice(
-                        result.getInt(1),
-                        result.getInt(2),
-                        result.getString(3),
-                        result.getString(4),
-                        result.getString(5),
-                        result.getString(6)
-                ));
+            String req = "SELECT * FROM exercice WHERE nom LIKE '%" + search + "%'";
+            Statement s = cnx.createStatement();
+
+            ResultSet rs = s.executeQuery(req);
+            while (rs.next()) {
+                exercice ex = new exercice();
+                ex.setId(rs.getInt("id"));
+                ex.setNom(rs.getString("nom"));
+                 ex.setVideo(rs.getString("video"));
+                 ex.setObjectif(rs.getString("objectif"));
+                 ex.setDescription(rs.getString("description"));
+                 
+                 ex.setNomtype_id(tex.findById(rs.getInt("nomtype_id")));
+                 
+                li.add(ex);
+                
+            }
+            System.out.println(li);
+        } catch (SQLException ex) {
+              ex.printStackTrace();
+        }
+
+        return li;
+
+    }
+
+   
+    public List<exercice> readExercice() {
+        List<exercice> li = new ArrayList<exercice>();
+
+        try {
+            String req = "select * from exercice";
+            Statement s = cnx.createStatement();
+
+            ResultSet rs = s.executeQuery(req);
+            while (rs.next()) {
+                exercice ex = new exercice();
+                ex.setId(rs.getInt("id"));
+                ex.setNom(rs.getString("nom"));
+                ex.setVideo(rs.getString("video"));
+                ex.setDescription(rs.getString("description"));
+                ex.setObjectif(rs.getString("objectif"));
+                ex.setNomtype_id(tex.findById(rs.getInt("nomtype_id")));
+                
+                li.add(ex);
             }
 
-            for (int i = 0; i < exercices.size(); i++) {
-                System.out.println("***********************************************************");
-                System.out.println(exercices.get(i).getId());
-                System.out.println(exercices.get(i).getNom());
-            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return exercices;
+
+        return li;
     }
 
 }

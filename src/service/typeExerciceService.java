@@ -52,6 +52,45 @@ public class typeExerciceService implements typeExerciceInterface {
             e.printStackTrace();
         }
     }
+    @Override
+    public typeExercice findByName(String name) {
+        typeExercice tex = null;
+        try {
+            String req = "SELECT id FROM typeexercice WHERE nom=?";
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, name);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                tex = new typeExercice(
+                        rs.getString(1));
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tex;
+    }
+    @Override
+    public typeExercice findById(int id) {
+        typeExercice tex = null;
+        try {
+            String req = "select * from typeexercice where id=? ";
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                tex = new typeExercice(
+                        rs.getInt(1),
+                        rs.getString(2));
+            }
+
+        } catch (Exception e) {
+        }
+        return tex;
+
+    }
 
     @Override
     public void deleteType(int id) {
@@ -80,11 +119,7 @@ public class typeExerciceService implements typeExerciceInterface {
                 ));
             }
 
-            for (int i = 0; i < types.size(); i++) {
-                System.out.println("***********************************************************");
-                System.out.println(types.get(i).getId());
-                System.out.println(types.get(i).getNom());
-            }
+          
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -17,9 +17,11 @@ public interface exerciceInterface {
 
     public void addExercice(typeExercice type, exercice exc);
 
-    public void editExercice(exercice exc);
+    public void editExercice(exercice exc, typeExercice type);
 
     public void deleteExercice(int id);
+
+    public List<exercice> searchExercice(String search);
 
     public List<exercice> readExercice();
 }

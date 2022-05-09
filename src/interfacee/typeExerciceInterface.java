@@ -20,6 +20,10 @@ public interface typeExerciceInterface {
 
     public void deleteType(int id);
 
+    public typeExercice findByName(String name);
+
+    public typeExercice findById(int id);
+
     public List<typeExercice> readType();
 
 }
