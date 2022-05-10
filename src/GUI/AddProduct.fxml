@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -19,7 +20,10 @@
             <VBox prefHeight="400.0" prefWidth="56.0" styleClass="right-bar" stylesheets="@Seifcss/style.css" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <VBox prefHeight="400.0" prefWidth="47.0" styleClass="right-bar" stylesheets="@Seifcss/style.css" BorderPane.alignment="CENTER" />
+            <VBox prefHeight="400.0" prefWidth="47.0" styleClass="right-bar" stylesheets="@Seifcss/style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="74.0" prefWidth="47.0" />
+               </children></VBox>
          </right>
          <center>
             <VBox prefHeight="200.0" prefWidth="512.0" BorderPane.alignment="CENTER">

@@ -18,13 +18,13 @@ import java.util.List;
 public interface productInterface {
     public ArrayList<product> getNumberofproodsByCat() ;
 
-    public void createproduct(product p, category cat);
+    public boolean createproduct(product p, category cat);
 
     public List<product> getallproduct();
 
     public void deleteproduct(int id);
 
-    public void updateproduct(product p, category cat);
+    public boolean updateproduct(product p, category cat);
 
     public List<product> paginationProd();
 

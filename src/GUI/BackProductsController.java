@@ -74,10 +74,6 @@ public class BackProductsController implements Initializable {
     private MyListener myListener;
     String name;
     double price;
-    
-    
-    
-    
 
     public void GoToMarket() throws java.io.IOException {
         Parent root = FXMLLoader.load(getClass().getResource("market.fxml"));
@@ -96,14 +92,9 @@ public class BackProductsController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("AddProduct.fxml"));
-            /*
-         * if "fx:controller" is not set in fxml
-         * fxmlLoader.setController(NewWindowController);
-             */
-            Scene scene = new Scene(fxmlLoader.load(), 800, 550);
+            Parent root = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setTitle("New Product");
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());
@@ -111,8 +102,8 @@ public class BackProductsController implements Initializable {
         }
     }
 
-    public void searchProduct() throws IOException{
-               String searched = searchprod.getText();
+    public void searchProduct() throws IOException {
+        String searched = searchprod.getText();
 
         if (searched != null) {
             grid.getChildren().clear();
@@ -150,7 +141,7 @@ public class BackProductsController implements Initializable {
         } else {
             this.RefreshPage();
         }
-           
+
     }
 
     private void setChosenProduct(product product) {
@@ -199,12 +190,12 @@ public class BackProductsController implements Initializable {
         return test;
     }
 
-    public void deleteprod() throws IOException{
+    public void deleteprod() throws IOException {
         int y = test.getId();
         System.out.println(y);
         fn.deleteproduct(y);
         this.RefreshPage();
-       
+
     }
 
     public void GoToEditProduct() throws IOException {
@@ -243,9 +234,8 @@ public class BackProductsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
-       
-       List<product> li = fn.getallproduct();
+
+        List<product> li = fn.getallproduct();
         if (li.size() > 0) {
             setChosenProduct(li.get(0));
             myListener = new MyListener() {
@@ -253,7 +243,6 @@ public class BackProductsController implements Initializable {
                 public void onClickListener(product product) {
                     setChosenProduct(product);
                     itemid(product);
-                    
 
                 }
             };

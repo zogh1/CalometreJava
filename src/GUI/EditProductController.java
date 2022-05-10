@@ -54,6 +54,7 @@ public class EditProductController implements Initializable {
     private TextField qtyProd;
     @FXML
     Button closewindow;
+
     @FXML
     public String uploadImage() throws java.io.IOException {
         FileChooser fileChooser = new FileChooser();
@@ -88,7 +89,7 @@ public class EditProductController implements Initializable {
 
         test.setId(y.getId());
         test.setName(y.getName());
-        test.setPrice(y.getPrice());
+        test.setPrice((int) y.getPrice());
         test.setDescription(y.getDescription());
         test.setQuantity(y.getQuantity());
         test.setCategory_id(y.getCategory_id());
@@ -98,36 +99,92 @@ public class EditProductController implements Initializable {
         descProd.setText(test.getDescription());
         qtyProd.setText(String.valueOf(test.getQuantity()));
         categ.setValue(test.getCategory_id().getName());
-      Picture = test.getImage();
-        
-        
+        Picture = test.getImage();
+
         return test;
     }
 
     public void editProd() throws java.io.IOException {
 
-        String selected = categ.getValue().toString();
-        category catname = fn1.findByName(selected);
-        String name = nameProd.getText();
-        String price = PriceProd.getText();
-        String description = descProd.getText();
-        String qty = qtyProd.getText();
-        int x = Integer.parseInt(catname.getName());
-        double prix = Double.parseDouble(price);
-        int quantity = Integer.parseInt(qty);
-        int id = test.getId();
-        test.setId(id);
-        test.setName(name);
-        test.setPrice(prix);
-        test.setDescription(description);
-        test.setQuantity(quantity);
-        test.setImage(Picture);
-        System.out.println(Picture);
-        cat.setId(x);
-        fn.updateproduct(test, cat);
-          Stage stage = (Stage) closewindow.getScene().getWindow();
-         stage.close(); 
-        this.refreshtables();
+        int error = 0;
+
+        if (categ.getValue() == null) {
+
+            categ.setStyle("-fx-prompt-text-fill: red;");
+            categ.setPromptText("Chose something!");
+            new animatefx.animation.Shake(categ).play();
+            error++;
+
+        } else {
+            categ.setStyle(null);
+
+        }
+
+        if (nameProd.getText().isEmpty()) {
+
+            nameProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+            nameProd.setPromptText("Please verify the product name!");
+            new animatefx.animation.Shake(nameProd).play();
+            System.out.println("1 : " + nameProd.getText());
+            error++;
+
+        } else {
+            nameProd.setStyle(null);
+
+        }
+        if (PriceProd.getText().isEmpty() || (!PriceProd.getText().matches("([0-9]*)\\.([0-9]*)") && !PriceProd.getText().matches("[0-9]+"))) {
+
+            PriceProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+            PriceProd.setText("");
+            PriceProd.setPromptText("Please verify the product price!");
+            new animatefx.animation.Shake(PriceProd).play();
+            error++;
+        } else {
+            PriceProd.setStyle(null);
+        }
+        if (descProd.getText().isEmpty()) {
+
+            descProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+            descProd.setPromptText("Please verify the product description!");
+            new animatefx.animation.Shake(descProd).play();
+            error++;
+        } else {
+            descProd.setStyle(null);
+
+        }
+        if (qtyProd.getText().isEmpty() || !qtyProd.getText().matches("[0-9]+")) {
+
+            qtyProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+            qtyProd.setText("");
+            qtyProd.setPromptText("Please verify the product quantity!");
+            new animatefx.animation.Shake(qtyProd).play();
+            error++;
+        } else {
+            qtyProd.setStyle(null);
+
+        }
+
+        if (error == 0) {
+            System.out.println("2 : " + nameProd.getText());
+            String selected = categ.getValue().toString();
+            category catname = fn1.findByName(selected);
+            int x = Integer.parseInt(catname.getName());
+            int quantity = Integer.parseInt(qtyProd.getText());
+            test.getId();
+            test.setName(nameProd.getText());
+            test.setPrice(Double.parseDouble(PriceProd.getText()));
+            test.setDescription(descProd.getText());
+            test.setQuantity(quantity);
+            test.setImage(Picture);
+            cat.setId(x);
+            if (fn.updateproduct(test, cat)) {
+                this.refreshtables();
+                Stage stage = (Stage) closewindow.getScene().getWindow();
+                stage.close();
+            }
+
+        }
+
     }
 
     @Override
@@ -137,7 +194,7 @@ public class EditProductController implements Initializable {
             String id = list.getName();
             categ.getItems().add(id);
         }
-        
+
     }
 
 }

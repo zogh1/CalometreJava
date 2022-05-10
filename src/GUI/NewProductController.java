@@ -24,7 +24,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import service.categoryservice;
@@ -42,6 +44,7 @@ public class NewProductController implements Initializable {
 
     categoryservice fn1 = new categoryservice();
     category cat = new category();
+
     @FXML
     private ComboBox categ;
     @FXML
@@ -87,39 +90,90 @@ public class NewProductController implements Initializable {
 
     public void addProduct() throws java.io.IOException {
 
-        String selected = categ.getValue().toString();
-        category catname = fn1.findByName(selected);
         String name = nameProd.getText();
         String price = PriceProd.getText();
         String description = descProd.getText();
         String qty = qtyProd.getText();
 
-        int x = Integer.parseInt(catname.getName());
-        System.out.println(catname);
-        // int x = catname;
-        //System.out.println(x);
-        int prix = Integer.parseInt(price);
-        int quantity = Integer.parseInt(qty);
+        int error = 0;
+
+        if (categ.getValue() == null) {
+
+            categ.setStyle("-fx-prompt-text-fill: red;");
+            categ.setPromptText("Chose something!");
+            new animatefx.animation.Shake(categ).play();
+            error++;
+
+        } else {
+            categ.setStyle(null);
+
+        }
 
         if (name.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("null");
-            alert.setContentText("Please fill all required fields");
-            alert.showAndWait();
-        } else {
 
+            nameProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+            nameProd.setPromptText("Please verify the product name!");
+            new animatefx.animation.Shake(nameProd).play();
+            error++;
+
+        } else {
+            nameProd.setStyle(null);
+
+        }
+        if (price.isEmpty() || (!PriceProd.getText().matches("([0-9]*)\\.([0-9]*)") && !PriceProd.getText().matches("[0-9]+"))) {
+
+            PriceProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+            PriceProd.setText("");
+            PriceProd.setPromptText("Please verify the product price!");
+            new animatefx.animation.Shake(PriceProd).play();
+            error++;
+        } else {
+            PriceProd.setStyle(null);
+
+        }
+        if (description.isEmpty()) {
+
+            descProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+            descProd.setPromptText("Please verify the product description!");
+            new animatefx.animation.Shake(descProd).play();
+            error++;
+        } else {
+            descProd.setStyle(null);
+
+        }
+        if (qty.isEmpty() || !qty.matches("[0-9]+")) {
+
+            qtyProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+            qtyProd.setText("");
+            qtyProd.setPromptText("Please verify the product quantity!");
+            new animatefx.animation.Shake(qtyProd).play();
+            error++;
+        } else {
+            qtyProd.setStyle(null);
+
+        }
+
+        // int x = catname;
+        //System.out.println(x);
+        if (error == 0) {
+            String selected = categ.getValue().toString();
+            category catname = fn1.findByName(selected);
+            int x = Integer.parseInt(catname.getName());
+            int prix = Integer.parseInt(price);
+            int quantity = Integer.parseInt(qty);
             test.setName(name);
             test.setPrice(prix);
             test.setDescription(description);
             test.setQuantity(quantity);
             test.setImage(Picture);
             cat.setId(x);
-            fn.createproduct(test, cat);
+            if (fn.createproduct(test, cat)) {
+                this.refreshtables();
+                Stage stage = (Stage) closewindow.getScene().getWindow();
+                stage.close();
+            }
 
         }
-        Stage stage = (Stage) closewindow.getScene().getWindow();
-        stage.close();
-        this.refreshtables();
 
     }
 
@@ -134,3 +188,36 @@ public class NewProductController implements Initializable {
     }
 
 }
+//private void onValiderClicked(MouseEvent event) throws Exception {
+//        
+//        Restaurant r = new Restaurant();
+//        r.setNom(input_nom.getText());
+//        r.setImage(imagelink);
+//        r.setNum(Integer.parseInt(num.getText()));
+//        r.setHorraire_ouverture(Date.valueOf(dateopen.getValue()));
+//        r.setHorraire_fermeture(Date.valueOf(dateclose.getValue()));
+//        r.setNom_reg(region.getValue());
+//                
+//if((Integer.toString(r.getNum()).length()!=8)||(r.getNom().length()==0)||(r.getHorraire_fermeture().toString().length()==0)||(r.getHorraire_ouverture().compareTo(Date.valueOf(LocalDate.now()))<0)||(r.getHorraire_ouverture().compareTo(r.getHorraire_fermeture())>0)){
+//         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//        alert.setTitle("Information");
+//        alert.setHeaderText(null);
+//        alert.setContentText("Verifiez vos données");
+//
+//        alert.show();
+//        }else{ 
+//        RestaurantService irestau = new RestaurantService();
+//        if (restaurant == null) {
+//            irestau.ajouterOrganisateur(r);
+//        } else {
+//            
+//            r.setId(restaurant.getId());
+//            irestau.ModifierRestaurant(r);
+//            region = null;
+//        }
+//
+//        input_nom.clear();
+//        num.clear();}
+//
+//
+//    }*

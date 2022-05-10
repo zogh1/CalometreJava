@@ -32,8 +32,9 @@ public class productservice implements productInterface {
     Connection cnx = instance.getCnx();
 
     categoryservice cs = new categoryservice();
-cartService cart = new cartService();
+    cartService cart = new cartService();
     Cart cr = new Cart();
+
     public product findById(int id) {
         product u = null;
         try {
@@ -53,7 +54,7 @@ cartService cart = new cartService();
                         rs.getString("image")
                 );
             }
-            
+
         } catch (Exception e) {
         }
         return u;
@@ -68,28 +69,26 @@ cartService cart = new cartService();
             String req = "SELECT *,COUNT(*) FROM cart_prods WHERE qty IN (SELECT MAX(qty) FROM cart_prods)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ResultSet rs = ps.executeQuery();
-           
-                
+
             while (rs.next()) {
                 count = rs.getInt("qty");
-                if(count !=0){
-                prodName = this.findById(rs.getInt(2)).getName();
-                
+                if (count != 0) {
+                    prodName = this.findById(rs.getInt(2)).getName();
+
+                }
             }
-            }
-            
+
             list.add(prodName);
             list.add(String.valueOf(count));
-            
-            
+
         } catch (SQLException e) {
         }
         return list;
     }
 
     @Override
-    public void createproduct(product p, category cat) {
-
+    public boolean createproduct(product p, category cat) {
+        boolean created = false;
         //request
         try {
             String req = "INSERT INTO `product`(`name`, `price`, `description`, `quantity`, `category_id`, `image`) VALUES (?,?,?,?,?,?)";
@@ -102,12 +101,13 @@ cartService cart = new cartService();
             st.setString(6, p.getImage());
             st.executeUpdate();
             System.out.println("Produit ajoutée avec succes.");
+            created = true;
 
         } catch (SQLException ex) {
 
             ex.printStackTrace();
         }
-
+        return created;
     }
 
     @Override
@@ -185,7 +185,7 @@ cartService cart = new cartService();
                 p.setImage(rs.getString("image"));
 
                 li.add(p);
-            
+
             }
 
         } catch (SQLException ex) {
@@ -215,11 +215,11 @@ cartService cart = new cartService();
                 p.setCategory_id(cs.findById(rs.getInt("category_id")));
 
                 li.add(p);
-                
+
             }
-            
+
         } catch (SQLException ex) {
-              ex.printStackTrace();
+            ex.printStackTrace();
         }
 
         return li;
@@ -242,17 +242,19 @@ cartService cart = new cartService();
     }
 
     @Override
-    public void updateproduct(product p, category cat) {
-
+    public boolean updateproduct(product p, category cat) {
+        boolean done = false;
         String req = "UPDATE `product` SET `name`='" + p.getName() + "',`price`='" + p.getPrice() + "',`description`='" + p.getDescription() + "',`quantity`='" + p.getQuantity() + "',`image`='" + p.getImage() + "' ,`category_id`='" + cat.getId() + "' WHERE id='" + p.getId() + "'";
         try {
             PreparedStatement st = cnx.prepareStatement(req);
 
             st.executeUpdate();
+            done = true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("error");
         }
+        return done;
     }
 
     @Override
