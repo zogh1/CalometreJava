@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import util.DataSource;
+import util.connexion;
 
 /**
  *
@@ -24,14 +24,14 @@ import util.DataSource;
  */
 public class ServiceEvent {
 
-    DataSource instance = DataSource.getInstance();
+    connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
 
     public List<Event> getallEvent() {
         List<Event> le = new ArrayList<Event>();
         String req = "select * from event";
         try {
-            Statement s = DataSource.getInstance().getCnx().createStatement();
+            Statement s = connexion.getInstance().getCnx().createStatement();
             ResultSet rs = s.executeQuery(req);
             while (rs.next()) {
                 Event e = new Event();
@@ -59,7 +59,7 @@ public class ServiceEvent {
         Event e = new Event();
         String req = "select * from event where id=?";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -87,7 +87,7 @@ public class ServiceEvent {
         //req BD
         String req = "INSERT INTO `event`(`nom`, `date_debut`, `date_fin`, `description`, `nombre_participants`, `lieu`, `image`) VALUES (?,?,?,?,?,?,?)";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
 
             ps.setString(1, e.getNom());
             ps.setString(2, e.getDate_debut());
@@ -111,7 +111,7 @@ public class ServiceEvent {
     public void deleteEvent(int id) {
         String req = "delete from event where id=?";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException er) {
@@ -125,7 +125,7 @@ public class ServiceEvent {
         String req = "update event set nom=?,date_debut=?,date_fin=?,description=?,nombre_participants=?,lieu=?,image=? where id=?";
         try {
             System.out.println("jib" + id);
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             ps.setString(1, e.getNom());
             ps.setString(2, e.getDate_debut());
             ps.setString(3, e.getDate_fin());
@@ -146,7 +146,7 @@ public class ServiceEvent {
         String req = "select count(*) from event_user where event_id=?;";
         int numberROW = 0;
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
 
             ps.setInt(1, event_id);
             ResultSet rs = ps.executeQuery();
@@ -167,7 +167,7 @@ public class ServiceEvent {
         String req = "select count(*) from event_user where event_id=? and user_id = ?;";
         int numberROW = 0;
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
 
             ps.setInt(1, idEvent);
             ps.setInt(2, idUser);
@@ -194,7 +194,7 @@ public class ServiceEvent {
                     && (user_is_applyed_toevent(idUser, idEvent) == false)) {
                 String req2 = "INSERT INTO `event_user`(`event_id`, `user_id`) VALUES (?,?)";
                 try {
-                    PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req2);
+                    PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req2);
 
                     ps.setInt(1, idEvent);
                     ps.setInt(2, idUser);
@@ -233,7 +233,7 @@ public class ServiceEvent {
                 + "                   order by count(eu.event_id) / e.nombre_participants desc\n"
                 + "                   LIMIT 3) as topThreeEventsIds);";
         try {
-            Statement s = DataSource.getInstance().getCnx().createStatement();
+            Statement s = connexion.getInstance().getCnx().createStatement();
             ResultSet rs = s.executeQuery(req);
             while (rs.next()) {
                 Event e = new Event();

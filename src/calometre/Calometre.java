@@ -6,55 +6,57 @@
 package calometre;
 
 import GUI.MainMenuController;
-import entity.Event;
-import entity.Post;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import service.ServiceEvent;
-import service.ServicePost;
-import sun.applet.Main;
 
 /**
  *
- * @author wassim
+ * @author Souhail
  */
 public class Calometre extends Application {
 
+    public static Stage primaryStage;
     public static MainMenuController mainController;
-     /**
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        Calometre.primaryStage = primaryStage;
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/login.fxml"));
+       
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        //
+    }
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//        // TODO code application logic here
+
         launch(args);
     }
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-      Parent root =FXMLLoader.load(getClass().getResource("../GUI/mainMenu.fxml"));
-           primaryStage.setTitle("calometre") ; 
-                primaryStage.setScene (new Scene(root,1315,600)) ; 
-                     primaryStage.show () ; 
-                     
- 
-        /*      try {
-            Parent root =FXMLLoader.load(getClass().getResource("../GUI/MenuGusest.fxml"));
-            Scene scene = new Scene(root);
-//            scene.getStylesheets().add(getClass().getResource("").toExternalForm());
-           primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    */
-        
-        
-    }       
+
 }
+/*public class main extends Application {
+        private Stage primaryStage;
+        @Override
+        public void start(Stage primaryStage) throws Exception {
+            this.primaryStage = primaryStage;
+            mainWindow();
+        }
+        private void mainWindow() {
+            try {
+                FXMLLoader loader = new FXMLLoader(main.class.getResource("../GUI/login.fxml"));
+                AnchorPane pane = loader.load();
+            } catch (IOException e) {
+            }
+            //To change body of generated methods, choose Tools | Templates.
+        }
+    };
+}*/

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import util.DataSource;
+import util.connexion;
 
 /**
  *
@@ -29,7 +29,7 @@ public class ServiceComment {
     public void addComment(Comment c) {
         String req = "insert into comment(event_id,commentdate,commentcontent,user_id,likecount) values(?,?,?,?,?)";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
 
             ps.setInt(1, c.getEvent_id());
             ps.setString(2, c.getCommentdate());
@@ -49,7 +49,7 @@ public class ServiceComment {
 
         String req = "delete from comment where id=?";
         try {
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("Commentaire supprimé");
@@ -61,7 +61,7 @@ public class ServiceComment {
         List<Comment> le = new ArrayList<Comment>();
         String req = "SELECT id,commentcontent,likecount,user_id FROM `comment` WHERE event_id=" + comment_id + " order by commentdate desc;";
         try {
-            Statement s = DataSource.getInstance().getCnx().createStatement();
+            Statement s = connexion.getInstance().getCnx().createStatement();
             ResultSet rs = s.executeQuery(req);
             while (rs.next()) {
                 Comment c = new Comment();
@@ -85,7 +85,7 @@ public class ServiceComment {
         String req = "update comment set likecount = likecount + 1 where id=?";
         try {
             System.out.println("zid j'aime lel comment " + id);
-            PreparedStatement ps = DataSource.getInstance().getCnx().prepareStatement(req);
+            PreparedStatement ps = connexion.getInstance().getCnx().prepareStatement(req);
             
             ps.setInt(1, id);
 

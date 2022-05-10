@@ -54,7 +54,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <HBox alignment="CENTER" onMouseClicked="#viewProfile" prefHeight="60.0" prefWidth="202.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="141.0" stylesheets="@../css/styles.css" text="Zoghlami Wassim" textAlignment="CENTER">
+                  <Label fx:id="userName" prefHeight="40.0" prefWidth="141.0" stylesheets="@../css/styles.css" text="Zoghlami Wassim" textAlignment="CENTER">
                      <font>
                         <Font name="Comic Sans MS" size="16.0" />
                      </font>
@@ -63,7 +63,7 @@
                         <String fx:value="mouse-moved" />
                      </styleClass>
                   </Label>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="UserImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icons/78701769_1214858548712099_5339090428526329856_n.jpg" />
                      </image>
@@ -85,7 +85,7 @@
          <children>
             <VBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="261.0" prefWidth="180.0" spacing="10.0">
                <children>
-                  <HBox alignment="CENTER" onMouseClicked="#selectMenueItem" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -95,10 +95,10 @@
                               <Cursor fx:constant="N_RESIZE" />
                            </cursor>
                         </ImageView>
-                        <Label prefHeight="17.0" prefWidth="111.0" text="Events" />
+                        <Label onMouseClicked="#selectMenueItem" prefHeight="17.0" prefWidth="111.0" text="Events" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#selectMenueItem" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -108,10 +108,10 @@
                               <Cursor fx:constant="N_RESIZE" />
                            </cursor>
                         </ImageView>
-                        <Label prefHeight="17.0" prefWidth="110.0" text="Exercice" />
+                        <Label onMouseClicked="#selectMenueItem" prefHeight="17.0" prefWidth="110.0" text="Exercice" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#selectMenueItem" prefHeight="24.0" prefWidth="195.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="195.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -121,10 +121,10 @@
                               <Cursor fx:constant="N_RESIZE" />
                            </cursor>
                         </ImageView>
-                        <Label prefHeight="17.0" prefWidth="111.0" text="Complaint" />
+                        <Label onMouseClicked="#selectMenueItem" prefHeight="17.0" prefWidth="111.0" text="Complaint" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#selectMenueItem" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -134,10 +134,10 @@
                               <Cursor fx:constant="N_RESIZE" />
                            </cursor>
                         </ImageView>
-                        <Label prefHeight="17.0" prefWidth="109.0" text="Category" />
+                        <Label onMouseClicked="#selectMenueItem" prefHeight="17.0" prefWidth="109.0" text="Category" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#selectMenueItem" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -147,10 +147,10 @@
                               <Cursor fx:constant="N_RESIZE" />
                            </cursor>
                         </ImageView>
-                        <Label prefHeight="17.0" prefWidth="110.0" text="Cart" />
+                        <Label onMouseClicked="#selectMenueItem" prefHeight="17.0" prefWidth="110.0" text="Cart" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#selectMenueItem" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -160,10 +160,23 @@
                               <Cursor fx:constant="N_RESIZE" />
                            </cursor>
                         </ImageView>
-                        <Label prefHeight="17.0" prefWidth="103.0" text="Recette" />
+                        <Label onMouseClicked="#selectMenueItem" prefHeight="17.0" prefWidth="103.0" text="Recette" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" onMouseClicked="#selectMenueItem" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
+                     <children>
+                        <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../Documents/NetBeansProjects/Calometre/src/img/icons8-rice-bowl-100-6226768747b90.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="N_RESIZE" />
+                           </cursor>
+                        </ImageView>
+                        <Label onMouseClicked="#selectMenueItem" prefHeight="17.0" prefWidth="103.0" text="IMC" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="123.0" spacing="15.0" styleClass="mouse-moved" stylesheets="@../css/styles.css">
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -173,7 +186,7 @@
                               <Cursor fx:constant="N_RESIZE" />
                            </cursor>
                         </ImageView>
-                        <Label prefHeight="17.0" prefWidth="103.0" text="Log out" />
+                        <Label onMouseClicked="#selectMenueItem" prefHeight="17.0" prefWidth="103.0" text="Log out" />
                      </children>
                   </HBox>
                </children>

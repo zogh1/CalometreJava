@@ -6,14 +6,22 @@
 package GUI;
 
 import entity.Comment;
+import entity.user;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import service.ServiceComment;
+import service.userservice;
+import util.session;
 
 /**
  * FXML Controller class
@@ -36,6 +44,7 @@ public class CommentController implements Initializable {
     private int idComment;
     
     private ServiceComment serviceComment;
+    private userservice userservice;
 
     /**
      * Initializes the controller class.
@@ -43,13 +52,23 @@ public class CommentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         serviceComment = new ServiceComment();
+        userservice = new userservice();
     }
     
-    void setData(Comment comment) {
+    void setData(Comment comment) throws FileNotFoundException {
         idComment = comment.getId();
-        username.setText("Zoghlami Wassim");
+        user user = userservice.findById(comment.getUser_id());
+        username.setText(user.getFirstname()+" " + user.getLastname());
         commentcontent.setText(comment.getCommentcontent());
+        if(user.getId() == session.getUser().getId())
+            username.setTextFill(Color.RED);
+        else
+            username.setTextFill(Color.BLUE);
         nbLike.setText(comment.getLikecount() + "");
+        Image i = new Image(new FileInputStream("C:\\Users\\wassim\\Desktop\\Pidev3A\\Calometre\\public\\uploads\\profilePicture\\"+ user.getProfile_picture()));
+        
+        
+        image.setImage(i);
     }
     
     @FXML

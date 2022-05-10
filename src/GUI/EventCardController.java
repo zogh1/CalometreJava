@@ -29,6 +29,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import service.ServiceEvent;
+import util.session;
 
 /**
  * FXML Controller class
@@ -92,7 +93,7 @@ public class EventCardController implements Initializable {
         try {
             parsedId = Integer.parseInt(id.getText());
             Event ev = serviceEvent.getEventById(parsedId);
-            serviceEvent.applyToEvent(5, parsedId);
+            serviceEvent.applyToEvent(session.getUser().getId(), parsedId);
             serviceSMS.sendMessage("Hello , You just applied to '"+ev.getNom()+"' event don't miss it . Meet you there on: "+ev.getDate_debut()+". This sms can  be you entry pass", "+21650310220");
 
             String nbApplyed = "" + serviceEvent.getNombre_participants_byevent(parsedId);
@@ -159,7 +160,7 @@ public class EventCardController implements Initializable {
         try {
             parsedId = Integer.parseInt(id.getText());
 
-            if (serviceEvent.user_is_applyed_toevent(5, parsedId)) {
+            if (serviceEvent.user_is_applyed_toevent(session.getUser().getId(), parsedId)) {
                 applyButton.setVisible(false);
             } else {
                 applyButton.setVisible(true);

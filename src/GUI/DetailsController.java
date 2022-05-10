@@ -35,6 +35,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import service.ServiceComment;
 import service.ServiceEvent;
+import util.session;
 
 /**
  * FXML Controller class
@@ -140,7 +141,7 @@ public class DetailsController implements Initializable {
             String mysqlDateString = formatter.format(now);
             comment.setCommentdate(mysqlDateString);
 
-            comment.setUser_id(1);
+            comment.setUser_id(session.getUser().getId());
 
             comment.setLikecount(0);
 
