@@ -54,7 +54,6 @@ public class LoginController implements Initializable {
 
     public void LinkToCreateAnAccount() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("signup.fxml"));
-
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
 

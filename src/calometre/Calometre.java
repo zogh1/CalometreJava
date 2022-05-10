@@ -5,11 +5,14 @@
  */
 package calometre;
 
+import GUI.MainMenuController;
+import entity.user;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import service.userservice;
 
 /**
  *
@@ -18,16 +21,21 @@ import javafx.stage.Stage;
 public class Calometre extends Application {
 
     public static Stage primaryStage;
+    public static MainMenuController mainController;
+    public static final String CURRENCY = "TND";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        userservice us = new userservice();
+        user test = new user();
+        test.setEmail("crinnxx@gmail.com");
+        test.setPassword("Souhailacc99**");
+        us.login(test);
         Calometre.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/userslist.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
-        //
     }
 
     /**

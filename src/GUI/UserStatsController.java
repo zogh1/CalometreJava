@@ -47,6 +47,18 @@ public class UserStatsController implements Initializable {
      * @param url
      * @param rb
      */
+    public void GoToBackProds() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("BackOfficeProducts.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+    }
+
+    public void GoToCat() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("addcategory.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
