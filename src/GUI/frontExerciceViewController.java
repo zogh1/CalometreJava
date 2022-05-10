@@ -45,8 +45,15 @@ import service.exerciceService;
 import service.productservice;
 import service.typeExerciceService;
 
-public class frontExerciceViewController implements Initializable {
 
+
+public class frontExerciceViewController implements Initializable {
+public void GoToBack() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("BackExerciceView.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
     exerciceService fn = new exerciceService();
     exercice ex = new exercice();
 

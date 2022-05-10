@@ -23,6 +23,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -98,6 +100,30 @@ public class AddExerciceController implements Initializable {
         int x = Integer.parseInt(typeEx.getNom());
         
         
+        if(name.isEmpty()|| objectif.isEmpty()|| description.isEmpty() || selected.isEmpty()   )
+        {
+        
+        
+        
+        Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("null");
+            alert.setContentText("Veuillez remplir tous les champs obligatoires");
+            alert.showAndWait();
+        
+        }
+        else if ( name.length()>30)
+            
+        {
+         
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("null");
+            alert.setContentText("Le nom doit contenir moins de 30 characters");
+            alert.showAndWait();
+            
+        }
+        else
+        {
+        
         
         
         ex.setNom(name);
@@ -111,7 +137,7 @@ public class AddExerciceController implements Initializable {
         Stage stage = (Stage) closewindow.getScene().getWindow();
         stage.close();
         this.refreshtables();
-    }
+    }}
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

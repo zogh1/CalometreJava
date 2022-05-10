@@ -81,11 +81,7 @@ public class BackExerciceViewController implements Initializable {
     private MediaPlayer mediaPlayer;
     String name;
 
-    public void GoToFront() throws java.io.IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("frontexercice.fxml"));
-        Calometre.primaryStage.setScene(new Scene(root));
-        Calometre.primaryStage.show();
-    }
+    
 
     private void RefreshPage() throws java.io.IOException {
 
@@ -154,7 +150,18 @@ public class BackExerciceViewController implements Initializable {
             this.RefreshPage();
         }
     }
+ public void LinkToFront() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("FrontExerciceView.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
 
+    }
+  public void GoToType() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("TypeExercice.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
     private void setChosenExercice(exercice exercice) {
 
         ExerciceName.setText(exercice.getNom());
@@ -204,18 +211,12 @@ public class BackExerciceViewController implements Initializable {
     }
 
     public void GoToEditExercice() throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("EditExercice.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("EditExercice.fxml"));
             Parent root = (Parent) loader.load();
-            EditExerciceController secController = loader.getController();
+            EditExerciceController secController=loader.getController();
             secController.itemSelected(ex);
-            Stage stage = new Stage();
-            stage.setTitle("Edit Exercice");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
     }
 
     @Override

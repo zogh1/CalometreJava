@@ -29,6 +29,12 @@ import service.typeExerciceService;
  * @author Souhail
  */
 public class TypeExerciceController implements Initializable {
+    public void GoToBack() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("BackExerciceView.fxml"));
+        Calometre.primaryStage.setScene(new Scene(root));
+        Calometre.primaryStage.show();
+
+    }
 
     @FXML
     private TextField nameField;

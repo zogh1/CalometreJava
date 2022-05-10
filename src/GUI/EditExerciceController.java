@@ -5,18 +5,14 @@
  */
 package GUI;
 
-import static GUI.NewProductController.Picture;
 import calometre.Calometre;
-import entity.category;
 import entity.exercice;
-import entity.product;
 import entity.typeExercice;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,9 +24,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import service.categoryservice;
 import service.exerciceService;
-import service.productservice;
 import service.typeExerciceService;
 
 /**
@@ -70,7 +64,7 @@ public class EditExerciceController implements Initializable {
                     System.err.println("wrong format");
                 } else {
                   
-                    String pathname = "C:\\Users\\seifd\\Documents\\CalometreJava\\src\\GUI\\videotest\\" + image.getName();
+                    String pathname = "C:\\Users\\yassine\\Desktop\\java\\yassin\\src\\GUI\\videotest\\" + image.getName();
                     File file1 = new File(pathname);
                     EditExerciceController.Picture = image.getName();
                     Files.copy(image.toPath(), file1.toPath(), StandardCopyOption.REPLACE_EXISTING);
