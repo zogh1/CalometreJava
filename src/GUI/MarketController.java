@@ -70,7 +70,7 @@ public class MarketController implements Initializable {
     private Label fruitNameLable;
     @FXML
     private Label prodDesc;
-     @FXML
+    @FXML
     private Label ItemsCount;
 
     @FXML
@@ -96,32 +96,31 @@ public class MarketController implements Initializable {
     double price;
 
     private void RefreshPage() throws java.io.IOException {
-        
+
         Parent root = FXMLLoader.load(getClass().getResource("market.fxml"));
         Calometre.primaryStage.setScene(new Scene(root));
         Calometre.primaryStage.show();
     }
+
     public void GoToCart() throws java.io.IOException {
         try {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("Cart.fxml"));
-        /*
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("Cart.fxml"));
+            /*
          * if "fx:controller" is not set in fxml
          * fxmlLoader.setController(NewWindowController);
-         */
-        Scene scene = new Scene(fxmlLoader.load(), 800, 550);
-        Stage stage = new Stage();
-        stage.setTitle("Cart Items");
-        stage.setScene(scene);
-        stage.show();
-    } catch (IOException e) {
-        Logger logger = Logger.getLogger(getClass().getName());
-        logger.log(Level.SEVERE, "Failed to create new Window.", e);
+             */
+            Scene scene = new Scene(fxmlLoader.load(), 800, 550);
+            Stage stage = new Stage();
+            stage.setTitle("Cart Items");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+
     }
-
-}
-
-    
 
     public void setQrCode() {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -226,10 +225,11 @@ public class MarketController implements Initializable {
         int y = product.getId();
 
     }
-     public void TotalText() {
 
-       List<CartItem> crtitem = cart.loadProductsFromCart(1);
-        ItemsCount.setText("ItemsCount:"+ crtitem.size());
+    public void TotalText() {
+
+        List<CartItem> crtitem = cart.loadProductsFromCart(1);
+        ItemsCount.setText("ItemsCount:" + crtitem.size());
     }
 
     public product itemid(product product) {
@@ -238,24 +238,33 @@ public class MarketController implements Initializable {
         test.setId(y);
         return test;
     }
-
+    
     public void AddToChart() throws Exception {
-        cart.createCart(1,0, 1);
+        cart.createCart(1, 0, 1);
         String quantity = qty.getText();
-        int x = Integer.parseInt(quantity);
-        int y = test.getId();
-        
-        if(x != 0){
-         cart.addProduct(y, 1, x);
+        int error = 0;
+        if (!quantity.matches("[1-9]+")) {
+
+            qty.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+            qty.setText("");
+            qty.setPromptText("Please verify Quantity!");
+            new animatefx.animation.Shake(qty).play();
+            error++;
+        } else {
+            qty.setStyle(null);
         }
-        
-        this.RefreshPage();
+        if (error == 0) {
+            int x = Integer.parseInt(quantity);
+            int y = test.getId();
+            cart.addProduct(y, 1, x);
+            this.RefreshPage();
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.setQrCode();
-        
+
         List<product> li = fn.getallproduct();
         if (li.size() > 0) {
             setChosenProduct(li.get(0));
