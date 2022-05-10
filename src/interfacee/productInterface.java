@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface productInterface {
     public ArrayList<product> getNumberofproodsByCat() ;
-
+public List<product> searchByCategory(String cat);
     public boolean createproduct(product p, category cat);
 
     public List<product> getallproduct();

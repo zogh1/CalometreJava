@@ -32,6 +32,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.cartService;
@@ -48,7 +49,7 @@ public class BackProductsController implements Initializable {
 
     cartService cart = new cartService();
     Cart cr = new Cart();
-    ObservableList<product> oblist = FXCollections.observableArrayList();
+
     @FXML
     private VBox ChosenProd;
 
@@ -66,10 +67,8 @@ public class BackProductsController implements Initializable {
     private TextField searchprod;
     @FXML
     private GridPane grid;
-
-    product p = null;
-
-    private List<product> products = new ArrayList<>();
+    @FXML
+    private ComboBox catBox;
     private Image image;
     private MyListener myListener;
     String name;
@@ -99,6 +98,50 @@ public class BackProductsController implements Initializable {
         } catch (IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
+    public void ShowByCategory() throws IOException {
+        String catego = (String) catBox.getValue();
+        System.out.println(catego);
+        List<product> li;
+
+        grid.getChildren().clear();
+        if ("All".equals(catego)) {
+            li = fn.getallproduct();
+        } else {
+            li = fn.searchByCategory(catego);
+        }
+        
+
+        int column = 0;
+        int row = 1;
+        for (int i = 0; i < li.size(); i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("item.fxml"));
+            AnchorPane anchorPane = fxmlLoader.load();
+
+            ItemController itemController = fxmlLoader.getController();
+            itemController.setData(li.get(i), myListener);
+
+            if (column == 3) {
+                column = 0;
+                row++;
+            }
+
+            grid.add(anchorPane, column++, row); //(child,column,row)
+            //set grid width
+            grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+            grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            grid.setMaxWidth(Region.USE_PREF_SIZE);
+
+            //set grid height
+            grid.setMinHeight(Region.USE_COMPUTED_SIZE);
+            grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            grid.setMaxHeight(Region.USE_PREF_SIZE);
+
+            GridPane.setMargin(anchorPane, new Insets(10));
+
         }
     }
 
@@ -279,7 +322,12 @@ public class BackProductsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        List<category> listCateg = fn1.getallcategory();
+        for (category list : listCateg) {
+            String id = list.getName();
+            catBox.getItems().add(id);
+        }
+        catBox.getItems().add("All");
     }
 
 }

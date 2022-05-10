@@ -24,5 +24,6 @@ public interface categoryInterface {
     
     public category findById(int id);
     public category findByName(String name);
+    public category findCatByName(String name);
 
 }

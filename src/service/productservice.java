@@ -285,6 +285,37 @@ public class productservice implements productInterface {
     }
 
     @Override
+    public List<product> searchByCategory(String cat) {
+        int id = cs.findCatByName(cat).getId();
+        System.out.println(cs.findCatByName(cat).getName());
+        System.out.println(id);
+        
+        List<product> li = new ArrayList();
+        try {
+            String req = "SELECT * FROM product Where category_id=" + id;
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                product p = new product();
+                p.setId(result.getInt("id"));
+                p.setName(result.getString("name"));
+                p.setPrice(result.getDouble("price"));
+                p.setDescription(result.getString("description"));
+                p.setQuantity(result.getInt("quantity"));
+                p.setImage(result.getString("image"));
+                p.setCategory_id(cs.findById(result.getInt("category_id")));
+
+                li.add(p);
+
+                System.out.println(p.getName());
+            }
+
+        } catch (SQLException ex) {
+        }
+        return li;
+    }
+
+    @Override
     public HashMap<String, Integer> getProductStats() {
         List<product> list = this.getNumberofproodsByCat();
         HashMap<String, Integer> stat = new HashMap<>();

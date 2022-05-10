@@ -37,6 +37,7 @@ public class test {
 //    fn.searchProduct("hi");
 //    
 //    System.out.println(fn.searchProduct(""));
+System.out.println(fn.searchByCategory("5"));
     
         }
     

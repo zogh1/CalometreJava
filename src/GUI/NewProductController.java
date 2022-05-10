@@ -90,11 +90,6 @@ public class NewProductController implements Initializable {
 
     public void addProduct() throws java.io.IOException {
 
-        String name = nameProd.getText();
-        String price = PriceProd.getText();
-        String description = descProd.getText();
-        String qty = qtyProd.getText();
-
         int error = 0;
 
         if (categ.getValue() == null) {
@@ -109,7 +104,7 @@ public class NewProductController implements Initializable {
 
         }
 
-        if (name.isEmpty()) {
+        if (nameProd.getText().isEmpty()) {
 
             nameProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
             nameProd.setPromptText("Please verify the product name!");
@@ -120,7 +115,7 @@ public class NewProductController implements Initializable {
             nameProd.setStyle(null);
 
         }
-        if (price.isEmpty() || (!PriceProd.getText().matches("([0-9]*)\\.([0-9]*)") && !PriceProd.getText().matches("[0-9]+"))) {
+        if (PriceProd.getText().isEmpty() || (!PriceProd.getText().matches("([0-9]*)\\.([0-9]*)") && !PriceProd.getText().matches("[0-9]+"))) {
 
             PriceProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
             PriceProd.setText("");
@@ -131,7 +126,7 @@ public class NewProductController implements Initializable {
             PriceProd.setStyle(null);
 
         }
-        if (description.isEmpty()) {
+        if (descProd.getText().isEmpty()) {
 
             descProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
             descProd.setPromptText("Please verify the product description!");
@@ -141,7 +136,7 @@ public class NewProductController implements Initializable {
             descProd.setStyle(null);
 
         }
-        if (qty.isEmpty() || !qty.matches("[0-9]+")) {
+        if (qtyProd.getText().isEmpty() || !qtyProd.getText().matches("[0-9]+")) {
 
             qtyProd.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
             qtyProd.setText("");
@@ -159,11 +154,10 @@ public class NewProductController implements Initializable {
             String selected = categ.getValue().toString();
             category catname = fn1.findByName(selected);
             int x = Integer.parseInt(catname.getName());
-            int prix = Integer.parseInt(price);
-            int quantity = Integer.parseInt(qty);
-            test.setName(name);
-            test.setPrice(prix);
-            test.setDescription(description);
+            int quantity = Integer.parseInt(qtyProd.getText());
+            test.setName(nameProd.getText());
+            test.setPrice(Double.parseDouble(PriceProd.getText()));
+            test.setDescription(descProd.getText());
             test.setQuantity(quantity);
             test.setImage(Picture);
             cat.setId(x);

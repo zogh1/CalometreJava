@@ -71,7 +71,7 @@
                               <VBox layoutX="620.0" layoutY="-16.0" prefHeight="122.0" prefWidth="134.0">
                                  <children>
                                     <Pane prefHeight="87.0" prefWidth="134.0" />
-                                    <ComboBox prefWidth="150.0" stylesheets="@Seifcss/style.css" />
+                                    <ComboBox fx:id="catBox" onAction="#ShowByCategory" onDragDetected="#ShowByCategory" onDragDone="#ShowByCategory" onDragDropped="#ShowByCategory" prefWidth="150.0" promptText="Select Category" style="-fx-background-radius: 100;" stylesheets="@Seifcss/style.css" />
                                  </children>
                               </VBox>
                            </children>

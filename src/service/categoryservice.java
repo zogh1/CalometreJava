@@ -25,7 +25,7 @@ public class categoryservice implements categoryInterface {
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
 
-  @Override
+    @Override
     public category findById(int id) {
         category u = null;
         try {
@@ -39,33 +39,54 @@ public class categoryservice implements categoryInterface {
                         rs.getInt(1),
                         rs.getString(2));
             }
-         
+
         } catch (Exception e) {
         }
         return u;
-      
+
     }
-   
+
     @Override
     public category findByName(String name) {
         category u = null;
         try {
-            String req = "SELECT id FROM category WHERE name=?";
+            String req = "SELECT id FROM category WHERE name='" + name + "'";
+            System.out.println(req);
             PreparedStatement st = cnx.prepareStatement(req);
-            st.setString(1, name);
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
                 u = new category(
                         rs.getString(1));
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return u;
     }
-   /*public category findByName(String name) {
+
+    @Override
+    public category findCatByName(String name) {
+        category u = null;
+        try {
+            String req = "SELECT id,name FROM category WHERE name='" + name + "'";
+            System.out.println(req);
+            PreparedStatement st = cnx.prepareStatement(req);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                u = new category(
+                        rs.getInt(1), rs.getString(2));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return u;
+    }
+
+    /*public category findByName(String name) {
         List<category> li = new ArrayList();
 
         try {
@@ -89,24 +110,22 @@ public class categoryservice implements categoryInterface {
         return li;
 
     }*/
-    
-    
-    
     @Override
     public boolean createcategory(category c) {
-        boolean isadded=false;
-   
+        boolean isadded = false;
+
         //request
         try {
             String req = "INSERT INTO `category`(`name`) VALUES (?)";
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, c.getName());
             st.executeUpdate();
-           
-            isadded=true;
+
+            isadded = true;
 
         } catch (SQLException ex) {
-        } return isadded;
+        }
+        return isadded;
 
     }
 
@@ -126,7 +145,7 @@ public class categoryservice implements categoryInterface {
 
                 li.add(c);
             }
-          
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
