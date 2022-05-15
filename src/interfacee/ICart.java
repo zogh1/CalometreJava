@@ -24,4 +24,5 @@ public interface ICart {
     public ArrayList<CartItem> loadProductsFromCart(int id);
     public void createCart(int cid, int tot, int uid) throws Exception;
     
+    
 }

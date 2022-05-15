@@ -31,4 +31,6 @@ public List<product> searchByCategory(String cat);
     public List<product> searchProduct(String search);
     
     public HashMap<String, Integer> getProductStats();
+    public boolean quantity(product p);
+    public ArrayList<product> getstatinfo();
 }

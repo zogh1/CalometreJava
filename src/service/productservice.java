@@ -242,6 +242,21 @@ public class productservice implements productInterface {
     }
 
     @Override
+    public boolean quantity(product p) {
+        boolean qtydone = false;
+        String req = "UPDATE `product` SET `quantity`='" + p.getQuantity() + "' WHERE id='" + p.getId() + "'";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+
+            st.executeUpdate();
+            qtydone = true;
+        } catch (SQLException e) {
+            System.out.println("error");
+        }
+        return qtydone;
+    }
+
+    @Override
     public boolean updateproduct(product p, category cat) {
         boolean done = false;
         String req = "UPDATE `product` SET `name`='" + p.getName() + "',`price`='" + p.getPrice() + "',`description`='" + p.getDescription() + "',`quantity`='" + p.getQuantity() + "',`image`='" + p.getImage() + "' ,`category_id`='" + cat.getId() + "' WHERE id='" + p.getId() + "'";
@@ -255,6 +270,37 @@ public class productservice implements productInterface {
             System.out.println("error");
         }
         return done;
+    }
+
+    @Override
+    public List<product> searchByCategory(String cat) {
+        int id = cs.findCatByName(cat).getId();
+        System.out.println(cs.findCatByName(cat).getName());
+        System.out.println(id);
+
+        List<product> li = new ArrayList();
+        try {
+            String req = "SELECT * FROM product Where category_id=" + id;
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                product p = new product();
+                p.setId(result.getInt("id"));
+                p.setName(result.getString("name"));
+                p.setPrice(result.getDouble("price"));
+                p.setDescription(result.getString("description"));
+                p.setQuantity(result.getInt("quantity"));
+                p.setImage(result.getString("image"));
+                p.setCategory_id(cs.findById(result.getInt("category_id")));
+
+                li.add(p);
+
+                System.out.println(p.getName());
+            }
+
+        } catch (SQLException ex) {
+        }
+        return li;
     }
 
     @Override
@@ -283,36 +329,31 @@ public class productservice implements productInterface {
         }
         return prods;
     }
-
     @Override
-    public List<product> searchByCategory(String cat) {
-        int id = cs.findCatByName(cat).getId();
-        System.out.println(cs.findCatByName(cat).getName());
-        System.out.println(id);
-        
-        List<product> li = new ArrayList();
+    public ArrayList<product> getstatinfo() {
+        ArrayList<product> prods = new ArrayList();
         try {
-            String req = "SELECT * FROM product Where category_id=" + id;
+            String req = "SELECT * FROM cart_prods GROUP BY qty;";
             PreparedStatement ps = cnx.prepareStatement(req);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
-                product p = new product();
-                p.setId(result.getInt("id"));
-                p.setName(result.getString("name"));
-                p.setPrice(result.getDouble("price"));
-                p.setDescription(result.getString("description"));
-                p.setQuantity(result.getInt("quantity"));
-                p.setImage(result.getString("image"));
-                p.setCategory_id(cs.findById(result.getInt("category_id")));
+                prods.add(new product(
+                        result.getInt(1),
+                        result.getString(2),
+                        cs.findById(result.getInt(3)),
+                        result.getInt(4)
+                ));
+                /* for (int i = 0; i < prods.size(); i++) {
+                    System.out.println(prods.get(i).getName());
+                    System.out.println(prods.get(i).getCount());
+                    System.err.println("*********");
+                }*/
 
-                li.add(p);
-
-                System.out.println(p.getName());
             }
 
         } catch (SQLException ex) {
         }
-        return li;
+        return prods;
     }
 
     @Override

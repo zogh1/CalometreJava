@@ -236,36 +236,61 @@ public class MarketController implements Initializable {
     }
 
     public product itemid(product product) {
-
-        int y = product.getId();
-        test.setId(y);
+        test.setId(product.getId());
+        test.setQuantity(product.getQuantity());
+        test.setName(product.getName());
         return test;
     }
-    
+
     public void AddToChart() throws Exception {
+
         cart.createCart(1, 0, 1);
         String quantity = qty.getText();
         int error = 0;
-        if (!quantity.matches("[1-9]+")) {
+        int x = Integer.parseInt(quantity);
+        int y = test.getId();
+        int f = test.getQuantity() - x;
+        if(x <0){
+        qty.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+                qty.setText("");
+                qty.setPromptText("Chose a positive number!");
+                new animatefx.animation.Shake(qty).play();
+                error++;
+        }else {
+            qty.setStyle(null);
 
-            qty.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
-            qty.setText("");
-            qty.setPromptText("Please verify Quantity!");
-            new animatefx.animation.Shake(qty).play();
+        }
+        
+        if (f < 0) {
+            if (test.getQuantity() > 0) {
+                qty.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+                qty.setText("");
+                qty.setPromptText(test.getQuantity() + " " + test.getName() + " left in stock");
+                new animatefx.animation.Shake(qty).play();
+                
+            }
+            if (test.getQuantity() == 0) {
+                qty.setStyle("-fx-prompt-text-fill: red; -fx-font-size: 10pt;");
+                qty.setText("");
+                qty.setPromptText("Out of Stock");
+                new animatefx.animation.Shake(qty).play();
+            }
             error++;
         } else {
             qty.setStyle(null);
+
         }
         if (error == 0) {
-            int x = Integer.parseInt(quantity);
-            int y = test.getId();
+            test.setQuantity(f);
             cart.addProduct(y, 1, x);
+            fn.quantity(test);
             this.RefreshPage();
         }
     }
-public void ShowByCategory() throws IOException {
+
+    public void ShowByCategory() throws IOException {
         String catego = (String) catBox.getValue();
-        System.out.println(catego);
+
         List<product> li;
 
         grid.getChildren().clear();
@@ -274,7 +299,6 @@ public void ShowByCategory() throws IOException {
         } else {
             li = fn.searchByCategory(catego);
         }
-        
 
         int column = 0;
         int row = 1;
@@ -306,6 +330,7 @@ public void ShowByCategory() throws IOException {
 
         }
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.setQrCode();
@@ -355,7 +380,7 @@ public void ShowByCategory() throws IOException {
             e.printStackTrace();
         }
         this.TotalText();
-          List<category> listCateg = fn1.getallcategory();
+        List<category> listCateg = fn1.getallcategory();
         for (category list : listCateg) {
             String id = list.getName();
             catBox.getItems().add(id);

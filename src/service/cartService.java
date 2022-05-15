@@ -63,7 +63,7 @@ public class cartService implements ICart {
     @Override
     public void deleteById(long id) {
 
-         String req = "delete FROM `cart_prods` where idcart_id = ?";
+        String req = "delete FROM `cart_prods` where idcart_id = ?";
         PreparedStatement st;
         try {
             st = cnx.prepareStatement(req);
@@ -72,9 +72,9 @@ public class cartService implements ICart {
         } catch (SQLException ex) {
 
         }
-        
+
         req = "delete FROM `cart` where id = ?";
-        
+
         try {
             st = cnx.prepareStatement(req);
             st.setLong(1, id);
@@ -177,42 +177,42 @@ public class cartService implements ICart {
             }
 
             return carts;
-          
+
         } catch (SQLException ex) {
             return null;
         }
 
     }
+
     @Override
     public void createCart(int cid, int tot, int uid) throws Exception {
         int count = 0;
-        
+
         try {
             String req1 = "SELECT *,COUNT(*) FROM cart";
             PreparedStatement ps = cnx.prepareStatement(req1);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
-                
+
                 if (count == 0) {
                     String req = "INSERT INTO `cart` (`id`,`total`, `user_cart_id`) VALUES (?, ?, ?);";
-        try {
-            PreparedStatement st;
-            st = cnx.prepareStatement(req);
-            st.setInt(1, cid);
-            st.setInt(2, tot);
-            st.setInt(3, uid);
-            st.execute();
+                    try {
+                        PreparedStatement st;
+                        st = cnx.prepareStatement(req);
+                        st.setInt(1, cid);
+                        st.setInt(2, tot);
+                        st.setInt(3, uid);
+                        st.execute();
 
-        } catch (SQLException sq) {
+                    } catch (SQLException sq) {
 
-        }
+                    }
                 }
             }
         } catch (SQLException e) {
         }
 
-        
     }
 
     public ArrayList<CartItem> loadProductsFromCart(int id) {
