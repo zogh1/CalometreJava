@@ -181,9 +181,4 @@ public class categoryservice implements categoryInterface {
             System.out.println("error");
         }
     }
-
-    public List<category> readType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

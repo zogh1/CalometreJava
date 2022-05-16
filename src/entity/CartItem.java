@@ -11,6 +11,8 @@ package entity;
  */
 public class CartItem {
 
+   
+
     /**
      * @return the product
      */

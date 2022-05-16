@@ -7,6 +7,7 @@ package service;
 
 import entity.Cart;
 import entity.CartItem;
+import entity.category;
 import entity.product;
 import interfacee.ICart;
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +31,9 @@ public class cartService implements ICart {
     private static cartService instance;
     connexion db = connexion.getInstance();
     Connection cnx = db.getCnx();
-
+    productservice test = new productservice();
+    product prod = new product();
+     categoryservice cs = new categoryservice();
     public void cartService() {
 
     }
@@ -43,6 +47,7 @@ public class cartService implements ICart {
 
     @Override
     public Cart findById(long id) {
+        
         String req = "SELECT * FROM `cart` where id = ?";
         PreparedStatement st;
         try {
@@ -242,5 +247,52 @@ public class cartService implements ICart {
         }
         return pl;
     }
+    
+    
+    @Override
+    public ArrayList<CartItem> getstatinfo() {
+        ArrayList<CartItem> cartitems = new ArrayList();
+        try {
+            String req = "SELECT product.name,cart_prods.qty FROM product INNER JOIN cart_prods ON product.id = cart_prods.idprod_id ORDER by cart_prods.qty DESC;";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                cartitems.add(new CartItem(
+                        result.getInt(1),
+                        findById(result.getInt(2)),
+                        test.findByNameProd(result.getString(3)),
+                        result.getInt(1)
+                ));
+                /* for (int i = 0; i < prods.size(); i++) {
+                    System.out.println(prods.get(i).getName());
+                    System.out.println(prods.get(i).getCount());
+                    System.err.println("*********");
+                }*/
+
+            }
+
+        } catch (SQLException ex) {
+        }
+        return cartitems;
+    }
+
+    @Override
+    public HashMap<String, Integer> getProductStats() {
+        List<CartItem> list = this.getstatinfo();
+        HashMap<String, Integer> stat = new HashMap<>();
+
+        for (CartItem ci : list) {
+            stat.put(ci.getProduct().getName(), 0);
+        }
+
+        list.stream().map((CartItem) -> CartItem.getQuantity()).forEachOrdered((cartitems) -> {
+            list.stream().filter((ci) -> (cartitems != 0)).forEachOrdered((ci) -> {
+                stat.put(ci.getProduct().getName(), stat.get(ci.getProduct().getName()) + 1);
+            });
+        });
+
+        return stat;
+    }
+
 
 }

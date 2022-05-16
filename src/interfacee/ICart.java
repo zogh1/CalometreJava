@@ -8,6 +8,7 @@ import entity.Cart;
 import entity.CartItem;
 import entity.product;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 /**
  *
@@ -23,6 +24,7 @@ public interface ICart {
     public List<Cart> findCartsByUserId(int uid);   
     public ArrayList<CartItem> loadProductsFromCart(int id);
     public void createCart(int cid, int tot, int uid) throws Exception;
-    
+    public ArrayList<CartItem> getstatinfo();
+    public HashMap<String, Integer> getProductStats();
     
 }

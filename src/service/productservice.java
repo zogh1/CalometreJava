@@ -30,10 +30,9 @@ public class productservice implements productInterface {
 
     connexion instance = connexion.getInstance();
     Connection cnx = instance.getCnx();
-
+    
     categoryservice cs = new categoryservice();
-    cartService cart = new cartService();
-    Cart cr = new Cart();
+   
 
     public product findById(int id) {
         product u = null;
@@ -329,49 +328,30 @@ public class productservice implements productInterface {
         }
         return prods;
     }
+ 
     @Override
-    public ArrayList<product> getstatinfo() {
-        ArrayList<product> prods = new ArrayList();
+    public product findByNameProd(String name) {
+        product u = null;
         try {
-            String req = "SELECT * FROM cart_prods GROUP BY qty;";
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ResultSet result = ps.executeQuery();
-            while (result.next()) {
-                prods.add(new product(
-                        result.getInt(1),
-                        result.getString(2),
-                        cs.findById(result.getInt(3)),
-                        result.getInt(4)
-                ));
-                /* for (int i = 0; i < prods.size(); i++) {
-                    System.out.println(prods.get(i).getName());
-                    System.out.println(prods.get(i).getCount());
-                    System.err.println("*********");
-                }*/
-
+            String req = "SELECT id FROM product WHERE name=?";
+            
+          PreparedStatement st = cnx.prepareStatement(req);
+          st.setString(1, name);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                u = new product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("price"),
+                        rs.getString("description"),
+                        rs.getInt("quantity"),
+                        cs.findById(rs.getInt("category_id")),
+                        rs.getString("image")
+                );
             }
 
-        } catch (SQLException ex) {
+        } catch (Exception e) {
         }
-        return prods;
+        return u;
     }
-
-    @Override
-    public HashMap<String, Integer> getProductStats() {
-        List<product> list = this.getNumberofproodsByCat();
-        HashMap<String, Integer> stat = new HashMap<>();
-
-        for (product ps : list) {
-            stat.put(ps.getCategory_id().getName(), 0);
-        }
-
-        list.stream().map((product) -> product.getCount()).forEachOrdered((count) -> {
-            list.stream().filter((ps) -> (count != 0)).forEachOrdered((ps) -> {
-                stat.put(ps.getCategory_id().getName(), stat.get(ps.getCategory_id().getName()) + 1);
-            });
-        });
-
-        return stat;
-    }
-
 }
