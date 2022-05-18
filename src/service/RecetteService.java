@@ -32,7 +32,7 @@ public class RecetteService implements RecetteInterface {
 
     @Override
     public void addRecette(Recette p) {
-        String req = "INSERT INTO `recette`(`regime`, `name`, `categorie`, `image`) VALUES (?,?,?,?)";
+        String req = "INSERT INTO `recettes`(`regime`, `name`, `categorie`, `image`) VALUES (?,?,?,?)";
         try {
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, p.getRegime());
@@ -57,7 +57,7 @@ public class RecetteService implements RecetteInterface {
         
         try {
             Statement st = cnx.createStatement();
-            String req = "SELECT * FROM recette";
+            String req = "SELECT * FROM recettes";
             ResultSet rs = st.executeQuery(req);
             
             while (rs.next()) {                
@@ -77,7 +77,7 @@ public class RecetteService implements RecetteInterface {
 
     @Override
     public void DeleatRecette(int id) {
-         String req = "delete from recette where id=?";
+         String req = "delete from recettes where id=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
@@ -90,7 +90,7 @@ public class RecetteService implements RecetteInterface {
 
     @Override
     public void UpdateRecette(Recette a, int id) {
-        String req = "update recette set name=?,regime=?,categorie=?,image=? where id=?";
+        String req = "update recettes set name=?,regime=?,categorie=?,image=? where id=?";
         try {
             
             PreparedStatement ps = cnx.prepareStatement(req);

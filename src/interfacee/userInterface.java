@@ -6,9 +6,22 @@
  */
 package interfacee;
 
+
+
+import java.util.List;
+import entity.user;
+import java.util.HashMap;
+
+
+
 import entity.user;
 import java.util.HashMap;
 import java.util.List;
+
+
+import java.util.List;
+import entity.user;
+
 
 /**
  *
@@ -16,28 +29,31 @@ import java.util.List;
  */
 public interface userInterface {
 
-    //CRUD
-    public void createuser(user u);
+     public void createuser(user u);
 
     public List<user> getalluser();
 
-    public List<user> pagination(int page, int row);
 
-    public int getRowCount();
+
+    public List<user> pagination();
+
+
+
+
 
     public boolean login(user user);
 
     public user findById(int id);
 
+
     public user findByEmail(String email);
+
+
 
     public void updateuser(user u);
 
-    public void updateuserinfo(user u);
-
-    public void updateProfilePicture(user u);
-
     public void deleteuser(int id);
+
 
     public boolean verifyEmailExistance(String email);
 
@@ -73,8 +89,5 @@ public interface userInterface {
 
     public String getRole();
 
-    public boolean isUserBanned(user user);
-
-    public String CreateCaptchaValue();
 
 }

@@ -30,7 +30,7 @@ public class AlimentService implements AlimentInterface {
     public void addAliment(Aliment p) {
         
         //request
-        String req = "INSERT INTO `aliment`(`calories`, `name`, `categorie`, `image`) VALUES (?,?,?,?)";
+        String req = "INSERT INTO `aliments`(`calories`, `name`, `categorie`, `image`) VALUES (?,?,?,?)";
         try {
             PreparedStatement st = cnx.prepareStatement(req);
             st.setFloat(1, p.getCalories());
@@ -54,7 +54,7 @@ public class AlimentService implements AlimentInterface {
         
         try {
             Statement st = cnx.createStatement();
-            String req = "SELECT * FROM aliment";
+            String req = "SELECT * FROM aliments";
             ResultSet rs = st.executeQuery(req);
             
             while (rs.next()) {                
@@ -73,7 +73,7 @@ public class AlimentService implements AlimentInterface {
     @Override
     public void DeleatAliment(int id ) {
          
-        String req = "delete from aliment where id=?";
+        String req = "delete from aliments where id=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
@@ -88,7 +88,7 @@ public class AlimentService implements AlimentInterface {
     public void UpdateAliment(Aliment a, int id) {
           
 
-        String req = "update aliment set name=?,calories=?,categorie=?,image=? where id=?";
+        String req = "update aliments set name=?,calories=?,categorie=?,image=? where id=?";
         try {
           
             PreparedStatement ps = cnx.prepareStatement(req);
