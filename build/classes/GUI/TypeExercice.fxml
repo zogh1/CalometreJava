@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="786.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.TypeExerciceController">
+   <children>
+      <Button alignment="CENTER" layoutX="510.0" layoutY="268.0" mnemonicParsing="false" onAction="#addtypeexercice" prefHeight="45.0" prefWidth="108.0" style="-fx-background-color: #30B21A;" text="Add" />
+      <TextField fx:id="nameField" alignment="CENTER" layoutX="510.0" layoutY="216.0" prefHeight="38.0" prefWidth="239.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: #000000;" />
+      <Label layoutX="579.0" layoutY="160.0" prefHeight="32.0" prefWidth="120.0" text="Type Exercice">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Button alignment="CENTER" layoutX="772.0" layoutY="516.0" mnemonicParsing="false" onAction="#deletetypeexercice" prefHeight="38.0" prefWidth="525.0" style="-fx-background-color: #FF0500;" text="Delete" />
+      <Button fx:id="edittype" alignment="CENTER" layoutX="638.0" layoutY="268.0" mnemonicParsing="false" onAction="#Edittypeexercice" prefHeight="45.0" prefWidth="113.0" style="-fx-background-color: #FFDA5C;" text="Edit" />
+      <TableView fx:id="typeexerciceview" layoutX="774.0" layoutY="148.0" prefHeight="360.0" prefWidth="524.0">
+        <columns>
+          <TableColumn fx:id="TypeId" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="TypeExerciceName" prefWidth="75.0" text="Name" />
+        </columns>
+      </TableView>
+      <Button layoutX="349.0" layoutY="42.0" mnemonicParsing="false" onAction="#GoToBack" prefHeight="50.0" prefWidth="62.0" style="-fx-background-color: #B8860B;" styleClass="add-btn" stylesheets="@../values/style.css" text="◨" textFill="#828282">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

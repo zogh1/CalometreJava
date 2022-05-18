@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="838.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddRecetteController">
+    <stylesheets>
+        <URL value="@ajouteroffre.css" />
+    </stylesheets>
+   <children>
+  
+      
+      <Separator layoutX="73.0" layoutY="522.0" opacity="0.47" prefHeight="3.0" prefWidth="700.0" AnchorPane.leftAnchor="73.0" AnchorPane.topAnchor="522.0" />
+      <Separator layoutX="73.0" layoutY="86.0" opacity="0.48" prefHeight="3.0" prefWidth="700.0" />
+      <ScrollPane prefHeight="600.0" prefWidth="844.0">
+         <content>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="826.0" styleClass="mainFxmlClass">
+               <children>
+                  <ImageView fitHeight="628.0" fitWidth="959.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/gettyimages-1272587212-612x612.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="340.0" layoutY="23.0" prefHeight="51.0" prefWidth="274.0" text="Ajouter Offres" textFill="#ddd9d9" AnchorPane.bottomAnchor="617.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="257.0" AnchorPane.topAnchor="23.0">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="46.0" layoutY="430.0" styleClass="fontsFxmlClass" text="Catégorie" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="btnajouter" layoutX="393.0" layoutY="499.0" onAction="#addRecette" prefHeight="44.0" prefWidth="150.0" styleClass="myButton" text="Ajouter" />
+                 
+                  <Separator layoutX="445.0" layoutY="125.0" opacity="0.46" orientation="VERTICAL" prefHeight="370.0" prefWidth="49.0" />
+                 
+                  <JFXButton layoutX="535.0" layoutY="381.0" onAction="#addimage" prefHeight="67.0" prefWidth="298.0" styleClass="myButton" text="Ajouter photo" />
+                  <JFXTextField fx:id="txtname" focusColor="#5e5b5b" layoutX="164.0" layoutY="298.0" prefHeight="31.0" prefWidth="281.0" stylesheets="@Styles/cardoffres.css" unFocusColor="WHITE">
+                     <styleClass>
+                        <String fx:value="input2" />
+                        <String fx:value="label1" />
+                     </styleClass>
+                  </JFXTextField>
+                  <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" layoutX="621.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label layoutX="46.0" layoutY="316.0" styleClass="fontsFxmlClass" text="Recette name" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+             
+               
+                  <Label layoutX="46.0" layoutY="372.0" styleClass="fontsFxmlClass" text="Regime" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="CB_Regime" layoutX="164.0" layoutY="369.0" prefHeight="25.0" prefWidth="280.0" styleClass="white-background" stylesheets="@../css/styles.css" />
+                  <ComboBox fx:id="CB_Category" layoutX="164.0" layoutY="428.0" prefHeight="25.0" prefWidth="280.0" styleClass="white-background" stylesheets="@../css/styles.css" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

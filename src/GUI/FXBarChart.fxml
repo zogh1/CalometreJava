@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXBarChartController">
+   <children>
+      <BarChart fx:id="ReclamationChart" layoutX="8.0" layoutY="13.0" prefHeight="467.0" prefWidth="725.0" title="Reclamations">
+        <xAxis>
+          <CategoryAxis label="Months" side="BOTTOM" fx:id="xAxis" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="yAxis" label="Reclamations" side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>

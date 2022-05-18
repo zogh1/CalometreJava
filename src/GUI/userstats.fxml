@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UserStatsController">
+    <children>
+        <AnchorPane layoutX="417.0" layoutY="46.0" prefHeight="138.0" prefWidth="160.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
+            <children>
+                <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="288.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/icons/admin.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="adminCount" layoutX="15.0" layoutY="40.0" prefHeight="51.0" prefWidth="271.0" text="Label">
+                    <font>
+                        <Font name="Corbel" size="26.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="790.0" layoutY="49.0" prefHeight="138.0" prefWidth="336.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
+            <children>
+                <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="288.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/icons/client.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="clientCount" layoutX="15.0" layoutY="40.0" prefHeight="51.0" prefWidth="271.0" text="Label">
+                    <font>
+                        <Font name="Corbel" size="26.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="1174.0" layoutY="42.0" prefHeight="138.0" prefWidth="336.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
+            <children>
+                <Label fx:id="coachCount" layoutX="15.0" layoutY="40.0" prefHeight="51.0" prefWidth="271.0" text="Label">
+                    <font>
+                        <Font name="Corbel" size="26.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="288.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/icons/coach.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="1552.0" layoutY="42.0" prefHeight="138.0" prefWidth="343.0" style="-fx-background-color: #ffffff; -fx-border-radius: 50px; -fx-background-radius: 50px;">
+            <children>
+                <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="288.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/icons/ban.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="blockedCount" layoutX="17.0" layoutY="40.0" prefHeight="51.0" prefWidth="271.0" text="Label">
+                    <font>
+                        <Font name="Corbel" size="26.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+      <AnchorPane layoutX="-15.0" layoutY="-77.0" prefHeight="1170.0" prefWidth="412.0" style="-fx-background-color: #0f2b44;">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="40.0" layoutX="58.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8-select-users-100.png" />
+               </image>
+            </ImageView>
+            <Hyperlink layoutX="112.0" layoutY="147.0" onAction="#LinkToUsersList" prefHeight="48.0" prefWidth="224.0" text="Users List" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="27.0" />
+               </font>
+            </Hyperlink>
+            <ImageView fitHeight="48.0" fitWidth="40.0" layoutX="57.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8-combo-chart-100.png" />
+               </image>
+            </ImageView>
+            <Hyperlink layoutX="111.0" layoutY="260.0" prefHeight="48.0" prefWidth="224.0" style="-fx-border-color: #42b9be; -fx-border-width: 0 0 1 0;" text="Stats" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="27.0" />
+               </font>
+            </Hyperlink>
+            <HBox layoutX="-5.0" layoutY="425.0" prefHeight="100.0" prefWidth="417.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="58.0" />
+                  <ImageView fitHeight="41.0" fitWidth="51.0" onMouseClicked="#GoToCat" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/PikPng.com_grid-png-transparent_2646969.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Hyperlink onMouseClicked="#GoToCat" prefHeight="48.0" prefWidth="224.0" style=": #42b9be;" text="Category" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="27.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Hyperlink>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="1.0" layoutY="340.0" prefHeight="100.0" prefWidth="420.0">
+               <children>
+                  <Pane prefHeight="88.0" prefWidth="45.0" />
+                  <ImageView fitHeight="52.0" fitWidth="50.0" onMouseClicked="#GoToProd" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/ic_cart.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Hyperlink onMouseClicked="#GoToProd" prefHeight="48.0" prefWidth="224.0" text="Products" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="27.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Hyperlink>
+               </children>
+            </HBox>
+            <HBox layoutX="-5.0" layoutY="511.0" prefHeight="100.0" prefWidth="417.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="58.0" />
+                  <ImageView fitHeight="41.0" fitWidth="51.0" onMouseClicked="#GoToEx" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/pngegg.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Hyperlink onMouseClicked="#GoToEx" prefHeight="48.0" prefWidth="224.0" text="Exercices" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="27.0" />
+                     </font>
+                  </Hyperlink>
+               </children>
+            </HBox>
+            <HBox layoutX="-9.0" layoutY="594.0" prefHeight="100.0" prefWidth="417.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="58.0" />
+                  <ImageView fitHeight="41.0" fitWidth="51.0" onMouseClicked="#GoToResp" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/PikPng.com_categories-png_5410770.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Hyperlink onMouseClicked="#GoToResp" prefHeight="48.0" prefWidth="224.0" text="Respond" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="27.0" />
+                     </font>
+                  </Hyperlink>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="40.0" fitWidth="56.0" layoutX="64.0" layoutY="1012.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/icons8-logout-100.png" />
+         </image>
+      </ImageView>
+      <Hyperlink layoutX="121.0" layoutY="1012.0" onAction="#logout" prefHeight="48.0" prefWidth="224.0" text="Logout" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="27.0" />
+         </font>
+      </Hyperlink>
+    </children>
+</AnchorPane>
